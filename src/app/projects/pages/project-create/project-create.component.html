@@ -1,0 +1,123 @@
+<section class="page">
+  <header class="page-heading">
+    <div class="page-heading__text">
+      <a class="back" routerLink="/projects">
+        <lucide-icon name="arrow-left" [size]="16" aria-hidden="true" />
+        {{ 'nav.backToProjects' | translate }}
+      </a>
+      <h1 class="page-title">{{ 'projects.create.title' | translate }}</h1>
+      <p class="page-description">{{ 'projects.create.description' | translate }}</p>
+    </div>
+  </header>
+
+  <form class="card project-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    @if (errorKey(); as error) {
+      <div class="form-alert" role="alert">
+        <lucide-icon name="circle-alert" [size]="16" aria-hidden="true" />
+        <span>{{ error | translate }}</span>
+      </div>
+    }
+
+    <fieldset class="form-section">
+      <legend class="section-title">{{ 'projects.create.generalSection' | translate }}</legend>
+      <div class="form-grid">
+        <div class="field field--full">
+          <label class="field__label" for="project-name">{{ 'projects.fields.name' | translate }}</label>
+          <input
+            id="project-name"
+            class="field__control"
+            formControlName="name"
+            [placeholder]="'projects.fields.namePlaceholder' | translate"
+          />
+          <app-field-error [control]="form.controls.name" />
+        </div>
+        <div class="field">
+          <label class="field__label" for="project-location">{{ 'projects.fields.location' | translate }}</label>
+          <input
+            id="project-location"
+            class="field__control"
+            formControlName="location"
+            [placeholder]="'projects.fields.locationPlaceholder' | translate"
+          />
+          <app-field-error [control]="form.controls.location" />
+        </div>
+        <div class="field">
+          <label class="field__label" for="project-status">{{ 'common.status' | translate }}</label>
+          <select id="project-status" class="field__control" formControlName="status">
+            @for (status of statuses; track status) {
+              <option [value]="status">{{ 'projects.status.' + status | translate }}</option>
+            }
+          </select>
+        </div>
+        <div class="field">
+          <label class="field__label" for="project-start">{{ 'projects.fields.startDate' | translate }}</label>
+          <input id="project-start" type="date" class="field__control" formControlName="startDate" />
+          <app-field-error [control]="form.controls.startDate" />
+        </div>
+        <div class="field" [class.field--invalid]="form.hasError('dateRange') && form.controls.endDate.touched">
+          <label class="field__label" for="project-end">{{ 'projects.fields.endDate' | translate }}</label>
+          <input id="project-end" type="date" class="field__control" formControlName="endDate" />
+          <app-field-error [control]="form.controls.endDate" />
+          @if (form.hasError('dateRange') && form.controls.endDate.touched) {
+            <span class="field-error" role="alert">{{ 'validation.dateRange' | translate }}</span>
+          }
+        </div>
+        <div class="field">
+          <label class="field__label" for="project-budget">{{ 'projects.fields.budget' | translate }}</label>
+          <input
+            id="project-budget"
+            type="number"
+            min="0"
+            step="0.01"
+            class="field__control"
+            formControlName="budget"
+          />
+          <app-field-error [control]="form.controls.budget" />
+        </div>
+        <div class="field">
+          <label class="field__label" for="project-progress">{{ 'projects.fields.progress' | translate }}</label>
+          <input
+            id="project-progress"
+            type="number"
+            min="0"
+            max="100"
+            class="field__control"
+            formControlName="progress"
+          />
+          <app-field-error [control]="form.controls.progress" />
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="form-section">
+      <legend class="section-title">{{ 'projects.create.responsiblesSection' | translate }}</legend>
+      <div class="form-grid">
+        <div class="field">
+          <label class="field__label" for="project-supervisor">{{ 'projects.fields.supervisor' | translate }}</label>
+          <input id="project-supervisor" class="field__control" [value]="session.user()?.fullName" readonly />
+        </div>
+        <div class="field">
+          <label class="field__label" for="project-contractor">{{ 'projects.fields.contractor' | translate }}</label>
+          <select id="project-contractor" class="field__control" formControlName="contractorId">
+            <option [ngValue]="null" disabled>{{ 'projects.fields.contractorPlaceholder' | translate }}</option>
+            @for (contractor of contractors(); track contractor.id) {
+              <option [ngValue]="contractor.id">{{ contractor.fullName }} · {{ contractor.email }}</option>
+            }
+          </select>
+          @if (contractorsError()) {
+            <span class="field-error">{{ 'errors.loadMessage' | translate }}</span>
+          }
+          <app-field-error [control]="form.controls.contractorId" />
+        </div>
+      </div>
+    </fieldset>
+
+    <div class="project-form__actions">
+      <a class="btn btn--secondary" routerLink="/projects">{{ 'common.cancel' | translate }}</a>
+      <button type="submit" class="btn btn--save" [disabled]="submitting()">
+        <lucide-icon name="check" [size]="16" aria-hidden="true" />
+        {{ (submitting() ? 'common.saving' : 'projects.create.submit') | translate }}
+      </button>
+    </div>
+  </form>
+</section>

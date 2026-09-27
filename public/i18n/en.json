@@ -1,0 +1,576 @@
+{
+  "common": {
+    "actions": "Actions",
+    "actionsFor": "Actions for {{name}}",
+    "cancel": "Cancel",
+    "close": "Close",
+    "delete": "Delete",
+    "edit": "Edit",
+    "loading": "Loading…",
+    "noResultsMessage": "Try other words or clear the filters.",
+    "noResultsTitle": "No results match your search",
+    "optional": "optional",
+    "retry": "Try again",
+    "saveChanges": "Save changes",
+    "saving": "Saving…",
+    "status": "Status"
+  },
+  "roles": {
+    "SUPERVISOR": "Site supervisor",
+    "CONTRACTOR": "Contractor",
+    "null": ""
+  },
+  "language": {
+    "label": "Language",
+    "es": "Español",
+    "en": "English"
+  },
+  "nav": {
+    "label": "Main navigation",
+    "open": "Open menu",
+    "close": "Close menu",
+    "breadcrumb": "Current location",
+    "currentProject": "Current project",
+    "projects": "Projects",
+    "materials": "Materials",
+    "workers": "Workers",
+    "tasks": "Tasks",
+    "incidents": "Incidents",
+    "machinery": "Machinery",
+    "reports": "Weekly report",
+    "profile": "My profile",
+    "backToProjects": "Back to projects",
+    "selectProjectFirst": "Select a project to see its modules.",
+    "userMenu": "User menu",
+    "skipToContent": "Skip to content"
+  },
+  "auth": {
+    "overline": "SMART CONSTRUCTION",
+    "headline": "Precision in every step.",
+    "tagline": "Control resources, equipment and site progress from one place.",
+    "welcome": "Welcome",
+    "subtitle": "Sign in to manage your site.",
+    "email": "Email",
+    "emailPlaceholder": "name@company.com",
+    "password": "Password",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "forgotPassword": "Forgot your password?",
+    "recoveryHelp": "For security reasons, resets are handled by the ArquiTech support team. Write to us from the email registered in your account.",
+    "signIn": "Sign in",
+    "signingIn": "Signing in…",
+    "signOut": "Sign out",
+    "support": "Need help? Contact support",
+    "sessionExpired": "Your session ended. Sign in again to continue.",
+    "demoTitle": "Demo mode · use a test account"
+  },
+  "pagination": {
+    "label": "Pagination",
+    "rowsPerPage": "Rows per page:",
+    "range": "{{start}}–{{end}} of {{total}}",
+    "previous": "Previous page",
+    "next": "Next page"
+  },
+  "filters": {
+    "button": "Filter",
+    "title": "Filters",
+    "all": "All",
+    "clear": "Clear",
+    "apply": "Apply",
+    "from": "From",
+    "to": "To",
+    "updatedFrom": "Updated from",
+    "hiredFrom": "Hired from",
+    "dueFrom": "Due from"
+  },
+  "validation": {
+    "required": "This field is required.",
+    "email": "Enter a valid email.",
+    "min": "The minimum value is {{min}}.",
+    "max": "The maximum value is {{max}}.",
+    "minlength": "Write at least {{requiredLength}} characters.",
+    "maxlength": "Up to {{requiredLength}} characters.",
+    "pattern": "The format is not valid.",
+    "ruc": "The RUC must have 11 digits and start with 10, 15, 17 or 20.",
+    "dateRange": "The end date must be on or after the start date.",
+    "futureDate": "The date cannot be in the future.",
+    "insufficientStock": "The quantity exceeds the available stock ({{available}})."
+  },
+  "errors": {
+    "unexpected": "Something went wrong. Please try again.",
+    "network": "Could not reach the server. Check your connection.",
+    "unauthorized": "Your session is not valid. Sign in again.",
+    "conflict": "The record conflicts with existing information.",
+    "recordNotFound": "The record no longer exists. The list was refreshed.",
+    "loadTitle": "We couldn't load the information",
+    "loadMessage": "Check your connection and try again.",
+    "codes": {
+      "INSUFFICIENT_STOCK": "There is not enough stock for that usage. The inventory was not changed.",
+      "INVALID_CREDENTIALS": "Incorrect email or password.",
+      "DUPLICATED_SERIAL_NUMBER": "A machine with that plate already exists on this site.",
+      "WORKER_NOT_FOUND": "The selected worker does not belong to this site.",
+      "INVALID_CONTRACTOR": "Select a valid contractor.",
+      "VALIDATION_ERROR": "Some data is invalid or incomplete. Nothing was saved.",
+      "NOT_FOUND": "The record does not exist or was deleted.",
+      "FORBIDDEN": "Your role is not allowed to perform this action."
+    }
+  },
+  "alerts": {
+    "label": "Notifications ({{count}})",
+    "title": "Site alerts",
+    "empty": "All good. There are no alerts on this site.",
+    "noProject": "Open a project to see its alerts.",
+    "lowStock": "Low stock: {{name}} ({{stock}} of {{minimum}} {{unit}} minimum).",
+    "criticalIncident": "High-severity incident pending: {{type}}."
+  },
+  "projects": {
+    "descriptionSupervisor": "See the sites under your supervision and open each one to manage it.",
+    "descriptionContractor": "Check the status of the sites you contracted.",
+    "search": "Search projects...",
+    "contractor": "Contractor",
+    "viewDetails": "View details",
+    "emptySupervisorTitle": "You have no registered projects",
+    "emptySupervisorMessage": "Register your first site to start managing materials, staff and incidents.",
+    "emptyContractorTitle": "You have no contracted projects",
+    "emptyContractorMessage": "When a supervisor assigns you as the contractor of a site, it will appear here.",
+    "columns": {
+      "date": "Date",
+      "project": "Project",
+      "location": "Location",
+      "progress": "Progress"
+    },
+    "status": {
+      "ACTIVE": "Active",
+      "PENDING": "Pending",
+      "COMPLETED": "Completed",
+      "SUSPENDED": "Suspended"
+    },
+    "fields": {
+      "name": "Project name",
+      "namePlaceholder": "E.g. North Residential Tower",
+      "location": "Location",
+      "locationPlaceholder": "E.g. Miraflores",
+      "startDate": "Start date",
+      "endDate": "Estimated end date",
+      "budget": "Budget (S/)",
+      "progress": "Progress (%)",
+      "supervisor": "Site supervisor",
+      "contractor": "Contractor",
+      "contractorPlaceholder": "Select a contractor"
+    },
+    "create": {
+      "action": "New project",
+      "title": "Register project",
+      "description": "Register the information of a new site and its responsible people.",
+      "generalSection": "General information",
+      "responsiblesSection": "Responsible people",
+      "submit": "Register project",
+      "success": "Project “{{name}}” registered."
+    }
+  },
+  "materials": {
+    "description": "Control the site inventory and register entries and usages.",
+    "descriptionReadOnly": "See the materials registered on the site and their availability.",
+    "search": "Search materials...",
+    "lowStock": "Low stock",
+    "emptyTitle": "No materials registered on this site",
+    "emptyMessage": "Register the first material to start controlling the inventory.",
+    "emptyMessageReadOnly": "The supervisor has not registered materials yet.",
+    "tabs": {
+      "label": "Material sections",
+      "inventory": "Inventory",
+      "movements": "Movements"
+    },
+    "filters": {
+      "stock": "Availability",
+      "lowStock": "Low stock",
+      "enoughStock": "Enough stock"
+    },
+    "columns": {
+      "material": "Material",
+      "quantity": "Quantity",
+      "stock": "Stock",
+      "unitPrice": "Unit price",
+      "unit": "Unit",
+      "provider": "Supplier",
+      "ruc": "RUC",
+      "date": "Date"
+    },
+    "fields": {
+      "name": "Material",
+      "namePlaceholder": "E.g. Portland cement",
+      "unit": "Unit of measure",
+      "initialQuantity": "Initial quantity",
+      "initialQuantityHint": "Registered as the first entry of the material.",
+      "entryDate": "Entry date",
+      "unitPrice": "Unit price (S/)",
+      "minimumStock": "Minimum stock",
+      "minimumStockHint": "You will be alerted when the stock falls below this value.",
+      "provider": "Supplier",
+      "ruc": "Supplier RUC"
+    },
+    "form": {
+      "createTitle": "Register material",
+      "createSubtitle": "Add a material to the site inventory.",
+      "editTitle": "Edit material",
+      "editSubtitle": "Update the material information.",
+      "stockHint": "Current stock is {{stock}} {{unit}}. To change it, register an entry or a usage.",
+      "submit": "Register material"
+    },
+    "actions": {
+      "create": "Add material",
+      "history": "View history",
+      "historyFor": "View history of {{name}}"
+    },
+    "delete": {
+      "title": "Delete material?",
+      "message": "“{{name}}” and its movement history will be deleted. This cannot be undone."
+    },
+    "messages": {
+      "created": "Material “{{name}}” registered.",
+      "updated": "Material “{{name}}” updated.",
+      "deleted": "Material “{{name}}” deleted."
+    }
+  },
+  "movements": {
+    "title": "Material movements",
+    "description": "History of entries and usages of the site inventory.",
+    "search": "Search by material, supplier or note...",
+    "emptyTitle": "No movements on this site yet",
+    "emptyMessage": "Material entries and usages will appear here.",
+    "types": {
+      "ENTRY": "Entry",
+      "USAGE": "Usage"
+    },
+    "columns": {
+      "date": "Date",
+      "material": "Material",
+      "type": "Type",
+      "quantity": "Quantity",
+      "supplier": "Supplier",
+      "registeredBy": "Registered by"
+    },
+    "fields": {
+      "material": "Material",
+      "materialPlaceholder": "Select a material",
+      "available": "Available: {{stock}} {{unit}}",
+      "quantity": "Quantity",
+      "date": "Date",
+      "supplier": "Supplier",
+      "note": "Note",
+      "type": "Movement type",
+      "entryNotePlaceholder": "E.g. Delivery note 001-2345",
+      "usageNotePlaceholder": "E.g. 7th floor slab pouring"
+    },
+    "form": {
+      "entryTitle": "Register entry",
+      "entrySubtitle": "Add material to the site inventory.",
+      "usageTitle": "Register usage",
+      "usageSubtitle": "Deduct the material used on the site.",
+      "entrySubmit": "Register entry",
+      "usageSubmit": "Register usage",
+      "noMaterials": "Register a material in the inventory first."
+    },
+    "actions": {
+      "entry": "Register entry",
+      "usage": "Register usage"
+    },
+    "messages": {
+      "entry": "Entry registered: +{{quantity}} {{unit}} of {{name}}.",
+      "usage": "Usage registered: −{{quantity}} {{unit}} of {{name}}."
+    }
+  },
+  "workers": {
+    "description": "Manage the site staff and assign them tasks.",
+    "descriptionReadOnly": "See the staff registered on the site.",
+    "search": "Search workers...",
+    "emptyTitle": "No workers registered on this site",
+    "emptyMessage": "Register the staff to be able to assign them tasks.",
+    "emptyMessageReadOnly": "The supervisor has not registered staff yet.",
+    "columns": {
+      "name": "Name",
+      "role": "Role",
+      "specialty": "Specialty",
+      "hireDate": "Hire date"
+    },
+    "status": {
+      "ACTIVE": "Active",
+      "ON_LEAVE": "On leave",
+      "INACTIVE": "Inactive"
+    },
+    "fields": {
+      "fullName": "Full name",
+      "role": "Role on site",
+      "specialty": "Specialty",
+      "hireDate": "Hire date"
+    },
+    "form": {
+      "createTitle": "Register worker",
+      "editTitle": "Edit worker",
+      "subtitle": "Information of the staff member on this site.",
+      "submit": "Register worker"
+    },
+    "actions": {
+      "create": "Add worker"
+    },
+    "delete": {
+      "title": "Delete worker?",
+      "message": "The record of “{{name}}” will be deleted from this site."
+    },
+    "messages": {
+      "created": "Worker “{{name}}” registered.",
+      "updated": "Worker “{{name}}” updated.",
+      "deleted": "Worker “{{name}}” deleted."
+    }
+  },
+  "tasks": {
+    "description": "Assign activities to the staff and follow their progress.",
+    "descriptionReadOnly": "See the registered activities and their status.",
+    "search": "Search tasks...",
+    "overdue": "Overdue",
+    "emptyTitle": "No tasks registered on this site",
+    "emptyMessage": "Assign the first task to a site worker.",
+    "emptyMessageReadOnly": "The supervisor has not registered tasks yet.",
+    "columns": {
+      "task": "Task",
+      "worker": "Assignee",
+      "dueDate": "Due date"
+    },
+    "status": {
+      "PENDING": "Pending",
+      "IN_PROGRESS": "In progress",
+      "COMPLETED": "Completed"
+    },
+    "fields": {
+      "title": "Task",
+      "titlePlaceholder": "E.g. 7th floor slab pouring",
+      "description": "Description",
+      "worker": "Assignee",
+      "workerPlaceholder": "Select a worker",
+      "dueDate": "Due date"
+    },
+    "form": {
+      "createTitle": "Assign task",
+      "editTitle": "Edit task",
+      "subtitle": "Define the activity, its assignee and the due date.",
+      "submit": "Assign task",
+      "noWorkers": "There are no active workers on this site. Register staff before assigning tasks."
+    },
+    "actions": {
+      "assign": "Assign task",
+      "markCompleted": "Mark as completed"
+    },
+    "delete": {
+      "title": "Delete task?",
+      "message": "The task “{{title}}” will be removed from the work plan."
+    },
+    "messages": {
+      "created": "Task “{{title}}” assigned to {{worker}}.",
+      "updated": "Task “{{title}}” updated.",
+      "completed": "Task “{{title}}” completed.",
+      "deleted": "Task “{{title}}” deleted."
+    }
+  },
+  "incidents": {
+    "description": "Register and follow up the problems that occur on the site.",
+    "descriptionReadOnly": "See the problems registered during the site execution.",
+    "search": "Search incidents...",
+    "resolvedOn": "Resolved on {{date}}",
+    "emptyTitle": "No incidents registered on this site",
+    "emptyMessage": "Register any relevant event to keep evidence.",
+    "emptyMessageReadOnly": "No incidents have been reported on this site.",
+    "columns": {
+      "date": "Date",
+      "type": "Incident type",
+      "severity": "Severity"
+    },
+    "types": {
+      "MATERIAL_SHORTAGE": "Material shortage",
+      "DELIVERY_DELAY": "Delivery delay",
+      "EQUIPMENT_FAILURE": "Equipment failure",
+      "WORK_ACCIDENT": "Work accident",
+      "UNSAFE_CONDITION": "Unsafe condition",
+      "OTHER": "Other"
+    },
+    "severity": {
+      "HIGH": "High",
+      "MEDIUM": "Medium",
+      "LOW": "Low"
+    },
+    "status": {
+      "OPEN": "Pending",
+      "IN_REVIEW": "In review",
+      "RESOLVED": "Resolved"
+    },
+    "fields": {
+      "type": "Incident type",
+      "typePlaceholder": "Select a type",
+      "reportedAt": "Incident date",
+      "severity": "Severity",
+      "description": "Description",
+      "descriptionPlaceholder": "What happened, where, and how does it affect the site?"
+    },
+    "form": {
+      "createTitle": "Register incident",
+      "editTitle": "Edit incident",
+      "subtitle": "Keep evidence of the problem and its severity.",
+      "submit": "Register incident"
+    },
+    "actions": {
+      "create": "Register incident",
+      "markResolved": "Mark as resolved"
+    },
+    "delete": {
+      "title": "Delete incident?",
+      "message": "Use this only if the incident was registered by mistake. This cannot be undone."
+    },
+    "messages": {
+      "created": "Incident registered.",
+      "updated": "Incident updated.",
+      "resolved": "Incident marked as resolved.",
+      "deleted": "Incident deleted."
+    }
+  },
+  "machinery": {
+    "description": "Control the machinery assigned to the site and its operating status.",
+    "descriptionReadOnly": "See the machinery assigned to the site and its status.",
+    "search": "Search machinery...",
+    "emptyTitle": "No machinery registered on this site",
+    "emptyMessage": "Register the assigned equipment to control its status.",
+    "emptyMessageReadOnly": "The supervisor has not registered machinery yet.",
+    "columns": {
+      "name": "Name",
+      "serialNumber": "Plate",
+      "registeredAt": "Registration date"
+    },
+    "status": {
+      "OPERATIONAL": "Operational",
+      "MAINTENANCE": "Maintenance",
+      "OUT_OF_SERVICE": "Out of service"
+    },
+    "fields": {
+      "name": "Name or type",
+      "namePlaceholder": "E.g. Concrete mixer",
+      "serialNumber": "Plate or serial number",
+      "serialNumberHint": "3 to 20 letters, numbers or hyphens.",
+      "registeredAt": "Registration date",
+      "description": "Description"
+    },
+    "form": {
+      "createTitle": "Register machinery",
+      "editTitle": "Edit machinery",
+      "subtitle": "Equipment assigned to the site and its operating status.",
+      "submit": "Register machinery"
+    },
+    "actions": {
+      "create": "Add machinery"
+    },
+    "delete": {
+      "title": "Delete machinery?",
+      "message": "“{{name}}” will be removed from the site resources."
+    },
+    "messages": {
+      "created": "Machinery “{{name}}” registered.",
+      "updated": "Machinery “{{name}}” updated.",
+      "deleted": "Machinery “{{name}}” deleted."
+    }
+  },
+  "reports": {
+    "title": "Weekly report",
+    "description": "Summary of progress, materials and incidents of the site during the week.",
+    "download": "Download PDF",
+    "downloading": "Generating PDF…",
+    "downloaded": "Report downloaded: {{file}}",
+    "downloadError": "The PDF could not be generated. Please try again.",
+    "weekRange": "Week of {{start}} to {{end}}",
+    "previousWeek": "Previous week",
+    "nextWeek": "Next week",
+    "currentWeek": "Current week",
+    "pickWeek": "Pick a date of the week",
+    "emptySection": "No records this week.",
+    "lowStock": "{{count}} material(s) below minimum stock:",
+    "kpis": {
+      "progress": "Site progress",
+      "completedTasks": "Completed tasks",
+      "openTasks": "Pending tasks",
+      "openTasksContext": "{{count}} tasks still open",
+      "movements": "Material movements",
+      "movementsContext": "{{entries}} entries · {{usages}} usages",
+      "incidents": "Registered incidents",
+      "openIncidents": "Unresolved incidents",
+      "openIncidentsContext": "{{count}} unresolved on the site"
+    },
+    "sections": {
+      "project": "Project information",
+      "completedTasks": "Completed tasks",
+      "entries": "Material entries",
+      "usages": "Material usages",
+      "incidents": "Registered incidents"
+    },
+    "columns": {
+      "completedOn": "Completed"
+    },
+    "pdf": {
+      "subtitle": "Weekly site report",
+      "generatedAt": "Generated on {{date}}",
+      "field": "Field",
+      "value": "Value",
+      "footer": "ArquiTech · Page {{page}} of {{pages}}"
+    }
+  },
+  "profile": {
+    "title": "My profile",
+    "description": "Your personal data and ArquiTech preferences.",
+    "memberSince": "Account created on {{date}}",
+    "personal": {
+      "title": "Personal information",
+      "subtitle": "This is how other users of your sites will see you."
+    },
+    "fields": {
+      "fullName": "Full name",
+      "email": "Email",
+      "emailHint": "It is your sign-in user; contact support to change it.",
+      "role": "Role",
+      "phone": "Phone",
+      "company": "Company"
+    },
+    "accessibility": {
+      "title": "Accessibility",
+      "subtitle": "Adjust the display to your needs. Changes apply instantly.",
+      "textSize": "Text size",
+      "sizes": {
+        "normal": "Normal",
+        "large": "Large",
+        "x-large": "Extra large"
+      },
+      "highContrast": "High contrast",
+      "highContrastHint": "Darker text and borders, useful under sunlight.",
+      "reduceMotion": "Reduce motion",
+      "reduceMotionHint": "Removes interface transitions and movement.",
+      "reset": "Reset to defaults"
+    },
+    "language": {
+      "title": "Language",
+      "subtitle": "Language used to display ArquiTech."
+    },
+    "session": {
+      "title": "Session",
+      "subtitle": "Sign out when you finish, especially on shared devices.",
+      "resetDemo": "Reset demo data"
+    },
+    "messages": {
+      "saved": "Profile updated.",
+      "accessibilityReset": "Accessibility preferences reset.",
+      "demoReset": "Demo data reset."
+    }
+  },
+  "unauthorized": {
+    "title": "Restricted access",
+    "message": "Your role ({{role}}) is not allowed to see this section or site."
+  },
+  "notFound": {
+    "title": "Page not found",
+    "message": "The address you are looking for does not exist or was moved.",
+    "action": "Go to my projects"
+  }
+}

@@ -1,0 +1,125 @@
+<section class="page">
+  <header class="page-heading">
+    <div class="page-heading__text">
+      <h1 class="page-title">{{ 'nav.incidents' | translate }}</h1>
+      <p class="page-description">
+        {{ (canManage() ? 'incidents.description' : 'incidents.descriptionReadOnly') | translate }}
+      </p>
+    </div>
+    @if (canManage()) {
+      <div class="page-actions">
+        <button type="button" class="btn btn--primary" (click)="openForm()">
+          <span class="btn__icon-add" aria-hidden="true">+</span>
+          {{ 'incidents.actions.create' | translate }}
+        </button>
+      </div>
+    }
+  </header>
+
+  <app-data-toolbar [state]="table" searchPlaceholderKey="incidents.search" [filters]="filterFields" />
+
+  <div class="data-panel">
+    <app-list-state
+      [status]="status()"
+      [isEmpty]="table.total() === 0"
+      [isFiltering]="table.isFiltering()"
+      icon="triangle-alert"
+      emptyTitleKey="incidents.emptyTitle"
+      [emptyMessageKey]="canManage() ? 'incidents.emptyMessage' : 'incidents.emptyMessageReadOnly'"
+      (retry)="load()"
+    >
+      @if (canManage()) {
+        <button emptyAction type="button" class="btn btn--primary" (click)="openForm()">
+          {{ 'incidents.actions.create' | translate }}
+        </button>
+      }
+      <div class="table-scroll">
+        <table class="data-table">
+          <caption class="sr-only">
+            {{
+              'nav.incidents' | translate
+            }}
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">{{ 'incidents.columns.date' | translate }}</th>
+              <th scope="col">{{ 'incidents.columns.type' | translate }}</th>
+              <th scope="col">{{ 'incidents.columns.severity' | translate }}</th>
+              <th scope="col">{{ 'common.status' | translate }}</th>
+              @if (canManage()) {
+                <th scope="col">
+                  <span class="sr-only">{{ 'common.actions' | translate }}</span>
+                </th>
+              }
+            </tr>
+          </thead>
+          <tbody>
+            @for (incident of table.pageRows(); track incident.id) {
+              <tr>
+                <td class="cell-num">{{ incident.reportedAt | appDate }}</td>
+                <td class="cell-strong incident-type">
+                  {{ incident.typeKey ? (incident.typeKey | translate) : incident.type }}
+                  <span class="cell-sub">{{ incident.description }}</span>
+                </td>
+                <td>
+                  <app-status-badge
+                    [tone]="severityTone[incident.severity]"
+                    [labelKey]="'incidents.severity.' + incident.severity"
+                  />
+                </td>
+                <td>
+                  <app-status-badge
+                    [tone]="statusTone[incident.status]"
+                    [labelKey]="'incidents.status.' + incident.status"
+                  />
+                  @if (incident.resolvedAt) {
+                    <span class="cell-sub">{{
+                      'incidents.resolvedOn' | translate: { date: (incident.resolvedAt | appDate) }
+                    }}</span>
+                  }
+                </td>
+                @if (canManage()) {
+                  <td class="cell-actions">
+                    <button
+                      type="button"
+                      class="icon-button"
+                      [cdkMenuTriggerFor]="rowMenu"
+                      [cdkMenuTriggerData]="{ $implicit: incident }"
+                      [attr.aria-label]="
+                        'common.actionsFor'
+                          | translate: { name: incident.typeKey ? (incident.typeKey | translate) : incident.type }
+                      "
+                    >
+                      <lucide-icon name="ellipsis-vertical" [size]="18" aria-hidden="true" />
+                    </button>
+                  </td>
+                }
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <app-paginator [state]="table" />
+    </app-list-state>
+  </div>
+</section>
+
+<ng-template #rowMenu let-incident>
+  <div class="menu" cdkMenu>
+    @if (!incident.isResolved()) {
+      <button type="button" class="menu__item" cdkMenuItem (cdkMenuItemTriggered)="markResolved(incident)">
+        <lucide-icon name="circle-check" [size]="16" aria-hidden="true" />
+        {{ 'incidents.actions.markResolved' | translate }}
+      </button>
+    }
+    <button type="button" class="menu__item" cdkMenuItem (cdkMenuItemTriggered)="openForm(incident)">
+      <lucide-icon name="pencil" [size]="16" aria-hidden="true" />
+      {{ 'common.edit' | translate }}
+    </button>
+    <div class="menu__divider" role="separator"></div>
+    <button type="button" class="menu__item menu__item--danger" cdkMenuItem (cdkMenuItemTriggered)="delete(incident)">
+      <lucide-icon name="trash-2" [size]="16" aria-hidden="true" />
+      {{ 'common.delete' | translate }}
+    </button>
+  </div>
+</ng-template>

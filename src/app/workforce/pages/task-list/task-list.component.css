@@ -1,0 +1,22 @@
+.task-title .cell-sub {
+  max-width: 360px;
+  overflow: hidden;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.due {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.due--overdue {
+  font-weight: 600;
+  color: var(--tone-danger-fg);
+}
+
+.due .badge::before {
+  display: none;
+}

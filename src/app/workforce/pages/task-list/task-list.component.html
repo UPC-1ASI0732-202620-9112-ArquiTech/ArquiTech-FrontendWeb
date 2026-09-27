@@ -1,0 +1,121 @@
+<section class="page">
+  <header class="page-heading">
+    <div class="page-heading__text">
+      <h1 class="page-title">{{ 'nav.tasks' | translate }}</h1>
+      <p class="page-description">
+        {{ (canManage() ? 'tasks.description' : 'tasks.descriptionReadOnly') | translate }}
+      </p>
+    </div>
+    @if (canManage()) {
+      <div class="page-actions">
+        <button type="button" class="btn btn--primary" (click)="openForm()">
+          <span class="btn__icon-add" aria-hidden="true">+</span>
+          {{ 'tasks.actions.assign' | translate }}
+        </button>
+      </div>
+    }
+  </header>
+
+  <app-data-toolbar [state]="table" searchPlaceholderKey="tasks.search" [filters]="filterFields()" />
+
+  <div class="data-panel">
+    <app-list-state
+      [status]="status()"
+      [isEmpty]="table.total() === 0"
+      [isFiltering]="table.isFiltering()"
+      icon="clipboard-list"
+      emptyTitleKey="tasks.emptyTitle"
+      [emptyMessageKey]="canManage() ? 'tasks.emptyMessage' : 'tasks.emptyMessageReadOnly'"
+      (retry)="load()"
+    >
+      @if (canManage()) {
+        <button emptyAction type="button" class="btn btn--primary" (click)="openForm()">
+          {{ 'tasks.actions.assign' | translate }}
+        </button>
+      }
+      <div class="table-scroll">
+        <table class="data-table">
+          <caption class="sr-only">
+            {{
+              'nav.tasks' | translate
+            }}
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">{{ 'tasks.columns.task' | translate }}</th>
+              <th scope="col">{{ 'tasks.columns.worker' | translate }}</th>
+              <th scope="col">{{ 'tasks.columns.dueDate' | translate }}</th>
+              <th scope="col">{{ 'common.status' | translate }}</th>
+              @if (canManage()) {
+                <th scope="col">
+                  <span class="sr-only">{{ 'common.actions' | translate }}</span>
+                </th>
+              }
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of table.pageRows(); track row.task.id) {
+              <tr>
+                <td class="cell-strong task-title">
+                  {{ row.task.title }}
+                  @if (row.task.description) {
+                    <span class="cell-sub">{{ row.task.description }}</span>
+                  }
+                </td>
+                <td>{{ row.workerName || '—' }}</td>
+                <td class="cell-num">
+                  <span class="due" [class.due--overdue]="row.task.isOverdue()">
+                    {{ row.task.dueDate | appDate }}
+                    @if (row.task.isOverdue()) {
+                      <span class="badge badge--danger">{{ 'tasks.overdue' | translate }}</span>
+                    }
+                  </span>
+                </td>
+                <td>
+                  <app-status-badge
+                    [tone]="statusTone[row.task.status]"
+                    [labelKey]="'tasks.status.' + row.task.status"
+                  />
+                </td>
+                @if (canManage()) {
+                  <td class="cell-actions">
+                    <button
+                      type="button"
+                      class="icon-button"
+                      [cdkMenuTriggerFor]="rowMenu"
+                      [cdkMenuTriggerData]="{ $implicit: row.task }"
+                      [attr.aria-label]="'common.actionsFor' | translate: { name: row.task.title }"
+                    >
+                      <lucide-icon name="ellipsis-vertical" [size]="18" aria-hidden="true" />
+                    </button>
+                  </td>
+                }
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <app-paginator [state]="table" />
+    </app-list-state>
+  </div>
+</section>
+
+<ng-template #rowMenu let-task>
+  <div class="menu" cdkMenu>
+    @if (!task.isCompleted()) {
+      <button type="button" class="menu__item" cdkMenuItem (cdkMenuItemTriggered)="markCompleted(task)">
+        <lucide-icon name="circle-check" [size]="16" aria-hidden="true" />
+        {{ 'tasks.actions.markCompleted' | translate }}
+      </button>
+    }
+    <button type="button" class="menu__item" cdkMenuItem (cdkMenuItemTriggered)="openForm(task)">
+      <lucide-icon name="pencil" [size]="16" aria-hidden="true" />
+      {{ 'common.edit' | translate }}
+    </button>
+    <div class="menu__divider" role="separator"></div>
+    <button type="button" class="menu__item menu__item--danger" cdkMenuItem (cdkMenuItemTriggered)="delete(task)">
+      <lucide-icon name="trash-2" [size]="16" aria-hidden="true" />
+      {{ 'common.delete' | translate }}
+    </button>
+  </div>
+</ng-template>

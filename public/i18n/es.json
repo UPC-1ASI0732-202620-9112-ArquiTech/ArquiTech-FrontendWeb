@@ -1,0 +1,576 @@
+{
+  "common": {
+    "actions": "Acciones",
+    "actionsFor": "Acciones para {{name}}",
+    "cancel": "Cancelar",
+    "close": "Cerrar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "loading": "Cargando…",
+    "noResultsMessage": "Prueba con otras palabras o limpia los filtros.",
+    "noResultsTitle": "No hay resultados para tu búsqueda",
+    "optional": "opcional",
+    "retry": "Reintentar",
+    "saveChanges": "Guardar cambios",
+    "saving": "Guardando…",
+    "status": "Estado"
+  },
+  "roles": {
+    "SUPERVISOR": "Supervisor de obra",
+    "CONTRACTOR": "Contratante",
+    "null": ""
+  },
+  "language": {
+    "label": "Idioma",
+    "es": "Español",
+    "en": "English"
+  },
+  "nav": {
+    "label": "Navegación principal",
+    "open": "Abrir menú",
+    "close": "Cerrar menú",
+    "breadcrumb": "Ubicación actual",
+    "currentProject": "Proyecto actual",
+    "projects": "Proyectos",
+    "materials": "Materiales",
+    "workers": "Trabajadores",
+    "tasks": "Tareas",
+    "incidents": "Incidentes",
+    "machinery": "Maquinaria",
+    "reports": "Reporte semanal",
+    "profile": "Mi perfil",
+    "backToProjects": "Volver a proyectos",
+    "selectProjectFirst": "Selecciona un proyecto para ver sus módulos.",
+    "userMenu": "Menú de usuario",
+    "skipToContent": "Saltar al contenido"
+  },
+  "auth": {
+    "overline": "CONSTRUCCIÓN INTELIGENTE",
+    "headline": "Precisión en cada avance.",
+    "tagline": "Controla recursos, equipos y progreso de obra desde un solo lugar.",
+    "welcome": "Bienvenido",
+    "subtitle": "Inicia sesión para gestionar tu obra.",
+    "email": "Correo electrónico",
+    "emailPlaceholder": "nombre@empresa.com",
+    "password": "Contraseña",
+    "showPassword": "Mostrar contraseña",
+    "hidePassword": "Ocultar contraseña",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "recoveryHelp": "Por seguridad, el restablecimiento lo realiza el equipo de soporte de ArquiTech. Escríbenos desde el correo registrado en tu cuenta.",
+    "signIn": "Iniciar sesión",
+    "signingIn": "Ingresando…",
+    "signOut": "Cerrar sesión",
+    "support": "¿Necesitas ayuda? Contacta a soporte",
+    "sessionExpired": "Tu sesión terminó. Vuelve a iniciar sesión para continuar.",
+    "demoTitle": "Modo demostración · usa una cuenta de prueba"
+  },
+  "pagination": {
+    "label": "Paginación",
+    "rowsPerPage": "Filas por página:",
+    "range": "{{start}}–{{end}} de {{total}}",
+    "previous": "Página anterior",
+    "next": "Página siguiente"
+  },
+  "filters": {
+    "button": "Filtrar",
+    "title": "Filtros",
+    "all": "Todos",
+    "clear": "Limpiar",
+    "apply": "Aplicar",
+    "from": "Desde",
+    "to": "Hasta",
+    "updatedFrom": "Actualizado desde",
+    "hiredFrom": "Ingreso desde",
+    "dueFrom": "Vence desde"
+  },
+  "validation": {
+    "required": "Este campo es obligatorio.",
+    "email": "Ingresa un correo válido.",
+    "min": "El valor mínimo es {{min}}.",
+    "max": "El valor máximo es {{max}}.",
+    "minlength": "Escribe al menos {{requiredLength}} caracteres.",
+    "maxlength": "Máximo {{requiredLength}} caracteres.",
+    "pattern": "El formato no es válido.",
+    "ruc": "El RUC debe tener 11 dígitos y empezar con 10, 15, 17 o 20.",
+    "dateRange": "La fecha de fin debe ser igual o posterior a la de inicio.",
+    "futureDate": "La fecha no puede ser futura.",
+    "insufficientStock": "La cantidad supera el stock disponible ({{available}})."
+  },
+  "errors": {
+    "unexpected": "Ocurrió un error inesperado. Inténtalo nuevamente.",
+    "network": "No se pudo conectar con el servidor. Revisa tu conexión.",
+    "unauthorized": "Tu sesión no es válida. Inicia sesión nuevamente.",
+    "conflict": "El registro entra en conflicto con información existente.",
+    "recordNotFound": "El registro ya no existe. La lista se actualizó.",
+    "loadTitle": "No pudimos cargar la información",
+    "loadMessage": "Verifica tu conexión e inténtalo nuevamente.",
+    "codes": {
+      "INSUFFICIENT_STOCK": "No hay stock suficiente para registrar esa salida. El inventario no se modificó.",
+      "INVALID_CREDENTIALS": "Correo o contraseña incorrectos.",
+      "DUPLICATED_SERIAL_NUMBER": "Ya existe una maquinaria con esa placa en esta obra.",
+      "WORKER_NOT_FOUND": "El trabajador seleccionado no pertenece a esta obra.",
+      "INVALID_CONTRACTOR": "Selecciona un contratante válido.",
+      "VALIDATION_ERROR": "Hay datos inválidos o incompletos. No se guardó ningún cambio.",
+      "NOT_FOUND": "El registro no existe o fue eliminado.",
+      "FORBIDDEN": "Tu rol no tiene permiso para realizar esta acción."
+    }
+  },
+  "alerts": {
+    "label": "Notificaciones ({{count}})",
+    "title": "Alertas de la obra",
+    "empty": "Todo en orden. No hay alertas en esta obra.",
+    "noProject": "Abre un proyecto para ver sus alertas.",
+    "lowStock": "Stock bajo: {{name}} ({{stock}} de {{minimum}} {{unit}} mínimos).",
+    "criticalIncident": "Incidencia de severidad alta pendiente: {{type}}."
+  },
+  "projects": {
+    "descriptionSupervisor": "Consulta las obras bajo tu supervisión y entra a cada una para gestionarla.",
+    "descriptionContractor": "Consulta el estado de las obras que contrataste.",
+    "search": "Buscar en proyectos...",
+    "contractor": "Contratante",
+    "viewDetails": "Ver detalles",
+    "emptySupervisorTitle": "No tienes proyectos registrados",
+    "emptySupervisorMessage": "Registra tu primera obra para empezar a gestionar materiales, personal e incidencias.",
+    "emptyContractorTitle": "No tienes proyectos contratados",
+    "emptyContractorMessage": "Cuando un supervisor te asigne como contratante de una obra, aparecerá aquí.",
+    "columns": {
+      "date": "Fecha",
+      "project": "Proyecto",
+      "location": "Ubicación",
+      "progress": "Avance"
+    },
+    "status": {
+      "ACTIVE": "Activo",
+      "PENDING": "Pendiente",
+      "COMPLETED": "Finalizado",
+      "SUSPENDED": "Suspendido"
+    },
+    "fields": {
+      "name": "Nombre del proyecto",
+      "namePlaceholder": "Ej. Torre Residencial Norte",
+      "location": "Ubicación",
+      "locationPlaceholder": "Ej. Miraflores",
+      "startDate": "Fecha de inicio",
+      "endDate": "Fecha estimada de fin",
+      "budget": "Presupuesto (S/)",
+      "progress": "Avance (%)",
+      "supervisor": "Supervisor de obra",
+      "contractor": "Contratante",
+      "contractorPlaceholder": "Selecciona un contratante"
+    },
+    "create": {
+      "action": "Nuevo proyecto",
+      "title": "Registrar proyecto",
+      "description": "Registra la información de una nueva obra y sus responsables.",
+      "generalSection": "Información general",
+      "responsiblesSection": "Responsables",
+      "submit": "Registrar proyecto",
+      "success": "Proyecto «{{name}}» registrado."
+    }
+  },
+  "materials": {
+    "description": "Controla el inventario de la obra y registra entradas y salidas.",
+    "descriptionReadOnly": "Consulta los materiales registrados en la obra y su disponibilidad.",
+    "search": "Buscar en materiales...",
+    "lowStock": "Stock bajo",
+    "emptyTitle": "No hay materiales registrados en esta obra",
+    "emptyMessage": "Registra el primer material para empezar a controlar el inventario.",
+    "emptyMessageReadOnly": "El supervisor aún no ha registrado materiales.",
+    "tabs": {
+      "label": "Secciones de materiales",
+      "inventory": "Inventario",
+      "movements": "Movimientos"
+    },
+    "filters": {
+      "stock": "Disponibilidad",
+      "lowStock": "Stock bajo",
+      "enoughStock": "Stock suficiente"
+    },
+    "columns": {
+      "material": "Material",
+      "quantity": "Cantidad",
+      "stock": "Stock",
+      "unitPrice": "Precio unit.",
+      "unit": "Unidad",
+      "provider": "Proveedor",
+      "ruc": "RUC",
+      "date": "Fecha"
+    },
+    "fields": {
+      "name": "Material",
+      "namePlaceholder": "Ej. Cemento Portland",
+      "unit": "Unidad de medida",
+      "initialQuantity": "Cantidad inicial",
+      "initialQuantityHint": "Se registra como primera entrada del material.",
+      "entryDate": "Fecha de ingreso",
+      "unitPrice": "Precio unitario (S/)",
+      "minimumStock": "Stock mínimo",
+      "minimumStockHint": "Te avisaremos cuando el stock baje de este valor.",
+      "provider": "Proveedor",
+      "ruc": "RUC del proveedor"
+    },
+    "form": {
+      "createTitle": "Registrar material",
+      "createSubtitle": "Añade un material al inventario de la obra.",
+      "editTitle": "Editar material",
+      "editSubtitle": "Actualiza la información del material.",
+      "stockHint": "El stock actual es {{stock}} {{unit}}. Para cambiarlo registra una entrada o una salida.",
+      "submit": "Registrar material"
+    },
+    "actions": {
+      "create": "Añadir material",
+      "history": "Ver historial",
+      "historyFor": "Ver historial de {{name}}"
+    },
+    "delete": {
+      "title": "¿Eliminar material?",
+      "message": "Se eliminará «{{name}}» y su historial de movimientos. Esta acción no se puede deshacer."
+    },
+    "messages": {
+      "created": "Material «{{name}}» registrado.",
+      "updated": "Material «{{name}}» actualizado.",
+      "deleted": "Material «{{name}}» eliminado."
+    }
+  },
+  "movements": {
+    "title": "Movimientos de materiales",
+    "description": "Historial de entradas y salidas del inventario de la obra.",
+    "search": "Buscar por material, proveedor o nota...",
+    "emptyTitle": "Aún no hay movimientos en esta obra",
+    "emptyMessage": "Las entradas y salidas de materiales aparecerán aquí.",
+    "types": {
+      "ENTRY": "Entrada",
+      "USAGE": "Salida"
+    },
+    "columns": {
+      "date": "Fecha",
+      "material": "Material",
+      "type": "Tipo",
+      "quantity": "Cantidad",
+      "supplier": "Proveedor",
+      "registeredBy": "Registrado por"
+    },
+    "fields": {
+      "material": "Material",
+      "materialPlaceholder": "Selecciona un material",
+      "available": "Disponible: {{stock}} {{unit}}",
+      "quantity": "Cantidad",
+      "date": "Fecha",
+      "supplier": "Proveedor",
+      "note": "Nota",
+      "type": "Tipo de movimiento",
+      "entryNotePlaceholder": "Ej. Guía de remisión 001-2345",
+      "usageNotePlaceholder": "Ej. Vaciado de losa del piso 7"
+    },
+    "form": {
+      "entryTitle": "Registrar entrada",
+      "entrySubtitle": "Suma material al inventario de la obra.",
+      "usageTitle": "Registrar salida",
+      "usageSubtitle": "Descuenta el material utilizado en la obra.",
+      "entrySubmit": "Registrar entrada",
+      "usageSubmit": "Registrar salida",
+      "noMaterials": "Primero registra un material en el inventario."
+    },
+    "actions": {
+      "entry": "Registrar entrada",
+      "usage": "Registrar salida"
+    },
+    "messages": {
+      "entry": "Entrada registrada: +{{quantity}} {{unit}} de {{name}}.",
+      "usage": "Salida registrada: −{{quantity}} {{unit}} de {{name}}."
+    }
+  },
+  "workers": {
+    "description": "Gestiona el personal de la obra y asígnale tareas.",
+    "descriptionReadOnly": "Consulta el personal registrado en la obra.",
+    "search": "Buscar en trabajadores...",
+    "emptyTitle": "No hay trabajadores registrados en esta obra",
+    "emptyMessage": "Registra al personal para poder asignarle tareas.",
+    "emptyMessageReadOnly": "El supervisor aún no ha registrado personal.",
+    "columns": {
+      "name": "Nombre",
+      "role": "Rol",
+      "specialty": "Especialidad",
+      "hireDate": "Fecha de ingreso"
+    },
+    "status": {
+      "ACTIVE": "Activo",
+      "ON_LEAVE": "Permiso",
+      "INACTIVE": "Inactivo"
+    },
+    "fields": {
+      "fullName": "Nombre completo",
+      "role": "Rol en obra",
+      "specialty": "Especialidad",
+      "hireDate": "Fecha de ingreso"
+    },
+    "form": {
+      "createTitle": "Registrar trabajador",
+      "editTitle": "Editar trabajador",
+      "subtitle": "Datos del personal asociado a la obra.",
+      "submit": "Registrar trabajador"
+    },
+    "actions": {
+      "create": "Añadir trabajador"
+    },
+    "delete": {
+      "title": "¿Eliminar trabajador?",
+      "message": "Se eliminará el registro de «{{name}}» de esta obra."
+    },
+    "messages": {
+      "created": "Trabajador «{{name}}» registrado.",
+      "updated": "Trabajador «{{name}}» actualizado.",
+      "deleted": "Trabajador «{{name}}» eliminado."
+    }
+  },
+  "tasks": {
+    "description": "Asigna actividades al personal y sigue su avance.",
+    "descriptionReadOnly": "Consulta las actividades registradas y su estado.",
+    "search": "Buscar en tareas...",
+    "overdue": "Vencida",
+    "emptyTitle": "No hay tareas registradas en esta obra",
+    "emptyMessage": "Asigna la primera tarea a un trabajador de la obra.",
+    "emptyMessageReadOnly": "El supervisor aún no ha registrado tareas.",
+    "columns": {
+      "task": "Tarea",
+      "worker": "Responsable",
+      "dueDate": "Fecha límite"
+    },
+    "status": {
+      "PENDING": "Pendiente",
+      "IN_PROGRESS": "En progreso",
+      "COMPLETED": "Completada"
+    },
+    "fields": {
+      "title": "Tarea",
+      "titlePlaceholder": "Ej. Vaciado de losa del piso 7",
+      "description": "Descripción",
+      "worker": "Responsable",
+      "workerPlaceholder": "Selecciona un trabajador",
+      "dueDate": "Fecha límite"
+    },
+    "form": {
+      "createTitle": "Asignar tarea",
+      "editTitle": "Editar tarea",
+      "subtitle": "Define la actividad, su responsable y la fecha límite.",
+      "submit": "Asignar tarea",
+      "noWorkers": "No hay trabajadores activos en esta obra. Registra personal antes de asignar tareas."
+    },
+    "actions": {
+      "assign": "Asignar tarea",
+      "markCompleted": "Marcar como completada"
+    },
+    "delete": {
+      "title": "¿Eliminar tarea?",
+      "message": "Se eliminará la tarea «{{title}}» del plan de trabajo."
+    },
+    "messages": {
+      "created": "Tarea «{{title}}» asignada a {{worker}}.",
+      "updated": "Tarea «{{title}}» actualizada.",
+      "completed": "Tarea «{{title}}» completada.",
+      "deleted": "Tarea «{{title}}» eliminada."
+    }
+  },
+  "incidents": {
+    "description": "Registra y da seguimiento a los problemas ocurridos en la obra.",
+    "descriptionReadOnly": "Consulta los problemas registrados durante la ejecución de la obra.",
+    "search": "Buscar en incidentes...",
+    "resolvedOn": "Resuelto el {{date}}",
+    "emptyTitle": "No hay incidencias registradas en esta obra",
+    "emptyMessage": "Registra cualquier evento relevante para mantener evidencia.",
+    "emptyMessageReadOnly": "No se han reportado incidencias en esta obra.",
+    "columns": {
+      "date": "Fecha",
+      "type": "Tipo de incidente",
+      "severity": "Severidad"
+    },
+    "types": {
+      "MATERIAL_SHORTAGE": "Falta de material",
+      "DELIVERY_DELAY": "Retraso en entrega",
+      "EQUIPMENT_FAILURE": "Falla de equipo",
+      "WORK_ACCIDENT": "Accidente laboral",
+      "UNSAFE_CONDITION": "Condición insegura",
+      "OTHER": "Otro"
+    },
+    "severity": {
+      "HIGH": "Alta",
+      "MEDIUM": "Media",
+      "LOW": "Baja"
+    },
+    "status": {
+      "OPEN": "Pendiente",
+      "IN_REVIEW": "En revisión",
+      "RESOLVED": "Resuelto"
+    },
+    "fields": {
+      "type": "Tipo de incidente",
+      "typePlaceholder": "Selecciona un tipo",
+      "reportedAt": "Fecha del incidente",
+      "severity": "Severidad",
+      "description": "Descripción",
+      "descriptionPlaceholder": "¿Qué ocurrió, dónde y qué impacto tiene en la obra?"
+    },
+    "form": {
+      "createTitle": "Registrar incidencia",
+      "editTitle": "Editar incidencia",
+      "subtitle": "Deja evidencia del problema y su nivel de severidad.",
+      "submit": "Registrar incidencia"
+    },
+    "actions": {
+      "create": "Registrar incidencia",
+      "markResolved": "Marcar como resuelta"
+    },
+    "delete": {
+      "title": "¿Eliminar incidencia?",
+      "message": "Úsalo solo si la incidencia se registró por error. Esta acción no se puede deshacer."
+    },
+    "messages": {
+      "created": "Incidencia registrada.",
+      "updated": "Incidencia actualizada.",
+      "resolved": "Incidencia marcada como resuelta.",
+      "deleted": "Incidencia eliminada."
+    }
+  },
+  "machinery": {
+    "description": "Controla la maquinaria asignada a la obra y su estado operativo.",
+    "descriptionReadOnly": "Consulta la maquinaria asignada a la obra y su estado.",
+    "search": "Buscar en maquinaria...",
+    "emptyTitle": "No hay maquinaria registrada en esta obra",
+    "emptyMessage": "Registra los equipos asignados para controlar su estado.",
+    "emptyMessageReadOnly": "El supervisor aún no ha registrado maquinaria.",
+    "columns": {
+      "name": "Nombre",
+      "serialNumber": "Placa",
+      "registeredAt": "Fecha de registro"
+    },
+    "status": {
+      "OPERATIONAL": "Operativa",
+      "MAINTENANCE": "Mantenimiento",
+      "OUT_OF_SERVICE": "Fuera de servicio"
+    },
+    "fields": {
+      "name": "Nombre o tipo",
+      "namePlaceholder": "Ej. Mezcladora",
+      "serialNumber": "Placa o número de serie",
+      "serialNumberHint": "De 3 a 20 letras, números o guiones.",
+      "registeredAt": "Fecha de registro",
+      "description": "Descripción"
+    },
+    "form": {
+      "createTitle": "Registrar maquinaria",
+      "editTitle": "Editar maquinaria",
+      "subtitle": "Equipo asignado a la obra y su estado operativo.",
+      "submit": "Registrar maquinaria"
+    },
+    "actions": {
+      "create": "Añadir maquinaria"
+    },
+    "delete": {
+      "title": "¿Eliminar maquinaria?",
+      "message": "Se eliminará «{{name}}» de los recursos de la obra."
+    },
+    "messages": {
+      "created": "Maquinaria «{{name}}» registrada.",
+      "updated": "Maquinaria «{{name}}» actualizada.",
+      "deleted": "Maquinaria «{{name}}» eliminada."
+    }
+  },
+  "reports": {
+    "title": "Reporte semanal",
+    "description": "Resumen de avances, materiales e incidencias de la obra durante la semana.",
+    "download": "Descargar PDF",
+    "downloading": "Generando PDF…",
+    "downloaded": "Reporte descargado: {{file}}",
+    "downloadError": "No se pudo generar el PDF. Inténtalo nuevamente.",
+    "weekRange": "Semana del {{start}} al {{end}}",
+    "previousWeek": "Semana anterior",
+    "nextWeek": "Semana siguiente",
+    "currentWeek": "Semana actual",
+    "pickWeek": "Elegir una fecha de la semana",
+    "emptySection": "Sin registros en esta semana.",
+    "lowStock": "{{count}} material(es) por debajo del stock mínimo:",
+    "kpis": {
+      "progress": "Avance de obra",
+      "completedTasks": "Tareas completadas",
+      "openTasks": "Tareas pendientes",
+      "openTasksContext": "{{count}} tareas aún abiertas",
+      "movements": "Movimientos de material",
+      "movementsContext": "{{entries}} entradas · {{usages}} salidas",
+      "incidents": "Incidencias registradas",
+      "openIncidents": "Incidencias sin resolver",
+      "openIncidentsContext": "{{count}} sin resolver en la obra"
+    },
+    "sections": {
+      "project": "Información del proyecto",
+      "completedTasks": "Tareas completadas",
+      "entries": "Entradas de materiales",
+      "usages": "Salidas de materiales",
+      "incidents": "Incidencias registradas"
+    },
+    "columns": {
+      "completedOn": "Completada"
+    },
+    "pdf": {
+      "subtitle": "Reporte semanal de obra",
+      "generatedAt": "Generado el {{date}}",
+      "field": "Dato",
+      "value": "Valor",
+      "footer": "ArquiTech · Página {{page}} de {{pages}}"
+    }
+  },
+  "profile": {
+    "title": "Mi perfil",
+    "description": "Tus datos personales y preferencias de uso de ArquiTech.",
+    "memberSince": "Cuenta creada el {{date}}",
+    "personal": {
+      "title": "Información personal",
+      "subtitle": "Así te verán los demás usuarios de tus obras."
+    },
+    "fields": {
+      "fullName": "Nombre completo",
+      "email": "Correo electrónico",
+      "emailHint": "Es tu usuario de acceso; para cambiarlo contacta a soporte.",
+      "role": "Rol",
+      "phone": "Teléfono",
+      "company": "Empresa"
+    },
+    "accessibility": {
+      "title": "Accesibilidad",
+      "subtitle": "Ajusta la visualización a tus necesidades. Se aplica al instante.",
+      "textSize": "Tamaño del texto",
+      "sizes": {
+        "normal": "Normal",
+        "large": "Grande",
+        "x-large": "Muy grande"
+      },
+      "highContrast": "Alto contraste",
+      "highContrastHint": "Textos y bordes más oscuros, útil bajo luz solar.",
+      "reduceMotion": "Reducir animaciones",
+      "reduceMotionHint": "Elimina transiciones y movimientos de la interfaz.",
+      "reset": "Restablecer valores"
+    },
+    "language": {
+      "title": "Idioma",
+      "subtitle": "Idioma en el que se muestra ArquiTech."
+    },
+    "session": {
+      "title": "Sesión",
+      "subtitle": "Cierra tu sesión al terminar, sobre todo en equipos compartidos.",
+      "resetDemo": "Restablecer datos de demostración"
+    },
+    "messages": {
+      "saved": "Perfil actualizado.",
+      "accessibilityReset": "Preferencias de accesibilidad restablecidas.",
+      "demoReset": "Datos de demostración restablecidos."
+    }
+  },
+  "unauthorized": {
+    "title": "Acceso restringido",
+    "message": "Tu rol ({{role}}) no tiene permiso para ver esta sección u obra."
+  },
+  "notFound": {
+    "title": "Página no encontrada",
+    "message": "La dirección que buscas no existe o fue movida.",
+    "action": "Ir a mis proyectos"
+  }
+}

@@ -1,0 +1,81 @@
+<form class="dialog" [formGroup]="form" (ngSubmit)="submit()" novalidate aria-labelledby="task-dialog-title">
+  <header class="dialog__header">
+    <div>
+      <h2 id="task-dialog-title" class="dialog__title">
+        {{ (isEdit ? 'tasks.form.editTitle' : 'tasks.form.createTitle') | translate }}
+      </h2>
+      <p class="dialog__subtitle">{{ 'tasks.form.subtitle' | translate }}</p>
+    </div>
+    <button type="button" class="icon-button" (click)="close()" [attr.aria-label]="'common.close' | translate">
+      <lucide-icon name="x" [size]="20" aria-hidden="true" />
+    </button>
+  </header>
+
+  <div class="dialog__body">
+    @if (errorKey(); as error) {
+      <div class="form-alert" role="alert">
+        <lucide-icon name="circle-alert" [size]="16" aria-hidden="true" />
+        <span>{{ error | translate }}</span>
+      </div>
+    }
+
+    @if (workers.length === 0) {
+      <p class="form-alert form-alert--info">
+        <lucide-icon name="info" [size]="16" aria-hidden="true" />
+        <span>{{ 'tasks.form.noWorkers' | translate }}</span>
+      </p>
+    }
+
+    <div class="form-grid">
+      <div class="field field--full">
+        <label class="field__label" for="task-title">{{ 'tasks.fields.title' | translate }}</label>
+        <input
+          id="task-title"
+          class="field__control"
+          formControlName="title"
+          [placeholder]="'tasks.fields.titlePlaceholder' | translate"
+        />
+        <app-field-error [control]="form.controls.title" />
+      </div>
+      <div class="field field--full">
+        <label class="field__label" for="task-description">
+          {{ 'tasks.fields.description' | translate }}
+          <span class="field__optional">({{ 'common.optional' | translate }})</span>
+        </label>
+        <textarea id="task-description" class="field__control" formControlName="description" rows="3"></textarea>
+        <app-field-error [control]="form.controls.description" />
+      </div>
+      <div class="field field--full">
+        <label class="field__label" for="task-worker">{{ 'tasks.fields.worker' | translate }}</label>
+        <select id="task-worker" class="field__control" formControlName="workerId">
+          <option [ngValue]="null" disabled>{{ 'tasks.fields.workerPlaceholder' | translate }}</option>
+          @for (worker of workers; track worker.id) {
+            <option [ngValue]="worker.id">{{ worker.fullName }} · {{ worker.role }}</option>
+          }
+        </select>
+        <app-field-error [control]="form.controls.workerId" />
+      </div>
+      <div class="field">
+        <label class="field__label" for="task-due">{{ 'tasks.fields.dueDate' | translate }}</label>
+        <input id="task-due" type="date" class="field__control" formControlName="dueDate" />
+        <app-field-error [control]="form.controls.dueDate" />
+      </div>
+      <div class="field">
+        <label class="field__label" for="task-status">{{ 'common.status' | translate }}</label>
+        <select id="task-status" class="field__control" formControlName="status">
+          @for (status of statuses; track status) {
+            <option [value]="status">{{ 'tasks.status.' + status | translate }}</option>
+          }
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <footer class="dialog__footer">
+    <button type="button" class="btn btn--secondary" (click)="close()">{{ 'common.cancel' | translate }}</button>
+    <button type="submit" class="btn btn--save" [disabled]="submitting() || workers.length === 0">
+      <lucide-icon name="check" [size]="16" aria-hidden="true" />
+      {{ (submitting() ? 'common.saving' : isEdit ? 'common.saveChanges' : 'tasks.form.submit') | translate }}
+    </button>
+  </footer>
+</form>

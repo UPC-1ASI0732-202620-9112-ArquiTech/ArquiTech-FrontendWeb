@@ -1,0 +1,48 @@
+@switch (status()) {
+  @case ('loading') {
+    <div class="list-state" role="status" aria-live="polite">
+      <div class="skeleton" aria-hidden="true"><span></span><span></span><span></span></div>
+      <span class="sr-only">{{ 'common.loading' | translate }}</span>
+    </div>
+  }
+  @case ('error') {
+    <div class="list-state" role="alert">
+      <lucide-icon
+        name="circle-alert"
+        [size]="28"
+        class="list-state__icon list-state__icon--error"
+        aria-hidden="true"
+      />
+      <p class="list-state__title">{{ 'errors.loadTitle' | translate }}</p>
+      <p class="list-state__message">{{ 'errors.loadMessage' | translate }}</p>
+      <button type="button" class="btn btn--secondary" (click)="retry.emit()">
+        <lucide-icon name="rotate-ccw" [size]="16" aria-hidden="true" />
+        {{ 'common.retry' | translate }}
+      </button>
+    </div>
+  }
+  @default {
+    @if (isEmpty()) {
+      <div class="list-state" role="status">
+        <lucide-icon
+          [name]="isFiltering() ? 'search' : icon()"
+          [size]="28"
+          class="list-state__icon"
+          aria-hidden="true"
+        />
+        @if (isFiltering()) {
+          <p class="list-state__title">{{ 'common.noResultsTitle' | translate }}</p>
+          <p class="list-state__message">{{ 'common.noResultsMessage' | translate }}</p>
+        } @else {
+          <p class="list-state__title">{{ emptyTitleKey() | translate }}</p>
+          @if (emptyMessageKey()) {
+            <p class="list-state__message">{{ emptyMessageKey() | translate }}</p>
+          }
+          <ng-content select="[emptyAction]" />
+        }
+      </div>
+    } @else {
+      <ng-content />
+    }
+  }
+}

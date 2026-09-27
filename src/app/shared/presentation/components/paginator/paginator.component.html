@@ -1,0 +1,35 @@
+<nav class="paginator" [attr.aria-label]="'pagination.label' | translate">
+  <label class="paginator__size">
+    <span>{{ 'pagination.rowsPerPage' | translate }}</span>
+    <select [value]="state().pageSize()" (change)="onPageSizeChange($event)">
+      @for (size of pageSizes; track size) {
+        <option [value]="size" [selected]="size === state().pageSize()">{{ size }}</option>
+      }
+    </select>
+  </label>
+  <div class="paginator__controls">
+    <span class="paginator__range" aria-live="polite">
+      {{
+        'pagination.range' | translate: { start: state().rangeStart(), end: state().rangeEnd(), total: state().total() }
+      }}
+    </span>
+    <button
+      type="button"
+      class="icon-button"
+      [disabled]="!state().hasPrevious()"
+      (click)="state().previousPage()"
+      [attr.aria-label]="'pagination.previous' | translate"
+    >
+      <lucide-icon name="chevron-left" [size]="18" aria-hidden="true" />
+    </button>
+    <button
+      type="button"
+      class="icon-button"
+      [disabled]="!state().hasNext()"
+      (click)="state().nextPage()"
+      [attr.aria-label]="'pagination.next' | translate"
+    >
+      <lucide-icon name="chevron-right" [size]="18" aria-hidden="true" />
+    </button>
+  </div>
+</nav>

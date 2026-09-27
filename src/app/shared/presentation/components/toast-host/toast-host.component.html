@@ -1,0 +1,20 @@
+<div class="toast-host" aria-live="polite" aria-atomic="false">
+  @for (toast of toastService.toasts(); track toast.id) {
+    <div class="toast" [class]="'toast toast--' + toast.tone" [attr.role]="toast.tone === 'error' ? 'alert' : 'status'">
+      <lucide-icon
+        [name]="toast.tone === 'success' ? 'circle-check' : toast.tone === 'error' ? 'circle-alert' : 'info'"
+        [size]="18"
+        aria-hidden="true"
+      />
+      <p class="toast__message">{{ toast.messageKey | translate: toast.params }}</p>
+      <button
+        type="button"
+        class="toast__close"
+        (click)="toastService.dismiss(toast.id)"
+        [attr.aria-label]="'common.close' | translate"
+      >
+        <lucide-icon name="x" [size]="16" aria-hidden="true" />
+      </button>
+    </div>
+  }
+</div>

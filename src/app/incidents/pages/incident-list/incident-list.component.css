@@ -1,0 +1,7 @@
+.incident-type .cell-sub {
+  max-width: 380px;
+  overflow: hidden;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

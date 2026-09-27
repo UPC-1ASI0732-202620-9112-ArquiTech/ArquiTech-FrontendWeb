@@ -1,0 +1,35 @@
+.progress {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 120px;
+}
+
+.progress__bar {
+  flex: 1;
+  height: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--color-surface-sunken);
+  overflow: hidden;
+}
+
+.progress__bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--color-fulvous);
+}
+
+.progress__value {
+  min-width: 36px;
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-muted);
+}
+
+.details-link {
+  min-height: 36px;
+  padding: 8px 12px;
+  font-weight: 600;
+  color: var(--color-sinopia);
+}

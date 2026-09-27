@@ -1,0 +1,61 @@
+<aside class="sidebar" [attr.aria-label]="'nav.label' | translate">
+  <div class="sidebar__top">
+    <a class="brand" routerLink="/projects" (click)="navigate.emit()">
+      <img class="brand__mark" src="images/arquitech-logo.png" alt="" width="38" height="38" />
+      <span class="brand__name">ARQUITECH</span>
+    </a>
+    <button type="button" class="sidebar__close" (click)="closeNav.emit()" [attr.aria-label]="'nav.close' | translate">
+      <lucide-icon name="x" [size]="20" aria-hidden="true" />
+    </button>
+  </div>
+
+  <nav class="nav">
+    <ul class="nav__list">
+      <li>
+        <a
+          class="nav__item"
+          routerLink="/projects"
+          [class.is-active]="isProjectListActive()"
+          [attr.aria-current]="isProjectListActive() ? 'page' : null"
+          (click)="navigate.emit()"
+        >
+          <lucide-icon name="folder" [size]="20" aria-hidden="true" />
+          <span>{{ 'nav.projects' | translate }}</span>
+        </a>
+      </li>
+      @for (item of projectItems; track item.path) {
+        <li>
+          @if (targetProjectId(); as projectId) {
+            <a
+              class="nav__item"
+              [routerLink]="['/projects', projectId, item.path]"
+              routerLinkActive="is-active"
+              ariaCurrentWhenActive="page"
+              (click)="navigate.emit()"
+            >
+              <lucide-icon [name]="item.icon" [size]="20" aria-hidden="true" />
+              <span>{{ item.labelKey | translate }}</span>
+            </a>
+          } @else {
+            <span class="nav__item is-disabled" aria-disabled="true" [title]="'nav.selectProjectFirst' | translate">
+              <lucide-icon [name]="item.icon" [size]="20" aria-hidden="true" />
+              <span>{{ item.labelKey | translate }}</span>
+            </span>
+          }
+        </li>
+      }
+    </ul>
+  </nav>
+
+  <div class="sidebar__footer">
+    @if (context.current()) {
+      <a class="back-link" routerLink="/projects" (click)="navigate.emit()">
+        <lucide-icon name="arrow-left" [size]="18" aria-hidden="true" />
+        <span>{{ 'nav.backToProjects' | translate }}</span>
+      </a>
+    } @else if (!targetProjectId()) {
+      <p class="sidebar__hint">{{ 'nav.selectProjectFirst' | translate }}</p>
+    }
+    <app-language-switch />
+  </div>
+</aside>

@@ -1,0 +1,87 @@
+<section class="page">
+  <header class="page-heading">
+    <div class="page-heading__text">
+      <h1 class="page-title">{{ 'movements.title' | translate }}</h1>
+      <p class="page-description">{{ 'movements.description' | translate }}</p>
+    </div>
+  </header>
+
+  <nav class="tabs" [attr.aria-label]="'materials.tabs.label' | translate">
+    <a
+      class="tabs__link"
+      [routerLink]="['/projects', projectId(), 'materials']"
+      routerLinkActive="is-active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      ariaCurrentWhenActive="page"
+    >
+      {{ 'materials.tabs.inventory' | translate }}
+    </a>
+    <a
+      class="tabs__link"
+      [routerLink]="['/projects', projectId(), 'materials', 'movements']"
+      routerLinkActive="is-active"
+      ariaCurrentWhenActive="page"
+    >
+      {{ 'materials.tabs.movements' | translate }}
+    </a>
+  </nav>
+
+  <app-data-toolbar [state]="table" searchPlaceholderKey="movements.search" [filters]="filterFields()" />
+
+  <div class="data-panel">
+    <app-list-state
+      [status]="status()"
+      [isEmpty]="table.total() === 0"
+      [isFiltering]="table.isFiltering()"
+      icon="history"
+      emptyTitleKey="movements.emptyTitle"
+      emptyMessageKey="movements.emptyMessage"
+      (retry)="load()"
+    >
+      <div class="table-scroll">
+        <table class="data-table">
+          <caption class="sr-only">
+            {{
+              'movements.title' | translate
+            }}
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">{{ 'movements.columns.date' | translate }}</th>
+              <th scope="col">{{ 'movements.columns.material' | translate }}</th>
+              <th scope="col">{{ 'movements.columns.type' | translate }}</th>
+              <th scope="col">{{ 'movements.columns.quantity' | translate }}</th>
+              <th scope="col">{{ 'movements.columns.supplier' | translate }}</th>
+              <th scope="col">{{ 'movements.columns.registeredBy' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (movement of table.pageRows(); track movement.id) {
+              <tr>
+                <td class="cell-num">{{ movement.occurredAt | appDate: 'datetime' }}</td>
+                <td class="cell-strong">
+                  {{ movement.materialName }}
+                  @if (movement.note) {
+                    <span class="cell-sub">{{ movement.note }}</span>
+                  }
+                </td>
+                <td>
+                  <app-status-badge
+                    [tone]="movement.type === entryType ? 'success' : 'warning'"
+                    [labelKey]="'movements.types.' + movement.type"
+                  />
+                </td>
+                <td class="cell-num quantity" [class.quantity--usage]="movement.type !== entryType">
+                  {{ movement.type === entryType ? '+' : '−' }}{{ movement.quantity | appNumber }} {{ movement.unit }}
+                </td>
+                <td>{{ movement.supplier || '—' }}</td>
+                <td class="cell-muted">{{ movement.registeredByName || '—' }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <app-paginator [state]="table" />
+    </app-list-state>
+  </div>
+</section>

@@ -1,0 +1,10 @@
+<section class="page">
+  <div class="card status-card">
+    <lucide-icon name="shield-alert" [size]="40" class="status-card__icon" aria-hidden="true" />
+    <h1 class="page-title">{{ 'unauthorized.title' | translate }}</h1>
+    <p class="page-description">
+      {{ 'unauthorized.message' | translate: { role: ('roles.' + session.role() | translate) } }}
+    </p>
+    <a class="btn btn--primary" routerLink="/projects">{{ 'nav.backToProjects' | translate }}</a>
+  </div>
+</section>

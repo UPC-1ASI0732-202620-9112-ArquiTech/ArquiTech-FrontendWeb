@@ -1,0 +1,105 @@
+<section class="page">
+  <header class="page-heading">
+    <div class="page-heading__text">
+      <h1 class="page-title">{{ 'nav.projects' | translate }}</h1>
+      <p class="page-description">
+        {{ (session.isSupervisor() ? 'projects.descriptionSupervisor' : 'projects.descriptionContractor') | translate }}
+      </p>
+    </div>
+    @if (session.isSupervisor()) {
+      <div class="page-actions">
+        <a class="btn btn--primary" routerLink="/projects/new">
+          <span class="btn__icon-add" aria-hidden="true">+</span>
+          {{ 'projects.create.action' | translate }}
+        </a>
+      </div>
+    }
+  </header>
+
+  <app-data-toolbar [state]="table" searchPlaceholderKey="projects.search" [filters]="filterFields" />
+
+  <div class="data-panel">
+    <app-list-state
+      [status]="status()"
+      [isEmpty]="table.total() === 0"
+      [isFiltering]="table.isFiltering()"
+      icon="folder"
+      [emptyTitleKey]="session.isSupervisor() ? 'projects.emptySupervisorTitle' : 'projects.emptyContractorTitle'"
+      [emptyMessageKey]="session.isSupervisor() ? 'projects.emptySupervisorMessage' : 'projects.emptyContractorMessage'"
+      (retry)="load()"
+    >
+      @if (session.isSupervisor()) {
+        <a emptyAction class="btn btn--primary" routerLink="/projects/new">{{
+          'projects.create.action' | translate
+        }}</a>
+      }
+      <div class="table-scroll">
+        <table class="data-table">
+          <caption class="sr-only">
+            {{
+              'nav.projects' | translate
+            }}
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">{{ 'projects.columns.date' | translate }}</th>
+              <th scope="col">{{ 'projects.columns.project' | translate }}</th>
+              <th scope="col">{{ 'projects.columns.location' | translate }}</th>
+              <th scope="col">{{ 'projects.columns.progress' | translate }}</th>
+              <th scope="col">{{ 'common.status' | translate }}</th>
+              <th scope="col">
+                <span class="sr-only">{{ 'common.actions' | translate }}</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (project of table.pageRows(); track project.id) {
+              <tr class="is-clickable" (click)="open(project)">
+                <td class="cell-num">{{ project.startDate | appDate }}</td>
+                <td class="cell-strong">
+                  {{ project.name }}
+                  @if (session.isSupervisor() && project.contractorName) {
+                    <span class="cell-sub">{{ 'projects.contractor' | translate }}: {{ project.contractorName }}</span>
+                  }
+                </td>
+                <td>{{ project.location }}</td>
+                <td>
+                  <div class="progress">
+                    <div
+                      class="progress__bar"
+                      role="progressbar"
+                      [attr.aria-label]="'projects.columns.progress' | translate"
+                      [attr.aria-valuenow]="project.progress"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                    >
+                      <span [style.width.%]="project.progress"></span>
+                    </div>
+                    <span class="progress__value">{{ project.progress }}%</span>
+                  </div>
+                </td>
+                <td>
+                  <app-status-badge
+                    [tone]="statusTone[project.status]"
+                    [labelKey]="'projects.status.' + project.status"
+                  />
+                </td>
+                <td class="cell-actions">
+                  <a
+                    class="btn btn--ghost details-link"
+                    [routerLink]="['/projects', project.id, 'materials']"
+                    (click)="$event.stopPropagation()"
+                  >
+                    {{ 'projects.viewDetails' | translate }}
+                    <lucide-icon name="arrow-right" [size]="16" aria-hidden="true" />
+                  </a>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <app-paginator [state]="table" />
+    </app-list-state>
+  </div>
+</section>

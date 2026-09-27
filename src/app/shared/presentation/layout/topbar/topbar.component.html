@@ -1,0 +1,102 @@
+<header class="topbar">
+  <div class="topbar__left">
+    <button
+      type="button"
+      class="icon-button topbar__menu"
+      (click)="toggleNav.emit()"
+      [attr.aria-label]="'nav.open' | translate"
+    >
+      <lucide-icon name="menu" [size]="22" aria-hidden="true" />
+    </button>
+    <nav class="breadcrumb" [attr.aria-label]="'nav.breadcrumb' | translate">
+      @if (context.current(); as project) {
+        <span>{{ 'nav.currentProject' | translate }}</span>
+        <span class="breadcrumb__separator" aria-hidden="true">/</span>
+        <span class="breadcrumb__current">{{ project.name }}</span>
+      } @else if (sectionKey()) {
+        <span class="breadcrumb__current">{{ sectionKey() | translate }}</span>
+      }
+    </nav>
+  </div>
+
+  <div class="topbar__right">
+    <button
+      type="button"
+      class="notification"
+      cdkOverlayOrigin
+      #alertsOrigin="cdkOverlayOrigin"
+      [attr.aria-expanded]="alertsOpen()"
+      [attr.aria-label]="'alerts.label' | translate: { count: alerts.alerts().length }"
+      (click)="openAlerts()"
+    >
+      <lucide-icon name="bell" [size]="17" aria-hidden="true" />
+      @if (alerts.alerts().length > 0) {
+        <span class="notification__dot" aria-hidden="true"></span>
+      }
+    </button>
+
+    <ng-template
+      cdkConnectedOverlay
+      [cdkConnectedOverlayOrigin]="alertsOrigin"
+      [cdkConnectedOverlayOpen]="alertsOpen()"
+      [cdkConnectedOverlayPositions]="alertPositions"
+      [cdkConnectedOverlayHasBackdrop]="true"
+      cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+      (backdropClick)="alertsOpen.set(false)"
+      (detach)="alertsOpen.set(false)"
+      (overlayKeydown)="$event.key === 'Escape' && alertsOpen.set(false)"
+    >
+      <div class="popover alerts" role="dialog" [attr.aria-label]="'alerts.title' | translate">
+        <p class="alerts__title">{{ 'alerts.title' | translate }}</p>
+        @if (!context.current()) {
+          <p class="alerts__empty">{{ 'alerts.noProject' | translate }}</p>
+        } @else if (alerts.alerts().length === 0) {
+          <p class="alerts__empty">{{ 'alerts.empty' | translate }}</p>
+        } @else {
+          <ul class="alerts__list">
+            @for (alert of alerts.alerts(); track alert.id) {
+              <li>
+                <button type="button" class="alerts__item" (click)="goTo(alert.link)">
+                  <lucide-icon
+                    [name]="alert.kind === 'lowStock' ? 'package-minus' : 'triangle-alert'"
+                    [size]="18"
+                    class="alerts__icon"
+                    aria-hidden="true"
+                  />
+                  <span>
+                    {{
+                      alert.messageKey
+                        | translate: (alert.typeKey ? { type: (alert.typeKey | translate) } : alert.params)
+                    }}
+                  </span>
+                </button>
+              </li>
+            }
+          </ul>
+        }
+      </div>
+    </ng-template>
+
+    <button type="button" class="user" [cdkMenuTriggerFor]="userMenu" [attr.aria-label]="'nav.userMenu' | translate">
+      <span class="user__avatar" aria-hidden="true">{{ session.user()?.initials }}</span>
+      <span class="user__text">
+        <span class="user__name">{{ session.user()?.fullName }}</span>
+        <span class="user__role">{{ 'roles.' + session.role() | translate }}</span>
+      </span>
+    </button>
+
+    <ng-template #userMenu>
+      <div class="menu" cdkMenu>
+        <a class="menu__item" cdkMenuItem routerLink="/profile">
+          <lucide-icon name="user" [size]="16" aria-hidden="true" />
+          {{ 'nav.profile' | translate }}
+        </a>
+        <div class="menu__divider" role="separator"></div>
+        <button type="button" class="menu__item menu__item--danger" cdkMenuItem (cdkMenuItemTriggered)="signOut()">
+          <lucide-icon name="log-out" [size]="16" aria-hidden="true" />
+          {{ 'auth.signOut' | translate }}
+        </button>
+      </div>
+    </ng-template>
+  </div>
+</header>

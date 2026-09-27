@@ -1,0 +1,13 @@
+<a class="skip-link" href="#main-content" (click)="skipToContent($event)">{{ 'nav.skipToContent' | translate }}</a>
+
+<div class="shell" [class.is-nav-open]="navOpen()">
+  <app-sidebar class="shell__sidebar" (navigate)="navOpen.set(false)" (closeNav)="navOpen.set(false)" />
+  <div class="shell__backdrop" (click)="navOpen.set(false)" aria-hidden="true"></div>
+
+  <div class="shell__workspace">
+    <app-topbar (toggleNav)="navOpen.set(!navOpen())" />
+    <main #main id="main-content" class="shell__content" tabindex="-1">
+      <router-outlet />
+    </main>
+  </div>
+</div>

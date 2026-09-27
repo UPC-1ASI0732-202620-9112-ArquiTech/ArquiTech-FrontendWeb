@@ -1,0 +1,129 @@
+:host {
+  display: block;
+}
+
+.sidebar {
+  --focus-ring-color: var(--color-selective-yellow);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: var(--sidebar-width);
+  height: 100%;
+  padding: 28px var(--space-3) var(--space-4);
+  background: var(--color-jet);
+  color: #ffffff;
+  overflow-y: auto;
+}
+
+.sidebar__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.brand__mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.brand__name {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.02em;
+  color: #ffffff;
+}
+
+.sidebar__close {
+  display: none;
+  padding: var(--space-1);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--color-sidebar-text);
+  cursor: pointer;
+}
+
+.nav__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 48px;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-button);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-sidebar-text);
+  text-decoration: none;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+a.nav__item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #ffffff;
+}
+
+.nav__item.is-active {
+  background: var(--color-sinopia);
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.nav__item.is-disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.sidebar__footer {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8125rem;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.back-link lucide-icon {
+  color: var(--color-selective-yellow);
+}
+
+.back-link:hover span {
+  text-decoration: underline;
+}
+
+.sidebar__hint {
+  font-size: 0.75rem;
+  color: var(--color-sidebar-muted);
+}
+
+@media (max-width: 960px) {
+  .sidebar__close {
+    display: inline-flex;
+  }
+}

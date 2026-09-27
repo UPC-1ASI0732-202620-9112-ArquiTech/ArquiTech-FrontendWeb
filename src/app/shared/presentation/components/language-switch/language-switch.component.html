@@ -1,0 +1,20 @@
+<div
+  class="language"
+  role="group"
+  [attr.aria-label]="'language.label' | translate"
+  [class.language--light]="variant() === 'light'"
+>
+  @for (language of languages; track language) {
+    <button
+      type="button"
+      class="language__option"
+      [class.is-active]="preferences.language() === language"
+      [attr.aria-pressed]="preferences.language() === language"
+      [attr.lang]="language"
+      [attr.aria-label]="'language.' + language | translate"
+      (click)="preferences.setLanguage(language)"
+    >
+      {{ language.toUpperCase() }}
+    </button>
+  }
+</div>

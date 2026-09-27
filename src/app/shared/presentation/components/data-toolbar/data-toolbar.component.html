@@ -1,0 +1,75 @@
+<div class="toolbar">
+  <label class="search">
+    <span class="sr-only">{{ searchPlaceholderKey() | translate }}</span>
+    <lucide-icon name="search" [size]="17" class="search__icon" aria-hidden="true" />
+    <input
+      type="search"
+      class="search__input"
+      [value]="state().query()"
+      [placeholder]="searchPlaceholderKey() | translate"
+      (input)="onSearch($event)"
+    />
+  </label>
+
+  @if (filters().length > 0) {
+    <button
+      type="button"
+      class="btn btn--secondary filter-button"
+      cdkOverlayOrigin
+      #origin="cdkOverlayOrigin"
+      [attr.aria-expanded]="filterOpen()"
+      [attr.aria-controls]="panelId"
+      (click)="filterOpen.set(!filterOpen())"
+    >
+      <lucide-icon name="sliders-horizontal" [size]="16" aria-hidden="true" />
+      <span>{{ 'filters.button' | translate }}</span>
+      @if (state().activeFilterCount() > 0) {
+        <span class="filter-button__count">{{ state().activeFilterCount() }}</span>
+      }
+    </button>
+
+    <ng-template
+      cdkConnectedOverlay
+      [cdkConnectedOverlayOrigin]="origin"
+      [cdkConnectedOverlayOpen]="filterOpen()"
+      [cdkConnectedOverlayPositions]="positions"
+      [cdkConnectedOverlayHasBackdrop]="true"
+      cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+      (backdropClick)="filterOpen.set(false)"
+      (detach)="filterOpen.set(false)"
+      (overlayKeydown)="$event.key === 'Escape' && filterOpen.set(false)"
+    >
+      <div class="popover filter-panel" [id]="panelId" role="dialog" [attr.aria-label]="'filters.title' | translate">
+        <p class="filter-panel__title">{{ 'filters.title' | translate }}</p>
+        @for (field of filters(); track field.key) {
+          <label class="field">
+            <span class="field__label">{{ field.labelKey | translate }}</span>
+            @if (field.type === 'select') {
+              <select class="field__control" [value]="valueOf(field.key)" (change)="onFilterChange(field.key, $event)">
+                <option value="">{{ 'filters.all' | translate }}</option>
+                @for (option of field.options ?? []; track option.value) {
+                  <option [value]="option.value" [selected]="option.value === valueOf(field.key)">
+                    {{ option.labelKey | translate }}
+                  </option>
+                }
+              </select>
+            } @else {
+              <input
+                type="date"
+                class="field__control"
+                [value]="valueOf(field.key)"
+                (change)="onFilterChange(field.key, $event)"
+              />
+            }
+          </label>
+        }
+        <div class="filter-panel__actions">
+          <button type="button" class="btn btn--ghost" (click)="clear()">{{ 'filters.clear' | translate }}</button>
+          <button type="button" class="btn btn--primary" (click)="filterOpen.set(false)">
+            {{ 'filters.apply' | translate }}
+          </button>
+        </div>
+      </div>
+    </ng-template>
+  }
+</div>

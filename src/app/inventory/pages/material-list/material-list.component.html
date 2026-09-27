@@ -1,0 +1,167 @@
+<section class="page">
+  <header class="page-heading">
+    <div class="page-heading__text">
+      <h1 class="page-title">{{ 'nav.materials' | translate }}</h1>
+      <p class="page-description">
+        {{ (canManage() ? 'materials.description' : 'materials.descriptionReadOnly') | translate }}
+      </p>
+    </div>
+    @if (canManage()) {
+      <div class="page-actions">
+        <button type="button" class="btn btn--primary" (click)="openCreate()">
+          <span class="btn__icon-add" aria-hidden="true">+</span>
+          {{ 'materials.actions.create' | translate }}
+        </button>
+      </div>
+    }
+  </header>
+
+  <div class="tabs-row">
+    <nav class="tabs" [attr.aria-label]="'materials.tabs.label' | translate">
+      <a
+        class="tabs__link"
+        [routerLink]="['/projects', projectId(), 'materials']"
+        routerLinkActive="is-active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        ariaCurrentWhenActive="page"
+      >
+        {{ 'materials.tabs.inventory' | translate }}
+      </a>
+      <a
+        class="tabs__link"
+        [routerLink]="['/projects', projectId(), 'materials', 'movements']"
+        routerLinkActive="is-active"
+        ariaCurrentWhenActive="page"
+      >
+        {{ 'materials.tabs.movements' | translate }}
+      </a>
+    </nav>
+    @if (canManage()) {
+      <div class="page-actions">
+        <button type="button" class="btn btn--secondary" (click)="openMovement('entry')">
+          <lucide-icon name="package-plus" [size]="16" aria-hidden="true" />
+          {{ 'movements.actions.entry' | translate }}
+        </button>
+        <button type="button" class="btn btn--secondary" (click)="openMovement('usage')">
+          <lucide-icon name="package-minus" [size]="16" aria-hidden="true" />
+          {{ 'movements.actions.usage' | translate }}
+        </button>
+      </div>
+    }
+  </div>
+
+  <app-data-toolbar [state]="table" searchPlaceholderKey="materials.search" [filters]="filterFields" />
+
+  <div class="data-panel">
+    <app-list-state
+      [status]="status()"
+      [isEmpty]="table.total() === 0"
+      [isFiltering]="table.isFiltering()"
+      icon="chart-column-stacked"
+      emptyTitleKey="materials.emptyTitle"
+      [emptyMessageKey]="canManage() ? 'materials.emptyMessage' : 'materials.emptyMessageReadOnly'"
+      (retry)="load()"
+    >
+      @if (canManage()) {
+        <button emptyAction type="button" class="btn btn--primary" (click)="openCreate()">
+          {{ 'materials.actions.create' | translate }}
+        </button>
+      }
+      <div class="table-scroll">
+        <table class="data-table">
+          <caption class="sr-only">
+            {{
+              'nav.materials' | translate
+            }}
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">{{ 'materials.columns.material' | translate }}</th>
+              <th scope="col">{{ 'materials.columns.quantity' | translate }}</th>
+              <th scope="col">{{ 'materials.columns.stock' | translate }}</th>
+              <th scope="col">{{ 'materials.columns.unitPrice' | translate }}</th>
+              <th scope="col">{{ 'materials.columns.unit' | translate }}</th>
+              <th scope="col">{{ 'materials.columns.provider' | translate }}</th>
+              <th scope="col">{{ 'materials.columns.ruc' | translate }}</th>
+              <th scope="col">{{ 'materials.columns.date' | translate }}</th>
+              <th scope="col">
+                <span class="sr-only">{{ 'common.actions' | translate }}</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (material of table.pageRows(); track material.id) {
+              <tr>
+                <td>{{ material.name }}</td>
+                <td class="cell-strong cell-num">{{ material.quantity | appNumber }}</td>
+                <td class="cell-num">
+                  <span class="stock" [class.stock--low]="material.isBelowMinimum()">
+                    {{ material.stock | appNumber }}
+                    @if (material.isBelowMinimum()) {
+                      <span class="badge badge--danger">{{ 'materials.lowStock' | translate }}</span>
+                    }
+                  </span>
+                </td>
+                <td class="cell-num">{{ material.unitPrice | pen }}</td>
+                <td>{{ material.unit }}</td>
+                <td>{{ material.provider }}</td>
+                <td class="cell-num">{{ material.providerRuc }}</td>
+                <td class="cell-num">{{ material.date | appDate }}</td>
+                <td class="cell-actions">
+                  @if (canManage()) {
+                    <button
+                      type="button"
+                      class="icon-button"
+                      [cdkMenuTriggerFor]="rowMenu"
+                      [cdkMenuTriggerData]="{ $implicit: material }"
+                      [attr.aria-label]="'common.actionsFor' | translate: { name: material.name }"
+                    >
+                      <lucide-icon name="ellipsis-vertical" [size]="18" aria-hidden="true" />
+                    </button>
+                  } @else {
+                    <button
+                      type="button"
+                      class="icon-button"
+                      (click)="viewHistory(material)"
+                      [attr.aria-label]="'materials.actions.historyFor' | translate: { name: material.name }"
+                      [title]="'materials.actions.history' | translate"
+                    >
+                      <lucide-icon name="history" [size]="18" aria-hidden="true" />
+                    </button>
+                  }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <app-paginator [state]="table" />
+    </app-list-state>
+  </div>
+</section>
+
+<ng-template #rowMenu let-material>
+  <div class="menu" cdkMenu>
+    <button type="button" class="menu__item" cdkMenuItem (cdkMenuItemTriggered)="openMovement('entry', material)">
+      <lucide-icon name="package-plus" [size]="16" aria-hidden="true" />
+      {{ 'movements.actions.entry' | translate }}
+    </button>
+    <button type="button" class="menu__item" cdkMenuItem (cdkMenuItemTriggered)="openMovement('usage', material)">
+      <lucide-icon name="package-minus" [size]="16" aria-hidden="true" />
+      {{ 'movements.actions.usage' | translate }}
+    </button>
+    <button type="button" class="menu__item" cdkMenuItem (cdkMenuItemTriggered)="viewHistory(material)">
+      <lucide-icon name="history" [size]="16" aria-hidden="true" />
+      {{ 'materials.actions.history' | translate }}
+    </button>
+    <div class="menu__divider" role="separator"></div>
+    <button type="button" class="menu__item" cdkMenuItem (cdkMenuItemTriggered)="openEdit(material)">
+      <lucide-icon name="pencil" [size]="16" aria-hidden="true" />
+      {{ 'common.edit' | translate }}
+    </button>
+    <button type="button" class="menu__item menu__item--danger" cdkMenuItem (cdkMenuItemTriggered)="delete(material)">
+      <lucide-icon name="trash-2" [size]="16" aria-hidden="true" />
+      {{ 'common.delete' | translate }}
+    </button>
+  </div>
+</ng-template>

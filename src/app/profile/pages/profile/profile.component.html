@@ -1,0 +1,196 @@
+<section class="page">
+  <header class="page-heading">
+    <div class="page-heading__text">
+      <h1 class="page-title">{{ 'profile.title' | translate }}</h1>
+      <p class="page-description">{{ 'profile.description' | translate }}</p>
+    </div>
+  </header>
+
+  <div class="profile-grid">
+    <form
+      class="card profile-card"
+      [formGroup]="form"
+      (ngSubmit)="saveProfile()"
+      novalidate
+      aria-labelledby="personal-title"
+    >
+      <div class="profile-card__header">
+        <span class="avatar" aria-hidden="true">{{ user()?.initials }}</span>
+        <div>
+          <h2 id="personal-title" class="section-title">{{ 'profile.personal.title' | translate }}</h2>
+          <p class="muted">{{ 'profile.personal.subtitle' | translate }}</p>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="field field--full">
+          <label class="field__label" for="profile-name">{{ 'profile.fields.fullName' | translate }}</label>
+          <input id="profile-name" class="field__control" formControlName="fullName" autocomplete="name" />
+          <app-field-error [control]="form.controls.fullName" />
+        </div>
+        <div class="field">
+          <label class="field__label" for="profile-email">{{ 'profile.fields.email' | translate }}</label>
+          <input
+            id="profile-email"
+            class="field__control"
+            [value]="user()?.email"
+            readonly
+            aria-describedby="profile-email-hint"
+          />
+          <span id="profile-email-hint" class="field__hint">{{ 'profile.fields.emailHint' | translate }}</span>
+        </div>
+        <div class="field">
+          <label class="field__label" for="profile-role">{{ 'profile.fields.role' | translate }}</label>
+          <input id="profile-role" class="field__control" [value]="'roles.' + user()?.role | translate" readonly />
+        </div>
+        <div class="field">
+          <label class="field__label" for="profile-phone">
+            {{ 'profile.fields.phone' | translate }}
+            <span class="field__optional">({{ 'common.optional' | translate }})</span>
+          </label>
+          <input
+            id="profile-phone"
+            class="field__control"
+            formControlName="phone"
+            autocomplete="tel"
+            placeholder="+51 987 654 321"
+          />
+          <app-field-error [control]="form.controls.phone" />
+        </div>
+        <div class="field">
+          <label class="field__label" for="profile-company">
+            {{ 'profile.fields.company' | translate }}
+            <span class="field__optional">({{ 'common.optional' | translate }})</span>
+          </label>
+          <input id="profile-company" class="field__control" formControlName="company" autocomplete="organization" />
+          <app-field-error [control]="form.controls.company" />
+        </div>
+      </div>
+
+      <div class="profile-card__actions">
+        @if (user()?.createdAt) {
+          <p class="muted">{{ 'profile.memberSince' | translate: { date: (user()?.createdAt | appDate) } }}</p>
+        }
+        <button type="submit" class="btn btn--save" [disabled]="saving() || form.pristine">
+          <lucide-icon name="check" [size]="16" aria-hidden="true" />
+          {{ (saving() ? 'common.saving' : 'common.saveChanges') | translate }}
+        </button>
+      </div>
+    </form>
+
+    <div class="profile-side">
+      <section class="card profile-card" aria-labelledby="accessibility-title">
+        <div class="profile-card__header">
+          <lucide-icon name="accessibility" [size]="22" class="profile-card__icon" aria-hidden="true" />
+          <div>
+            <h2 id="accessibility-title" class="section-title">{{ 'profile.accessibility.title' | translate }}</h2>
+            <p class="muted">{{ 'profile.accessibility.subtitle' | translate }}</p>
+          </div>
+        </div>
+
+        <fieldset class="option-group">
+          <legend class="field__label">{{ 'profile.accessibility.textSize' | translate }}</legend>
+          <div class="segmented">
+            @for (size of textSizes; track size) {
+              <label class="segmented__option" [class.is-selected]="preferences.accessibility().textSize === size">
+                <input
+                  type="radio"
+                  name="text-size"
+                  [value]="size"
+                  [checked]="preferences.accessibility().textSize === size"
+                  (change)="setTextSize(size)"
+                />
+                <span [class]="'sample sample--' + size" aria-hidden="true">Aa</span>
+                <span>{{ 'profile.accessibility.sizes.' + size | translate }}</span>
+              </label>
+            }
+          </div>
+        </fieldset>
+
+        <label class="switch toggle-row">
+          <span class="toggle-row__text">
+            <span class="toggle-row__label">{{ 'profile.accessibility.highContrast' | translate }}</span>
+            <span class="muted">{{ 'profile.accessibility.highContrastHint' | translate }}</span>
+          </span>
+          <input
+            type="checkbox"
+            [checked]="preferences.accessibility().highContrast"
+            (change)="toggle('highContrast', $event)"
+          />
+          <span class="switch__track" aria-hidden="true"></span>
+        </label>
+
+        <label class="switch toggle-row">
+          <span class="toggle-row__text">
+            <span class="toggle-row__label">{{ 'profile.accessibility.reduceMotion' | translate }}</span>
+            <span class="muted">{{ 'profile.accessibility.reduceMotionHint' | translate }}</span>
+          </span>
+          <input
+            type="checkbox"
+            [checked]="preferences.accessibility().reduceMotion"
+            (change)="toggle('reduceMotion', $event)"
+          />
+          <span class="switch__track" aria-hidden="true"></span>
+        </label>
+
+        <button type="button" class="btn btn--ghost reset" (click)="resetAccessibility()">
+          <lucide-icon name="rotate-ccw" [size]="16" aria-hidden="true" />
+          {{ 'profile.accessibility.reset' | translate }}
+        </button>
+      </section>
+
+      <section class="card profile-card" aria-labelledby="language-title">
+        <div class="profile-card__header">
+          <lucide-icon name="languages" [size]="22" class="profile-card__icon" aria-hidden="true" />
+          <div>
+            <h2 id="language-title" class="section-title">{{ 'profile.language.title' | translate }}</h2>
+            <p class="muted">{{ 'profile.language.subtitle' | translate }}</p>
+          </div>
+        </div>
+        <fieldset class="option-group">
+          <legend class="sr-only">{{ 'profile.language.title' | translate }}</legend>
+          <div class="segmented segmented--two">
+            @for (language of languages; track language) {
+              <label
+                class="segmented__option"
+                [class.is-selected]="preferences.language() === language"
+                [attr.lang]="language"
+              >
+                <input
+                  type="radio"
+                  name="language"
+                  [value]="language"
+                  [checked]="preferences.language() === language"
+                  (change)="preferences.setLanguage(language)"
+                />
+                <span>{{ 'language.' + language | translate }}</span>
+              </label>
+            }
+          </div>
+        </fieldset>
+      </section>
+
+      <section class="card profile-card" aria-labelledby="session-title">
+        <div class="profile-card__header">
+          <lucide-icon name="lock" [size]="22" class="profile-card__icon" aria-hidden="true" />
+          <div>
+            <h2 id="session-title" class="section-title">{{ 'profile.session.title' | translate }}</h2>
+            <p class="muted">{{ 'profile.session.subtitle' | translate }}</p>
+          </div>
+        </div>
+        <div class="session-actions">
+          <button type="button" class="btn btn--secondary" (click)="signOut()">
+            <lucide-icon name="log-out" [size]="16" aria-hidden="true" />
+            {{ 'auth.signOut' | translate }}
+          </button>
+          @if (isMockApi) {
+            <button type="button" class="btn btn--ghost" (click)="resetDemoData()">
+              <lucide-icon name="rotate-ccw" [size]="16" aria-hidden="true" />
+              {{ 'profile.session.resetDemo' | translate }}
+            </button>
+          }
+        </div>
+      </section>
+    </div>
+  </div>
+</section>

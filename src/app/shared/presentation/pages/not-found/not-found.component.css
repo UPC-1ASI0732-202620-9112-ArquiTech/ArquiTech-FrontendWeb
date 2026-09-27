@@ -1,0 +1,21 @@
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  min-height: 100vh;
+  padding: var(--space-4);
+  text-align: center;
+}
+
+.not-found img {
+  border-radius: var(--radius-sm);
+}
+
+.not-found__code {
+  font-family: var(--font-display);
+  font-size: 4rem;
+  line-height: 1;
+  color: var(--color-sinopia);
+}

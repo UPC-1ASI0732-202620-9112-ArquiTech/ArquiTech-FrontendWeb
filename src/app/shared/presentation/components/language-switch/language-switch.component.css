@@ -1,0 +1,32 @@
+.language {
+  display: inline-flex;
+  gap: var(--space-1);
+}
+
+.language__option {
+  min-width: 32px;
+  min-height: 28px;
+  padding: 2px 6px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  font-family: var(--font-button);
+  font-size: 0.75rem;
+  color: var(--color-sidebar-muted);
+  cursor: pointer;
+  --focus-ring-color: var(--color-selective-yellow);
+}
+
+.language__option.is-active {
+  font-weight: 700;
+  color: var(--color-selective-yellow);
+}
+
+.language--light .language__option {
+  color: var(--color-text-muted);
+  --focus-ring-color: var(--color-sinopia);
+}
+
+.language--light .language__option.is-active {
+  color: var(--color-sinopia);
+}

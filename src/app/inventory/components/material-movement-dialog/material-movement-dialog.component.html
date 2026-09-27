@@ -1,0 +1,108 @@
+<form class="dialog" [formGroup]="form" (ngSubmit)="submit()" novalidate aria-labelledby="movement-dialog-title">
+  <header class="dialog__header">
+    <div>
+      <h2 id="movement-dialog-title" class="dialog__title">
+        {{ (isEntry ? 'movements.form.entryTitle' : 'movements.form.usageTitle') | translate }}
+      </h2>
+      <p class="dialog__subtitle">
+        {{ (isEntry ? 'movements.form.entrySubtitle' : 'movements.form.usageSubtitle') | translate }}
+      </p>
+    </div>
+    <button type="button" class="icon-button" (click)="close()" [attr.aria-label]="'common.close' | translate">
+      <lucide-icon name="x" [size]="20" aria-hidden="true" />
+    </button>
+  </header>
+
+  <div class="dialog__body">
+    @if (errorKey(); as error) {
+      <div class="form-alert" role="alert">
+        <lucide-icon name="circle-alert" [size]="16" aria-hidden="true" />
+        <span>{{ error | translate }}</span>
+      </div>
+    }
+
+    @if (materials.length === 0) {
+      <p class="form-alert form-alert--info">{{ 'movements.form.noMaterials' | translate }}</p>
+    } @else {
+      <div class="form-grid">
+        <div class="field field--full">
+          <label class="field__label" for="movement-material">{{ 'movements.fields.material' | translate }}</label>
+          <select id="movement-material" class="field__control" formControlName="materialId">
+            <option [ngValue]="null" disabled>{{ 'movements.fields.materialPlaceholder' | translate }}</option>
+            @for (material of materials; track material.id) {
+              <option [ngValue]="material.id">{{ material.name }} ({{ material.unit }})</option>
+            }
+          </select>
+          @if (selected(); as material) {
+            <span class="field__hint">
+              {{
+                'movements.fields.available' | translate: { stock: (material.stock | appNumber), unit: material.unit }
+              }}
+            </span>
+          }
+          <app-field-error [control]="form.controls.materialId" />
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="movement-quantity">
+            {{ 'movements.fields.quantity' | translate }}
+            @if (selected(); as material) {
+              <span class="field__optional">({{ material.unit }})</span>
+            }
+          </label>
+          <input
+            id="movement-quantity"
+            type="number"
+            min="0"
+            step="any"
+            class="field__control"
+            formControlName="quantity"
+          />
+          <app-field-error [control]="form.controls.quantity" />
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="movement-date">{{ 'movements.fields.date' | translate }}</label>
+          <input id="movement-date" type="date" class="field__control" formControlName="occurredAt" [max]="today" />
+          <app-field-error [control]="form.controls.occurredAt" />
+        </div>
+
+        @if (isEntry) {
+          <div class="field field--full">
+            <label class="field__label" for="movement-supplier">{{ 'movements.fields.supplier' | translate }}</label>
+            <input id="movement-supplier" class="field__control" formControlName="supplier" />
+            <app-field-error [control]="form.controls.supplier" />
+          </div>
+        }
+
+        <div class="field field--full">
+          <label class="field__label" for="movement-note">
+            {{ 'movements.fields.note' | translate }}
+            <span class="field__optional">({{ 'common.optional' | translate }})</span>
+          </label>
+          <textarea
+            id="movement-note"
+            class="field__control"
+            formControlName="note"
+            rows="2"
+            [placeholder]="
+              (isEntry ? 'movements.fields.entryNotePlaceholder' : 'movements.fields.usageNotePlaceholder') | translate
+            "
+          ></textarea>
+          <app-field-error [control]="form.controls.note" />
+        </div>
+      </div>
+    }
+  </div>
+
+  <footer class="dialog__footer">
+    <button type="button" class="btn btn--secondary" (click)="close()">{{ 'common.cancel' | translate }}</button>
+    <button type="submit" class="btn btn--save" [disabled]="submitting() || materials.length === 0">
+      <lucide-icon [name]="isEntry ? 'package-plus' : 'package-minus'" [size]="16" aria-hidden="true" />
+      {{
+        (submitting() ? 'common.saving' : isEntry ? 'movements.form.entrySubmit' : 'movements.form.usageSubmit')
+          | translate
+      }}
+    </button>
+  </footer>
+</form>

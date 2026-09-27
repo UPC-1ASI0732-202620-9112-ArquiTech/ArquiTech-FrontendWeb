@@ -1,0 +1,8 @@
+.quantity {
+  font-weight: 600;
+  color: var(--tone-success-fg);
+}
+
+.quantity--usage {
+  color: var(--tone-warning-fg);
+}

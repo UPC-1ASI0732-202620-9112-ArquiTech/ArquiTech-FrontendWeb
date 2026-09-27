@@ -1,0 +1,111 @@
+<div class="sign-in">
+  <section class="brand-panel">
+    <div class="brand">
+      <img class="brand__mark" src="images/arquitech-logo.png" alt="" width="46" height="46" />
+      <span class="brand__name">ARQUITECH</span>
+    </div>
+    <div class="brand-panel__message">
+      <p class="brand-panel__overline">{{ 'auth.overline' | translate }}</p>
+      <p class="brand-panel__headline">{{ 'auth.headline' | translate }}</p>
+      <p class="brand-panel__description">{{ 'auth.tagline' | translate }}</p>
+    </div>
+  </section>
+
+  <main class="form-panel">
+    <div class="form-panel__language">
+      <app-language-switch variant="light" />
+    </div>
+
+    <form class="form-card" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <div class="form-card__heading">
+        <h1 class="form-card__title">{{ 'auth.welcome' | translate }}</h1>
+        <p class="form-card__subtitle">{{ 'auth.subtitle' | translate }}</p>
+      </div>
+
+      @if (reason() === 'expired' && !errorKey()) {
+        <div class="form-alert form-alert--info" role="status">
+          <lucide-icon name="info" [size]="16" aria-hidden="true" />
+          <span>{{ 'auth.sessionExpired' | translate }}</span>
+        </div>
+      }
+
+      @if (errorKey(); as error) {
+        <div class="form-alert" role="alert">
+          <lucide-icon name="circle-alert" [size]="16" aria-hidden="true" />
+          <span>{{ error | translate }}</span>
+        </div>
+      }
+
+      <div class="field">
+        <label class="field__label" for="email">{{ 'auth.email' | translate }}</label>
+        <input
+          id="email"
+          class="field__control"
+          type="email"
+          formControlName="email"
+          autocomplete="username"
+          [placeholder]="'auth.emailPlaceholder' | translate"
+          aria-describedby="email-error"
+        />
+        <app-field-error id="email-error" [control]="form.controls.email" />
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="password">{{ 'auth.password' | translate }}</label>
+        <div class="password">
+          <input
+            id="password"
+            class="field__control"
+            [type]="showPassword() ? 'text' : 'password'"
+            formControlName="password"
+            autocomplete="current-password"
+            placeholder="••••••••"
+            aria-describedby="password-error"
+          />
+          <button
+            type="button"
+            class="password__toggle"
+            (click)="showPassword.set(!showPassword())"
+            [attr.aria-pressed]="showPassword()"
+            [attr.aria-label]="(showPassword() ? 'auth.hidePassword' : 'auth.showPassword') | translate"
+          >
+            <lucide-icon [name]="showPassword() ? 'eye-off' : 'eye'" [size]="18" aria-hidden="true" />
+          </button>
+        </div>
+        <app-field-error id="password-error" [control]="form.controls.password" />
+      </div>
+
+      <button
+        type="button"
+        class="forgot"
+        (click)="showRecoveryHelp.set(!showRecoveryHelp())"
+        [attr.aria-expanded]="showRecoveryHelp()"
+      >
+        {{ 'auth.forgotPassword' | translate }}
+      </button>
+      @if (showRecoveryHelp()) {
+        <p class="form-alert form-alert--info" role="status">{{ 'auth.recoveryHelp' | translate }}</p>
+      }
+
+      <button type="submit" class="btn btn--primary btn--block btn--lg" [disabled]="submitting()">
+        {{ (submitting() ? 'auth.signingIn' : 'auth.signIn') | translate }}
+      </button>
+
+      <p class="form-card__support">{{ 'auth.support' | translate }}</p>
+    </form>
+
+    @if (demoAccounts.length > 0) {
+      <aside class="demo" [attr.aria-label]="'auth.demoTitle' | translate">
+        <p class="demo__title">{{ 'auth.demoTitle' | translate }}</p>
+        <div class="demo__accounts">
+          @for (account of demoAccounts; track account.email) {
+            <button type="button" class="demo__account" (click)="useDemoAccount(account.email, account.password)">
+              <span class="demo__role">{{ account.roleKey | translate }}</span>
+              <span class="demo__email">{{ account.email }}</span>
+            </button>
+          }
+        </div>
+      </aside>
+    }
+  </main>
+</div>

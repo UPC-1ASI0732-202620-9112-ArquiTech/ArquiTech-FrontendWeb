@@ -1,0 +1,107 @@
+<section class="page">
+  <header class="page-heading">
+    <div class="page-heading__text">
+      <h1 class="page-title">{{ 'nav.machinery' | translate }}</h1>
+      <p class="page-description">
+        {{ (canManage() ? 'machinery.description' : 'machinery.descriptionReadOnly') | translate }}
+      </p>
+    </div>
+    @if (canManage()) {
+      <div class="page-actions">
+        <button type="button" class="btn btn--primary" (click)="openForm()">
+          <span class="btn__icon-add" aria-hidden="true">+</span>
+          {{ 'machinery.actions.create' | translate }}
+        </button>
+      </div>
+    }
+  </header>
+
+  <app-data-toolbar [state]="table" searchPlaceholderKey="machinery.search" [filters]="filterFields" />
+
+  <div class="data-panel">
+    <app-list-state
+      [status]="status()"
+      [isEmpty]="table.total() === 0"
+      [isFiltering]="table.isFiltering()"
+      icon="forklift"
+      emptyTitleKey="machinery.emptyTitle"
+      [emptyMessageKey]="canManage() ? 'machinery.emptyMessage' : 'machinery.emptyMessageReadOnly'"
+      (retry)="load()"
+    >
+      @if (canManage()) {
+        <button emptyAction type="button" class="btn btn--primary" (click)="openForm()">
+          {{ 'machinery.actions.create' | translate }}
+        </button>
+      }
+      <div class="table-scroll">
+        <table class="data-table">
+          <caption class="sr-only">
+            {{
+              'nav.machinery' | translate
+            }}
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">{{ 'machinery.columns.name' | translate }}</th>
+              <th scope="col">{{ 'machinery.columns.serialNumber' | translate }}</th>
+              <th scope="col">{{ 'machinery.columns.registeredAt' | translate }}</th>
+              <th scope="col">{{ 'common.status' | translate }}</th>
+              @if (canManage()) {
+                <th scope="col">
+                  <span class="sr-only">{{ 'common.actions' | translate }}</span>
+                </th>
+              }
+            </tr>
+          </thead>
+          <tbody>
+            @for (machine of table.pageRows(); track machine.id) {
+              <tr>
+                <td>
+                  {{ machine.name }}
+                  @if (machine.description) {
+                    <span class="cell-sub">{{ machine.description }}</span>
+                  }
+                </td>
+                <td class="cell-strong">{{ machine.serialNumber }}</td>
+                <td class="cell-num">{{ machine.registeredAt | appDate }}</td>
+                <td>
+                  <app-status-badge
+                    [tone]="statusTone[machine.status]"
+                    [labelKey]="'machinery.status.' + machine.status"
+                  />
+                </td>
+                @if (canManage()) {
+                  <td class="cell-actions">
+                    <button
+                      type="button"
+                      class="icon-button"
+                      [cdkMenuTriggerFor]="rowMenu"
+                      [cdkMenuTriggerData]="{ $implicit: machine }"
+                      [attr.aria-label]="'common.actionsFor' | translate: { name: machine.name }"
+                    >
+                      <lucide-icon name="ellipsis-vertical" [size]="18" aria-hidden="true" />
+                    </button>
+                  </td>
+                }
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <app-paginator [state]="table" />
+    </app-list-state>
+  </div>
+</section>
+
+<ng-template #rowMenu let-machine>
+  <div class="menu" cdkMenu>
+    <button type="button" class="menu__item" cdkMenuItem (cdkMenuItemTriggered)="openForm(machine)">
+      <lucide-icon name="pencil" [size]="16" aria-hidden="true" />
+      {{ 'common.edit' | translate }}
+    </button>
+    <button type="button" class="menu__item menu__item--danger" cdkMenuItem (cdkMenuItemTriggered)="delete(machine)">
+      <lucide-icon name="trash-2" [size]="16" aria-hidden="true" />
+      {{ 'common.delete' | translate }}
+    </button>
+  </div>
+</ng-template>

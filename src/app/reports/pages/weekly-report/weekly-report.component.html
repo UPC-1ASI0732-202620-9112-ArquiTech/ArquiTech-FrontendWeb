@@ -1,0 +1,292 @@
+<section class="page">
+  <header class="page-heading">
+    <div class="page-heading__text">
+      <h1 class="page-title">{{ 'reports.title' | translate }}</h1>
+      <p class="page-description">{{ 'reports.description' | translate }}</p>
+    </div>
+    <div class="page-actions">
+      <button
+        type="button"
+        class="btn btn--primary"
+        (click)="download()"
+        [disabled]="status() !== 'ready' || downloading()"
+      >
+        <lucide-icon name="download" [size]="16" aria-hidden="true" />
+        {{ (downloading() ? 'reports.downloading' : 'reports.download') | translate }}
+      </button>
+    </div>
+  </header>
+
+  <div class="week-bar card">
+    <div class="week-bar__nav">
+      <button
+        type="button"
+        class="icon-button"
+        (click)="shiftWeek(-1)"
+        [attr.aria-label]="'reports.previousWeek' | translate"
+      >
+        <lucide-icon name="chevron-left" [size]="20" aria-hidden="true" />
+      </button>
+      <p class="week-bar__range" aria-live="polite">
+        <lucide-icon name="calendar-days" [size]="18" aria-hidden="true" />
+        {{ 'reports.weekRange' | translate: { start: (weekStartIso() | appDate), end: (weekEndIso() | appDate) } }}
+      </p>
+      <button
+        type="button"
+        class="icon-button"
+        (click)="shiftWeek(1)"
+        [disabled]="isCurrentWeek()"
+        [attr.aria-label]="'reports.nextWeek' | translate"
+      >
+        <lucide-icon name="chevron-right" [size]="20" aria-hidden="true" />
+      </button>
+    </div>
+    <div class="week-bar__tools">
+      <label class="week-bar__picker">
+        <span class="sr-only">{{ 'reports.pickWeek' | translate }}</span>
+        <input
+          type="date"
+          class="field__control"
+          [value]="weekStartIso()"
+          [max]="todayIso"
+          (change)="pickDate($event)"
+        />
+      </label>
+      @if (!isCurrentWeek()) {
+        <button type="button" class="btn btn--secondary" (click)="goToCurrentWeek()">
+          {{ 'reports.currentWeek' | translate }}
+        </button>
+      }
+    </div>
+  </div>
+
+  <app-list-state [status]="status()" emptyTitleKey="reports.emptySection" (retry)="load()">
+    @if (report(); as report) {
+      <div class="kpis" role="list">
+        <div class="kpi card" role="listitem">
+          <p class="kpi__label">{{ 'reports.kpis.progress' | translate }}</p>
+          <p class="kpi__value">{{ report.project.progress }}%</p>
+          <div
+            class="meter"
+            role="progressbar"
+            [attr.aria-valuenow]="report.project.progress"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            [attr.aria-label]="'reports.kpis.progress' | translate"
+          >
+            <span [style.width.%]="report.project.progress"></span>
+          </div>
+        </div>
+        <div class="kpi card" role="listitem">
+          <p class="kpi__label">{{ 'reports.kpis.completedTasks' | translate }}</p>
+          <p class="kpi__value">{{ report.completedTasks.length }}</p>
+          <p class="kpi__context">{{ 'reports.kpis.openTasksContext' | translate: { count: report.openTasks } }}</p>
+        </div>
+        <div class="kpi card" role="listitem">
+          <p class="kpi__label">{{ 'reports.kpis.movements' | translate }}</p>
+          <p class="kpi__value">{{ report.entries.length + report.usages.length }}</p>
+          <p class="kpi__context">
+            {{
+              'reports.kpis.movementsContext'
+                | translate: { entries: report.entries.length, usages: report.usages.length }
+            }}
+          </p>
+        </div>
+        <div class="kpi card" role="listitem">
+          <p class="kpi__label">{{ 'reports.kpis.incidents' | translate }}</p>
+          <p class="kpi__value">{{ report.incidents.length }}</p>
+          <p class="kpi__context">
+            {{ 'reports.kpis.openIncidentsContext' | translate: { count: report.openIncidents } }}
+          </p>
+        </div>
+      </div>
+
+      <div class="report-grid">
+        <section class="card report-section">
+          <h2 class="section-title">{{ 'reports.sections.project' | translate }}</h2>
+          <dl class="details">
+            <div>
+              <dt>{{ 'projects.columns.project' | translate }}</dt>
+              <dd>{{ report.project.name }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'projects.fields.location' | translate }}</dt>
+              <dd>{{ report.project.location }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'common.status' | translate }}</dt>
+              <dd>
+                <app-status-badge
+                  [tone]="projectStatusTone[report.project.status]"
+                  [labelKey]="'projects.status.' + report.project.status"
+                />
+              </dd>
+            </div>
+            <div>
+              <dt>{{ 'projects.fields.startDate' | translate }}</dt>
+              <dd>{{ report.project.startDate | appDate }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'projects.fields.endDate' | translate }}</dt>
+              <dd>{{ report.project.endDate | appDate }}</dd>
+            </div>
+            <div>
+              <dt>{{ 'projects.fields.budget' | translate }}</dt>
+              <dd>{{ report.project.budget | pen }}</dd>
+            </div>
+            @if (report.project.contractorName) {
+              <div>
+                <dt>{{ 'projects.fields.contractor' | translate }}</dt>
+                <dd>{{ report.project.contractorName }}</dd>
+              </div>
+            }
+          </dl>
+          @if (report.lowStockMaterials.length > 0) {
+            <div class="form-alert low-stock" role="note">
+              <lucide-icon name="package-minus" [size]="16" aria-hidden="true" />
+              <span>
+                {{ 'reports.lowStock' | translate: { count: report.lowStockMaterials.length } }}
+                @for (material of report.lowStockMaterials; track material.id; let last = $last) {
+                  <strong>{{ material.name }}</strong
+                  >{{ last ? '' : ', ' }}
+                }
+              </span>
+            </div>
+          }
+        </section>
+
+        <section class="card report-section">
+          <h2 class="section-title">
+            {{ 'reports.sections.completedTasks' | translate }}
+            <span class="count">{{ report.completedTasks.length }}</span>
+          </h2>
+          @if (report.completedTasks.length === 0) {
+            <p class="empty">{{ 'reports.emptySection' | translate }}</p>
+          } @else {
+            <ul class="entries">
+              @for (entry of report.completedTasks; track entry.task.id) {
+                <li>
+                  <lucide-icon
+                    name="circle-check"
+                    [size]="16"
+                    class="entries__icon entries__icon--success"
+                    aria-hidden="true"
+                  />
+                  <div>
+                    <p class="entries__title">{{ entry.task.title }}</p>
+                    <p class="entries__meta">{{ entry.workerName }} · {{ entry.completedOn | appDate }}</p>
+                  </div>
+                </li>
+              }
+            </ul>
+          }
+        </section>
+      </div>
+
+      <div class="report-grid">
+        <section class="card report-section">
+          <h2 class="section-title">
+            {{ 'reports.sections.entries' | translate }} <span class="count">{{ report.entries.length }}</span>
+          </h2>
+          @if (report.entries.length === 0) {
+            <p class="empty">{{ 'reports.emptySection' | translate }}</p>
+          } @else {
+            <ul class="entries">
+              @for (movement of report.entries; track movement.id) {
+                <li>
+                  <lucide-icon
+                    name="arrow-down-to-line"
+                    [size]="16"
+                    class="entries__icon entries__icon--success"
+                    aria-hidden="true"
+                  />
+                  <div>
+                    <p class="entries__title">
+                      +{{ movement.quantity | appNumber }} {{ movement.unit }} · {{ movement.materialName }}
+                    </p>
+                    <p class="entries__meta">{{ movement.occurredAt | appDate }} · {{ movement.supplier || '—' }}</p>
+                  </div>
+                </li>
+              }
+            </ul>
+          }
+        </section>
+
+        <section class="card report-section">
+          <h2 class="section-title">
+            {{ 'reports.sections.usages' | translate }} <span class="count">{{ report.usages.length }}</span>
+          </h2>
+          @if (report.usages.length === 0) {
+            <p class="empty">{{ 'reports.emptySection' | translate }}</p>
+          } @else {
+            <ul class="entries">
+              @for (movement of report.usages; track movement.id) {
+                <li>
+                  <lucide-icon
+                    name="arrow-up-from-line"
+                    [size]="16"
+                    class="entries__icon entries__icon--warning"
+                    aria-hidden="true"
+                  />
+                  <div>
+                    <p class="entries__title">
+                      −{{ movement.quantity | appNumber }} {{ movement.unit }} · {{ movement.materialName }}
+                    </p>
+                    <p class="entries__meta">
+                      {{ movement.occurredAt | appDate }}{{ movement.note ? ' · ' + movement.note : '' }}
+                    </p>
+                  </div>
+                </li>
+              }
+            </ul>
+          }
+        </section>
+      </div>
+
+      <section class="card report-section">
+        <h2 class="section-title">
+          {{ 'reports.sections.incidents' | translate }} <span class="count">{{ report.incidents.length }}</span>
+        </h2>
+        @if (report.incidents.length === 0) {
+          <p class="empty">{{ 'reports.emptySection' | translate }}</p>
+        } @else {
+          <div class="table-scroll">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th scope="col">{{ 'incidents.columns.date' | translate }}</th>
+                  <th scope="col">{{ 'incidents.columns.type' | translate }}</th>
+                  <th scope="col">{{ 'incidents.columns.severity' | translate }}</th>
+                  <th scope="col">{{ 'common.status' | translate }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (incident of report.incidents; track incident.id) {
+                  <tr>
+                    <td class="cell-num">{{ incident.reportedAt | appDate }}</td>
+                    <td class="cell-strong">
+                      {{ incident.typeKey ? (incident.typeKey | translate) : incident.type }}
+                      <span class="cell-sub">{{ incident.description }}</span>
+                    </td>
+                    <td>
+                      <app-status-badge
+                        [tone]="severityTone[incident.severity]"
+                        [labelKey]="'incidents.severity.' + incident.severity"
+                      />
+                    </td>
+                    <td>
+                      <app-status-badge
+                        [tone]="incidentStatusTone[incident.status]"
+                        [labelKey]="'incidents.status.' + incident.status"
+                      />
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        }
+      </section>
+    }
+  </app-list-state>
+</section>

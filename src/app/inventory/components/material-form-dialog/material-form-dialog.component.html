@@ -1,0 +1,130 @@
+<form class="dialog" [formGroup]="form" (ngSubmit)="submit()" novalidate aria-labelledby="material-dialog-title">
+  <header class="dialog__header">
+    <div>
+      <h2 id="material-dialog-title" class="dialog__title">
+        {{ (isEdit ? 'materials.form.editTitle' : 'materials.form.createTitle') | translate }}
+      </h2>
+      <p class="dialog__subtitle">
+        {{ (isEdit ? 'materials.form.editSubtitle' : 'materials.form.createSubtitle') | translate }}
+      </p>
+    </div>
+    <button type="button" class="icon-button" (click)="close()" [attr.aria-label]="'common.close' | translate">
+      <lucide-icon name="x" [size]="20" aria-hidden="true" />
+    </button>
+  </header>
+
+  <div class="dialog__body">
+    @if (errorKey(); as error) {
+      <div class="form-alert" role="alert">
+        <lucide-icon name="circle-alert" [size]="16" aria-hidden="true" />
+        <span>{{ error | translate }}</span>
+      </div>
+    }
+
+    <div class="form-grid">
+      <div class="field">
+        <label class="field__label" for="material-name">{{ 'materials.fields.name' | translate }}</label>
+        <input
+          id="material-name"
+          class="field__control"
+          formControlName="name"
+          [placeholder]="'materials.fields.namePlaceholder' | translate"
+        />
+        <app-field-error [control]="form.controls.name" />
+      </div>
+      <div class="field">
+        <label class="field__label" for="material-unit">{{ 'materials.fields.unit' | translate }}</label>
+        <input id="material-unit" class="field__control" formControlName="unit" list="material-units" />
+        <datalist id="material-units">
+          @for (unit of units; track unit) {
+            <option [value]="unit"></option>
+          }
+        </datalist>
+        <app-field-error [control]="form.controls.unit" />
+      </div>
+
+      @if (!isEdit) {
+        <div class="field">
+          <label class="field__label" for="material-quantity">{{
+            'materials.fields.initialQuantity' | translate
+          }}</label>
+          <input
+            id="material-quantity"
+            type="number"
+            min="0"
+            step="any"
+            class="field__control"
+            formControlName="quantity"
+          />
+          <span class="field__hint">{{ 'materials.fields.initialQuantityHint' | translate }}</span>
+          <app-field-error [control]="form.controls.quantity" />
+        </div>
+        <div class="field">
+          <label class="field__label" for="material-date">{{ 'materials.fields.entryDate' | translate }}</label>
+          <input id="material-date" type="date" class="field__control" formControlName="date" [max]="today" />
+          <app-field-error [control]="form.controls.date" />
+        </div>
+      } @else {
+        <div class="field field--full">
+          <p class="form-alert form-alert--info">
+            <lucide-icon name="info" [size]="16" aria-hidden="true" />
+            <span>{{
+              'materials.form.stockHint' | translate: { stock: data.material?.stock, unit: data.material?.unit }
+            }}</span>
+          </p>
+        </div>
+      }
+
+      <div class="field">
+        <label class="field__label" for="material-price">{{ 'materials.fields.unitPrice' | translate }}</label>
+        <input
+          id="material-price"
+          type="number"
+          min="0"
+          step="0.01"
+          class="field__control"
+          formControlName="unitPrice"
+        />
+        <app-field-error [control]="form.controls.unitPrice" />
+      </div>
+      <div class="field">
+        <label class="field__label" for="material-minimum">{{ 'materials.fields.minimumStock' | translate }}</label>
+        <input
+          id="material-minimum"
+          type="number"
+          min="0"
+          step="any"
+          class="field__control"
+          formControlName="minimumStock"
+        />
+        <span class="field__hint">{{ 'materials.fields.minimumStockHint' | translate }}</span>
+        <app-field-error [control]="form.controls.minimumStock" />
+      </div>
+      <div class="field">
+        <label class="field__label" for="material-provider">{{ 'materials.fields.provider' | translate }}</label>
+        <input id="material-provider" class="field__control" formControlName="provider" />
+        <app-field-error [control]="form.controls.provider" />
+      </div>
+      <div class="field">
+        <label class="field__label" for="material-ruc">{{ 'materials.fields.ruc' | translate }}</label>
+        <input
+          id="material-ruc"
+          class="field__control"
+          formControlName="providerRuc"
+          inputmode="numeric"
+          maxlength="11"
+          placeholder="20100124567"
+        />
+        <app-field-error [control]="form.controls.providerRuc" />
+      </div>
+    </div>
+  </div>
+
+  <footer class="dialog__footer">
+    <button type="button" class="btn btn--secondary" (click)="close()">{{ 'common.cancel' | translate }}</button>
+    <button type="submit" class="btn btn--save" [disabled]="submitting()">
+      <lucide-icon name="check" [size]="16" aria-hidden="true" />
+      {{ (submitting() ? 'common.saving' : isEdit ? 'common.saveChanges' : 'materials.form.submit') | translate }}
+    </button>
+  </footer>
+</form>

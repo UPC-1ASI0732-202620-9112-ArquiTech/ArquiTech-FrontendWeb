@@ -1,0 +1,70 @@
+<form class="dialog" [formGroup]="form" (ngSubmit)="submit()" novalidate aria-labelledby="machinery-dialog-title">
+  <header class="dialog__header">
+    <div>
+      <h2 id="machinery-dialog-title" class="dialog__title">
+        {{ (isEdit ? 'machinery.form.editTitle' : 'machinery.form.createTitle') | translate }}
+      </h2>
+      <p class="dialog__subtitle">{{ 'machinery.form.subtitle' | translate }}</p>
+    </div>
+    <button type="button" class="icon-button" (click)="close()" [attr.aria-label]="'common.close' | translate">
+      <lucide-icon name="x" [size]="20" aria-hidden="true" />
+    </button>
+  </header>
+
+  <div class="dialog__body">
+    @if (errorKey(); as error) {
+      <div class="form-alert" role="alert">
+        <lucide-icon name="circle-alert" [size]="16" aria-hidden="true" />
+        <span>{{ error | translate }}</span>
+      </div>
+    }
+
+    <div class="form-grid">
+      <div class="field">
+        <label class="field__label" for="machinery-name">{{ 'machinery.fields.name' | translate }}</label>
+        <input
+          id="machinery-name"
+          class="field__control"
+          formControlName="name"
+          [placeholder]="'machinery.fields.namePlaceholder' | translate"
+        />
+        <app-field-error [control]="form.controls.name" />
+      </div>
+      <div class="field">
+        <label class="field__label" for="machinery-serial">{{ 'machinery.fields.serialNumber' | translate }}</label>
+        <input id="machinery-serial" class="field__control" formControlName="serialNumber" placeholder="MIX123" />
+        <span class="field__hint">{{ 'machinery.fields.serialNumberHint' | translate }}</span>
+        <app-field-error [control]="form.controls.serialNumber" />
+      </div>
+      <div class="field">
+        <label class="field__label" for="machinery-date">{{ 'machinery.fields.registeredAt' | translate }}</label>
+        <input id="machinery-date" type="date" class="field__control" formControlName="registeredAt" [max]="today" />
+        <app-field-error [control]="form.controls.registeredAt" />
+      </div>
+      <div class="field">
+        <label class="field__label" for="machinery-status">{{ 'common.status' | translate }}</label>
+        <select id="machinery-status" class="field__control" formControlName="status">
+          @for (status of statuses; track status) {
+            <option [value]="status">{{ 'machinery.status.' + status | translate }}</option>
+          }
+        </select>
+      </div>
+      <div class="field field--full">
+        <label class="field__label" for="machinery-description">
+          {{ 'machinery.fields.description' | translate }}
+          <span class="field__optional">({{ 'common.optional' | translate }})</span>
+        </label>
+        <textarea id="machinery-description" class="field__control" formControlName="description" rows="3"></textarea>
+        <app-field-error [control]="form.controls.description" />
+      </div>
+    </div>
+  </div>
+
+  <footer class="dialog__footer">
+    <button type="button" class="btn btn--secondary" (click)="close()">{{ 'common.cancel' | translate }}</button>
+    <button type="submit" class="btn btn--save" [disabled]="submitting()">
+      <lucide-icon name="check" [size]="16" aria-hidden="true" />
+      {{ (submitting() ? 'common.saving' : isEdit ? 'common.saveChanges' : 'machinery.form.submit') | translate }}
+    </button>
+  </footer>
+</form>

@@ -1,0 +1,25 @@
+<section class="dialog" aria-labelledby="confirm-title" aria-describedby="confirm-message">
+  <header class="dialog__header">
+    <h2 id="confirm-title" class="dialog__title">{{ data.titleKey | translate: data.params }}</h2>
+  </header>
+  <div class="dialog__body">
+    <p id="confirm-message">{{ data.messageKey | translate: data.params }}</p>
+  </div>
+  <footer class="dialog__footer">
+    <button type="button" class="btn btn--secondary" (click)="dialogRef.close(false)">
+      {{ 'common.cancel' | translate }}
+    </button>
+    <button
+      type="button"
+      class="btn"
+      [class.btn--danger]="(data.tone ?? 'danger') === 'danger'"
+      [class.btn--primary]="data.tone === 'primary'"
+      (click)="dialogRef.close(true)"
+    >
+      @if ((data.tone ?? 'danger') === 'danger') {
+        <lucide-icon name="trash-2" [size]="16" aria-hidden="true" />
+      }
+      {{ data.confirmKey ?? 'common.delete' | translate }}
+    </button>
+  </footer>
+</section>

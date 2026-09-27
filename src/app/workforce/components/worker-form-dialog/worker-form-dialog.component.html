@@ -1,0 +1,69 @@
+<form class="dialog" [formGroup]="form" (ngSubmit)="submit()" novalidate aria-labelledby="worker-dialog-title">
+  <header class="dialog__header">
+    <div>
+      <h2 id="worker-dialog-title" class="dialog__title">
+        {{ (isEdit ? 'workers.form.editTitle' : 'workers.form.createTitle') | translate }}
+      </h2>
+      <p class="dialog__subtitle">{{ 'workers.form.subtitle' | translate }}</p>
+    </div>
+    <button type="button" class="icon-button" (click)="close()" [attr.aria-label]="'common.close' | translate">
+      <lucide-icon name="x" [size]="20" aria-hidden="true" />
+    </button>
+  </header>
+
+  <div class="dialog__body">
+    @if (errorKey(); as error) {
+      <div class="form-alert" role="alert">
+        <lucide-icon name="circle-alert" [size]="16" aria-hidden="true" />
+        <span>{{ error | translate }}</span>
+      </div>
+    }
+
+    <div class="form-grid">
+      <div class="field field--full">
+        <label class="field__label" for="worker-name">{{ 'workers.fields.fullName' | translate }}</label>
+        <input id="worker-name" class="field__control" formControlName="fullName" autocomplete="off" />
+        <app-field-error [control]="form.controls.fullName" />
+      </div>
+      <div class="field">
+        <label class="field__label" for="worker-role">{{ 'workers.fields.role' | translate }}</label>
+        <input id="worker-role" class="field__control" formControlName="role" list="worker-roles" />
+        <datalist id="worker-roles">
+          @for (role of roles; track role) {
+            <option [value]="role"></option>
+          }
+        </datalist>
+        <app-field-error [control]="form.controls.role" />
+      </div>
+      <div class="field">
+        <label class="field__label" for="worker-specialty">
+          {{ 'workers.fields.specialty' | translate }}
+          <span class="field__optional">({{ 'common.optional' | translate }})</span>
+        </label>
+        <input id="worker-specialty" class="field__control" formControlName="specialty" />
+        <app-field-error [control]="form.controls.specialty" />
+      </div>
+      <div class="field">
+        <label class="field__label" for="worker-hire-date">{{ 'workers.fields.hireDate' | translate }}</label>
+        <input id="worker-hire-date" type="date" class="field__control" formControlName="hireDate" [max]="today" />
+        <app-field-error [control]="form.controls.hireDate" />
+      </div>
+      <div class="field">
+        <label class="field__label" for="worker-status">{{ 'common.status' | translate }}</label>
+        <select id="worker-status" class="field__control" formControlName="status">
+          @for (status of statuses; track status) {
+            <option [value]="status">{{ 'workers.status.' + status | translate }}</option>
+          }
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <footer class="dialog__footer">
+    <button type="button" class="btn btn--secondary" (click)="close()">{{ 'common.cancel' | translate }}</button>
+    <button type="submit" class="btn btn--save" [disabled]="submitting()">
+      <lucide-icon name="check" [size]="16" aria-hidden="true" />
+      {{ (submitting() ? 'common.saving' : isEdit ? 'common.saveChanges' : 'workers.form.submit') | translate }}
+    </button>
+  </footer>
+</form>

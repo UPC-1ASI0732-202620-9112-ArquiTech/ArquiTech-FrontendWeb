@@ -1,0 +1,3 @@
+@if (message(); as error) {
+  <span class="field-error" [id]="id()" role="alert">{{ error.key | translate: error.params }}</span>
+}
