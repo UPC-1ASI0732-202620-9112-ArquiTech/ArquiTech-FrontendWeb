@@ -1,0 +1,70 @@
+<section class="page">
+  <header class="page-heading">
+    <div class="page-heading__text">
+      <h1 class="page-title">{{ 'nav.attendance' | translate }}</h1>
+      <p class="page-description">{{ 'attendance.description' | translate }}</p>
+    </div>
+    @if (canManage()) {
+      <button type="button" class="btn btn--primary" (click)="openForm()">{{ 'attendance.create' | translate }}</button>
+    }
+  </header>
+  <app-data-toolbar [state]="table" searchPlaceholderKey="attendance.search" [filters]="filterFields" />
+  <div class="data-panel">
+    <app-list-state
+      [status]="status()"
+      [isEmpty]="table.total() === 0"
+      [isFiltering]="table.isFiltering()"
+      icon="calendar-days"
+      emptyTitleKey="attendance.empty"
+      emptyMessageKey="attendance.emptyMessage"
+      (retry)="load()"
+    >
+      <div class="table-scroll">
+        <table class="data-table">
+          <caption class="sr-only">
+            {{
+              'nav.attendance' | translate
+            }}
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">{{ 'attendance.worker' | translate }}</th>
+              <th scope="col">{{ 'attendance.date' | translate }}</th>
+              <th scope="col">{{ 'common.status' | translate }}</th>
+              <th scope="col">{{ 'attendance.checkIn' | translate }}</th>
+              <th scope="col">{{ 'attendance.checkOut' | translate }}</th>
+              <th scope="col">{{ 'attendance.notes' | translate }}</th>
+              @if (canManage()) {
+                <th scope="col">{{ 'common.actions' | translate }}</th>
+              }
+            </tr>
+          </thead>
+          <tbody>
+            @for (row of table.pageRows(); track row.id) {
+              <tr>
+                <td class="cell-strong">{{ row.workerName }}</td>
+                <td>{{ row.attendanceDate | appDate }}</td>
+                <td>
+                  <app-status-badge [tone]="statusTone[row.status]" [labelKey]="'attendance.status.' + row.status" />
+                </td>
+                <td>{{ row.checkInAt | appDate: 'datetime' }}</td>
+                <td>{{ row.checkOutAt | appDate: 'datetime' }}</td>
+                <td>{{ row.notes || '—' }}</td>
+                @if (canManage()) {
+                  <td class="cell-actions">
+                    <button type="button" class="btn btn--ghost" (click)="openForm(row)">
+                      {{ 'common.edit' | translate }}</button
+                    ><button type="button" class="btn btn--ghost" (click)="delete(row)">
+                      {{ 'common.delete' | translate }}
+                    </button>
+                  </td>
+                }
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <app-paginator [state]="table" />
+    </app-list-state>
+  </div>
+</section>

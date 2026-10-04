@@ -42,7 +42,8 @@
     "backToProjects": "Volver a proyectos",
     "selectProjectFirst": "Selecciona un proyecto para ver sus módulos.",
     "userMenu": "Menú de usuario",
-    "skipToContent": "Saltar al contenido"
+    "skipToContent": "Saltar al contenido",
+    "attendance": "Asistencia"
   },
   "auth": {
     "overline": "CONSTRUCCIÓN INTELIGENTE",
@@ -112,7 +113,12 @@
       "INVALID_CONTRACTOR": "Selecciona un contratante válido.",
       "VALIDATION_ERROR": "Hay datos inválidos o incompletos. No se guardó ningún cambio.",
       "NOT_FOUND": "El registro no existe o fue eliminado.",
-      "FORBIDDEN": "Tu rol no tiene permiso para realizar esta acción."
+      "FORBIDDEN": "Tu rol no tiene permiso para realizar esta acción.",
+      "DUPLICATE_ATTENDANCE": "Ya existe asistencia para este trabajador en esa fecha. Edita el registro existente.",
+      "ATTENDANCE_NOT_FOUND": "El registro de asistencia ya no existe.",
+      "WORKER_HAS_ATTENDANCE": "Este trabajador tiene asistencia. Márcalo como inactivo para conservar el historial o elimina primero esos registros.",
+      "WORKER_HAS_TASKS": "El trabajador tiene tareas. Reasígnalas o elimínalas primero.",
+      "PROJECT_NOT_FOUND": "El proyecto ya no existe."
     }
   },
   "alerts": {
@@ -166,6 +172,12 @@
       "responsiblesSection": "Responsables",
       "submit": "Registrar proyecto",
       "success": "Proyecto «{{name}}» registrado."
+    },
+    "delete": {
+      "title": "Eliminar proyecto",
+      "warning": "Esta acción es irreversible. Se eliminarán trabajadores, tareas, asistencia, materiales y movimientos, incidentes y maquinaria de la obra.",
+      "confirmName": "Escribe el nombre del proyecto para confirmar",
+      "success": "Proyecto eliminado"
     }
   },
   "materials": {
@@ -572,5 +584,30 @@
     "title": "Página no encontrada",
     "message": "La dirección que buscas no existe o fue movida.",
     "action": "Ir a mis proyectos"
+  },
+  "attendance": {
+    "worker": "Trabajador",
+    "date": "Fecha de asistencia",
+    "checkIn": "Entrada",
+    "checkOut": "Salida",
+    "notes": "Observaciones",
+    "description": "Registra y consulta asistencia diaria. Filtra las fechas para revisar el historial.",
+    "search": "Buscar trabajador u observaciones",
+    "empty": "Sin registros de asistencia",
+    "emptyMessage": "Cambia los filtros o registra la asistencia de la obra.",
+    "create": "Registrar asistencia",
+    "saved": "Asistencia guardada",
+    "deleted": "Asistencia eliminada",
+    "noWorkers": "No hay trabajadores elegibles. Registra un trabajador activo primero.",
+    "invalidTimes": "La salida requiere entrada y no puede ser anterior.",
+    "beforeHire": "La asistencia no puede ser anterior a la contratación.",
+    "deleteTitle": "Eliminar asistencia",
+    "deleteMessage": "¿Eliminar la asistencia de {{name}} del {{date}}?",
+    "status": {
+      "PRESENT": "Presente",
+      "ABSENT": "Ausente",
+      "LATE": "Tardanza",
+      "EXCUSED": "Justificado"
+    }
   }
 }

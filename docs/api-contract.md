@@ -1,39 +1,45 @@
-# Contrato REST: frontend vs. backend (insumo para SP-01)
+# Contrato REST Web y Backend actual
 
-Comparación entre los endpoints que consume la Frontend Web Application y los expuestos por
-`arquitech-back-end` según la documentación OpenAPI del Project Report (sección 5.2.6).
+Prefijo /api/v1. Producción llama a la API real; el modo demo es explícito en environment.development.ts. Scope por proyecto y permisos son autoridad Backend. No se solicita GET Project individual ni endpoints de asistencia antes de que existan: esta entrega los incorpora primero al servidor.
 
-Leyenda: ✅ existe en el Swagger · ⚠️ existe con otra forma · ❌ no existe todavía (el mock del frontend lo implementa).
+| Feature | Operaciones existentes |
+|---|---|
+| Auth | POST /authentication/sign-in, POST /authentication/sign-up |
+| Users | GET /users (Supervisor), GET /users/{id} con permisos del servidor |
+| Projects | GET/POST /projects, GET /projects/supervisor/{userId}, DELETE /projects/{id} |
+| Materials | GET /materials/project/{projectId}, POST /materials, PUT/DELETE /materials/{id} |
+| Movements | POST /materials/{id}/entry, POST /materials/{id}/use, GET /materials/project/{projectId}/history |
+| Machinery | GET/POST /machinery, GET/PUT/DELETE /machinery/{id}; filtro projectId |
+| Workers | GET/POST /workers, GET/PUT/DELETE /workers/{id}; filtro projectId |
+| Tasks | GET/POST /tasks, PUT/DELETE /tasks/{id}; filtro projectId |
+| Incidents | GET /incidents/project/{projectId}, POST /incidents, PUT/DELETE /incidents/{id} |
+| Attendance | GET/POST /attendance, PUT/DELETE /attendance/{id}; projectId requerido, date opcional en GET |
 
-| Uso en el frontend | Método y ruta | Estado | Historia | Acción recomendada |
-| --- | --- | --- | --- | --- |
-| Iniciar sesión | `POST /authentication/sign-in` | ✅ | HU23 · TS14 | Devolver `id`, `fullName`, `email`, `role`, `token`. |
-| Contratantes para un proyecto | `GET /users` | ✅ | HU09 · TS33 | — |
-| Proyectos del supervisor | `GET /projects/supervisor/{userId}` | ✅ | HU22 · TS13 | — |
-| Proyectos del contratante | `GET /projects` + filtro por `contractorId` | ⚠️ | HU33 · TS13 | Exponer `GET /projects/contractor/{userId}` para no enviar obras ajenas al cliente. |
-| Registrar proyecto | `POST /projects` | ✅ | HU09 · TS09 | Incluir `location`, `supervisorId`, `contractorId`, `progress`. |
-| Materiales de una obra | `GET /materials/project/{projectId}` | ✅ | HU28, HU40 · TS24 | — |
-| Registrar material | `POST /materials` | ✅ | HU01 · TS01 | Registrar la cantidad inicial como primer movimiento de entrada. |
-| Actualizar material | `PUT /materials/{id}` | ✅ | HU29 · TS25 | — |
-| Eliminar material | `DELETE /materials/{id}` | ❌ | HU47 · TS34 | Implementar. |
-| Entrada de material | `POST /materials/{id}/entry` | ❌ | HU01 · TS01 | Implementar (hoy solo existe `use`). |
-| Salida de material | `POST /materials/{id}/use` | ✅ | HU02 · TS02, TS03 | Responder `400` con `code: INSUFFICIENT_STOCK`. |
-| Historial de la obra | `GET /materials/project/{projectId}/history` | ⚠️ | HU04 · TS04 | Hoy existe solo por material: `/history/{materialName}`. Agregar el historial completo. |
-| Maquinaria | `GET/POST /machinery`, `PUT/DELETE /machinery/{id}` | ✅ | HU05, HU30, HU31, HU41, HU48 | Aceptar `?projectId=` (el frontend filtra igual por seguridad). |
-| Trabajadores | `GET/POST /workers`, `PUT/DELETE /workers/{workerId}` | ✅ | HU06, HU10, HU32, HU42, HU49 | Aceptar `?projectId=`. |
-| Tareas | `GET/POST /tasks`, `PUT/DELETE /tasks/{taskId}` | ✅ | HU07, HU08, HU43, HU50, HU53 | Guardar `completedAt` al completar (lo usa el reporte semanal). |
-| Incidencias | `GET /incidents/project/{projectId}`, `POST /incidents`, `PUT/DELETE /incidents/{id}` | ✅ | HU35–HU37, HU39, HU51 | — |
-| Perfil | — | ❌ | HU16 · SP-03 | Hoy se guarda en el navegador; evaluar `PUT /users/{id}` (SP-03). |
+GET /projects filtra por el usuario autenticado en el servidor. No hace falta endpoint de contratante adicional. No existen GET /tasks/{id}, actualización REST de Profile, Reports ni Notifications. Perfil/preferencias y reportes/alertas agregados mantienen sus operaciones locales. JWT sigue usando la sesión existente.
 
-## Reglas de seguridad esperadas (SP-02)
+Sin sesión: 401; escritura Contractor u obra ajena: 403; campos inválidos: 400; recursos inexistentes: 404; conflictos: 409. JSON camelCase. LocalDate YYYY-MM-DD e instantes ISO UTC. Creación 201, actualización 200, borrado 204.
 
-- Sin token o con token inválido → `401` (TS20). El frontend cierra la sesión y pide iniciar sesión otra vez.
-- Contratante en `POST`, `PUT` o `DELETE` → `403` (TS15). El frontend además oculta esas acciones y bloquea
-  `/projects/new` con `roleGuard` (TS21).
-- Acceso a una obra no asignada → `403`. El frontend lo bloquea con `projectAccessGuard`.
+## Asistencia y eliminación de proyectos (4 de octubre de 2026)
 
-## Formato de errores
+Todas las rutas tienen prefijo /api/v1 y requieren JWT. Supervisor escribe únicamente en sus obras; Contractor consulta las obras donde está asignado. Backend aplica permisos y scope, independientemente de la UI.
 
-El frontend traduce el campo `code` del cuerpo de error cuando existe:
-`INSUFFICIENT_STOCK`, `INVALID_CREDENTIALS`, `DUPLICATED_SERIAL_NUMBER`, `WORKER_NOT_FOUND`,
-`INVALID_CONTRACTOR`, `VALIDATION_ERROR`, `NOT_FOUND`, `FORBIDDEN`. Sin `code`, usa el código HTTP.
+| Método | Endpoint | Supervisor | Contractor | Request | Response |
+|---|---|---|---|---|---|
+| DELETE | /projects/{id} | Propietario | No (403) | Sin body | 204 |
+| GET | /attendance?projectId=X&date=YYYY-MM-DD | Leer | Leer | projectId requerido; date opcional | 200: AttendanceResource[] |
+| POST | /attendance | Crear | No (403) | projectId, workerId, attendanceDate, status, checkInAt opcional, checkOutAt opcional, notes opcional | 201: AttendanceResource |
+| PUT | /attendance/{id} | Editar | No (403) | workerId, attendanceDate, status, checkInAt opcional, checkOutAt opcional, notes opcional | 200: AttendanceResource |
+| DELETE | /attendance/{id} | Eliminar | No (403) | Sin body | 204 |
+
+AttendanceResource: id, projectId, workerId, workerName, attendanceDate, status, checkInAt, checkOutAt, notes, registeredByUserId, createdAt, updatedAt.
+
+- Estados: PRESENT, ABSENT, LATE, EXCUSED (presente, ausente, tardanza, justificado).
+- attendanceDate es la fecha de la jornada, YYYY-MM-DD. Los instantes de entrada y salida son ISO-8601 UTC; Web y Mobile presentan la hora local y permiten turnos que cruzan medianoche.
+- Un solo registro por trabajador/fecha, protegido por constraint de base de datos. Duplicados devuelven 409 DUPLICATE_ATTENDANCE.
+- La salida requiere entrada y no puede precederla. ABSENT y EXCUSED no admiten horas. Notes tiene máximo 1000 caracteres.
+- El trabajador debe pertenecer a la obra; la fecha no puede preceder su contratación. No se crean registros nuevos para INACTIVE, pero puede corregirse su historial existente.
+- No se envían registeredByUserId, workerName, createdAt ni updatedAt: son administrados por el servidor. PUT no admite cambio de projectId.
+- Eliminar un trabajador con asistencia devuelve 409 WORKER_HAS_ATTENDANCE; puede marcarse INACTIVE para preservar su historial.
+- La eliminación del proyecto elimina asistencia, tareas, trabajadores, movimientos/materiales, maquinaria e incidentes de esa obra; conserva usuarios y otras obras. Todo ocurre en una transacción y se revierte completamente si falla un paso.
+- Ambas interfaces requieren escribir el nombre exacto de la obra para confirmar su borrado. El contexto local de esa obra se limpia tras el éxito.
+- Las escrituras bloquean el proyecto antes de modificar sus recursos para evitar datos huérfanos durante una eliminación simultánea. Materiales bloquea proyecto antes de material.

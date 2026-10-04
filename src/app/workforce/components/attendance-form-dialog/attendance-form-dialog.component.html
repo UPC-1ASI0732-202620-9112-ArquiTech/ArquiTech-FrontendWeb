@@ -1,0 +1,63 @@
+<form class="dialog" [formGroup]="form" (ngSubmit)="submit()" novalidate aria-labelledby="attendance-title">
+  <header class="dialog__header">
+    <h2 id="attendance-title" class="dialog__title">{{ 'nav.attendance' | translate }}</h2>
+  </header>
+  <div class="dialog__body">
+    @if (errorKey(); as error) {
+      <div class="form-alert" role="alert">{{ error | translate }}</div>
+    }
+    <div class="form-grid">
+      <div class="field field--full">
+        <label for="attendance-worker">{{ 'attendance.worker' | translate }}</label>
+        <select id="attendance-worker" class="field__control" formControlName="workerId">
+          @for (worker of workers; track worker.id) {
+            <option [value]="worker.id">{{ worker.fullName }}</option>
+          }
+        </select>
+        <app-field-error [control]="form.controls.workerId" />
+      </div>
+      <div class="field">
+        <label for="attendance-date">{{ 'attendance.date' | translate }}</label>
+        <input id="attendance-date" type="date" class="field__control" formControlName="attendanceDate" />
+        <app-field-error [control]="form.controls.attendanceDate" />
+      </div>
+      <div class="field">
+        <label for="attendance-status">{{ 'common.status' | translate }}</label>
+        <select id="attendance-status" class="field__control" formControlName="status" (change)="changeStatus()">
+          @for (status of statuses; track status) {
+            <option [value]="status">{{ 'attendance.status.' + status | translate }}</option>
+          }
+        </select>
+      </div>
+      @if (allowsTimes()) {
+        <div class="field">
+          <label for="attendance-in">{{ 'attendance.checkIn' | translate }} ({{ 'common.optional' | translate }})</label
+          ><input id="attendance-in" type="datetime-local" class="field__control" formControlName="checkInAt" />
+        </div>
+        <div class="field">
+          <label for="attendance-out"
+            >{{ 'attendance.checkOut' | translate }} ({{ 'common.optional' | translate }})</label
+          ><input id="attendance-out" type="datetime-local" class="field__control" formControlName="checkOutAt" />
+        </div>
+      }
+      <div class="field field--full">
+        <label for="attendance-notes">{{ 'attendance.notes' | translate }}</label
+        ><textarea
+          id="attendance-notes"
+          class="field__control"
+          formControlName="notes"
+          rows="3"
+          maxlength="1000"
+        ></textarea
+        ><app-field-error [control]="form.controls.notes" />
+      </div>
+    </div>
+  </div>
+  <footer class="dialog__footer">
+    <button type="button" class="btn btn--secondary" [disabled]="submitting()" (click)="close()">
+      {{ 'common.cancel' | translate }}</button
+    ><button class="btn btn--save" type="submit" [disabled]="submitting()">
+      {{ (submitting() ? 'common.saving' : 'common.saveChanges') | translate }}
+    </button>
+  </footer>
+</form>

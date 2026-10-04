@@ -32,6 +32,7 @@ export class SidebarComponent {
   protected readonly projectItems: ProjectNavItem[] = [
     { path: 'materials', labelKey: 'nav.materials', icon: 'chart-column-stacked' },
     { path: 'workers', labelKey: 'nav.workers', icon: 'construction' },
+    { path: 'attendance', labelKey: 'nav.attendance', icon: 'calendar-days' },
     { path: 'tasks', labelKey: 'nav.tasks', icon: 'clipboard-list' },
     { path: 'incidents', labelKey: 'nav.incidents', icon: 'triangle-alert' },
     { path: 'machinery', labelKey: 'nav.machinery', icon: 'forklift' },

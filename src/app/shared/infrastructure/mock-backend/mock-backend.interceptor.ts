@@ -9,6 +9,8 @@ import {
 import { inject } from '@angular/core';
 import { Observable, defer, delay, mergeMap, of, throwError } from 'rxjs';
 import { environment } from '../../../../environments/environment';
+import { AttendanceResource, AttendanceStatus } from '../../../workforce/model/attendance.entity';
+import { validAttendanceTimes } from '../../../workforce/model/attendance-request';
 import { IncidentResource } from '../../../incidents/model/incident.entity';
 import { MachineryResource } from '../../../inventory/model/machinery.entity';
 import { MaterialMovementResource } from '../../../inventory/model/material-movement.entity';
@@ -230,7 +232,145 @@ function registerMovement(
 
 // ---------- Routes ----------
 
+function validateAttendance(
+  context: MockContext,
+  data: Partial<AttendanceResource>,
+  existing?: AttendanceResource,
+): MockResult | AttendanceResource {
+  const allowedFields = new Set([
+    'workerId',
+    'attendanceDate',
+    'status',
+    'checkInAt',
+    'checkOutAt',
+    'notes',
+    ...(existing ? [] : ['projectId']),
+  ]);
+  if (Object.keys(context.request.body ?? {}).some((key) => !allowedFields.has(key)))
+    return validationError('Unknown request fields');
+  const accessError = checkProjectAccess(context, data.projectId);
+  if (accessError) return accessError;
+  const worker = context.db.state.workers.find((w) => w.id === Number(data.workerId));
+  if (!worker) return fail(404, 'WORKER_NOT_FOUND', 'Worker not found');
+  if (worker.projectId !== data.projectId || (worker.status === 'INACTIVE' && worker.id !== existing?.workerId))
+    return validationError('Worker is not eligible');
+  if (
+    !data.attendanceDate ||
+    !isValidDate(data.attendanceDate) ||
+    new Date(data.attendanceDate).toISOString().slice(0, 10) !== data.attendanceDate ||
+    data.attendanceDate < worker.hireDate
+  )
+    return validationError('Invalid attendance date');
+  if (!data.status || !Object.values(AttendanceStatus).includes(data.status))
+    return validationError('Invalid attendance status');
+  if (!validAttendanceTimes(data.status, data.checkInAt ?? null, data.checkOutAt ?? null))
+    return validationError('Invalid working times');
+  if ((data.notes?.length ?? 0) > 1000) return validationError('Notes too long');
+  if (
+    context.db.state.attendance.some(
+      (a) => a.workerId === worker.id && a.attendanceDate === data.attendanceDate && a.id !== existing?.id,
+    )
+  )
+    return fail(409, 'DUPLICATE_ATTENDANCE', 'Attendance already exists');
+  const now = new Date().toISOString();
+  return {
+    id: existing?.id ?? context.db.nextId(),
+    projectId: data.projectId!,
+    workerId: worker.id,
+    workerName: worker.fullName,
+    attendanceDate: data.attendanceDate,
+    status: data.status,
+    checkInAt: data.checkInAt ? new Date(data.checkInAt).toISOString() : null,
+    checkOutAt: data.checkOutAt ? new Date(data.checkOutAt).toISOString() : null,
+    notes: data.notes?.trim() ?? null,
+    registeredByUserId: existing?.registeredByUserId ?? context.user!.id,
+    createdAt: existing?.createdAt ?? now,
+    updatedAt: now,
+  };
+}
 const ROUTES: MockRoute[] = [
+  {
+    method: 'DELETE',
+    pattern: new RegExp('^/projects/([0-9]+)$'),
+    handle: (context) => {
+      if (!isWriter(context)) return forbidden();
+      const id = Number(context.params[0]);
+      const error = checkProjectAccess(context, id);
+      if (error) return error;
+      const state = context.db.state;
+      state.attendance = state.attendance.filter((a) => a.projectId !== id);
+      state.tasks = state.tasks.filter((a) => a.projectId !== id);
+      state.workers = state.workers.filter((a) => a.projectId !== id);
+      state.movements = state.movements.filter((a) => a.projectId !== id);
+      state.materials = state.materials.filter((a) => a.projectId !== id);
+      state.machinery = state.machinery.filter((a) => a.projectId !== id);
+      state.incidents = state.incidents.filter((a) => a.projectId !== id);
+      state.projects = state.projects.filter((a) => a.id !== id);
+      context.db.save();
+      return ok(null, 204);
+    },
+  },
+  {
+    method: 'GET',
+    pattern: new RegExp('^/attendance$'),
+    handle: (context) => {
+      const id = Number(context.query.get('projectId'));
+      const error = checkProjectAccess(context, id);
+      if (error) return error;
+      const date = context.query.get('date');
+      return ok(
+        context.db.state.attendance
+          .filter((a) => a.projectId === id && (!date || a.attendanceDate === date))
+          .map((a) => ({
+            ...a,
+            workerName: context.db.state.workers.find((w) => w.id === a.workerId)?.fullName ?? a.workerName,
+          }))
+          .sort((a, b) => b.attendanceDate.localeCompare(a.attendanceDate) || b.id - a.id),
+      );
+    },
+  },
+  {
+    method: 'POST',
+    pattern: new RegExp('^/attendance$'),
+    handle: (context) => {
+      if (!isWriter(context)) return forbidden();
+      const result = validateAttendance(context, body<AttendanceResource>(context));
+      if (result instanceof HttpErrorResponse || result instanceof HttpResponse) return result;
+      context.db.state.attendance.push(result);
+      context.db.save();
+      return ok(result, 201);
+    },
+  },
+  {
+    method: 'PUT',
+    pattern: new RegExp('^/attendance/([0-9]+)$'),
+    handle: (context) => {
+      if (!isWriter(context)) return forbidden();
+      const row = findScoped(context, context.db.state.attendance, 'Attendance');
+      if (row instanceof HttpErrorResponse) return row;
+      const result = validateAttendance(
+        context,
+        { ...body<AttendanceResource>(context), projectId: row.projectId },
+        row,
+      );
+      if (result instanceof HttpErrorResponse || result instanceof HttpResponse) return result;
+      Object.assign(row, result);
+      context.db.save();
+      return ok(row);
+    },
+  },
+  {
+    method: 'DELETE',
+    pattern: new RegExp('^/attendance/([0-9]+)$'),
+    handle: (context) => {
+      if (!isWriter(context)) return forbidden();
+      const row = findScoped(context, context.db.state.attendance, 'Attendance');
+      if (row instanceof HttpErrorResponse) return row;
+      removeById(context.db.state.attendance, row.id);
+      context.db.save();
+      return ok(null, 204);
+    },
+  },
   // Authentication (TS14, TS32)
   {
     method: 'POST',
@@ -716,6 +856,10 @@ const ROUTES: MockRoute[] = [
       if (!isWriter(context)) return forbidden();
       const worker = findScoped(context, context.db.state.workers, 'Worker');
       if (worker instanceof HttpErrorResponse) return worker;
+      if (context.db.state.tasks.some((t) => t.workerId === worker.id))
+        return fail(409, 'WORKER_HAS_TASKS', 'Worker has tasks');
+      if (context.db.state.attendance.some((a) => a.workerId === worker.id))
+        return fail(409, 'WORKER_HAS_ATTENDANCE', 'Worker has attendance');
       removeById(context.db.state.workers, worker.id);
       context.db.save();
       return ok(null, 204);

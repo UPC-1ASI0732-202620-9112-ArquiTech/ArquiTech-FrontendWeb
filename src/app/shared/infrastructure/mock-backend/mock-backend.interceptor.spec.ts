@@ -26,7 +26,12 @@ describe('mockBackendInterceptor (REST contract /api/v1)', () => {
     }
   }
 
+  const originalMock = environment.useMockApi;
+  afterEach(() => {
+    environment.useMockApi = originalMock;
+  });
   beforeEach(() => {
+    environment.useMockApi = true;
     localStorage.clear();
     TestBed.configureTestingModule({
       providers: [provideHttpClient(withInterceptors([mockBackendInterceptor]))],
@@ -80,6 +85,55 @@ describe('mockBackendInterceptor (REST contract /api/v1)', () => {
     expect(await status(request)).toBe(404);
   });
 
+  it('records attendance, rejects duplicates and enforces contractor read-only', async () => {
+    const token = await signIn('supervisor@arquitech.demo', 'Supervisor2026!');
+    const headers = { Authorization: 'Bearer ' + token };
+    const worker = TestBed.inject(MockDatabase).state.workers[0];
+    const request = {
+      projectId: worker.projectId,
+      workerId: worker.id,
+      attendanceDate: '2026-10-03',
+      status: 'PRESENT',
+      checkInAt: null,
+      checkOutAt: null,
+      notes: 'Site',
+    };
+    const created = await firstValueFrom(
+      http.post<{ id: number; registeredByUserId: number }>(API + '/attendance', request, { headers }),
+    );
+    expect(created.registeredByUserId).toBe(1);
+    expect(await status(firstValueFrom(http.post(API + '/attendance', request, { headers })))).toBe(409);
+    const contractor = await signIn('contratante@arquitech.demo', 'Contratante2026!');
+    expect(
+      await status(
+        firstValueFrom(
+          http.delete(API + '/attendance/' + created.id, { headers: { Authorization: 'Bearer ' + contractor } }),
+        ),
+      ),
+    ).toBe(403);
+    expect(await status(firstValueFrom(http.delete(API + '/workers/' + worker.id, { headers })))).toBe(409);
+    await firstValueFrom(http.delete(API + '/attendance/' + created.id, { headers }));
+  });
+  it('deletes project children while preserving other projects and users', async () => {
+    const token = await signIn('supervisor@arquitech.demo', 'Supervisor2026!');
+    const headers = { Authorization: 'Bearer ' + token };
+    const database = TestBed.inject(MockDatabase),
+      userCount = database.state.users.length;
+    await firstValueFrom(http.delete(API + '/projects/1', { headers }));
+    expect(database.state.projects.some((p) => p.id === 1)).toBeFalse();
+    expect(database.state.projects.length).toBeGreaterThan(0);
+    for (const rows of [
+      database.state.workers,
+      database.state.tasks,
+      database.state.materials,
+      database.state.movements,
+      database.state.incidents,
+      database.state.machinery,
+      database.state.attendance,
+    ])
+      expect(rows.some((r) => r.projectId === 1)).toBeFalse();
+    expect(database.state.users.length).toBe(userCount);
+  });
   it('returns only the works of the signed-in contractor (HU33)', async () => {
     const token = await signIn('contratante@arquitech.demo', 'Contratante2026!');
     const projects = await firstValueFrom(

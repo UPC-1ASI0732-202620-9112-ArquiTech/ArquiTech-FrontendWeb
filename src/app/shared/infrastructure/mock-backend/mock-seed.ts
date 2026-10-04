@@ -1,3 +1,4 @@
+import { AttendanceResource } from '../../../workforce/model/attendance.entity';
 import { IncidentResource } from '../../../incidents/model/incident.entity';
 import { MachineryResource } from '../../../inventory/model/machinery.entity';
 import { MaterialMovementResource } from '../../../inventory/model/material-movement.entity';
@@ -24,6 +25,7 @@ export interface MockDatabaseState {
   workers: WorkerResource[];
   tasks: TaskResource[];
   incidents: IncidentResource[];
+  attendance: AttendanceResource[];
 }
 
 export const MOCK_DATABASE_VERSION = 1;
@@ -570,5 +572,6 @@ export function createSeedState(now: Date = new Date()): MockDatabaseState {
     workers,
     tasks,
     incidents,
+    attendance: [],
   };
 }

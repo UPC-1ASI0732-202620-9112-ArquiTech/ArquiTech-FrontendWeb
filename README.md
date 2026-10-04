@@ -52,7 +52,7 @@ Los datos de ejemplo son los del Figma. Se guardan en el navegador y se restable
 
 ```ts
 apiBaseUrl: 'https://arquitech-backend-production.up.railway.app/api/v1',
-useMockApi: true,   // false = llamar al backend Spring Boot real
+useMockApi: false,  // producción: backend real; desarrollo conserva demo con true
 ```
 
 Con `useMockApi: true`, un interceptor HTTP responde en el navegador con el **mismo contrato REST** del backend
@@ -98,3 +98,13 @@ Cada contexto separa `model/` (entidades del Class Dictionary, sección 4.9.2), 
 Nombres en inglés, `kebab-case` para archivos, sufijos `.component` / `.service`, `camelCase` / `PascalCase` /
 `UPPER_SNAKE_CASE` según la sección 5.1.3 del reporte. Commits con Conventional Commits y ramas GitFlow
 (`feature/*`, `release/*`, `hotfix/*`).
+
+
+## Asistencia y eliminación de proyectos
+
+- Supervisor elimina sus obras desde Proyectos, escribiendo el nombre exacto para confirmar. El borrado incluye todos los registros de esa obra, conserva usuarios y otras obras y limpia su contexto local.
+- Asistencia se encuentra en la navegación de la obra: registros diarios por trabajador, cuatro estados, entrada/salida opcionales, observaciones, búsqueda y filtros de fechas/estado. Supervisor administra; Contractor solo consulta.
+- Producción usa Backend real (useMockApi=false). Desarrollo conserva el demo explícito (true); el mock implementa también estos contratos y migra sus datos locales incorporando asistencia sin restablecer los registros previos.
+- Los códigos DUPLICATE_ATTENDANCE, ATTENDANCE_NOT_FOUND y WORKER_HAS_ATTENDANCE se presentan en ES/EN.
+
+Contrato y reglas: [docs/api-contract.md](docs/api-contract.md). Tests: npm run test:ci; build: npm run build.

@@ -8,7 +8,7 @@
 export const environment = {
   production: true,
   apiBaseUrl: 'https://arquitech-backend-production.up.railway.app/api/v1',
-  useMockApi: true,
+  useMockApi: false,
   mockLatencyMs: 250,
   defaultLanguage: 'es',
   supportedLanguages: ['es', 'en'],

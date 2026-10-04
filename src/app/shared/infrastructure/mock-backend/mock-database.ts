@@ -36,6 +36,7 @@ export class MockDatabase {
       if (stored) {
         const parsed = JSON.parse(stored) as MockDatabaseState;
         if (parsed.version === MOCK_DATABASE_VERSION) {
+          parsed.attendance ??= [];
           return parsed;
         }
       }

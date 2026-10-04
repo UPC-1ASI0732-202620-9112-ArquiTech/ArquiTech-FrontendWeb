@@ -85,6 +85,16 @@
                   />
                 </td>
                 <td class="cell-actions">
+                  @if (session.isSupervisor()) {
+                    <button
+                      type="button"
+                      class="icon-button"
+                      [attr.aria-label]="'projects.delete.title' | translate"
+                      (click)="$event.stopPropagation(); delete(project)"
+                    >
+                      <lucide-icon name="trash-2" [size]="18" aria-hidden="true" />
+                    </button>
+                  }
                   <a
                     class="btn btn--ghost details-link"
                     [routerLink]="['/projects', project.id, 'materials']"

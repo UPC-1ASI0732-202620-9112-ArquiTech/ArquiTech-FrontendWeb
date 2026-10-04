@@ -62,6 +62,14 @@ export const routes: Routes = [
             data: { titleKey: 'nav.workers' },
           },
           {
+            path: 'attendance',
+            loadComponent: () =>
+              import('./workforce/pages/attendance-list/attendance-list.component').then(
+                (m) => m.AttendanceListComponent,
+              ),
+            data: { titleKey: 'nav.attendance' },
+          },
+          {
             path: 'tasks',
             loadComponent: () =>
               import('./workforce/pages/task-list/task-list.component').then((m) => m.TaskListComponent),

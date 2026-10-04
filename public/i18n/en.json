@@ -42,7 +42,8 @@
     "backToProjects": "Back to projects",
     "selectProjectFirst": "Select a project to see its modules.",
     "userMenu": "User menu",
-    "skipToContent": "Skip to content"
+    "skipToContent": "Skip to content",
+    "attendance": "Attendance"
   },
   "auth": {
     "overline": "SMART CONSTRUCTION",
@@ -112,7 +113,12 @@
       "INVALID_CONTRACTOR": "Select a valid contractor.",
       "VALIDATION_ERROR": "Some data is invalid or incomplete. Nothing was saved.",
       "NOT_FOUND": "The record does not exist or was deleted.",
-      "FORBIDDEN": "Your role is not allowed to perform this action."
+      "FORBIDDEN": "Your role is not allowed to perform this action.",
+      "DUPLICATE_ATTENDANCE": "Attendance already exists for this worker and date. Edit the existing record.",
+      "ATTENDANCE_NOT_FOUND": "The attendance record no longer exists.",
+      "WORKER_HAS_ATTENDANCE": "This worker has attendance. Mark them inactive to preserve history or delete those records first.",
+      "WORKER_HAS_TASKS": "This worker has tasks. Reassign or delete them first.",
+      "PROJECT_NOT_FOUND": "The project no longer exists."
     }
   },
   "alerts": {
@@ -166,6 +172,12 @@
       "responsiblesSection": "Responsible people",
       "submit": "Register project",
       "success": "Project “{{name}}” registered."
+    },
+    "delete": {
+      "title": "Delete project",
+      "warning": "This action is irreversible. Workers, tasks, attendance, materials and movements, incidents and machinery of the project will be deleted.",
+      "confirmName": "Type the project name to confirm",
+      "success": "Project deleted"
     }
   },
   "materials": {
@@ -572,5 +584,30 @@
     "title": "Page not found",
     "message": "The address you are looking for does not exist or was moved.",
     "action": "Go to my projects"
+  },
+  "attendance": {
+    "worker": "Worker",
+    "date": "Attendance date",
+    "checkIn": "Check-in",
+    "checkOut": "Check-out",
+    "notes": "Notes",
+    "description": "Record and view daily attendance. Filter dates to review history.",
+    "search": "Search worker or notes",
+    "empty": "No attendance records",
+    "emptyMessage": "Change filters or record project attendance.",
+    "create": "Record attendance",
+    "saved": "Attendance saved",
+    "deleted": "Attendance deleted",
+    "noWorkers": "No eligible workers. Register an active worker first.",
+    "invalidTimes": "Check-out requires check-in and cannot precede it.",
+    "beforeHire": "Attendance cannot precede the hire date.",
+    "deleteTitle": "Delete attendance",
+    "deleteMessage": "Delete attendance for {{name}} on {{date}}?",
+    "status": {
+      "PRESENT": "Present",
+      "ABSENT": "Absent",
+      "LATE": "Late",
+      "EXCUSED": "Excused"
+    }
   }
 }

@@ -1,3 +1,7 @@
+import { Dialog } from '@angular/cdk/dialog';
+import { DeleteProjectDialogComponent } from '../../components/delete-project-dialog.component';
+import { openFormDialog } from '../../../shared/services/dialog.helpers';
+import { ToastService } from '../../../shared/services/toast.service';
 import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router, RouterLink } from '@angular/router';
@@ -40,6 +44,8 @@ import { ProjectService } from '../../services/project.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProjectListComponent implements OnInit {
+  private readonly dialog = inject(Dialog);
+  private readonly toast = inject(ToastService);
   private readonly projectService = inject(ProjectService);
   private readonly context = inject(ProjectContextService);
   private readonly router = inject(Router);
@@ -88,6 +94,14 @@ export class ProjectListComponent implements OnInit {
       });
   }
 
+  protected delete(project: Project): void {
+    openFormDialog<boolean, Project>(this.dialog, DeleteProjectDialogComponent, project).closed.subscribe((deleted) => {
+      if (deleted) {
+        this.toast.success('projects.delete.success');
+        this.load();
+      }
+    });
+  }
   protected open(project: Project): void {
     void this.router.navigate(['/projects', project.id, 'materials']);
   }

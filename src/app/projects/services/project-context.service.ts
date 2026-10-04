@@ -53,6 +53,17 @@ export class ProjectContextService {
     }
   }
 
+  forget(projectId: number): void {
+    if (this.currentState()?.id === projectId) this.currentState.set(null);
+    if (this.storedState()?.id === projectId) {
+      this.storedState.set(null);
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+      } catch {
+        /* Memory state was cleared. */
+      }
+    }
+  }
   leave(): void {
     this.currentState.set(null);
   }
