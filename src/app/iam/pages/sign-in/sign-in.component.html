@@ -92,6 +92,7 @@
       </button>
 
       <p class="form-card__support">{{ 'auth.support' | translate }}</p>
+      <p class="form-card__support"><a [href]="termsUrl" target="_blank" rel="noopener noreferrer">{{ 'legal.terms' | translate }}</a></p>
     </form>
 
     @if (demoAccounts.length > 0) {

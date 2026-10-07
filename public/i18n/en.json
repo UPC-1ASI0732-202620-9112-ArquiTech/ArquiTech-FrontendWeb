@@ -609,5 +609,9 @@
       "LATE": "Late",
       "EXCUSED": "Excused"
     }
+  },
+  "legal": {
+    "terms": "Terms and Conditions",
+    "opensExternally": "Opens in a new tab"
   }
 }
