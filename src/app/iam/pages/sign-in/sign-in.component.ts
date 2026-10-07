@@ -3,6 +3,7 @@ import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angula
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LucideAngularModule } from 'lucide-angular';
+import { TERMS_URL } from '../../../shared/legal-links';
 import { environment } from '../../../../environments/environment';
 import { DEMO_ACCOUNTS } from '../../../shared/infrastructure/mock-backend/mock-seed';
 import { FieldErrorComponent } from '../../../shared/presentation/components/field-error/field-error.component';
@@ -19,6 +20,7 @@ import { AuthenticationService } from '../../services/authentication.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignInComponent {
+  protected readonly termsUrl = TERMS_URL;
   private readonly authentication = inject(AuthenticationService);
   private readonly router = inject(Router);
   private readonly formBuilder = inject(NonNullableFormBuilder);

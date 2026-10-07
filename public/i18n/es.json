@@ -609,5 +609,9 @@
       "LATE": "Tardanza",
       "EXCUSED": "Justificado"
     }
+  },
+  "legal": {
+    "terms": "Términos y Condiciones",
+    "opensExternally": "Se abre en una pestaña nueva"
   }
 }
