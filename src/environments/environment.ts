@@ -7,7 +7,7 @@
  */
 export const environment = {
   production: true,
-  apiBaseUrl: 'https://arquitech-backend-production.up.railway.app/api/v1',
+  apiBaseUrl: 'https://arquitech-backend-production-cfc2.up.railway.app/api/v1',
   useMockApi: false,
   mockLatencyMs: 250,
   defaultLanguage: 'es',
