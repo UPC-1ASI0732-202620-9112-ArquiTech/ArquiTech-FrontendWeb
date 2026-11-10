@@ -1,3 +1,4 @@
+import { ExperimentModulePanelComponent } from '../../../experiments/experiment-module-panel.component';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
@@ -25,6 +26,7 @@ import {
 @Component({
   selector: 'app-attendance-list',
   imports: [
+    ExperimentModulePanelComponent,
     TranslatePipe,
     DataToolbarComponent,
     ListStateComponent,
