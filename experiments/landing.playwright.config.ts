@@ -22,7 +22,8 @@ export default defineConfig({
     screenshot: 'only-on-failure',
   },
   webServer: {
-    command: 'npm --prefix landing run start -- --host 127.0.0.1 --port 4300',
+    command: 'npm run start -- --host 127.0.0.1 --port 4300',
+    cwd: resolve(process.cwd(), 'landing'),
     url: 'http://127.0.0.1:4300/experiment/ec10',
     timeout: 120000,
     reuseExistingServer: !process.env.CI,

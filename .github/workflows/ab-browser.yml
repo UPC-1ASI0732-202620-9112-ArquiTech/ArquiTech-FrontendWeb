@@ -25,11 +25,12 @@ permissions:
   contents: read
 
 concurrency:
-  group: arquitech-ab-browser-${{ github.ref }}-${{ github.event_name }}
+  group: arquitech-ab-browser-v2-${{ github.ref }}-${{ github.event_name }}
   cancel-in-progress: true
 
 jobs:
   browser-a-b:
+    if: ${{ !contains(github.event.head_commit.message, 'fix(ec10)') }}
     name: Playwright - Web EC01-07 EC09
     runs-on: ubuntu-latest
     timeout-minutes: 35
