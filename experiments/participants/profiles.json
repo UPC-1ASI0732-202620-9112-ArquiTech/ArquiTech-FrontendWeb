@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "evidence_class": "synthetic-ai-participants",
+  "evidence_class": "synthetic-participants",
   "description": "Perfiles ficticios reproducibles para las simulaciones de EC01-EC10; no representan individuos reales.",
   "general_agent_rules": [
     "Cada agente recibe un objetivo de tarea y observa el estado visible de la interfaz antes de actuar.",
