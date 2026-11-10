@@ -1,0 +1,71 @@
+name: A-B Browser Validation
+
+on:
+  push:
+    branches:
+      - experiment/ab-evaluation
+    paths:
+      - 'experiments/**'
+      - 'tests/experiments/**'
+      - 'src/**'
+      - 'package.json'
+      - '.github/workflows/ab-browser.yml'
+  workflow_dispatch:
+    inputs:
+      coverage:
+        description: 'smoke = one profile per experiment; full = all planned profiles'
+        required: true
+        default: smoke
+        type: choice
+        options:
+          - smoke
+          - full
+
+permissions:
+  contents: read
+
+concurrency:
+  group: arquitech-ab-browser-${{ github.ref }}-${{ github.event_name }}
+  cancel-in-progress: true
+
+jobs:
+  browser-a-b:
+    name: Playwright - isolated Angular mock
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      CI: 'true'
+      AB_FULL: ${{ github.event_name == 'workflow_dispatch' && inputs.coverage == 'full' && '1' || '0' }}
+
+    steps:
+      - name: Check out A/B evaluation branch
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install Angular and Playwright packages
+        run: npm ci
+
+      - name: Install browser and OS dependencies
+        run: npx playwright install --with-deps chromium
+
+      - name: Validate experimental assignment
+        run: npm run experiments:validate
+
+      - name: Run scripted A/B UI verification
+        run: npm run experiments:smoke
+
+      - name: Preserve actual browser outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ab-web-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            test-results/ab-web
+          if-no-files-found: warn
+          retention-days: 30
