@@ -1,0 +1,509 @@
+{
+  "schema_version": "1.0",
+  "evidence_class": "synthetic-ai-experiment-plan",
+  "status": "configuration-only-not-executed",
+  "created_for": "ArquiTech Capítulo VIII EC01-EC10",
+  "default_data_source": "isolated-demo-or-mock",
+  "baseline_condition": "A - aplicación o procedimiento actual",
+  "experimental_condition": "B - propuesta modificada sin despliegue a producción",
+  "baseline_branch": "main",
+  "experimental_branch": "experiment/ai-evaluation",
+  "recorded_results": 0,
+  "design_constraints": [
+    "No usar cuentas humanas reales, datos sensibles ni modificar información en producción.",
+    "No revelar al agente los selectores, resultados esperados ni la condición alterna.",
+    "A/B debe utilizar casos comparables, controlando la complejidad y el efecto de aprendizaje.",
+    "Los tiempos corresponden a navegación de agentes y no a tiempos de personas.",
+    "Los costos y tasas de conversión basados en supuestos deben etiquetarse como estimaciones sintéticas.",
+    "Los estados de éxito, error y bloqueo se calculan de registros obtenidos durante la ejecución; no hay resultados predeterminados."
+  ],
+  "experiments": [
+    {
+      "id": "EC01",
+      "priority": 6,
+      "platform": "web",
+      "design": "within-subject",
+      "population": "supervisor",
+      "assignments": [
+        {
+          "participant_id": "S01",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "S02",
+          "order": "B-A"
+        },
+        {
+          "participant_id": "S03",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "S04",
+          "order": "B-A"
+        },
+        {
+          "participant_id": "S05",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "S06",
+          "order": "B-A"
+        },
+        {
+          "participant_id": "S07",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "S08",
+          "order": "B-A"
+        }
+      ],
+      "cases_per_condition": 6,
+      "unit": "material_operations",
+      "metric_ids": [
+        "M01",
+        "F01"
+      ],
+      "task": "Registrar seis entradas o usos de materiales en un inventario de ensayo; los casos de A y B deben ser equivalentes."
+    },
+    {
+      "id": "EC02",
+      "priority": 8,
+      "platform": "web",
+      "design": "within-subject",
+      "population": "supervisor",
+      "assignments": [
+        {
+          "participant_id": "S01",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "S02",
+          "order": "B-A"
+        },
+        {
+          "participant_id": "S03",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "S04",
+          "order": "B-A"
+        },
+        {
+          "participant_id": "S05",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "S06",
+          "order": "B-A"
+        },
+        {
+          "participant_id": "S07",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "S08",
+          "order": "B-A"
+        }
+      ],
+      "cases_per_condition": 1,
+      "units_per_case": 12,
+      "unit": "attendance_shift",
+      "metric_ids": [
+        "M02",
+        "F01"
+      ],
+      "task": "Registrar la asistencia de una jornada de doce trabajadores ficticios, con la misma nómina patrón en ambas condiciones."
+    },
+    {
+      "id": "EC03",
+      "priority": 11,
+      "platform": "web",
+      "design": "within-subject",
+      "population": "supervisor",
+      "assignments": [
+        {
+          "participant_id": "S01",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "S02",
+          "order": "B-A"
+        },
+        {
+          "participant_id": "S03",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "S04",
+          "order": "B-A"
+        },
+        {
+          "participant_id": "S05",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "S06",
+          "order": "B-A"
+        },
+        {
+          "participant_id": "S07",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "S08",
+          "order": "B-A"
+        }
+      ],
+      "cases_per_condition": 5,
+      "unit": "task_priority_case",
+      "metric_ids": [
+        "M03",
+        "F01"
+      ],
+      "task": "Identificar la tarea crítica en cinco conjuntos comparables de tareas; usar una tarea de referencia por agente para M03."
+    },
+    {
+      "id": "EC04",
+      "priority": 1,
+      "platform": "web",
+      "design": "within-subject",
+      "population": "contractor",
+      "assignments": [
+        {
+          "participant_id": "C01",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "C02",
+          "order": "B-A"
+        },
+        {
+          "participant_id": "C03",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "C04",
+          "order": "B-A"
+        },
+        {
+          "participant_id": "C05",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "C06",
+          "order": "B-A"
+        },
+        {
+          "participant_id": "C07",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "C08",
+          "order": "B-A"
+        }
+      ],
+      "cases_per_condition": 1,
+      "unit": "project_status_and_report_lookup",
+      "metric_ids": [
+        "M04",
+        "F01"
+      ],
+      "task": "Averiguar el estado de una obra contratada y consultar el reporte semanal correspondiente, sin recibir una ruta de navegación."
+    },
+    {
+      "id": "EC05",
+      "priority": 7,
+      "platform": "web",
+      "design": "within-subject",
+      "population": "mixed",
+      "assignments": [
+        {
+          "participant_id": "S01",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "S02",
+          "order": "B-A"
+        },
+        {
+          "participant_id": "S03",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "S04",
+          "order": "B-A"
+        },
+        {
+          "participant_id": "C01",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "C02",
+          "order": "B-A"
+        },
+        {
+          "participant_id": "C03",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "C04",
+          "order": "B-A"
+        }
+      ],
+      "cases_per_condition": 5,
+      "unit": "material_history_discrepancy",
+      "metric_ids": [
+        "M05",
+        "F01"
+      ],
+      "task": "Encontrar origen, responsable y fecha cuando el dato exista, en cinco discrepancias ficticias por versión; usar un caso de referencia por agente."
+    },
+    {
+      "id": "EC06",
+      "priority": 3,
+      "platform": "web",
+      "design": "within-subject",
+      "population": "supervisor",
+      "assignments": [
+        {
+          "participant_id": "S01",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "S02",
+          "order": "B-A"
+        },
+        {
+          "participant_id": "S03",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "S04",
+          "order": "B-A"
+        },
+        {
+          "participant_id": "S05",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "S06",
+          "order": "B-A"
+        },
+        {
+          "participant_id": "S07",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "S08",
+          "order": "B-A"
+        }
+      ],
+      "cases_per_condition": 1,
+      "unit": "weekly_report",
+      "metric_ids": [
+        "M06",
+        "M07",
+        "F02"
+      ],
+      "task": "Elaborar un reporte semanal con consolidación manual A y generación asistida B, usando datos equivalentes y verificando campos requeridos."
+    },
+    {
+      "id": "EC07",
+      "priority": 4,
+      "platform": "web",
+      "design": "alternating-periods",
+      "population": "mixed",
+      "assignments": [
+        {
+          "participant_id": "S01",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "S02",
+          "order": "B-A"
+        },
+        {
+          "participant_id": "S03",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "S04",
+          "order": "B-A"
+        },
+        {
+          "participant_id": "S05",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "S06",
+          "order": "B-A"
+        },
+        {
+          "participant_id": "C01",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "C02",
+          "order": "B-A"
+        },
+        {
+          "participant_id": "C03",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "C04",
+          "order": "B-A"
+        },
+        {
+          "participant_id": "C05",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "C06",
+          "order": "B-A"
+        }
+      ],
+      "periods": 2,
+      "calendar_duration_days": 14,
+      "simulated_incidents_per_condition": 12,
+      "unit": "critical_incident_detection",
+      "metric_ids": [
+        "M08",
+        "F01"
+      ],
+      "task": "Reconocer incidencias críticas ficticias durante periodos alternados sin aviso A y con alertas B; registrar tiempo de detección y seguimiento."
+    },
+    {
+      "id": "EC08",
+      "priority": 9,
+      "platform": "mobile",
+      "design": "within-subject",
+      "population": "supervisor",
+      "assignments": [
+        {
+          "participant_id": "S01",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "S02",
+          "order": "B-A"
+        },
+        {
+          "participant_id": "S03",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "S04",
+          "order": "B-A"
+        },
+        {
+          "participant_id": "S05",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "S06",
+          "order": "B-A"
+        },
+        {
+          "participant_id": "S07",
+          "order": "A-B"
+        },
+        {
+          "participant_id": "S08",
+          "order": "B-A"
+        }
+      ],
+      "cases_per_condition": 5,
+      "unit": "offline_record",
+      "metric_ids": [
+        "M09",
+        "F01"
+      ],
+      "dependency": "Q11 context of offline usage should be assessed before interpreting applicability",
+      "task": "Registrar cinco eventos con interrupción controlada de conectividad y verificar recuperación manual A frente a sincronización B sin duplicados."
+    },
+    {
+      "id": "EC09",
+      "priority": 12,
+      "platform": "web",
+      "design": "between-subject",
+      "population": "newcomer",
+      "assignments": [
+        {
+          "participant_id": "N01",
+          "condition": "A"
+        },
+        {
+          "participant_id": "N02",
+          "condition": "B"
+        },
+        {
+          "participant_id": "N03",
+          "condition": "A"
+        },
+        {
+          "participant_id": "N04",
+          "condition": "B"
+        },
+        {
+          "participant_id": "N05",
+          "condition": "A"
+        },
+        {
+          "participant_id": "N06",
+          "condition": "B"
+        },
+        {
+          "participant_id": "N07",
+          "condition": "A"
+        },
+        {
+          "participant_id": "N08",
+          "condition": "B"
+        },
+        {
+          "participant_id": "N09",
+          "condition": "A"
+        },
+        {
+          "participant_id": "N10",
+          "condition": "B"
+        },
+        {
+          "participant_id": "N11",
+          "condition": "A"
+        },
+        {
+          "participant_id": "N12",
+          "condition": "B"
+        }
+      ],
+      "cases_per_participant": 1,
+      "unit": "first_task_completion",
+      "metric_ids": [
+        "M10",
+        "F01"
+      ],
+      "task": "Completar la primera tarea de incorporación usando solo A o solo B; no mostrar la otra variante para evitar aprendizaje previo."
+    },
+    {
+      "id": "EC10",
+      "priority": 2,
+      "platform": "landing",
+      "design": "between-subject-synthetic-traffic",
+      "population": "synthetic-visitors",
+      "visitors_per_condition": {
+        "A": 200,
+        "B": 200
+      },
+      "unique_visitor_assignment": "persistent-seeded",
+      "unit": "synthetic_visit_and_conversion_event",
+      "metric_ids": [
+        "M11",
+        "F03"
+      ],
+      "task": "Verificar asignación persistente A/B, exposición por segmento y eventos de CTA o solicitud; el tráfico sintético no valida tasas de conversión comercial."
+    }
+  ]
+}
