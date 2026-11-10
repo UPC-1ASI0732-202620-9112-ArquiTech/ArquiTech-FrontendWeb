@@ -30,3 +30,10 @@
 .experiment-guide label { flex: 1 1 210px; }
 .experiment-guide input { width: 18px; height: 18px; accent-color: var(--color-sinopia); }
 @media(max-width:720px) { .experiment-page { padding: 16px; } .experiment-grid { grid-template-columns: 1fr; } .experiment-table { font-size: .8rem; } }
+
+/* Embedded condition B shares the native module page instead of replacing it. */
+.experiment-page--embedded { max-width: 100%; margin: 0; padding: 0; }
+.experiment-page--embedded .experiment-grid { width: 100%; }
+@media (max-width: 720px) {
+  .experiment-page--embedded { padding: 0; }
+}
