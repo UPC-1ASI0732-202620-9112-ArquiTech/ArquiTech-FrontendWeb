@@ -96,6 +96,12 @@
                     </button>
                   }
                   <a
+                    class="btn btn--secondary"
+                    [routerLink]="['/projects', project.id, 'experiments', 'overview']"
+                    (click)="$event.stopPropagation()"
+                    aria-label="Abrir variantes de investigación para este proyecto"
+                  >Laboratorio B</a>
+                  <a
                     class="btn btn--ghost details-link"
                     [routerLink]="['/projects', project.id, 'materials']"
                     (click)="$event.stopPropagation()"
