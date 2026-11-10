@@ -17,6 +17,8 @@
     </div>
   </header>
 
+  <app-experiment-module-panel [projectId]="projectId()" [experiments]="session.isContractor() ? ['EC04'] : ['EC06']" (changed)="load()" />
+
   <div class="week-bar card">
     <div class="week-bar__nav">
       <button
