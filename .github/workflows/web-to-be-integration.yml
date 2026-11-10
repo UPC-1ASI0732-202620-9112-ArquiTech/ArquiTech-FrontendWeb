@@ -6,6 +6,7 @@ on:
       - experiment/ab-evaluation
     paths:
       - 'src/**'
+      - 'public/i18n/**'
       - 'tests/integration/**'
       - 'experiments/integration.playwright.config.ts'
       - '.github/workflows/web-to-be-integration.yml'
