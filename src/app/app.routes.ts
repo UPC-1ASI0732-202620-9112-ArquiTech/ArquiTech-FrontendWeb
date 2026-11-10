@@ -52,6 +52,14 @@ export const routes: Routes = [
         canActivate: [projectAccessGuard],
         children: [
           {
+            path: 'experiments/:experimentId',
+            loadComponent: () =>
+              import('./experiments/experiment-workbench.component').then(
+                (m) => m.ExperimentWorkbenchComponent,
+              ),
+            data: { titleKey: 'nav.projects' },
+          },
+          {
             path: '',
             pathMatch: 'full',
             redirectTo: 'materials',
