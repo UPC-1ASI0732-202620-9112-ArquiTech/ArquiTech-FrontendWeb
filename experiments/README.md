@@ -65,15 +65,20 @@ ni solicitudes comerciales efectivamente recibidas.
 7. Cuando falten mediciones de uso humano o comerciales, registrar el indicador
    como no evaluable con esta metodología, en lugar de afirmarlo como validado.
 
-## Estado de implementación
+## Estado de implementación y evidencia
 
-- [x] Configuración de perfiles, cohortes y asignaciones A/B.
-- [x] Variantes B iniciales: Web (EC01-EC07 y EC09), Mobile (EC08) y
-  Landing Page (EC10), en ramas de evaluación independientes.
-- [ ] Controlador de agentes y batería de recorridos verificables.
-- [ ] Ejecución integrada con evidencias por condición.
-- [ ] Análisis de resultados y documentación en el informe.
+- [x] Configuración de perfiles y asignaciones A/B.
+- [x] Variantes B iniciales en Web, Mobile y Landing.
+- [x] Playwright Web con 132 recorridos técnicos aprobados (EC01–EC07, EC09).
+- [x] Playwright Landing con 200 visitas automatizadas por condición (EC10).
+- [x] Flutter Mobile: verificación local de borradores, análisis y compilación aprobados (EC08).
+- [x] Evidencias conservadas en GitHub Actions y consolidación de resultados técnicos.
+- [ ] Controlador con decisiones de navegación autónomas de modelo; la batería actual de Playwright utiliza acciones predefinidas.
+- [ ] Ensayo completo EC08 con interrupción/reconexión sobre backend de pruebas aislado.
+- [ ] Métricas M01–M11 y F01–F03 contrastadas bajo escenarios equivalentes; no se derivan de aprobaciones técnicas.
 
-**Estado de resultados:** las variantes de software están desarrolladas, pero
-las pruebas A/B con agentes aún no se han ejecutado. No existen resultados
-experimentales que puedan presentarse como observaciones completadas.
+**Evidencias:** [ejecución Web](https://github.com/educmz/ArquiTech-FrontendWeb/actions/runs/42756612966/artifacts/13735444685), [ejecución EC10](https://github.com/educmz/ArquiTech-FrontendWeb/actions/runs/42757279970/artifacts/13736537034), [validación Mobile](https://github.com/educmz/ArquiTech-FrontendMobile/actions/runs/42756103823).
+
+**Informe técnico consolidado:** [resultados A/B del 09/11/2026](./results/2026-11-09-ab-execution-report.md).
+
+La ejecución de las rutas A/B es una **prueba real del comportamiento del software** mediante automatización, pero no se atribuye a participantes humanos. Los KPI que no se han medido se mantienen sin conclusión, sin inferirlos a partir de tiempos de script o visitas sin conversiones comerciales.
