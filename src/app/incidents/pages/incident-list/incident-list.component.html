@@ -16,6 +16,8 @@
     }
   </header>
 
+  <app-experiment-module-panel [projectId]="projectId()" [experiments]="['EC07']" (changed)="load()" />
+
   <app-data-toolbar [state]="table" searchPlaceholderKey="incidents.search" [filters]="filterFields" />
 
   <div class="data-panel">
