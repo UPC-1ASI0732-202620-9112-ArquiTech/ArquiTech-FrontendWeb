@@ -13,14 +13,6 @@
     </div>
   </header>
 
-  <p class="experiment-note" role="note">
-    {{ 'improvements.header.note' | translate }}
-    @if (readOnlyEnvironment) {
-      {{ 'improvements.header.readOnly' | translate }}
-    } @else {
-      {{ 'improvements.header.mockWarning' | translate }}
-    }
-  </p>
   }
   @if (error()) { <p class="experiment-error" role="alert">{{ error() | translate }}</p> }
   @if (message()) { <p class="experiment-success" role="status">{{ message() | translate: messageParams() }}</p> }
