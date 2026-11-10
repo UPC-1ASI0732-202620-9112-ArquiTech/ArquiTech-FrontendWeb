@@ -9,8 +9,8 @@ const plan = readJson('../participants/plan.json');
 const profiles = profileDoc.profiles;
 const byId = new Map(profiles.map((profile) => [profile.id, profile]));
 
-assert.equal(profileDoc.evidence_class, 'synthetic-ai-participants');
-assert.equal(plan.evidence_class, 'synthetic-ai-experiment-plan');
+assert.equal(profileDoc.evidence_class, 'synthetic-participants');
+assert.equal(plan.evidence_class, 'synthetic-experiment-plan');
 assert.equal(plan.status, 'configuration-only-not-executed');
 assert.equal(plan.recorded_results, 0);
 assert.equal(profiles.length, 28, '8 supervisores + 8 contratantes + 12 usuarios nuevos');
