@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, computed, effect, inject, input, output, signal, untracked } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { forkJoin, firstValueFrom, Observable, Subscription } from 'rxjs';
 import { SessionService } from '../iam/services/session.service';
 import { ProjectContextService } from '../projects/services/project-context.service';
@@ -25,14 +26,14 @@ type ExperimentId = 'EC01' | 'EC02' | 'EC03' | 'EC04' | 'EC05' | 'EC06' | 'EC07'
 interface ExperimentLink { id: ExperimentId; title: string; description: string; role: 'all' | 'supervisor' | 'contractor'; }
 
 const EXPERIMENTS: ExperimentLink[] = [
-  { id: 'EC04', title: 'Panel de seguimiento', description: 'Estado, avance, incidencias y reporte en un mismo lugar.', role: 'contractor' },
-  { id: 'EC06', title: 'Reporte asistido', description: 'Consolidación verificable del reporte semanal y descarga.', role: 'supervisor' },
-  { id: 'EC07', title: 'Incidencias críticas', description: 'Bandeja priorizada de alertas de alta severidad.', role: 'all' },
-  { id: 'EC01', title: 'Registro guiado de materiales', description: 'Verificación anticipada de existencias y cantidades.', role: 'supervisor' },
-  { id: 'EC05', title: 'Historial verificable', description: 'Responsable, fecha y tipo de cada movimiento.', role: 'all' },
-  { id: 'EC02', title: 'Asistencia rápida', description: 'Registrar una jornada desde una lista de trabajadores.', role: 'supervisor' },
-  { id: 'EC03', title: 'Tareas prioritarias', description: 'Tareas vencidas y próximas a vencer primero.', role: 'supervisor' },
-  { id: 'EC09', title: 'Primeros pasos por rol', description: 'Guía interactiva para el primer uso.', role: 'all' },
+  { id: 'EC04', title: 'improvements.experiments.EC04.title', description: 'improvements.experiments.EC04.description', role: 'contractor' },
+  { id: 'EC06', title: 'improvements.experiments.EC06.title', description: 'improvements.experiments.EC06.description', role: 'supervisor' },
+  { id: 'EC07', title: 'improvements.experiments.EC07.title', description: 'improvements.experiments.EC07.description', role: 'all' },
+  { id: 'EC01', title: 'improvements.experiments.EC01.title', description: 'improvements.experiments.EC01.description', role: 'supervisor' },
+  { id: 'EC05', title: 'improvements.experiments.EC05.title', description: 'improvements.experiments.EC05.description', role: 'all' },
+  { id: 'EC02', title: 'improvements.experiments.EC02.title', description: 'improvements.experiments.EC02.description', role: 'supervisor' },
+  { id: 'EC03', title: 'improvements.experiments.EC03.title', description: 'improvements.experiments.EC03.description', role: 'supervisor' },
+  { id: 'EC09', title: 'improvements.experiments.EC09.title', description: 'improvements.experiments.EC09.description', role: 'all' },
 ];
 
 /**
@@ -42,7 +43,7 @@ const EXPERIMENTS: ExperimentLink[] = [
 @Component({
   selector: 'app-experiment-workbench',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, TranslatePipe],
   templateUrl: './experiment-workbench.component.html',
   styleUrl: './experiment-workbench.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -63,6 +64,7 @@ export class ExperimentWorkbenchComponent {
   private readonly incidentService = inject(IncidentService);
   private readonly reportService = inject(WeeklyReportService);
   private readonly pdfService = inject(ReportPdfService);
+  private readonly translate = inject(TranslateService);
 
   protected readonly experimentLinks = EXPERIMENTS;
   protected readonly current = computed(() => EXPERIMENTS.find(e => e.id === this.experimentId()));
@@ -70,6 +72,7 @@ export class ExperimentWorkbenchComponent {
   protected readonly busy = signal(false);
   protected readonly loading = signal(false);
   protected readonly message = signal('');
+  protected readonly messageParams = signal<Record<string, unknown>>({});
   protected readonly error = signal('');
   protected readonly materials = signal<Material[]>([]);
   protected readonly movements = signal<MaterialMovement[]>([]);
@@ -99,14 +102,14 @@ export class ExperimentWorkbenchComponent {
   protected readonly selectedAlert = computed(() => this.critical().find(i => i.id === this.selectedCriticalId()) ?? null);
   protected readonly guide = computed(() => this.session.isContractor()
     ? [
-      { label: 'Revisar el estado y avance del proyecto', target: 'EC04' },
-      { label: 'Abrir el reporte semanal', target: 'reports' },
-      { label: 'Consultar las incidencias', target: 'incidents' },
+      { key: 'projectStatus', target: 'EC04' },
+      { key: 'weeklyReport', target: 'reports' },
+      { key: 'incidents', target: 'incidents' },
     ]
     : [
-      { label: 'Revisar tareas prioritarias', target: 'EC03' },
-      { label: 'Registrar un material en entorno de ensayo', target: 'EC01' },
-      { label: 'Revisar las alertas críticas', target: 'EC07' },
+      { key: 'priorityTasks', target: 'EC03' },
+      { key: 'material', target: 'EC01' },
+      { key: 'criticalAlerts', target: 'EC07' },
     ]);
 
   constructor() {
@@ -160,7 +163,7 @@ export class ExperimentWorkbenchComponent {
     const id = Number(this.projectId());
     const experiment = this.experimentId();
     if (!Number.isInteger(id) || id <= 0) {
-      this.error.set('Selecciona una obra válida.');
+      this.error.set('improvements.messages.invalidProject');
       return;
     }
     if (experiment === 'EC09') {
@@ -170,7 +173,7 @@ export class ExperimentWorkbenchComponent {
     if (experiment === 'overview') return;
     const current = this.projectContext.current();
     if (!current || current.id !== id) {
-      this.error.set('No se encontró una obra autorizada en la sesión.');
+      this.error.set('improvements.messages.unauthorizedProject');
       return;
     }
     this.materials.set([]);
@@ -198,7 +201,7 @@ export class ExperimentWorkbenchComponent {
     })();
     if (!request) {
       this.loading.set(false);
-      this.error.set('Experimento no disponible en esta rama.');
+      this.error.set('improvements.messages.unavailable');
       return;
     }
     this.activeRequest = request.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
@@ -218,7 +221,7 @@ export class ExperimentWorkbenchComponent {
       },
       error: () => {
         this.loading.set(false);
-        this.error.set('No se pudieron cargar los datos del proyecto. Comprueba la conexión o el escenario de ensayo.');
+        this.error.set('improvements.messages.loadError');
       },
     });
   }
@@ -235,10 +238,10 @@ export class ExperimentWorkbenchComponent {
   protected stockError(): string {
     const quantity = this.movementQty();
     const material = this.selectedMaterial();
-    if (!material) return 'Selecciona un material.';
-    if (!Number.isFinite(quantity) || quantity <= 0) return 'La cantidad debe ser mayor que cero.';
+    if (!material) return this.translate.instant('improvements.messages.selectMaterial');
+    if (!Number.isFinite(quantity) || quantity <= 0) return this.translate.instant('improvements.messages.invalidQuantity');
     if (this.movementKind() === MovementType.Usage && quantity > material.stock) {
-      return 'El uso supera el stock disponible (' + material.stock + ' ' + material.unit + ').';
+      return this.translate.instant('improvements.messages.insufficientStock', { stock: material.stock, unit: material.unit });
     }
     return '';
   }
@@ -267,9 +270,9 @@ export class ExperimentWorkbenchComponent {
       }
       this.refresh();
       this.changed.emit();
-      this.message.set('Movimiento de ensayo registrado. Se actualizará el stock.');
+      this.message.set('improvements.messages.movementSuccess');
     } catch {
-      this.error.set('No se pudo registrar el movimiento. Los datos no se han confirmado.');
+      this.error.set('improvements.messages.movementFailure');
     } finally {
       this.busy.set(false);
     }
@@ -300,10 +303,11 @@ export class ExperimentWorkbenchComponent {
         }));
         count++;
       }
-      this.message.set(count + ' registros nuevos guardados; ' + registered.size + ' ya existían para la fecha.');
+      this.messageParams.set({ count, existing: registered.size });
+      this.message.set('improvements.messages.attendanceSuccess');
       if (count > 0) this.changed.emit();
     } catch {
-      this.error.set('Se produjo un error; algunos registros pueden haberse guardado. Revisa la asistencia antes de repetir.');
+      this.error.set('improvements.messages.attendanceFailure');
     } finally {
       this.busy.set(false);
     }
@@ -315,9 +319,9 @@ export class ExperimentWorkbenchComponent {
     this.busy.set(true);
     try {
       await this.pdfService.download(report);
-      this.message.set('Reporte generado con la información disponible para la semana.');
+      this.message.set('improvements.messages.reportSuccess');
     } catch {
-      this.error.set('No se pudo generar el PDF.');
+      this.error.set('improvements.messages.reportFailure');
     } finally {
       this.busy.set(false);
     }
@@ -328,7 +332,7 @@ export class ExperimentWorkbenchComponent {
     try {
       localStorage.setItem(this.guideStorageKey(), JSON.stringify(this.completedGuideSteps()));
     } catch {
-      this.message.set('El navegador no pudo guardar el progreso de esta guía.');
+      this.message.set('improvements.messages.progressFailure');
     }
   }
   protected selectAlert(id: number): void {
