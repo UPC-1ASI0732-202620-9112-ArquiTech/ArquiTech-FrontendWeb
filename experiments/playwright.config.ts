@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import { resolve } from 'node:path';
 
 export default defineConfig({
   testDir: '../tests/experiments',
@@ -9,10 +10,10 @@ export default defineConfig({
   workers: process.env.CI ? 2 : undefined,
   reporter: [
     ['list'],
-    ['html', { outputFolder: 'test-results/ab-web/html', open: 'never' }],
-    ['junit', { outputFile: 'test-results/ab-web/junit.xml' }],
+    ['html', { outputFolder: resolve(process.cwd(), 'test-results/ab-web/html'), open: 'never' }],
+    ['junit', { outputFile: resolve(process.cwd(), 'test-results/ab-web/junit.xml') }],
   ],
-  outputDir: 'test-results/ab-web/traces',
+  outputDir: resolve(process.cwd(), 'test-results/ab-web/traces'),
   use: {
     ...devices['Desktop Chrome'],
     baseURL: 'http://127.0.0.1:4200',
