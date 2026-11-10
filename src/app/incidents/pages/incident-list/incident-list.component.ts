@@ -1,3 +1,4 @@
+import { ExperimentModulePanelComponent } from '../../../experiments/experiment-module-panel.component';
 import { CdkMenu, CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
@@ -28,6 +29,7 @@ import { IncidentService } from '../../services/incident.service';
 @Component({
   selector: 'app-incident-list',
   imports: [
+    ExperimentModulePanelComponent,
     TranslatePipe,
     LucideAngularModule,
     CdkMenu,

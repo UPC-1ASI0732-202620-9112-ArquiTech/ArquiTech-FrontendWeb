@@ -16,6 +16,8 @@
     }
   </header>
 
+  <app-experiment-module-panel [projectId]="projectId()" [experiments]="['EC01']" (changed)="load()" />
+
   <div class="tabs-row">
     <nav class="tabs" [attr.aria-label]="'materials.tabs.label' | translate">
       <a

@@ -1,3 +1,4 @@
+import { ExperimentModulePanelComponent } from '../../../experiments/experiment-module-panel.component';
 import { Dialog } from '@angular/cdk/dialog';
 import { DeleteProjectDialogComponent } from '../../components/delete-project-dialog.component';
 import { openFormDialog } from '../../../shared/services/dialog.helpers';
@@ -30,6 +31,7 @@ import { ProjectService } from '../../services/project.service';
 @Component({
   selector: 'app-project-list',
   imports: [
+    ExperimentModulePanelComponent,
     RouterLink,
     TranslatePipe,
     LucideAngularModule,

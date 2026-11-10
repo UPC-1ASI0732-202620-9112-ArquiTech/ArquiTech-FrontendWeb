@@ -1,0 +1,13 @@
+@if (mode.enabled()) {
+  <section class="module-improvement" [attr.aria-label]="'improvements.panel.aria' | translate">
+    <div class="module-improvement__header">
+      <p class="module-improvement__eyebrow">{{ 'improvements.panel.badge' | translate }}</p>
+      <h2>{{ 'improvements.panel.title' | translate }}</h2>
+      <p class="module-improvement__description">{{ 'improvements.panel.description' | translate }}</p>
+    </div>
+    @for (id of experiments(); track id) {
+      <app-experiment-workbench [projectId]="projectId()" [experimentId]="id"
+        [embedded]="true" (changed)="changed.emit()" />
+    }
+  </section>
+}

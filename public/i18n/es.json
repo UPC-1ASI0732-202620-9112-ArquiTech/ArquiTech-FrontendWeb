@@ -613,5 +613,190 @@
   "legal": {
     "terms": "Términos y Condiciones",
     "opensExternally": "Se abre en una pestaña nueva"
+  },
+  "improvements": {
+    "toggle": {
+      "label": "Vista",
+      "on": "Vista mejorada",
+      "off": "Vista original",
+      "enable": "Cambiar a vista mejorada",
+      "disable": "Cambiar a vista original"
+    },
+    "panel": {
+      "aria": "Mejoras del módulo",
+      "badge": "VISTA MEJORADA",
+      "title": "Funciones adicionales",
+      "description": "Herramientas de apoyo integradas a este módulo."
+    },
+    "header": {
+      "tag": "ARQUITECH · VISTA MEJORADA",
+      "title": "Laboratorio experimental",
+      "description": "Selecciona una mejora para esta obra.",
+      "other": "Otras mejoras",
+      "refresh": "Actualizar",
+      "loading": "Cargando información del proyecto...",
+      "variantB": "Variante B",
+      "explore": "Explorar mejora"
+    },
+    "experiments": {
+      "EC01": {
+        "title": "Registro guiado de materiales",
+        "description": "Verificación anticipada de existencias y cantidades."
+      },
+      "EC02": {
+        "title": "Asistencia rápida",
+        "description": "Registrar una jornada desde una lista de trabajadores."
+      },
+      "EC03": {
+        "title": "Tareas prioritarias",
+        "description": "Tareas vencidas y próximas a vencer primero."
+      },
+      "EC04": {
+        "title": "Panel de seguimiento",
+        "description": "Estado, avance, incidencias y reporte en un mismo lugar."
+      },
+      "EC05": {
+        "title": "Historial verificable",
+        "description": "Responsable, fecha y tipo de cada movimiento."
+      },
+      "EC06": {
+        "title": "Reporte asistido",
+        "description": "Consolidación verificable del reporte semanal y descarga."
+      },
+      "EC07": {
+        "title": "Incidencias críticas",
+        "description": "Bandeja priorizada de alertas de alta severidad."
+      },
+      "EC09": {
+        "title": "Primeros pasos por rol",
+        "description": "Guía interactiva para el primer uso."
+      }
+    },
+    "shared": {
+      "date": "Fecha",
+      "select": "Seleccionar",
+      "supervisorOnly": "Este flujo corresponde al rol supervisor.",
+      "unknown": "No existe una variante B implementada para este identificador en Frontend Web."
+    },
+    "ec04": {
+      "project": "Proyecto contratado",
+      "status": "Estado de la obra",
+      "statusCaption": "Estado actual del proyecto",
+      "progress": "Avance general",
+      "progressAria": "Avance del proyecto",
+      "weekly": "Informe de esta semana",
+      "available": "Disponible",
+      "consulting": "Consultando",
+      "openReport": "Abrir reporte semanal",
+      "openTasks": "Tareas abiertas",
+      "pendingIncidents": "Incidencias pendientes",
+      "openIncidents": "Consultar incidencias",
+      "weeklyMovements": "Movimientos de la semana",
+      "history": "Ver historial"
+    },
+    "ec01": {
+      "step1": "1. Selecciona un material",
+      "material": "Material",
+      "stock": "Stock disponible",
+      "minimum": "Stock mínimo",
+      "lowStock": "Stock inferior al mínimo.",
+      "step2": "2. Comprueba el movimiento",
+      "operation": "Operación",
+      "usage": "Uso de material",
+      "entry": "Entrada de material",
+      "quantity": "Cantidad",
+      "projected": "Stock resultante previsto",
+      "confirm": "Confirmar movimiento en datos de ensayo"
+    },
+    "ec02": {
+      "title": "Registro rápido por jornada",
+      "description": "Selecciona un estado para cada trabajador. Solo se guardan registros nuevos de la fecha elegida.",
+      "worker": "Trabajador",
+      "status": "Estado",
+      "attendanceFor": "Asistencia de {{name}}",
+      "eligible": "{{count}} trabajadores elegibles.",
+      "complete": "Lista completa.",
+      "incomplete": "Completa todos los estados antes de guardar.",
+      "save": "Guardar asistencia de ensayo"
+    },
+    "ec03": {
+      "title": "Tareas vencidas y próximas a vencer",
+      "description": "Las tareas abiertas vencidas aparecen primero; las completadas, al final.",
+      "done": "Completada",
+      "overdue": "VENCIDA",
+      "pending": "Pendiente",
+      "due": "Vence",
+      "empty": "No hay tareas disponibles.",
+      "openList": "Abrir listado completo"
+    },
+    "ec05": {
+      "title": "Historial con trazabilidad",
+      "description": "Movimientos ordenados por fecha, incluyendo responsable, cantidad y tipo.",
+      "type": "Tipo",
+      "owner": "Responsable",
+      "usage": "Uso",
+      "user": "Usuario #{{id}}",
+      "empty": "No hay movimientos para esta obra.",
+      "openHistory": "Abrir historial actual"
+    },
+    "ec06": {
+      "title": "Reporte asistido: revisión de completitud",
+      "description": "Los datos proceden de los servicios existentes. La vista presenta campos que deben verificarse antes de exportar.",
+      "project": "Proyecto",
+      "week": "Semana",
+      "to": "al",
+      "status": "Estado",
+      "progress": "Avance",
+      "completedTasks": "Tareas completadas",
+      "openTasks": "Tareas abiertas",
+      "entriesUsages": "Entradas y usos",
+      "and": "y",
+      "incidentsRecorded": "Incidencias registradas",
+      "incidentsOpen": "Incidencias pendientes",
+      "generate": "Generar PDF con datos consolidados",
+      "failure": "No se pudo generar el reporte de esta semana."
+    },
+    "ec07": {
+      "title": "Alertas priorizadas de obra",
+      "description": "Únicamente incidencias de severidad alta que siguen sin resolver.",
+      "count": "{{count}} alertas críticas",
+      "high": "ALTA PRIORIDAD",
+      "reported": "Registrada",
+      "detail": "Revisar detalle",
+      "empty": "No hay incidencias críticas abiertas para esta obra.",
+      "open": "Abrir módulo de incidencias"
+    },
+    "ec09": {
+      "title": "Primeros pasos para {{role}}",
+      "supervisor": "supervisor",
+      "contractor": "contratante",
+      "description": "Marca cada paso cuando termines de explorar el módulo. Puedes volver al recorrido cuando quieras.",
+      "explore": "Explorar",
+      "progress": "Progreso de la guía: {{done}} de {{total}} pasos."
+    },
+    "guide": {
+      "projectStatus": "Revisar el estado y avance del proyecto",
+      "weeklyReport": "Abrir el reporte semanal",
+      "incidents": "Consultar las incidencias",
+      "priorityTasks": "Revisar tareas prioritarias",
+      "material": "Registrar un material en entorno de ensayo",
+      "criticalAlerts": "Revisar las alertas críticas"
+    },
+    "messages": {
+      "invalidProject": "Selecciona una obra válida.",
+      "unauthorizedProject": "No se encontró una obra autorizada en la sesión.",
+      "unavailable": "Experimento no disponible en esta rama.",
+      "loadError": "No se pudieron cargar los datos del proyecto. Comprueba la conexión o el escenario de ensayo.",
+      "selectMaterial": "Selecciona un material.",
+      "invalidQuantity": "La cantidad debe ser mayor que cero.",
+      "insufficientStock": "El uso supera el stock disponible ({{stock}} {{unit}}).",
+      "movementSuccess": "Movimiento de ensayo registrado. Se actualizará el stock.",
+      "movementFailure": "No se pudo registrar el movimiento. Los datos no se han confirmado.",
+      "attendanceSuccess": "{{count}} registros nuevos guardados; {{existing}} ya existían para la fecha.",
+      "attendanceFailure": "Se produjo un error; algunos registros pueden haberse guardado. Revisa la asistencia antes de repetir.",
+      "reportSuccess": "Reporte generado con la información disponible para la semana.",
+      "reportFailure": "No se pudo generar el PDF.",
+      "progressFailure": "El navegador no pudo guardar el progreso de esta guía."
+    }
   }
 }

@@ -613,5 +613,190 @@
   "legal": {
     "terms": "Terms and Conditions",
     "opensExternally": "Opens in a new tab"
+  },
+  "improvements": {
+    "toggle": {
+      "label": "View",
+      "on": "Enhanced view",
+      "off": "Original view",
+      "enable": "Switch to enhanced view",
+      "disable": "Switch to original view"
+    },
+    "panel": {
+      "aria": "Module improvements",
+      "badge": "ENHANCED VIEW",
+      "title": "Additional features",
+      "description": "Supporting tools integrated into this module."
+    },
+    "header": {
+      "tag": "ARQUITECH · ENHANCED VIEW",
+      "title": "Experiment workspace",
+      "description": "Select an improvement for this project.",
+      "other": "Other improvements",
+      "refresh": "Refresh",
+      "loading": "Loading project data...",
+      "variantB": "Variant B",
+      "explore": "Explore improvement"
+    },
+    "experiments": {
+      "EC01": {
+        "title": "Guided material registration",
+        "description": "Check stock and quantities before recording."
+      },
+      "EC02": {
+        "title": "Quick attendance",
+        "description": "Record a workday from a worker list."
+      },
+      "EC03": {
+        "title": "Priority tasks",
+        "description": "Show overdue and upcoming tasks first."
+      },
+      "EC04": {
+        "title": "Progress dashboard",
+        "description": "Status, progress, incidents and reports in one place."
+      },
+      "EC05": {
+        "title": "Verifiable history",
+        "description": "Author, date and type for every movement."
+      },
+      "EC06": {
+        "title": "Assisted report",
+        "description": "Reviewable weekly report compilation and download."
+      },
+      "EC07": {
+        "title": "Critical incidents",
+        "description": "Prioritized list of high-severity alerts."
+      },
+      "EC09": {
+        "title": "Role-based first steps",
+        "description": "Interactive guide for first-time use."
+      }
+    },
+    "shared": {
+      "date": "Date",
+      "select": "Select",
+      "supervisorOnly": "This workflow is for supervisors.",
+      "unknown": "No B variant is available for this identifier in Frontend Web."
+    },
+    "ec04": {
+      "project": "Contracted project",
+      "status": "Project status",
+      "statusCaption": "Current project status",
+      "progress": "Overall progress",
+      "progressAria": "Project progress",
+      "weekly": "This week's report",
+      "available": "Available",
+      "consulting": "Loading",
+      "openReport": "Open weekly report",
+      "openTasks": "Open tasks",
+      "pendingIncidents": "Pending incidents",
+      "openIncidents": "View incidents",
+      "weeklyMovements": "Movements this week",
+      "history": "View history"
+    },
+    "ec01": {
+      "step1": "1. Select a material",
+      "material": "Material",
+      "stock": "Available stock",
+      "minimum": "Minimum stock",
+      "lowStock": "Stock below minimum.",
+      "step2": "2. Check the movement",
+      "operation": "Operation",
+      "usage": "Material usage",
+      "entry": "Material entry",
+      "quantity": "Quantity",
+      "projected": "Expected remaining stock",
+      "confirm": "Confirm movement in test data"
+    },
+    "ec02": {
+      "title": "Quick daily attendance",
+      "description": "Select a status for each worker. Only new records for the chosen date are saved.",
+      "worker": "Worker",
+      "status": "Status",
+      "attendanceFor": "Attendance for {{name}}",
+      "eligible": "{{count}} eligible workers.",
+      "complete": "List complete.",
+      "incomplete": "Complete every status before saving.",
+      "save": "Save test attendance"
+    },
+    "ec03": {
+      "title": "Overdue and upcoming tasks",
+      "description": "Overdue open tasks appear first; completed tasks last.",
+      "done": "Completed",
+      "overdue": "OVERDUE",
+      "pending": "Pending",
+      "due": "Due",
+      "empty": "No tasks available.",
+      "openList": "Open full task list"
+    },
+    "ec05": {
+      "title": "Traceable movement history",
+      "description": "Movements sorted by date, including author, quantity and type.",
+      "type": "Type",
+      "owner": "Responsible person",
+      "usage": "Usage",
+      "user": "User #{{id}}",
+      "empty": "No movements for this project.",
+      "openHistory": "Open current history"
+    },
+    "ec06": {
+      "title": "Assisted report: completeness review",
+      "description": "Data comes from existing services. Review the fields before export.",
+      "project": "Project",
+      "week": "Week",
+      "to": "to",
+      "status": "Status",
+      "progress": "Progress",
+      "completedTasks": "Completed tasks",
+      "openTasks": "Open tasks",
+      "entriesUsages": "Entries and usages",
+      "and": "and",
+      "incidentsRecorded": "Recorded incidents",
+      "incidentsOpen": "Pending incidents",
+      "generate": "Generate PDF with consolidated data",
+      "failure": "Could not generate this week's report."
+    },
+    "ec07": {
+      "title": "Prioritized project alerts",
+      "description": "Only unresolved high-severity incidents.",
+      "count": "{{count}} critical alerts",
+      "high": "HIGH PRIORITY",
+      "reported": "Reported",
+      "detail": "View details",
+      "empty": "No open critical incidents for this project.",
+      "open": "Open incidents module"
+    },
+    "ec09": {
+      "title": "First steps for {{role}}",
+      "supervisor": "supervisor",
+      "contractor": "contractor",
+      "description": "Check off each step after exploring the module. You can revisit the guide at any time.",
+      "explore": "Explore",
+      "progress": "Guide progress: {{done}} of {{total}} steps."
+    },
+    "guide": {
+      "projectStatus": "Review project status and progress",
+      "weeklyReport": "Open the weekly report",
+      "incidents": "View incidents",
+      "priorityTasks": "Review priority tasks",
+      "material": "Record a material in the test environment",
+      "criticalAlerts": "Review critical alerts"
+    },
+    "messages": {
+      "invalidProject": "Select a valid project.",
+      "unauthorizedProject": "No authorized project was found in this session.",
+      "unavailable": "Experiment not available on this branch.",
+      "loadError": "Could not load project data. Check the connection or test scenario.",
+      "selectMaterial": "Select a material.",
+      "invalidQuantity": "Quantity must be greater than zero.",
+      "insufficientStock": "Usage exceeds available stock ({{stock}} {{unit}}).",
+      "movementSuccess": "Test movement saved. Stock will be updated.",
+      "movementFailure": "Could not save the movement. Data was not confirmed.",
+      "attendanceSuccess": "{{count}} new records saved; {{existing}} already existed for this date.",
+      "attendanceFailure": "An error occurred; some records may have been saved. Check attendance before retrying.",
+      "reportSuccess": "Report generated with the available weekly information.",
+      "reportFailure": "Could not generate the PDF.",
+      "progressFailure": "The browser could not save this guide's progress."
+    }
   }
 }

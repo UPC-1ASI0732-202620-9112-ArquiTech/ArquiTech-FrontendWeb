@@ -1,0 +1,15 @@
+/* All enhancements appear only when the global topbar switch is on. */
+.module-improvement {
+  display: grid;
+  gap: 16px;
+  margin: 0 0 24px;
+  padding: 20px;
+  background: var(--color-surface, #fff);
+  border: 1px solid var(--color-border, #e6e0d9);
+  border-radius: 12px;
+}
+.module-improvement__header { display: grid; gap: 4px; }
+.module-improvement__header h2 { margin: 0; font-size: 1.2rem; }
+.module-improvement__eyebrow { font-size: .72rem; font-weight: 750; letter-spacing: .06em; color: var(--color-sinopia, #c43508); }
+.module-improvement__description { font-size: .85rem; line-height: 1.5; color: var(--color-text-muted, #665e56); }
+@media(max-width: 720px) { .module-improvement { padding: 14px; } }

@@ -1,3 +1,4 @@
+import { ExperimentModulePanelComponent } from '../../../experiments/experiment-module-panel.component';
 import { CdkMenu, CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -41,6 +42,7 @@ interface TaskRow {
 @Component({
   selector: 'app-task-list',
   imports: [
+    ExperimentModulePanelComponent,
     TranslatePipe,
     LucideAngularModule,
     CdkMenu,

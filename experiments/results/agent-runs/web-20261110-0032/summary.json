@@ -1,0 +1,122 @@
+{
+  "mode": "scripted-playwright-browser-smoke",
+  "runner_stats": {
+    "startTime": "2026-11-10T05:33:00.772Z",
+    "duration": 188523.332,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "recorded": 132,
+  "passed": 132,
+  "failed": 0,
+  "screenshots": 132,
+  "suite_traces": 8,
+  "experiments": [
+    {
+      "experiment_id": "EC01",
+      "conditions": {
+        "A": {
+          "recorded": 8,
+          "passed": 8
+        },
+        "B": {
+          "recorded": 8,
+          "passed": 8
+        }
+      }
+    },
+    {
+      "experiment_id": "EC02",
+      "conditions": {
+        "A": {
+          "recorded": 8,
+          "passed": 8
+        },
+        "B": {
+          "recorded": 8,
+          "passed": 8
+        }
+      }
+    },
+    {
+      "experiment_id": "EC03",
+      "conditions": {
+        "A": {
+          "recorded": 8,
+          "passed": 8
+        },
+        "B": {
+          "recorded": 8,
+          "passed": 8
+        }
+      }
+    },
+    {
+      "experiment_id": "EC04",
+      "conditions": {
+        "A": {
+          "recorded": 8,
+          "passed": 8
+        },
+        "B": {
+          "recorded": 8,
+          "passed": 8
+        }
+      }
+    },
+    {
+      "experiment_id": "EC05",
+      "conditions": {
+        "A": {
+          "recorded": 8,
+          "passed": 8
+        },
+        "B": {
+          "recorded": 8,
+          "passed": 8
+        }
+      }
+    },
+    {
+      "experiment_id": "EC06",
+      "conditions": {
+        "A": {
+          "recorded": 8,
+          "passed": 8
+        },
+        "B": {
+          "recorded": 8,
+          "passed": 8
+        }
+      }
+    },
+    {
+      "experiment_id": "EC07",
+      "conditions": {
+        "A": {
+          "recorded": 12,
+          "passed": 12
+        },
+        "B": {
+          "recorded": 12,
+          "passed": 12
+        }
+      }
+    },
+    {
+      "experiment_id": "EC09",
+      "conditions": {
+        "A": {
+          "recorded": 6,
+          "passed": 6
+        },
+        "B": {
+          "recorded": 6,
+          "passed": 6
+        }
+      }
+    }
+  ]
+}

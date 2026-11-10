@@ -1,0 +1,52 @@
+name: Web To-Be Integration
+
+on:
+  push:
+    branches:
+      - experiment/ab-evaluation
+    paths:
+      - 'src/**'
+      - 'public/i18n/**'
+      - 'tests/integration/**'
+      - 'experiments/integration.playwright.config.ts'
+      - '.github/workflows/web-to-be-integration.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: web-to-be-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  integration:
+    name: Unit, build and integrated A/B modules
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      CI: 'true'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Run Angular tests
+        run: npm run test:ci
+      - name: Build Angular application
+        run: npm run build
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Verify To-Be within each original module
+        run: npx playwright test --config experiments/integration.playwright.config.ts
+      - name: Preserve independent integration evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: to-be-module-integration-${{ github.run_id }}
+          path: test-results/integrated-web/
+          if-no-files-found: warn
+          retention-days: 30

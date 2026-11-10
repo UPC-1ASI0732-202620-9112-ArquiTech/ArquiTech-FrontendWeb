@@ -1,3 +1,5 @@
+import { SessionService } from '../../../iam/services/session.service';
+import { ExperimentModulePanelComponent } from '../../../experiments/experiment-module-panel.component';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -31,6 +33,7 @@ import { WeeklyReportService } from '../../services/weekly-report.service';
 @Component({
   selector: 'app-weekly-report',
   imports: [
+    ExperimentModulePanelComponent,
     TranslatePipe,
     LucideAngularModule,
     ListStateComponent,
@@ -45,6 +48,7 @@ import { WeeklyReportService } from '../../services/weekly-report.service';
 })
 export class WeeklyReportComponent {
   readonly projectId = input.required<string>();
+  protected readonly session = inject(SessionService);
 
   private readonly reportService = inject(WeeklyReportService);
   private readonly pdfService = inject(ReportPdfService);

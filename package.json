@@ -8,7 +8,10 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:ci": "ng test --watch=false --browsers=ChromeHeadlessCI",
-    "format": "prettier --write \"src/**/*.{ts,html,css}\" \"public/i18n/*.json\""
+    "format": "prettier --write \"src/**/*.{ts,html,css}\" \"public/i18n/*.json\"",
+    "experiments:validate": "node experiments/scripts/validate-plan.mjs",
+    "experiments:smoke": "playwright test --config experiments/playwright.config.ts",
+    "experiments:all-web": "node experiments/scripts/run-full-web.mjs"
   },
   "private": true,
   "dependencies": {

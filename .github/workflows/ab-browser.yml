@@ -1,0 +1,122 @@
+name: A-B Browser Validation
+
+on:
+  push:
+    branches:
+      - experiment/ab-evaluation
+    paths:
+      - 'experiments/**'
+      - '!experiments/**/*.md'
+      - 'tests/experiments/**'
+      - 'src/**'
+      - 'package.json'
+      - '.github/workflows/ab-browser.yml'
+  workflow_dispatch:
+    inputs:
+      coverage:
+        description: 'smoke = exploratory subset; full = all planned automated visits'
+        required: true
+        default: smoke
+        type: choice
+        options:
+          - smoke
+          - full
+
+permissions:
+  contents: read
+
+concurrency:
+  group: arquitech-ab-browser-v2-${{ github.ref }}-${{ github.event_name }}
+  cancel-in-progress: true
+
+jobs:
+  browser-a-b:
+    if: ${{ !contains(github.event.head_commit.message, 'fix(ec10)') }}
+    name: Playwright - Web EC01-07 EC09
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      CI: 'true'
+      AB_FULL: ${{ ((github.event_name == 'workflow_dispatch' && inputs.coverage == 'full') || contains(github.event.head_commit.message, '[full-ab]')) && '1' || '0' }}
+
+    steps:
+      - name: Check out A/B evaluation branch
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install Angular and Playwright packages
+        run: npm ci
+
+      - name: Install browser and OS dependencies
+        run: npx playwright install --with-deps chromium
+
+      - name: Validate experimental assignment
+        run: npm run experiments:validate
+
+      - name: Run Web A/B browser evaluation
+        run: npm run experiments:smoke
+
+      - name: Summarize observed technical results
+        if: always()
+        run: node experiments/scripts/summarize-results.mjs
+
+      - name: Preserve browser outputs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ab-web-${{ github.run_id }}-${{ github.run_attempt }}
+          path: test-results/ab-web
+          if-no-files-found: warn
+          retention-days: 30
+
+  landing-a-b:
+    name: Playwright - Landing EC10
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      CI: 'true'
+      AB_FULL: ${{ ((github.event_name == 'workflow_dispatch' && inputs.coverage == 'full') || contains(github.event.head_commit.message, '[full-ab]')) && '1' || '0' }}
+
+    steps:
+      - name: Check out evaluation runner
+        uses: actions/checkout@v4
+
+      - name: Check out the isolated Landing B branch
+        uses: actions/checkout@v4
+        with:
+          repository: educmz/ArquiTech-LandingPage
+          ref: experiment/ab-evaluation
+          path: landing
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install runner and Landing packages
+        run: |
+          npm ci
+          npm --prefix landing ci
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Landing A/B visit evaluation
+        run: npx playwright test --config experiments/landing.playwright.config.ts
+
+      - name: Preserve Landing browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ab-landing-${{ github.run_id }}-${{ github.run_attempt }}
+          path: test-results/ab-landing
+          if-no-files-found: warn
+          retention-days: 30

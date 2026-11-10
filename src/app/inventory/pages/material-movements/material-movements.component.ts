@@ -1,3 +1,4 @@
+import { ExperimentModulePanelComponent } from '../../../experiments/experiment-module-panel.component';
 import { ChangeDetectionStrategy, Component, OnInit, inject, input, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -21,6 +22,7 @@ import { MaterialService } from '../../services/material.service';
 @Component({
   selector: 'app-material-movements',
   imports: [
+    ExperimentModulePanelComponent,
     RouterLink,
     RouterLinkActive,
     TranslatePipe,

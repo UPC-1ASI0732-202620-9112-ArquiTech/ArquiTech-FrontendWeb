@@ -6,6 +6,8 @@
     </div>
   </header>
 
+  <app-experiment-module-panel [projectId]="projectId()" [experiments]="['EC05']" (changed)="load()" />
+
   <nav class="tabs" [attr.aria-label]="'materials.tabs.label' | translate">
     <a
       class="tabs__link"

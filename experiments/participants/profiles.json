@@ -1,0 +1,304 @@
+{
+  "schema_version": "1.0",
+  "evidence_class": "synthetic-participants",
+  "description": "Perfiles de evaluación automatizada para ejecutar EC01-EC10 en ArquiTech. Cada perfil es un agente de software, no una persona participante.",
+  "general_agent_rules": [
+    "Cada agente recibe un objetivo de tarea y observa el estado visible de la interfaz antes de actuar.",
+    "No se proporcionan selectores, rutas de clics ni respuestas esperadas al agente participante.",
+    "Los rasgos de perfil no fuerzan errores, éxito, solicitudes de ayuda ni tiempos de ejecución.",
+    "No se inventan acciones, tiempos, resultados ni sentimientos cuando la ejecución o el modelo no estén disponibles.",
+    "Los resultados se identifican como ejecuciones automatizadas por agentes y se conservan por separado de observaciones realizadas con participantes humanos."
+  ],
+  "visitor_templates": [
+    {
+      "id": "V01",
+      "segment": "supervisor",
+      "device": "desktop",
+      "intent": "explore"
+    },
+    {
+      "id": "V02",
+      "segment": "contractor",
+      "device": "mobile",
+      "intent": "compare"
+    },
+    {
+      "id": "V03",
+      "segment": "supervisor",
+      "device": "mobile",
+      "intent": "request_information"
+    },
+    {
+      "id": "V04",
+      "segment": "contractor",
+      "device": "desktop",
+      "intent": "explore"
+    },
+    {
+      "id": "V05",
+      "segment": "undecided",
+      "device": "desktop",
+      "intent": "compare"
+    },
+    {
+      "id": "V06",
+      "segment": "undecided",
+      "device": "mobile",
+      "intent": "request_information"
+    }
+  ],
+  "profiles": [
+    {
+      "id": "S01",
+      "role": "supervisor",
+      "digital_experience": "beginner",
+      "navigation_preference": "menu-first",
+      "attention_style": "deliberate",
+      "persona_context": "Gestiona el seguimiento operativo de obras y consulta registros.",
+      "notes": "Las preferencias orientan decisiones, no obligan a cometer errores ni determinan resultados."
+    },
+    {
+      "id": "S02",
+      "role": "supervisor",
+      "digital_experience": "intermediate",
+      "navigation_preference": "search-first",
+      "attention_style": "direct",
+      "persona_context": "Gestiona el seguimiento operativo de obras y consulta registros.",
+      "notes": "Las preferencias orientan decisiones, no obligan a cometer errores ni determinan resultados."
+    },
+    {
+      "id": "S03",
+      "role": "supervisor",
+      "digital_experience": "advanced",
+      "navigation_preference": "systematic",
+      "attention_style": "structured",
+      "persona_context": "Gestiona el seguimiento operativo de obras y consulta registros.",
+      "notes": "Las preferencias orientan decisiones, no obligan a cometer errores ni determinan resultados."
+    },
+    {
+      "id": "S04",
+      "role": "supervisor",
+      "digital_experience": "beginner",
+      "navigation_preference": "exploratory",
+      "attention_style": "exploratory",
+      "persona_context": "Gestiona el seguimiento operativo de obras y consulta registros.",
+      "notes": "Las preferencias orientan decisiones, no obligan a cometer errores ni determinan resultados."
+    },
+    {
+      "id": "S05",
+      "role": "supervisor",
+      "digital_experience": "intermediate",
+      "navigation_preference": "detail-oriented",
+      "attention_style": "careful",
+      "persona_context": "Gestiona el seguimiento operativo de obras y consulta registros.",
+      "notes": "Las preferencias orientan decisiones, no obligan a cometer errores ni determinan resultados."
+    },
+    {
+      "id": "S06",
+      "role": "supervisor",
+      "digital_experience": "advanced",
+      "navigation_preference": "filter-first",
+      "attention_style": "analytical",
+      "persona_context": "Gestiona el seguimiento operativo de obras y consulta registros.",
+      "notes": "Las preferencias orientan decisiones, no obligan a cometer errores ni determinan resultados."
+    },
+    {
+      "id": "S07",
+      "role": "supervisor",
+      "digital_experience": "beginner",
+      "navigation_preference": "cautious",
+      "attention_style": "deliberate",
+      "persona_context": "Gestiona el seguimiento operativo de obras y consulta registros.",
+      "notes": "Las preferencias orientan decisiones, no obligan a cometer errores ni determinan resultados."
+    },
+    {
+      "id": "S08",
+      "role": "supervisor",
+      "digital_experience": "intermediate",
+      "navigation_preference": "overview-first",
+      "attention_style": "quick",
+      "persona_context": "Gestiona el seguimiento operativo de obras y consulta registros.",
+      "notes": "Las preferencias orientan decisiones, no obligan a cometer errores ni determinan resultados."
+    },
+    {
+      "id": "C01",
+      "role": "contractor",
+      "digital_experience": "beginner",
+      "navigation_preference": "systematic",
+      "attention_style": "analytical",
+      "persona_context": "Contrata obras y necesita consultar estado, avance y reportes.",
+      "notes": "Las preferencias orientan decisiones, no obligan a cometer errores ni determinan resultados."
+    },
+    {
+      "id": "C02",
+      "role": "contractor",
+      "digital_experience": "intermediate",
+      "navigation_preference": "exploratory",
+      "attention_style": "deliberate",
+      "persona_context": "Contrata obras y necesita consultar estado, avance y reportes.",
+      "notes": "Las preferencias orientan decisiones, no obligan a cometer errores ni determinan resultados."
+    },
+    {
+      "id": "C03",
+      "role": "contractor",
+      "digital_experience": "advanced",
+      "navigation_preference": "detail-oriented",
+      "attention_style": "quick",
+      "persona_context": "Contrata obras y necesita consultar estado, avance y reportes.",
+      "notes": "Las preferencias orientan decisiones, no obligan a cometer errores ni determinan resultados."
+    },
+    {
+      "id": "C04",
+      "role": "contractor",
+      "digital_experience": "beginner",
+      "navigation_preference": "filter-first",
+      "attention_style": "deliberate",
+      "persona_context": "Contrata obras y necesita consultar estado, avance y reportes.",
+      "notes": "Las preferencias orientan decisiones, no obligan a cometer errores ni determinan resultados."
+    },
+    {
+      "id": "C05",
+      "role": "contractor",
+      "digital_experience": "intermediate",
+      "navigation_preference": "cautious",
+      "attention_style": "direct",
+      "persona_context": "Contrata obras y necesita consultar estado, avance y reportes.",
+      "notes": "Las preferencias orientan decisiones, no obligan a cometer errores ni determinan resultados."
+    },
+    {
+      "id": "C06",
+      "role": "contractor",
+      "digital_experience": "beginner",
+      "navigation_preference": "overview-first",
+      "attention_style": "structured",
+      "persona_context": "Contrata obras y necesita consultar estado, avance y reportes.",
+      "notes": "Las preferencias orientan decisiones, no obligan a cometer errores ni determinan resultados."
+    },
+    {
+      "id": "C07",
+      "role": "contractor",
+      "digital_experience": "intermediate",
+      "navigation_preference": "menu-first",
+      "attention_style": "exploratory",
+      "persona_context": "Contrata obras y necesita consultar estado, avance y reportes.",
+      "notes": "Las preferencias orientan decisiones, no obligan a cometer errores ni determinan resultados."
+    },
+    {
+      "id": "C08",
+      "role": "contractor",
+      "digital_experience": "advanced",
+      "navigation_preference": "search-first",
+      "attention_style": "careful",
+      "persona_context": "Contrata obras y necesita consultar estado, avance y reportes.",
+      "notes": "Las preferencias orientan decisiones, no obligan a cometer errores ni determinan resultados."
+    },
+    {
+      "id": "N01",
+      "role": "supervisor",
+      "digital_experience": "advanced",
+      "navigation_preference": "detail-oriented",
+      "attention_style": "direct",
+      "persona_context": "Primer contacto con ArquiTech; no conoce la posición de los controles ni ha completado el flujo de incorporación.",
+      "notes": "Solo recibirá una variante; no se le facilitará la ruta de clics ni la solución esperada."
+    },
+    {
+      "id": "N02",
+      "role": "supervisor",
+      "digital_experience": "beginner",
+      "navigation_preference": "filter-first",
+      "attention_style": "structured",
+      "persona_context": "Primer contacto con ArquiTech; no conoce la posición de los controles ni ha completado el flujo de incorporación.",
+      "notes": "Solo recibirá una variante; no se le facilitará la ruta de clics ni la solución esperada."
+    },
+    {
+      "id": "N03",
+      "role": "contractor",
+      "digital_experience": "intermediate",
+      "navigation_preference": "cautious",
+      "attention_style": "exploratory",
+      "persona_context": "Primer contacto con ArquiTech; no conoce la posición de los controles ni ha completado el flujo de incorporación.",
+      "notes": "Solo recibirá una variante; no se le facilitará la ruta de clics ni la solución esperada."
+    },
+    {
+      "id": "N04",
+      "role": "contractor",
+      "digital_experience": "advanced",
+      "navigation_preference": "overview-first",
+      "attention_style": "careful",
+      "persona_context": "Primer contacto con ArquiTech; no conoce la posición de los controles ni ha completado el flujo de incorporación.",
+      "notes": "Solo recibirá una variante; no se le facilitará la ruta de clics ni la solución esperada."
+    },
+    {
+      "id": "N05",
+      "role": "supervisor",
+      "digital_experience": "beginner",
+      "navigation_preference": "menu-first",
+      "attention_style": "analytical",
+      "persona_context": "Primer contacto con ArquiTech; no conoce la posición de los controles ni ha completado el flujo de incorporación.",
+      "notes": "Solo recibirá una variante; no se le facilitará la ruta de clics ni la solución esperada."
+    },
+    {
+      "id": "N06",
+      "role": "supervisor",
+      "digital_experience": "intermediate",
+      "navigation_preference": "search-first",
+      "attention_style": "deliberate",
+      "persona_context": "Primer contacto con ArquiTech; no conoce la posición de los controles ni ha completado el flujo de incorporación.",
+      "notes": "Solo recibirá una variante; no se le facilitará la ruta de clics ni la solución esperada."
+    },
+    {
+      "id": "N07",
+      "role": "contractor",
+      "digital_experience": "beginner",
+      "navigation_preference": "systematic",
+      "attention_style": "quick",
+      "persona_context": "Primer contacto con ArquiTech; no conoce la posición de los controles ni ha completado el flujo de incorporación.",
+      "notes": "Solo recibirá una variante; no se le facilitará la ruta de clics ni la solución esperada."
+    },
+    {
+      "id": "N08",
+      "role": "contractor",
+      "digital_experience": "intermediate",
+      "navigation_preference": "exploratory",
+      "attention_style": "deliberate",
+      "persona_context": "Primer contacto con ArquiTech; no conoce la posición de los controles ni ha completado el flujo de incorporación.",
+      "notes": "Solo recibirá una variante; no se le facilitará la ruta de clics ni la solución esperada."
+    },
+    {
+      "id": "N09",
+      "role": "supervisor",
+      "digital_experience": "advanced",
+      "navigation_preference": "detail-oriented",
+      "attention_style": "direct",
+      "persona_context": "Primer contacto con ArquiTech; no conoce la posición de los controles ni ha completado el flujo de incorporación.",
+      "notes": "Solo recibirá una variante; no se le facilitará la ruta de clics ni la solución esperada."
+    },
+    {
+      "id": "N10",
+      "role": "supervisor",
+      "digital_experience": "beginner",
+      "navigation_preference": "filter-first",
+      "attention_style": "structured",
+      "persona_context": "Primer contacto con ArquiTech; no conoce la posición de los controles ni ha completado el flujo de incorporación.",
+      "notes": "Solo recibirá una variante; no se le facilitará la ruta de clics ni la solución esperada."
+    },
+    {
+      "id": "N11",
+      "role": "contractor",
+      "digital_experience": "intermediate",
+      "navigation_preference": "cautious",
+      "attention_style": "exploratory",
+      "persona_context": "Primer contacto con ArquiTech; no conoce la posición de los controles ni ha completado el flujo de incorporación.",
+      "notes": "Solo recibirá una variante; no se le facilitará la ruta de clics ni la solución esperada."
+    },
+    {
+      "id": "N12",
+      "role": "contractor",
+      "digital_experience": "advanced",
+      "navigation_preference": "overview-first",
+      "attention_style": "careful",
+      "persona_context": "Primer contacto con ArquiTech; no conoce la posición de los controles ni ha completado el flujo de incorporación.",
+      "notes": "Solo recibirá una variante; no se le facilitará la ruta de clics ni la solución esperada."
+    }
+  ]
+}

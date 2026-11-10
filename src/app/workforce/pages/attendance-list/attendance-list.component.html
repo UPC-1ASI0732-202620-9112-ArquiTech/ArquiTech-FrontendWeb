@@ -8,6 +8,8 @@
       <button type="button" class="btn btn--primary" (click)="openForm()">{{ 'attendance.create' | translate }}</button>
     }
   </header>
+
+  <app-experiment-module-panel [projectId]="projectId()" [experiments]="['EC02']" (changed)="load()" />
   <app-data-toolbar [state]="table" searchPlaceholderKey="attendance.search" [filters]="filterFields" />
   <div class="data-panel">
     <app-list-state

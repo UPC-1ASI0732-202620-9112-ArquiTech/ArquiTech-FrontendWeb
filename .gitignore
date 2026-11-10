@@ -48,3 +48,7 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+# Locally retained A/B evidence. Review metadata is tracked by explicit allowlist.
+/experiments/results/agent-runs/*
+/experiments/results/.evidence-packages/

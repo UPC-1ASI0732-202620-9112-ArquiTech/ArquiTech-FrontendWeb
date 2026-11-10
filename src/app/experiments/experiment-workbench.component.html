@@ -1,0 +1,261 @@
+<section class="page experiment-page" [class.experiment-page--embedded]="embedded()">
+  @if (!embedded()) {
+  <header class="page-heading">
+    <div class="page-heading__text">
+      <p class="experiment-tag">{{ 'improvements.header.tag' | translate }}</p>
+      <h1 class="page-title">{{ (current()?.title || 'improvements.header.title') | translate }}</h1>
+      <p class="page-description">{{ (current()?.description || 'improvements.header.description') | translate }}</p>
+    </div>
+    <div class="page-actions">
+      <a class="btn btn--secondary" [routerLink]="['/projects']">{{ 'nav.projects' | translate }}</a>
+      <a class="btn btn--secondary" [routerLink]="path('overview')">{{ 'improvements.header.other' | translate }}</a>
+      <button type="button" class="btn btn--secondary" (click)="refresh()">{{ 'improvements.header.refresh' | translate }}</button>
+    </div>
+  </header>
+
+  }
+  @if (error()) { <p class="experiment-error" role="alert">{{ error() | translate }}</p> }
+  @if (message()) { <p class="experiment-success" role="status">{{ message() | translate: messageParams() }}</p> }
+  @if (loading()) { <p role="status">{{ 'improvements.header.loading' | translate }}</p> }
+
+  @switch (experimentId()) {
+    @case ('overview') {
+      <div class="experiment-grid">
+        @for (experiment of experimentLinks; track experiment.id) {
+          @if (visible(experiment)) {
+            <a class="experiment-card" [routerLink]="path(experiment.id)">
+              <small>{{ experiment.id }} · {{ 'improvements.header.variantB' | translate }}</small>
+              <h2>{{ experiment.title | translate }}</h2>
+              <p>{{ experiment.description | translate }}</p>
+              <strong>{{ 'improvements.header.explore' | translate }}</strong>
+            </a>
+          }
+        }
+      </div>
+    }
+    @case ('EC04') {
+      @if (projectContext.current(); as project) {
+        <div class="experiment-grid experiment-metrics">
+          <article class="experiment-card">
+            <small>{{ 'improvements.ec04.project' | translate }}</small>
+            <h2>{{ project.name }}</h2>
+            <p>{{ project.location }}</p>
+          </article>
+          <article class="experiment-card">
+            <small>{{ 'improvements.ec04.status' | translate }}</small>
+            <h2 data-testid="ec04-status">{{ project.status }}</h2>
+            <p>{{ 'improvements.ec04.statusCaption' | translate }}</p>
+          </article>
+          <article class="experiment-card">
+            <small>{{ 'improvements.ec04.progress' | translate }}</small>
+            <h2 data-testid="ec04-progress">{{ project.progress }} %</h2>
+            <progress [value]="project.progress" max="100" [attr.aria-label]="'improvements.ec04.progressAria' | translate"></progress>
+          </article>
+          <article class="experiment-card">
+            <small>{{ 'improvements.ec04.weekly' | translate }}</small>
+            <h2>{{ (report() ? 'improvements.ec04.available' : 'improvements.ec04.consulting') | translate }}</h2>
+            <a class="btn btn--primary" [routerLink]="modulePath('reports')" data-testid="ec04-weekly-report-link">{{ 'improvements.ec04.openReport' | translate }}</a>
+          </article>
+        </div>
+        @if (report(); as reportValue) {
+          <div class="experiment-grid experiment-metrics">
+            <article class="experiment-card">
+              <small>{{ 'improvements.ec04.openTasks' | translate }}</small><h2>{{ reportValue.openTasks }}</h2>
+            </article>
+            <article class="experiment-card">
+              <small>{{ 'improvements.ec04.pendingIncidents' | translate }}</small><h2>{{ reportValue.openIncidents }}</h2>
+              <a [routerLink]="modulePath('incidents')">{{ 'improvements.ec04.openIncidents' | translate }}</a>
+            </article>
+            <article class="experiment-card">
+              <small>{{ 'improvements.ec04.weeklyMovements' | translate }}</small><h2>{{ reportValue.entries.length + reportValue.usages.length }}</h2>
+              <a [routerLink]="modulePath('materials/movements')">{{ 'improvements.ec04.history' | translate }}</a>
+            </article>
+          </div>
+        }
+      }
+    }
+    @case ('EC01') {
+      @if (session.isSupervisor()) {
+        <div class="experiment-grid">
+          <article class="experiment-card">
+            <h2>{{ 'improvements.ec01.step1' | translate }}</h2>
+            <label class="experiment-field">{{ 'improvements.ec01.material' | translate }}
+              <select [value]="selectedMaterialId()" (change)="changeMaterial($event)">
+                @for (material of materials(); track material.id) {
+                  <option [value]="material.id">{{ material.name }} - {{ material.stock }} {{ material.unit }}</option>
+                }
+              </select>
+            </label>
+            @if (selectedMaterial(); as selected) {
+              <p>{{ 'improvements.ec01.stock' | translate }}: <strong>{{ selected.stock }} {{ selected.unit }}</strong></p>
+              <p>{{ 'improvements.ec01.minimum' | translate }}: {{ selected.minimumStock }} {{ selected.unit }}</p>
+              @if (selected.isBelowMinimum()) { <p class="experiment-alert">{{ 'improvements.ec01.lowStock' | translate }}</p> }
+            }
+          </article>
+          <article class="experiment-card">
+            <h2>{{ 'improvements.ec01.step2' | translate }}</h2>
+            <label class="experiment-field">{{ 'improvements.ec01.operation' | translate }}
+              <select [value]="movementKind()" (change)="changeKind($event)">
+                <option value="USAGE">{{ 'improvements.ec01.usage' | translate }}</option>
+                <option value="ENTRY">{{ 'improvements.ec01.entry' | translate }}</option>
+              </select>
+            </label>
+            <label class="experiment-field">{{ 'improvements.ec01.quantity' | translate }}
+              <input type="number" min="0.01" step="any" [value]="movementQty()" (input)="changeQty($event)" />
+            </label>
+            @if (stockError()) {
+              <p class="experiment-error" role="alert">{{ stockError() }}</p>
+            } @else {
+              @if (selectedMaterial(); as selected) {
+                <p>{{ 'improvements.ec01.projected' | translate }}:
+                  <strong>{{ selected.stock + (movementKind() === 'ENTRY' ? movementQty() : -movementQty()) }} {{ selected.unit }}</strong>
+                </p>
+              }
+            }
+            <button type="button" class="btn btn--primary" data-testid="ec01-save"
+              [disabled]="!canEdit() || !!stockError() || busy()" (click)="saveMovement()">
+              {{ 'improvements.ec01.confirm' | translate }}
+            </button>
+          </article>
+        </div>
+      } @else { <p class="experiment-error">{{ 'improvements.shared.supervisorOnly' | translate }}</p> }
+    }
+    @case ('EC02') {
+      @if (session.isSupervisor()) {
+        <article class="experiment-card">
+          <h2>{{ 'improvements.ec02.title' | translate }}</h2>
+          <p>{{ 'improvements.ec02.description' | translate }}</p>
+          <label class="experiment-field">{{ 'improvements.shared.date' | translate }}
+            <input type="date" [value]="attendanceDate()" (change)="attendanceDate.set($any($event.target).value)" />
+          </label>
+          <table class="experiment-table">
+            <thead><tr><th scope="col">{{ 'improvements.ec02.worker' | translate }}</th><th scope="col">{{ 'improvements.ec02.status' | translate }}</th></tr></thead>
+            <tbody>
+              @for (worker of workers(); track worker.id) {
+                <tr>
+                  <td>{{ worker.fullName }}</td>
+                  <td>
+                    <label class="sr-only" [for]="'attendance-' + worker.id">{{ 'improvements.ec02.attendanceFor' | translate: { name: worker.fullName } }}</label>
+                    <select [id]="'attendance-' + worker.id" [value]="selections()[worker.id] || ''" (change)="setAttendance(worker.id, $event)">
+                      <option value="">{{ 'improvements.shared.select' | translate }}</option>
+                      <option value="PRESENT">{{ 'attendance.status.PRESENT' | translate }}</option>
+                      <option value="ABSENT">{{ 'attendance.status.ABSENT' | translate }}</option>
+                      <option value="LATE">{{ 'attendance.status.LATE' | translate }}</option>
+                      <option value="EXCUSED">{{ 'attendance.status.EXCUSED' | translate }}</option>
+                    </select>
+                  </td>
+                </tr>
+              }
+            </tbody>
+          </table>
+          <p>{{ 'improvements.ec02.eligible' | translate: { count: workers().length } }} {{ (attendanceComplete() ? 'improvements.ec02.complete' : 'improvements.ec02.incomplete') | translate }}</p>
+          <button class="btn btn--primary" type="button" [disabled]="!canEdit() || !attendanceComplete() || busy()" (click)="saveAttendance()">{{ 'improvements.ec02.save' | translate }}</button>
+        </article>
+      } @else { <p class="experiment-error">{{ 'improvements.shared.supervisorOnly' | translate }}</p> }
+    }
+    @case ('EC03') {
+      <article class="experiment-card">
+        <h2>{{ 'improvements.ec03.title' | translate }}</h2>
+        <p>{{ 'improvements.ec03.description' | translate }}</p>
+        <ul class="experiment-list">
+          @for (task of orderedTasks(); track task.id) {
+            <li>
+              <span class="experiment-priority" [class.is-urgent]="task.isOverdue()">
+                {{ (task.isCompleted() ? 'improvements.ec03.done' : task.isOverdue() ? 'improvements.ec03.overdue' : 'improvements.ec03.pending') | translate }}
+              </span>
+              <strong>{{ task.title }}</strong>
+              <span>{{ 'improvements.ec03.due' | translate }}: {{ task.dueDate | date:'dd/MM/yyyy' }}</span>
+              <small>{{ task.workerName }}</small>
+            </li>
+          } @empty { <li>{{ 'improvements.ec03.empty' | translate }}</li> }
+        </ul>
+        <a class="btn btn--secondary" [routerLink]="modulePath('tasks')">{{ 'improvements.ec03.openList' | translate }}</a>
+      </article>
+    }
+    @case ('EC05') {
+      <article class="experiment-card">
+        <h2>{{ 'improvements.ec05.title' | translate }}</h2>
+        <p>{{ 'improvements.ec05.description' | translate }}</p>
+        <div class="experiment-scroll"><table class="experiment-table">
+          <thead><tr><th scope="col">{{ 'improvements.shared.date' | translate }}</th><th scope="col">{{ 'improvements.ec01.material' | translate }}</th><th scope="col">{{ 'improvements.ec05.type' | translate }}</th><th scope="col">{{ 'improvements.ec01.quantity' | translate }}</th><th scope="col">{{ 'improvements.ec05.owner' | translate }}</th></tr></thead>
+          <tbody>
+            @for (movement of movements(); track movement.id) {
+              <tr>
+                <td>{{ movement.occurredAt | date:'dd/MM/yyyy HH:mm' }}</td>
+                <td>{{ movement.materialName }}</td>
+                <td>{{ (movement.type === 'ENTRY' ? 'improvements.ec01.entry' : 'improvements.ec05.usage') | translate }}</td>
+                <td>{{ movement.quantity }} {{ movement.unit }}</td>
+                <td>{{ movement.registeredByName || ('improvements.ec05.user' | translate: { id: movement.registeredByUserId }) }}</td>
+              </tr>
+            } @empty { <tr><td colspan="5">{{ 'improvements.ec05.empty' | translate }}</td></tr> }
+          </tbody>
+        </table></div>
+        <a class="btn btn--secondary" [routerLink]="modulePath('materials/movements')">{{ 'improvements.ec05.openHistory' | translate }}</a>
+      </article>
+    }
+    @case ('EC06') {
+      @if (report(); as weekly) {
+        <article class="experiment-card">
+          <h2>{{ 'improvements.ec06.title' | translate }}</h2>
+          <p>{{ 'improvements.ec06.description' | translate }}</p>
+          <ul class="experiment-checklist">
+            <li><strong>{{ 'improvements.ec06.project' | translate }}:</strong> {{ weekly.project.name }}</li>
+            <li><strong>{{ 'improvements.ec06.week' | translate }}:</strong> {{ weekly.weekStart | date:'dd/MM/yyyy' }} {{ 'improvements.ec06.to' | translate }} {{ weekly.weekEnd | date:'dd/MM/yyyy' }}</li>
+            <li><strong>{{ 'improvements.ec06.status' | translate }}:</strong> {{ weekly.project.status }}</li>
+            <li><strong>{{ 'improvements.ec06.progress' | translate }}:</strong> {{ weekly.project.progress }} %</li>
+            <li><strong>{{ 'improvements.ec06.completedTasks' | translate }}:</strong> {{ weekly.completedTasks.length }}</li>
+            <li><strong>{{ 'improvements.ec06.openTasks' | translate }}:</strong> {{ weekly.openTasks }}</li>
+            <li><strong>{{ 'improvements.ec06.entriesUsages' | translate }}:</strong> {{ weekly.entries.length }} {{ 'improvements.ec06.and' | translate }} {{ weekly.usages.length }}</li>
+            <li><strong>{{ 'improvements.ec06.incidentsRecorded' | translate }}:</strong> {{ weekly.incidents.length }}</li>
+            <li><strong>{{ 'improvements.ec06.incidentsOpen' | translate }}:</strong> {{ weekly.openIncidents }}</li>
+          </ul>
+          <button class="btn btn--primary" type="button" [disabled]="busy()" (click)="downloadReport()">{{ 'improvements.ec06.generate' | translate }}</button>
+        </article>
+      } @else if (!loading()) { <p>{{ 'improvements.ec06.failure' | translate }}</p> }
+    }
+    @case ('EC07') {
+      <article class="experiment-card">
+        <h2>{{ 'improvements.ec07.title' | translate }}</h2>
+        <p>{{ 'improvements.ec07.description' | translate }}</p>
+        <div aria-live="polite"><strong data-testid="ec07-critical-count">{{ 'improvements.ec07.count' | translate: { count: critical().length } }}</strong></div>
+        <ul class="experiment-list">
+          @for (incident of critical(); track incident.id) {
+            <li>
+              <span class="experiment-priority is-urgent">{{ 'improvements.ec07.high' | translate }}</span>
+              <strong>{{ incident.type }}</strong>
+              <span>{{ 'improvements.ec07.reported' | translate }}: {{ incident.reportedAt | date:'dd/MM/yyyy HH:mm' }}</span>
+              <button class="btn btn--secondary" type="button" (click)="selectAlert(incident.id)">{{ 'improvements.ec07.detail' | translate }}</button>
+            </li>
+          } @empty { <li>{{ 'improvements.ec07.empty' | translate }}</li> }
+        </ul>
+        @if (selectedAlert(); as incident) {
+          <div class="experiment-alert" role="status">
+            <strong>{{ incident.type }} - {{ ('incidents.status.' + incident.status) | translate }}</strong>
+            <p>{{ incident.description }}</p>
+            <a class="btn btn--secondary" [routerLink]="modulePath('incidents')">{{ 'improvements.ec07.open' | translate }}</a>
+          </div>
+        }
+      </article>
+    }
+    @case ('EC09') {
+      <article class="experiment-card">
+        <h2>{{ 'improvements.ec09.title' | translate: { role: ((session.isSupervisor() ? 'improvements.ec09.supervisor' : 'improvements.ec09.contractor') | translate) } }}</h2>
+        <p>{{ 'improvements.ec09.description' | translate }}</p>
+        <ol class="experiment-guide">
+          @for (step of guide(); track step.key; let i = $index) {
+            <li>
+              <input type="checkbox" [id]="'guide-' + i" [checked]="completedGuideSteps().includes(i)"
+                (change)="toggleGuideStep(i)" />
+              <label [for]="'guide-' + i">{{ ('improvements.guide.' + step.key) | translate }}</label>
+              <a class="btn btn--secondary" [routerLink]="step.target.startsWith('EC') ? path(step.target) : modulePath(step.target)">{{ 'improvements.ec09.explore' | translate }}</a>
+            </li>
+          }
+        </ol>
+        <p role="status">{{ 'improvements.ec09.progress' | translate: { done: completedGuideSteps().length, total: guide().length } }}</p>
+      </article>
+    }
+    @default {
+      <p class="experiment-error">{{ 'improvements.shared.unknown' | translate }}</p>
+    }
+  }
+</section>

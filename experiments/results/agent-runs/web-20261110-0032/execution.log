@@ -1,0 +1,118 @@
+2026-11-10T05:33:00.779Z pw:webserver HTTP GET: http://127.0.0.1:4200/login
+2026-11-10T05:33:00.788Z pw:webserver Error while checking if http://127.0.0.1:4200/login is available: connect ECONNREFUSED 127.0.0.1:4200
+2026-11-10T05:33:00.788Z pw:webserver Starting WebServer process npm run start -- --configuration development --host 127.0.0.1 --port 4200...
+2026-11-10T05:33:00.810Z pw:webserver Process started
+2026-11-10T05:33:00.810Z pw:webserver Waiting for availability...
+2026-11-10T05:33:00.810Z pw:webserver HTTP GET: http://127.0.0.1:4200/login
+2026-11-10T05:33:00.818Z pw:webserver Error while checking if http://127.0.0.1:4200/login is available: connect ECONNREFUSED 127.0.0.1:4200
+2026-11-10T05:33:00.818Z pw:webserver Waiting 100ms
+2026-11-10T05:33:00.928Z pw:webserver HTTP GET: http://127.0.0.1:4200/login
+2026-11-10T05:33:00.931Z pw:webserver Error while checking if http://127.0.0.1:4200/login is available: connect ECONNREFUSED 127.0.0.1:4200
+2026-11-10T05:33:00.931Z pw:webserver Waiting 250ms
+2026-11-10T05:33:01.199Z pw:webserver HTTP GET: http://127.0.0.1:4200/login
+2026-11-10T05:33:01.201Z pw:webserver Error while checking if http://127.0.0.1:4200/login is available: connect ECONNREFUSED 127.0.0.1:4200
+2026-11-10T05:33:01.202Z pw:webserver Waiting 500ms
+[WebServer] npm notice run arquitech@1.0.0 start
+[WebServer] npm notice run ng serve --configuration development --host 127.0.0.1 --port 4200
+2026-11-10T05:33:01.702Z pw:webserver HTTP GET: http://127.0.0.1:4200/login
+2026-11-10T05:33:01.703Z pw:webserver Error while checking if http://127.0.0.1:4200/login is available: connect ECONNREFUSED 127.0.0.1:4200
+2026-11-10T05:33:01.703Z pw:webserver Waiting 1000ms
+2026-11-10T05:33:02.709Z pw:webserver HTTP GET: http://127.0.0.1:4200/login
+2026-11-10T05:33:02.710Z pw:webserver Error while checking if http://127.0.0.1:4200/login is available: connect ECONNREFUSED 127.0.0.1:4200
+2026-11-10T05:33:02.710Z pw:webserver Waiting 1000ms
+[WebServer] Component HMR has been enabled, see https://angular.dev/hmr for more info.
+2026-11-10T05:33:03.724Z pw:webserver HTTP GET: http://127.0.0.1:4200/login
+2026-11-10T05:33:03.726Z pw:webserver Error while checking if http://127.0.0.1:4200/login is available: connect ECONNREFUSED 127.0.0.1:4200
+2026-11-10T05:33:03.726Z pw:webserver Waiting 1000ms
+[WebServer] > Building...
+2026-11-10T05:33:04.734Z pw:webserver HTTP GET: http://127.0.0.1:4200/login
+2026-11-10T05:33:04.736Z pw:webserver Error while checking if http://127.0.0.1:4200/login is available: connect ECONNREFUSED 127.0.0.1:4200
+2026-11-10T05:33:04.736Z pw:webserver Waiting 1000ms
+2026-11-10T05:33:05.744Z pw:webserver HTTP GET: http://127.0.0.1:4200/login
+2026-11-10T05:33:05.746Z pw:webserver Error while checking if http://127.0.0.1:4200/login is available: connect ECONNREFUSED 127.0.0.1:4200
+2026-11-10T05:33:05.747Z pw:webserver Waiting 1000ms
+2026-11-10T05:33:06.758Z pw:webserver HTTP GET: http://127.0.0.1:4200/login
+2026-11-10T05:33:06.760Z pw:webserver Error while checking if http://127.0.0.1:4200/login is available: connect ECONNREFUSED 127.0.0.1:4200
+2026-11-10T05:33:06.760Z pw:webserver Waiting 1000ms
+2026-11-10T05:33:07.763Z pw:webserver HTTP GET: http://127.0.0.1:4200/login
+2026-11-10T05:33:07.764Z pw:webserver Error while checking if http://127.0.0.1:4200/login is available: connect ECONNREFUSED 127.0.0.1:4200
+2026-11-10T05:33:07.764Z pw:webserver Waiting 1000ms
+2026-11-10T05:33:08.778Z pw:webserver HTTP GET: http://127.0.0.1:4200/login
+2026-11-10T05:33:08.780Z pw:webserver Error while checking if http://127.0.0.1:4200/login is available: connect ECONNREFUSED 127.0.0.1:4200
+2026-11-10T05:33:08.781Z pw:webserver Waiting 1000ms
+2026-11-10T05:33:09.782Z pw:webserver HTTP GET: http://127.0.0.1:4200/login
+2026-11-10T05:33:09.784Z pw:webserver Error while checking if http://127.0.0.1:4200/login is available: connect ECONNREFUSED 127.0.0.1:4200
+2026-11-10T05:33:09.784Z pw:webserver Waiting 1000ms
+2026-11-10T05:33:10.795Z pw:webserver HTTP GET: http://127.0.0.1:4200/login
+2026-11-10T05:33:10.797Z pw:webserver Error while checking if http://127.0.0.1:4200/login is available: connect ECONNREFUSED 127.0.0.1:4200
+2026-11-10T05:33:10.797Z pw:webserver Waiting 1000ms
+[WebServer] √ Building...
+[WebServer] Initial chunk files | Names                          |  Raw size
+[WebServer] main.js             | main                           | 153.07 kB | 
+[WebServer] polyfills.js        | polyfills                      |  89.77 kB | 
+[WebServer] styles.css          | styles                         |  33.75 kB | 
+[WebServer] chunk-FSBCRXWV.js   | -                              |  20.54 kB | 
+[WebServer] chunk-NTXKQW4W.js   | -                              |   7.19 kB | 
+[WebServer] chunk-RCNSSL24.js   | -                              |   4.36 kB | 
+[WebServer] chunk-ZWT5T5SO.js   | -                              |   4.32 kB | 
+[WebServer] chunk-LA7JUA4N.js   | -                              |   3.85 kB | 
+[WebServer] chunk-ZQZTFAQ5.js   | -                              |   2.61 kB | 
+[WebServer] chunk-JVBGAVKT.js   | -                              |   2.36 kB | 
+[WebServer] chunk-3CR6WSM4.js   | -                              |   2.28 kB | 
+[WebServer] chunk-WDMUDEB6.js   | -                              |   1.93 kB | 
+[WebServer] chunk-XKX5DE65.js   | -                              |   1.90 kB | 
+[WebServer] chunk-D5VFRHN7.js   | -                              |   1.77 kB | 
+[WebServer] chunk-H5Y55IWJ.js   | -                              |   1.39 kB | 
+[WebServer] chunk-VQS7NGBS.js   | -                              |   1.35 kB | 
+[WebServer] chunk-6XYPCJB6.js   | -                              |   1.28 kB | 
+[WebServer] chunk-IXNLKAOE.js   | -                              |   1.15 kB | 
+[WebServer] chunk-DDZLLWZ3.js   | -                              |   1.13 kB | 
+[WebServer] chunk-ZCJOXS6F.js   | -                              | 972 bytes | 
+[WebServer] 
+[WebServer]                     | Initial total                  | 336.99 kB
+[WebServer] 
+[WebServer] Lazy chunk files    | Names                          |  Raw size
+[WebServer] chunk-RFAWDNPO.js   | material-list-component        |  84.36 kB | 
+[WebServer] chunk-5J7W2O2M.js   | experiment-workbench-component |  82.92 kB | 
+[WebServer] chunk-LCSMEVF3.js   | weekly-report-component        |  56.60 kB | 
+[WebServer] chunk-3KDJWVWQ.js   | incident-list-component        |  49.62 kB | 
+[WebServer] chunk-222PPAO4.js   | machinery-list-component       |  43.16 kB | 
+[WebServer] chunk-6TW2U6ST.js   | worker-list-component          |  42.18 kB | 
+[WebServer] chunk-F6RYFNLT.js   | profile-component              |  41.55 kB | 
+[WebServer] chunk-M3U4GTZC.js   | -                              |  40.87 kB | 
+[WebServer] chunk-4FCEEFBW.js   | attendance-list-component      |  35.58 kB | 
+[WebServer] chunk-E3ZY2IQV.js   | project-list-component         |  33.78 kB | 
+[WebServer] chunk-XVP74UDK.js   | project-create-component       |  29.82 kB | 
+[WebServer] chunk-ILXVG7AI.js   | task-list-component            |  27.27 kB | 
+[WebServer] chunk-ETKNTNUB.js   | -                              |  19.68 kB | 
+[WebServer] chunk-IMIMOA53.js   | material-movements-component   |  18.74 kB | 
+[WebServer] chunk-A54POVRP.js   | -                              |  13.36 kB | 
+[WebServer] ...and 12 more lazy chunks files. Use "--verbose" to show all the files.
+[WebServer] 
+[WebServer] Application bundle generation complete. [7.148 seconds]
+[WebServer] 
+[WebServer] Watch mode enabled. Watching for file changes...
+[WebServer] NOTE: Raw file sizes do not reflect development server per-request transformations.
+[WebServer]   ➜  Local:   http://127.0.0.1:4200/
+2026-11-10T05:33:11.808Z pw:webserver HTTP GET: http://127.0.0.1:4200/login
+2026-11-10T05:33:11.835Z pw:webserver HTTP Status: 200
+2026-11-10T05:33:11.836Z pw:webserver WebServer available
+
+Running 8 tests using 2 workers
+
+(node:17112) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:39916) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ok 1 tests\experiments\ab-smoke.spec.ts:169:7 › EC01: smoke A/B - Stock y límites de movimiento (37.0s)
+  ok 2 tests\experiments\ab-smoke.spec.ts:169:7 › EC02: smoke A/B - Asistencia y completitud (1.1m)
+  ok 3 tests\experiments\ab-smoke.spec.ts:169:7 › EC03: smoke A/B - Priorización de tareas (36.5s)
+  ok 4 tests\experiments\ab-smoke.spec.ts:169:7 › EC04: smoke A/B - Consulta del estado y reporte (39.5s)
+  ok 5 tests\experiments\ab-smoke.spec.ts:169:7 › EC05: smoke A/B - Fecha y responsable del movimiento (38.1s)
+  ok 6 tests\experiments\ab-smoke.spec.ts:169:7 › EC06: smoke A/B - Informe y campos obligatorios (36.7s)
+  ok 7 tests\experiments\ab-smoke.spec.ts:169:7 › EC07: smoke A/B - Incidencias críticas abiertas (55.7s)
+  ok 8 tests\experiments\ab-smoke.spec.ts:169:7 › EC09: smoke A/B - Guía de incorporación por rol (29.7s)
+2026-11-10T05:36:08.876Z pw:webserver Terminating the WebServer
+2026-11-10T05:36:09.296Z pw:webserver Terminated the WebServer
+
+  8 passed (3.1m)

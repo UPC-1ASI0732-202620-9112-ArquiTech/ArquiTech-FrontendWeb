@@ -1,0 +1,143 @@
+{
+  "scope": "Descriptive diagnostics of the synthetic cohort. Pilot excluded because its objectives or timing protocol differ.",
+  "conditions": {
+    "A": {
+      "M01_lab_correct_at_first_observed_submit": {
+        "numerator": 42,
+        "denominator": 42,
+        "percent": 100
+      },
+      "M02_lab_attendance_completeness": {
+        "numerator": 7,
+        "denominator": 7,
+        "percent": 100
+      },
+      "M03_lab_correct_reference_within_120s": {
+        "numerator": 7,
+        "denominator": 7,
+        "percent": 100
+      },
+      "M04_lab_correct_within_180s_help_not_measured": {
+        "numerator": 7,
+        "denominator": 7,
+        "percent": 100
+      },
+      "EC05_lab_correct_reference_within_120s": {
+        "numerator": 7,
+        "denominator": 7,
+        "percent": 100
+      },
+      "EC06_correct_report_median_elapsed_seconds": 26.999283899999988,
+      "EC06_correct_report_n": 2,
+      "EC06_all_submitted_reports_with_fields": {
+        "numerator": 7,
+        "denominator": 7,
+        "percent": 100
+      },
+      "M07_lab_required_fields_present": {
+        "numerator": 2,
+        "denominator": 2,
+        "percent": 100
+      },
+      "EC07_simulated_injections": 22,
+      "EC07_confirmed_within_600s": 12,
+      "EC07_detection_median_seconds": 8.780000000000001,
+      "M10_lab_correct_within_600s_help_not_measured": {
+        "numerator": 5,
+        "denominator": 5,
+        "percent": 100
+      }
+    },
+    "B": {
+      "M01_lab_correct_at_first_observed_submit": {
+        "numerator": 42,
+        "denominator": 42,
+        "percent": 100
+      },
+      "M02_lab_attendance_completeness": {
+        "numerator": 7,
+        "denominator": 7,
+        "percent": 100
+      },
+      "M03_lab_correct_reference_within_120s": {
+        "numerator": 7,
+        "denominator": 7,
+        "percent": 100
+      },
+      "M04_lab_correct_within_180s_help_not_measured": {
+        "numerator": 7,
+        "denominator": 7,
+        "percent": 100
+      },
+      "EC05_lab_correct_reference_within_120s": {
+        "numerator": 7,
+        "denominator": 7,
+        "percent": 100
+      },
+      "EC06_correct_report_median_elapsed_seconds": 6.924856899999984,
+      "EC06_correct_report_n": 7,
+      "EC06_all_submitted_reports_with_fields": {
+        "numerator": 7,
+        "denominator": 7,
+        "percent": 100
+      },
+      "M07_lab_required_fields_present": {
+        "numerator": 7,
+        "denominator": 7,
+        "percent": 100
+      },
+      "EC07_simulated_injections": 22,
+      "EC07_confirmed_within_600s": 3,
+      "EC07_detection_median_seconds": 11.025,
+      "M10_lab_correct_within_600s_help_not_measured": {
+        "numerator": 5,
+        "denominator": 5,
+        "percent": 100
+      }
+    }
+  },
+  "models": {
+    "gpt-6.1-sol": [
+      {
+        "condition": "A",
+        "executed": 23
+      },
+      {
+        "condition": "B",
+        "executed": 25
+      }
+    ],
+    "gpt-6-luna": [
+      {
+        "condition": "A",
+        "executed": 35
+      },
+      {
+        "condition": "B",
+        "executed": 33
+      }
+    ]
+  },
+  "EC06_same_model_correct_pairs": {
+    "n": 2,
+    "profiles": [
+      "S02",
+      "S08"
+    ],
+    "median_A_elapsed_seconds": 26.999283899999988,
+    "median_B_elapsed_seconds": 6.830925200000005,
+    "comparison": "Descriptive values only for paired correct reports of the same model; not a business improvement estimate."
+  },
+  "not_estimated": {
+    "M04": "Help requests were not separately observed or measured.",
+    "M05": "The reference scenario is synthetic and only the cohort diagnostic is available.",
+    "M06": "Report timing is model/controller wall time. No validated operational reduction estimate.",
+    "M08": "The mock requires reload and uses compressed periods. Unconfirmed events are censored before the full calendar window.",
+    "M09": "Offline/mobile conditions were outside this web run.",
+    "M10": "Help was not separately measured and newcomers are synthetic profiles.",
+    "M11": "Qualified prospects and acquisition analytics are unavailable.",
+    "F01": "No operational time and rate inputs.",
+    "F02": "No direct preparation or validation cost inputs.",
+    "F03": "No campaign costs or qualified prospect counts."
+  }
+}
