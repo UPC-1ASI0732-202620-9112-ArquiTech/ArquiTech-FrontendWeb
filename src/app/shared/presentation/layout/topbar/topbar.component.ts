@@ -1,3 +1,4 @@
+import { ExperimentModeService } from '../../../../experiments/experiment-mode.service';
 import { CdkMenu, CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
 import { CdkConnectedOverlay, CdkOverlayOrigin, ConnectedPosition } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, output, signal } from '@angular/core';
@@ -35,6 +36,7 @@ export class TopbarComponent {
   protected readonly session = inject(SessionService);
   protected readonly context = inject(ProjectContextService);
   protected readonly alerts = inject(ProjectAlertsService);
+  protected readonly mode = inject(ExperimentModeService);
 
   readonly toggleNav = output<void>();
 
