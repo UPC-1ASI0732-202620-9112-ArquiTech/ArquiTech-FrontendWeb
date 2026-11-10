@@ -107,7 +107,22 @@ export class ExperimentWorkbenchComponent implements OnInit {
     ]);
 
   ngOnInit(): void {
+    if (this.experimentId() === 'EC09') {
+      try {
+        const raw = localStorage.getItem(this.guideStorageKey());
+        const value: unknown = raw ? JSON.parse(raw) : [];
+        if (Array.isArray(value)) {
+          this.completedGuideSteps.set(value.filter((v): v is number => Number.isInteger(v) && v >= 0 && v < 3));
+        }
+      } catch {
+        this.completedGuideSteps.set([]);
+      }
+    }
     this.refresh();
+  }
+
+  private guideStorageKey(): string {
+    return ['arquitech.ec09', this.session.user()?.id ?? 'unknown', this.projectId()].join('.');
   }
 
   protected visible(experiment: ExperimentLink): boolean {
@@ -220,8 +235,8 @@ export class ExperimentWorkbenchComponent implements OnInit {
           note: 'EC01 - escenario controlado',
         }));
       }
-      this.message.set('Movimiento de ensayo registrado. Se actualizará el stock.');
       this.refresh();
+      this.message.set('Movimiento de ensayo registrado. Se actualizará el stock.');
     } catch {
       this.error.set('No se pudo registrar el movimiento. Los datos no se han confirmado.');
     } finally {
@@ -278,6 +293,11 @@ export class ExperimentWorkbenchComponent implements OnInit {
 
   protected toggleGuideStep(index: number): void {
     this.completedGuideSteps.update(steps => steps.includes(index) ? steps.filter(i => i !== index) : [...steps, index]);
+    try {
+      localStorage.setItem(this.guideStorageKey(), JSON.stringify(this.completedGuideSteps()));
+    } catch {
+      this.message.set('El navegador no pudo guardar el progreso de esta guía.');
+    }
   }
   protected selectAlert(id: number): void {
     this.selectedCriticalId.set(id);
