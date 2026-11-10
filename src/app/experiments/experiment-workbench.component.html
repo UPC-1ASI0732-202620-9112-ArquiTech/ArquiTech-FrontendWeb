@@ -1,4 +1,5 @@
-<section class="page experiment-page">
+<section class="page experiment-page" [class.experiment-page--embedded]="embedded()">
+  @if (!embedded()) {
   <header class="page-heading">
     <div class="page-heading__text">
       <p class="experiment-tag">ARQUITECH - CONDICIÓN B / ENTORNO DE INVESTIGACIÓN</p>
@@ -20,6 +21,7 @@
       Las modificaciones se permiten únicamente con rol supervisor en el entorno mock local.
     }
   </p>
+  }
   @if (error()) { <p class="experiment-error" role="alert">{{ error() }}</p> }
   @if (message()) { <p class="experiment-success" role="status">{{ message() }}</p> }
   @if (loading()) { <p role="status">Cargando información del proyecto...</p> }
