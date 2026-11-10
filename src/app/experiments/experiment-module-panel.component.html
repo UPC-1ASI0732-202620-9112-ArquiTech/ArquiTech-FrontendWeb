@@ -1,0 +1,27 @@
+<section class="module-improvement" aria-label="Comparación de mejoras">
+  <div class="module-improvement__header">
+    <div>
+      <p class="module-improvement__eyebrow">Versión To-Be · Comparación A/B</p>
+      <h2>Mejoras del módulo</h2>
+      <p class="module-improvement__description">
+        Consulta las mejoras dentro de esta pantalla. El módulo original permanece disponible.
+      </p>
+    </div>
+    <div class="module-improvement__actions" role="group" aria-label="Seleccionar versión">
+      <button type="button" class="module-improvement__button"
+        [class.is-active]="activeId() === null" [attr.aria-pressed]="activeId() === null"
+        (click)="select(null)">Versión A · Original</button>
+      @for (id of experiments(); track id) {
+        <button type="button" class="module-improvement__button"
+          [class.is-active]="activeId() === id" [attr.aria-pressed]="activeId() === id"
+          (click)="select(id)">{{ id }} · {{ titles[id] || 'Mejora' }}</button>
+      }
+    </div>
+  </div>
+  @if (activeId(); as active) {
+    <app-experiment-workbench [projectId]="projectId()" [experimentId]="active"
+      [embedded]="true" (changed)="changed.emit()" />
+  } @else {
+    <p class="module-improvement__description">Estás consultando la versión original del módulo.</p>
+  }
+</section>
