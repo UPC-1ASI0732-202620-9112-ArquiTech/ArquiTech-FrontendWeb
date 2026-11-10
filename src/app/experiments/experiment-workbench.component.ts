@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, computed, inject, input, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
-import { forkJoin, firstValueFrom } from 'rxjs';
+import { forkJoin, firstValueFrom, Observable } from 'rxjs';
 import { SessionService } from '../iam/services/session.service';
 import { ProjectContextService } from '../projects/services/project-context.service';
 import { MaterialService } from '../inventory/services/material.service';
@@ -136,7 +136,10 @@ export class ExperimentWorkbenchComponent implements OnInit {
     const experiment = this.experimentId();
     if (experiment === 'overview' || experiment === 'EC09') return;
     this.loading.set(true);
-    const request = (() => {
+    const request: Observable<{
+      materials?: Material[]; workers?: Worker[]; tasks?: Task[]; report?: WeeklyReport;
+      movements?: MaterialMovement[]; incidents?: Incident[];
+    }> | null = (() => {
       switch (experiment) {
         case 'EC01': return forkJoin({ materials: this.materialService.getByProject(id) });
         case 'EC02': return forkJoin({ workers: this.workerService.getByProject(id) });
@@ -155,17 +158,17 @@ export class ExperimentWorkbenchComponent implements OnInit {
     }
     request.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (result) => {
-        if ('materials' in result) {
+        if (result.materials) {
           this.materials.set(result.materials);
           if (!this.selectedMaterialId() && result.materials.length) this.selectedMaterialId.set(result.materials[0].id);
         }
-        if ('workers' in result) this.workers.set(result.workers.filter(w => w.isActive()).slice(0, 12));
-        if ('tasks' in result) this.tasks.set(result.tasks);
-        if ('report' in result) this.report.set(result.report);
-        if ('movements' in result) this.movements.set(
+        if (result.workers) this.workers.set(result.workers.filter(w => w.isActive()).slice(0, 12));
+        if (result.tasks) this.tasks.set(result.tasks);
+        if (result.report) this.report.set(result.report);
+        if (result.movements) this.movements.set(
           [...result.movements].sort((a, b) => b.occurredAt.localeCompare(a.occurredAt)),
         );
-        if ('incidents' in result) this.incidents.set(result.incidents);
+        if (result.incidents) this.incidents.set(result.incidents);
         this.loading.set(false);
       },
       error: () => {
