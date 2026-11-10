@@ -6,6 +6,7 @@ on:
       - experiment/ab-evaluation
     paths:
       - 'experiments/**'
+      - '!experiments/**/*.md'
       - 'tests/experiments/**'
       - 'src/**'
       - 'package.json'
@@ -36,7 +37,7 @@ jobs:
     timeout-minutes: 35
     env:
       CI: 'true'
-      AB_FULL: ${{ github.event_name == 'workflow_dispatch' && inputs.coverage != 'full' && '0' || '1' }}
+      AB_FULL: ${{ ((github.event_name == 'workflow_dispatch' && inputs.coverage == 'full') || contains(github.event.head_commit.message, '[full-ab]')) && '1' || '0' }}
 
     steps:
       - name: Check out A/B evaluation branch
@@ -80,7 +81,7 @@ jobs:
     timeout-minutes: 35
     env:
       CI: 'true'
-      AB_FULL: ${{ github.event_name == 'workflow_dispatch' && inputs.coverage != 'full' && '0' || '1' }}
+      AB_FULL: ${{ ((github.event_name == 'workflow_dispatch' && inputs.coverage == 'full') || contains(github.event.head_commit.message, '[full-ab]')) && '1' || '0' }}
 
     steps:
       - name: Check out evaluation runner
