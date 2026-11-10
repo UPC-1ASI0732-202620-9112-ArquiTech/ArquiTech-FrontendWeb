@@ -301,6 +301,7 @@ export class ExperimentWorkbenchComponent {
         count++;
       }
       this.message.set(count + ' registros nuevos guardados; ' + registered.size + ' ya existían para la fecha.');
+      if (count > 0) this.changed.emit();
     } catch {
       this.error.set('Se produjo un error; algunos registros pueden haberse guardado. Revisa la asistencia antes de repetir.');
     } finally {
