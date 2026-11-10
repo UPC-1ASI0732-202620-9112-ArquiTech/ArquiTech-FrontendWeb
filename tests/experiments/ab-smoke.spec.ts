@@ -123,7 +123,7 @@ async function inspect(page: Page, id: string, condition: 'A' | 'B'): Promise<st
     }
     case 'EC03':
       await expect(page.locator('.experiment-list li')).toHaveCount(5);
-      await expect(page.getByText('Tareas vencidas y próximas a vencer')).toBeVisible();
+      await expect(page.getByRole('heading', { name: 'Tareas vencidas y próximas a vencer', exact: true })).toBeVisible();
       assertions.push('cinco tareas presentadas con jerarquía de prioridad');
       break;
     case 'EC04':
@@ -171,7 +171,10 @@ for (const [id, scenario] of Object.entries(cases)) {
     const current = plan.experiments.find((experiment) => experiment.id === id);
     if (!current?.assignments) throw new Error('Falta asignación en el plan para ' + id);
     // Smoke: one assigned profile. Full: the complete cohort from the research plan.
-    const selected = FULL ? current.assignments : current.assignments.slice(0, 1);
+    const selected = FULL ? current.assignments : id === 'EC09'
+      ? [current.assignments.find((assignment) => assignment.condition === 'A')!,
+         current.assignments.find((assignment) => assignment.condition === 'B')!]
+      : current.assignments.slice(0, 1);
     const records: Observation[] = [];
     const destination = join(process.cwd(), 'test-results/ab-web/records');
     mkdirSync(destination, { recursive: true });
