@@ -8,7 +8,8 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "test:ci": "ng test --watch=false --browsers=ChromeHeadlessCI",
-    "format": "prettier --write \"src/**/*.{ts,html,css}\" \"public/i18n/*.json\""
+    "format": "prettier --write \"src/**/*.{ts,html,css}\" \"public/i18n/*.json\"",
+    "experiments:validate": "node experiments/scripts/validate-plan.mjs"
   },
   "private": true,
   "dependencies": {
