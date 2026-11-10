@@ -111,10 +111,12 @@
             </label>
             @if (stockError()) {
               <p class="experiment-error" role="alert">{{ stockError() }}</p>
-            } @else if (selectedMaterial(); as selected) {
-              <p>Stock resultante previsto:
-                <strong>{{ selected.stock + (movementKind() === 'ENTRY' ? movementQty() : -movementQty()) }} {{ selected.unit }}</strong>
-              </p>
+            } @else {
+              @if (selectedMaterial(); as selected) {
+                <p>Stock resultante previsto:
+                  <strong>{{ selected.stock + (movementKind() === 'ENTRY' ? movementQty() : -movementQty()) }} {{ selected.unit }}</strong>
+                </p>
+              }
             }
             <button type="button" class="btn btn--primary" data-testid="ec01-save"
               [disabled]="!canEdit() || !!stockError() || busy()" (click)="saveMovement()">
