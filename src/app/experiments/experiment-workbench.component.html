@@ -7,18 +7,18 @@
       <p class="page-description">{{ (current()?.description || 'improvements.header.description') | translate }}</p>
     </div>
     <div class="page-actions">
-      <a class="btn btn--secondary" [routerLink]="['/projects']">Proyectos</a>
+      <a class="btn btn--secondary" [routerLink]="['/projects']">{{ 'nav.projects' | translate }}</a>
       <a class="btn btn--secondary" [routerLink]="path('overview')">{{ 'improvements.header.other' | translate }}</a>
       <button type="button" class="btn btn--secondary" (click)="refresh()">{{ 'improvements.header.refresh' | translate }}</button>
     </div>
   </header>
 
   <p class="experiment-note" role="note">
-    Esta pantalla solo existe en la rama experimental. Los datos se consultan con los servicios de ArquiTech.
+    {{ 'improvements.header.note' | translate }}
     @if (readOnlyEnvironment) {
-      Las operaciones que modificarían el proyecto están deshabilitadas fuera del entorno de demostración.
+      {{ 'improvements.header.readOnly' | translate }}
     } @else {
-      Las modificaciones se permiten únicamente con rol supervisor en el entorno mock local.
+      {{ 'improvements.header.mockWarning' | translate }}
     }
   </p>
   }
@@ -146,10 +146,10 @@
                     <label class="sr-only" [for]="'attendance-' + worker.id">{{ 'improvements.ec02.attendanceFor' | translate: { name: worker.fullName } }}</label>
                     <select [id]="'attendance-' + worker.id" [value]="selections()[worker.id] || ''" (change)="setAttendance(worker.id, $event)">
                       <option value="">{{ 'improvements.shared.select' | translate }}</option>
-                      <option value="PRESENT">Presente</option>
-                      <option value="ABSENT">Ausente</option>
-                      <option value="LATE">Tardanza</option>
-                      <option value="EXCUSED">Justificado</option>
+                      <option value="PRESENT">{{ 'attendance.status.PRESENT' | translate }}</option>
+                      <option value="ABSENT">{{ 'attendance.status.ABSENT' | translate }}</option>
+                      <option value="LATE">{{ 'attendance.status.LATE' | translate }}</option>
+                      <option value="EXCUSED">{{ 'attendance.status.EXCUSED' | translate }}</option>
                     </select>
                   </td>
                 </tr>
