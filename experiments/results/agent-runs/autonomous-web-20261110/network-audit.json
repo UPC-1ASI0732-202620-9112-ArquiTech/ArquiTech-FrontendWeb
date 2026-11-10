@@ -1,0 +1,146 @@
+[
+  {
+    "trace": "EC01-A/trace.zip",
+    "browser_context_network_streams": 1,
+    "http_requests": 149,
+    "http_responses_2xx_or_3xx": 149,
+    "observed_origins": [
+      "http://127.0.0.1:4200"
+    ]
+  },
+  {
+    "trace": "EC01-B/trace.zip",
+    "browser_context_network_streams": 1,
+    "http_requests": 141,
+    "http_responses_2xx_or_3xx": 141,
+    "observed_origins": [
+      "http://127.0.0.1:4200"
+    ]
+  },
+  {
+    "trace": "EC02-A/trace.zip",
+    "browser_context_network_streams": 1,
+    "http_requests": 150,
+    "http_responses_2xx_or_3xx": 150,
+    "observed_origins": [
+      "http://127.0.0.1:4200"
+    ]
+  },
+  {
+    "trace": "EC02-B/trace.zip",
+    "browser_context_network_streams": 1,
+    "http_requests": 141,
+    "http_responses_2xx_or_3xx": 141,
+    "observed_origins": [
+      "http://127.0.0.1:4200"
+    ]
+  },
+  {
+    "trace": "EC03-A/trace.zip",
+    "browser_context_network_streams": 1,
+    "http_requests": 151,
+    "http_responses_2xx_or_3xx": 151,
+    "observed_origins": [
+      "http://127.0.0.1:4200"
+    ]
+  },
+  {
+    "trace": "EC03-B/trace.zip",
+    "browser_context_network_streams": 1,
+    "http_requests": 141,
+    "http_responses_2xx_or_3xx": 141,
+    "observed_origins": [
+      "http://127.0.0.1:4200"
+    ]
+  },
+  {
+    "trace": "EC04-A/trace.zip",
+    "browser_context_network_streams": 1,
+    "http_requests": 160,
+    "http_responses_2xx_or_3xx": 160,
+    "observed_origins": [
+      "http://127.0.0.1:4200"
+    ]
+  },
+  {
+    "trace": "EC04-B/trace.zip",
+    "browser_context_network_streams": 1,
+    "http_requests": 152,
+    "http_responses_2xx_or_3xx": 152,
+    "observed_origins": [
+      "http://127.0.0.1:4200"
+    ]
+  },
+  {
+    "trace": "EC05-A/trace.zip",
+    "browser_context_network_streams": 1,
+    "http_requests": 148,
+    "http_responses_2xx_or_3xx": 148,
+    "observed_origins": [
+      "http://127.0.0.1:4200"
+    ]
+  },
+  {
+    "trace": "EC05-B/trace.zip",
+    "browser_context_network_streams": 1,
+    "http_requests": 141,
+    "http_responses_2xx_or_3xx": 141,
+    "observed_origins": [
+      "http://127.0.0.1:4200"
+    ]
+  },
+  {
+    "trace": "EC06-A/trace.zip",
+    "browser_context_network_streams": 1,
+    "http_requests": 151,
+    "http_responses_2xx_or_3xx": 151,
+    "observed_origins": [
+      "http://127.0.0.1:4200"
+    ]
+  },
+  {
+    "trace": "EC06-B/trace.zip",
+    "browser_context_network_streams": 1,
+    "http_requests": 143,
+    "http_responses_2xx_or_3xx": 143,
+    "observed_origins": [
+      "http://127.0.0.1:4200"
+    ]
+  },
+  {
+    "trace": "EC07-A/trace.zip",
+    "browser_context_network_streams": 1,
+    "http_requests": 150,
+    "http_responses_2xx_or_3xx": 150,
+    "observed_origins": [
+      "http://127.0.0.1:4200"
+    ]
+  },
+  {
+    "trace": "EC07-B/trace.zip",
+    "browser_context_network_streams": 1,
+    "http_requests": 141,
+    "http_responses_2xx_or_3xx": 141,
+    "observed_origins": [
+      "http://127.0.0.1:4200"
+    ]
+  },
+  {
+    "trace": "EC09-A/trace.zip",
+    "browser_context_network_streams": 1,
+    "http_requests": 149,
+    "http_responses_2xx_or_3xx": 149,
+    "observed_origins": [
+      "http://127.0.0.1:4200"
+    ]
+  },
+  {
+    "trace": "EC09-B/trace.zip",
+    "browser_context_network_streams": 1,
+    "http_requests": 156,
+    "http_responses_2xx_or_3xx": 156,
+    "observed_origins": [
+      "http://127.0.0.1:4200"
+    ]
+  }
+]

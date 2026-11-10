@@ -1,0 +1,74 @@
+[
+  {
+    "trace": "traces/ab-smoke-EC01-smoke-A-B---Stock-y-límites-de-movimiento/trace.zip",
+    "browser_context_network_streams": 16,
+    "http_requests": 2320,
+    "http_responses_2xx_or_3xx": 2320,
+    "observed_origins": [
+      "http://127.0.0.1:4200"
+    ]
+  },
+  {
+    "trace": "traces/ab-smoke-EC02-smoke-A-B---Asistencia-y-completitud/trace.zip",
+    "browser_context_network_streams": 16,
+    "http_requests": 2328,
+    "http_responses_2xx_or_3xx": 2328,
+    "observed_origins": [
+      "http://127.0.0.1:4200"
+    ]
+  },
+  {
+    "trace": "traces/ab-smoke-EC03-smoke-A-B---Priorización-de-tareas/trace.zip",
+    "browser_context_network_streams": 16,
+    "http_requests": 2336,
+    "http_responses_2xx_or_3xx": 2336,
+    "observed_origins": [
+      "http://127.0.0.1:4200"
+    ]
+  },
+  {
+    "trace": "traces/ab-smoke-EC04-smoke-A-B---Consulta-del-estado-y-reporte/trace.zip",
+    "browser_context_network_streams": 16,
+    "http_requests": 2408,
+    "http_responses_2xx_or_3xx": 2408,
+    "observed_origins": [
+      "http://127.0.0.1:4200"
+    ]
+  },
+  {
+    "trace": "traces/ab-smoke-EC05-smoke-A-B---Fecha-y-responsable-del-movimiento/trace.zip",
+    "browser_context_network_streams": 16,
+    "http_requests": 2312,
+    "http_responses_2xx_or_3xx": 2312,
+    "observed_origins": [
+      "http://127.0.0.1:4200"
+    ]
+  },
+  {
+    "trace": "traces/ab-smoke-EC06-smoke-A-B---Informe-y-campos-obligatorios/trace.zip",
+    "browser_context_network_streams": 16,
+    "http_requests": 2320,
+    "http_responses_2xx_or_3xx": 2320,
+    "observed_origins": [
+      "http://127.0.0.1:4200"
+    ]
+  },
+  {
+    "trace": "traces/ab-smoke-EC07-smoke-A-B---Incidencias-críticas-abiertas/trace.zip",
+    "browser_context_network_streams": 24,
+    "http_requests": 3492,
+    "http_responses_2xx_or_3xx": 3492,
+    "observed_origins": [
+      "http://127.0.0.1:4200"
+    ]
+  },
+  {
+    "trace": "traces/ab-smoke-EC09-smoke-A-B---Guía-de-incorporación-por-rol/trace.zip",
+    "browser_context_network_streams": 12,
+    "http_requests": 2142,
+    "http_responses_2xx_or_3xx": 2142,
+    "observed_origins": [
+      "http://127.0.0.1:4200"
+    ]
+  }
+]

@@ -1,0 +1,1983 @@
+{
+  "verified_runs": [
+    {
+      "id": "EC01-S02-B",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:51:13.289Z",
+      "ended_at": "2026-11-10T10:51:50.085Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 142,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC01-S02-A",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:52:05.817Z",
+      "ended_at": "2026-11-10T10:53:19.590Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 149,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC01-S03-A",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:51:13.842Z",
+      "ended_at": "2026-11-10T10:51:57.604Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 150,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC01-S03-B",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:52:15.627Z",
+      "ended_at": "2026-11-10T10:53:02.480Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 141,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC01-S04-B",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:51:12.888Z",
+      "ended_at": "2026-11-10T10:51:43.971Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 142,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC01-S04-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:01:22.471Z",
+      "ended_at": "2026-11-10T11:02:50.555Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 150,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC01-S05-A",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:51:11.242Z",
+      "ended_at": "2026-11-10T10:52:01.240Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 150,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC01-S05-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:01:18.752Z",
+      "ended_at": "2026-11-10T11:02:14.874Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 142,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC01-S06-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:01:21.960Z",
+      "ended_at": "2026-11-10T11:02:35.007Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 142,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC01-S06-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:02:46.699Z",
+      "ended_at": "2026-11-10T11:03:54.985Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 149,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC01-S07-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:01:19.961Z",
+      "ended_at": "2026-11-10T11:02:48.161Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 150,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC01-S07-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:03:01.282Z",
+      "ended_at": "2026-11-10T11:04:02.942Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 141,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC01-S08-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:01:18.907Z",
+      "ended_at": "2026-11-10T11:02:11.322Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 142,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC01-S08-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:02:22.229Z",
+      "ended_at": "2026-11-10T11:03:57.338Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 149,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC02-S02-B",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:49:25.126Z",
+      "ended_at": "2026-11-10T10:49:48.585Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 142,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC02-S02-A",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:50:02.126Z",
+      "ended_at": "2026-11-10T10:50:47.085Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 150,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC02-S03-A",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:49:23.347Z",
+      "ended_at": "2026-11-10T10:50:04.664Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 151,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC02-S03-B",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:50:20.782Z",
+      "ended_at": "2026-11-10T10:50:51.826Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 155,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC02-S04-B",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:49:23.470Z",
+      "ended_at": "2026-11-10T10:49:55.294Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 156,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC02-S04-A",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:50:07.872Z",
+      "ended_at": "2026-11-10T10:50:53.165Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 150,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC02-S05-A",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:50:18.398Z",
+      "ended_at": "2026-11-10T10:50:56.260Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 150,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC02-S05-B",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:51:18.357Z",
+      "ended_at": "2026-11-10T10:51:37.352Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 141,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC02-S06-B",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:50:21.404Z",
+      "ended_at": "2026-11-10T10:50:43.926Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 141,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC02-S06-A",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:50:57.896Z",
+      "ended_at": "2026-11-10T10:51:50.020Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 150,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC02-S07-A",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:50:21.792Z",
+      "ended_at": "2026-11-10T10:51:02.532Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 150,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC02-S07-B",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:51:20.356Z",
+      "ended_at": "2026-11-10T10:51:44.314Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 141,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC02-S08-B",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:50:25.275Z",
+      "ended_at": "2026-11-10T10:50:49.228Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 141,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC02-S08-A",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:51:02.112Z",
+      "ended_at": "2026-11-10T10:51:50.208Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 150,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC03-S02-B",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:50:25.758Z",
+      "ended_at": "2026-11-10T10:50:53.910Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 409,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC03-S02-A",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:51:11.864Z",
+      "ended_at": "2026-11-10T10:51:41.594Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 460,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC03-S03-A",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:50:28.926Z",
+      "ended_at": "2026-11-10T10:50:51.926Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 459,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC03-S03-B",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:51:08.467Z",
+      "ended_at": "2026-11-10T10:51:32.068Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 409,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC03-S04-B",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:50:30.422Z",
+      "ended_at": "2026-11-10T10:50:57.446Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 409,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC03-S04-A",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:51:15.633Z",
+      "ended_at": "2026-11-10T10:51:46.226Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 460,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC03-S05-A",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:51:02.752Z",
+      "ended_at": "2026-11-10T10:51:30.247Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 459,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC03-S05-B",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:51:47.081Z",
+      "ended_at": "2026-11-10T10:52:17.471Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 409,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC03-S06-B",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:51:05.028Z",
+      "ended_at": "2026-11-10T10:51:30.978Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 409,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC03-S06-A",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:51:47.961Z",
+      "ended_at": "2026-11-10T10:52:17.174Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 459,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC03-S07-A",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:51:14.444Z",
+      "ended_at": "2026-11-10T10:51:42.082Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 460,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC03-S07-B",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:51:58.536Z",
+      "ended_at": "2026-11-10T10:52:28.953Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 410,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC03-S08-B",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:51:49.927Z",
+      "ended_at": "2026-11-10T10:52:15.300Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 410,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC03-S08-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:01:19.836Z",
+      "ended_at": "2026-11-10T11:01:41.627Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 460,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC04-C02-B",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:51:51.250Z",
+      "ended_at": "2026-11-10T10:51:58.360Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 152,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC04-C02-A",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:52:13.413Z",
+      "ended_at": "2026-11-10T10:52:19.101Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 161,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC04-C03-A",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:51:57.269Z",
+      "ended_at": "2026-11-10T10:52:09.827Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 163,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC04-C03-B",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:52:23.620Z",
+      "ended_at": "2026-11-10T10:52:30.199Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 152,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC04-C04-B",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:51:59.900Z",
+      "ended_at": "2026-11-10T10:52:07.257Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 153,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC04-C04-A",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:52:21.051Z",
+      "ended_at": "2026-11-10T10:52:38.362Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 163,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC04-C05-A",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:52:04.678Z",
+      "ended_at": "2026-11-10T10:52:11.318Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 160,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC04-C05-B",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:52:24.842Z",
+      "ended_at": "2026-11-10T10:52:31.239Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 152,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC04-C06-B",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:52:11.838Z",
+      "ended_at": "2026-11-10T10:52:17.741Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 152,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC04-C06-A",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:52:33.579Z",
+      "ended_at": "2026-11-10T10:52:48.368Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 164,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC04-C07-A",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:52:12.770Z",
+      "ended_at": "2026-11-10T10:52:18.415Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 160,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC04-C07-B",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:52:33.828Z",
+      "ended_at": "2026-11-10T10:52:41.195Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 153,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC04-C08-B",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:52:34.600Z",
+      "ended_at": "2026-11-10T10:52:41.940Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 152,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC04-C08-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:01:18.483Z",
+      "ended_at": "2026-11-10T11:01:25.811Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 163,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC05-S02-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:01:18.333Z",
+      "ended_at": "2026-11-10T11:01:32.636Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 142,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC05-S02-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:01:43.613Z",
+      "ended_at": "2026-11-10T11:02:09.736Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 148,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC05-S03-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:01:20.518Z",
+      "ended_at": "2026-11-10T11:01:32.289Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 149,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC05-S03-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:01:42.496Z",
+      "ended_at": "2026-11-10T11:01:55.363Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 141,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC05-S04-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:01:17.946Z",
+      "ended_at": "2026-11-10T11:01:28.664Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 142,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC05-S04-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:01:38.585Z",
+      "ended_at": "2026-11-10T11:01:49.778Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 148,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC05-C01-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:01:36.563Z",
+      "ended_at": "2026-11-10T11:01:52.874Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 148,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC05-C01-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:02:05.649Z",
+      "ended_at": "2026-11-10T11:02:17.837Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 141,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC05-C02-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:01:54.287Z",
+      "ended_at": "2026-11-10T11:02:11.426Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 141,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC05-C02-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:02:23.841Z",
+      "ended_at": "2026-11-10T11:02:41.839Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 148,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC05-C03-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:01:59.633Z",
+      "ended_at": "2026-11-10T11:02:23.976Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 148,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC05-C03-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:02:34.386Z",
+      "ended_at": "2026-11-10T11:02:45.002Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 141,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC05-C04-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:02:05.524Z",
+      "ended_at": "2026-11-10T11:02:18.368Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 141,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC05-C04-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:02:29.796Z",
+      "ended_at": "2026-11-10T11:03:09.834Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 148,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC06-S02-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:02:20.550Z",
+      "ended_at": "2026-11-10T11:02:26.004Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 143,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC06-S02-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:02:38.567Z",
+      "ended_at": "2026-11-10T11:03:10.362Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 168,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC06-S03-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:02:26.588Z",
+      "ended_at": "2026-11-10T11:02:49.926Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 172,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC06-S03-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:03:05.253Z",
+      "ended_at": "2026-11-10T11:03:15.504Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 143,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC06-S04-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:02:31.087Z",
+      "ended_at": "2026-11-10T11:02:37.062Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 143,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC06-S04-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:02:53.026Z",
+      "ended_at": "2026-11-10T11:03:25.145Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 172,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC06-S05-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:02:53.797Z",
+      "ended_at": "2026-11-10T11:03:16.761Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 172,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC06-S05-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:03:32.084Z",
+      "ended_at": "2026-11-10T11:03:40.172Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 143,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC06-S06-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:02:55.237Z",
+      "ended_at": "2026-11-10T11:03:00.837Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 143,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC06-S06-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:03:12.051Z",
+      "ended_at": "2026-11-10T11:04:17.433Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 172,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC06-S07-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:03:05.755Z",
+      "ended_at": "2026-11-10T11:03:36.394Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 172,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC06-S07-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:03:52.918Z",
+      "ended_at": "2026-11-10T11:03:59.843Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 143,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC06-S08-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:03:21.484Z",
+      "ended_at": "2026-11-10T11:03:29.691Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 143,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC06-S08-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:03:46.941Z",
+      "ended_at": "2026-11-10T11:04:09.145Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 168,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC07-S02-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:06:52.884Z",
+      "ended_at": "2026-11-10T11:07:19.841Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 234,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC07-S02-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:07:32.954Z",
+      "ended_at": "2026-11-10T11:07:50.396Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 151,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC07-S03-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:06:52.293Z",
+      "ended_at": "2026-11-10T11:07:15.772Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 304,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC07-S03-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:07:30.141Z",
+      "ended_at": "2026-11-10T11:08:00.473Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 209,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC07-S04-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:06:51.361Z",
+      "ended_at": "2026-11-10T11:07:17.522Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 143,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC07-S04-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:10:27.577Z",
+      "ended_at": "2026-11-10T11:10:51.331Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 303,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC07-S05-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:06:55.032Z",
+      "ended_at": "2026-11-10T11:07:08.186Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 152,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC07-S05-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:07:19.414Z",
+      "ended_at": "2026-11-10T11:07:43.552Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 142,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC07-S06-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:06:52.421Z",
+      "ended_at": "2026-11-10T11:07:45.711Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 234,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC07-S06-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:07:57.357Z",
+      "ended_at": "2026-11-10T11:08:35.182Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 303,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC07-C01-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:06:52.355Z",
+      "ended_at": "2026-11-10T11:07:06.510Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 151,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC07-C01-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:07:18.249Z",
+      "ended_at": "2026-11-10T11:07:38.354Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 158,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC07-C02-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:06:51.358Z",
+      "ended_at": "2026-11-10T11:07:12.073Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 209,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC07-C02-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:07:24.253Z",
+      "ended_at": "2026-11-10T11:07:44.712Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 303,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC07-C03-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:07:49.955Z",
+      "ended_at": "2026-11-10T11:08:08.298Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 303,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC07-C03-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:08:20.361Z",
+      "ended_at": "2026-11-10T11:08:32.099Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 142,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC07-C04-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:07:57.305Z",
+      "ended_at": "2026-11-10T11:08:32.051Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 234,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC07-C04-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:08:43.998Z",
+      "ended_at": "2026-11-10T11:09:10.545Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 151,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC07-C05-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:07:57.307Z",
+      "ended_at": "2026-11-10T11:08:15.028Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 227,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC07-C05-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:08:26.949Z",
+      "ended_at": "2026-11-10T11:08:52.187Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 209,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC07-C06-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:07:58.378Z",
+      "ended_at": "2026-11-10T11:08:24.154Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 142,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC07-C06-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:09:36.313Z",
+      "ended_at": "2026-11-10T11:10:04.201Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 303,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC09-N03-A",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:49:00.232Z",
+      "ended_at": "2026-11-10T10:49:07.523Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 156,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC09-N04-B",
+      "model": "gpt-6.1-sol",
+      "status": "executed",
+      "started_at": "2026-11-10T10:49:00.371Z",
+      "ended_at": "2026-11-10T10:49:05.599Z",
+      "initial_state_sha256": "366d3d490bde10c4e7a9579aa05acdf1ab80fae49cb8bc20f6e3963cd0360add",
+      "requests": 156,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC09-N05-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:03:54.664Z",
+      "ended_at": "2026-11-10T11:04:03.437Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 156,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC09-N06-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:03:55.957Z",
+      "ended_at": "2026-11-10T11:04:06.629Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 156,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC09-N07-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:03:57.156Z",
+      "ended_at": "2026-11-10T11:04:04.415Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 156,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC09-N08-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:03:59.033Z",
+      "ended_at": "2026-11-10T11:04:05.931Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 156,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC09-N09-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:04:06.949Z",
+      "ended_at": "2026-11-10T11:04:16.459Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 156,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC09-N10-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:04:12.832Z",
+      "ended_at": "2026-11-10T11:04:21.517Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 156,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC09-N11-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:04:13.234Z",
+      "ended_at": "2026-11-10T11:04:20.136Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 156,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "EC09-N12-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:04:15.478Z",
+      "ended_at": "2026-11-10T11:04:21.844Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 156,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "SUP-EC01-S01-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:04:17.906Z",
+      "ended_at": "2026-11-10T11:05:32.609Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 149,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "SUP-EC01-S01-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:05:43.644Z",
+      "ended_at": "2026-11-10T11:06:26.023Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 141,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "SUP-EC03-S01-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:04:18.550Z",
+      "ended_at": "2026-11-10T11:04:33.517Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 383,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "SUP-EC03-S01-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:04:44.091Z",
+      "ended_at": "2026-11-10T11:05:14.295Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 402,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "SUP-EC05-S01-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:04:19.590Z",
+      "ended_at": "2026-11-10T11:04:30.057Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 148,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "SUP-EC05-S01-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:04:44.511Z",
+      "ended_at": "2026-11-10T11:04:56.254Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 141,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "SUP-EC06-S01-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:04:19.590Z",
+      "ended_at": "2026-11-10T11:04:40.045Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 168,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "SUP-EC07-S01-A",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:08:02.427Z",
+      "ended_at": "2026-11-10T11:08:25.944Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 303,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    },
+    {
+      "id": "SUP-EC07-S01-B",
+      "model": "gpt-6-luna",
+      "status": "executed",
+      "started_at": "2026-11-10T11:08:37.975Z",
+      "ended_at": "2026-11-10T11:09:10.665Z",
+      "initial_state_sha256": "e58d0894208d3d759573d3aaa951f9e5b85f4b18115d4526a59db81a9f173a65",
+      "requests": 234,
+      "origins": [
+        "http://127.0.0.1:4200"
+      ]
+    }
+  ],
+  "paired_initial_state": [
+    {
+      "experiment": "EC01",
+      "profile": "S02",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC01",
+      "profile": "S03",
+      "order": "A-B",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC01",
+      "profile": "S04",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": false,
+      "observed_order": true,
+      "same_initial_state": false
+    },
+    {
+      "experiment": "EC01",
+      "profile": "S05",
+      "order": "A-B",
+      "recorded": true,
+      "same_model": false,
+      "observed_order": true,
+      "same_initial_state": false
+    },
+    {
+      "experiment": "EC01",
+      "profile": "S06",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC01",
+      "profile": "S07",
+      "order": "A-B",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC01",
+      "profile": "S08",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC02",
+      "profile": "S02",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC02",
+      "profile": "S03",
+      "order": "A-B",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC02",
+      "profile": "S04",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC02",
+      "profile": "S05",
+      "order": "A-B",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC02",
+      "profile": "S06",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC02",
+      "profile": "S07",
+      "order": "A-B",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC02",
+      "profile": "S08",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC03",
+      "profile": "S02",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC03",
+      "profile": "S03",
+      "order": "A-B",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC03",
+      "profile": "S04",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC03",
+      "profile": "S05",
+      "order": "A-B",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC03",
+      "profile": "S06",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC03",
+      "profile": "S07",
+      "order": "A-B",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC03",
+      "profile": "S08",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": false,
+      "observed_order": true,
+      "same_initial_state": false
+    },
+    {
+      "experiment": "EC04",
+      "profile": "C02",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC04",
+      "profile": "C03",
+      "order": "A-B",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC04",
+      "profile": "C04",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC04",
+      "profile": "C05",
+      "order": "A-B",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC04",
+      "profile": "C06",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC04",
+      "profile": "C07",
+      "order": "A-B",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC04",
+      "profile": "C08",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": false,
+      "observed_order": true,
+      "same_initial_state": false
+    },
+    {
+      "experiment": "EC05",
+      "profile": "S02",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC05",
+      "profile": "S03",
+      "order": "A-B",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC05",
+      "profile": "S04",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC05",
+      "profile": "C01",
+      "order": "A-B",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC05",
+      "profile": "C02",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC05",
+      "profile": "C03",
+      "order": "A-B",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC05",
+      "profile": "C04",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC06",
+      "profile": "S02",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC06",
+      "profile": "S03",
+      "order": "A-B",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC06",
+      "profile": "S04",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC06",
+      "profile": "S05",
+      "order": "A-B",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC06",
+      "profile": "S06",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC06",
+      "profile": "S07",
+      "order": "A-B",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC06",
+      "profile": "S08",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC07",
+      "profile": "S02",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC07",
+      "profile": "S03",
+      "order": "A-B",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC07",
+      "profile": "S04",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC07",
+      "profile": "S05",
+      "order": "A-B",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC07",
+      "profile": "S06",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC07",
+      "profile": "C01",
+      "order": "A-B",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC07",
+      "profile": "C02",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC07",
+      "profile": "C03",
+      "order": "A-B",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC07",
+      "profile": "C04",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC07",
+      "profile": "C05",
+      "order": "A-B",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    },
+    {
+      "experiment": "EC07",
+      "profile": "C06",
+      "order": "B-A",
+      "recorded": true,
+      "same_model": true,
+      "observed_order": true,
+      "same_initial_state": true
+    }
+  ]
+}

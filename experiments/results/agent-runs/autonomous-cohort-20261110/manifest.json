@@ -1,0 +1,58 @@
+{
+  "run_id": "autonomous-cohort-20261110",
+  "repository": "educmz/ArquiTech-FrontendWeb",
+  "branch": "experiment/ab-evaluation",
+  "commit": "15a8e170b0e464de8beeb187c892d809e157faf3",
+  "base_url": "http://127.0.0.1:4200",
+  "backend": "Angular development mock in isolated browser storage",
+  "driver": "Playwright 1.63.0 / Chromium 153.0.8010.12",
+  "mode": "Model-directed MCP browser control; independent verifier; no scripted task paths",
+  "model_provider": "OpenAI Codex CLI",
+  "model_counts": {
+    "gpt-6.1-sol": {
+      "recorded": 48,
+      "executed": 48
+    },
+    "gpt-6-luna": {
+      "recorded": 68,
+      "executed": 68
+    }
+  },
+  "planned_new": 116,
+  "prior_autonomous_retained": 16,
+  "fully_executed_new": 116,
+  "independently_correct_new": 84,
+  "incomplete_new": 0,
+  "blocked_new": 0,
+  "not_run_new": 0,
+  "supplementary_recorded": 9,
+  "historical_integrity": {
+    "autonomous_pilot_sha256_entries": 277,
+    "technical_sha256_entries": 189
+  },
+  "outcome_schema": "One row per assignment, separate cases and supplemental CSV",
+  "detector": "Two compressed periods per condition, isolated injection while app open, reload may be necessary",
+  "timing": {
+    "explicit_wait_seconds": "Wait requested through wait_period",
+    "duration_seconds": "Wall time from first tool request to final submit or interruption",
+    "browser_action_seconds": "Browser action and snapshot time",
+    "initial_model_wait_seconds": "Time after preparation until first tool request",
+    "inter_task_queue": "Excluded from task duration"
+  },
+  "report_sha256": "0f1f5b5e0563354d529a7ddd5f90dc6fb75f4037a4c960ba7ea7273ffbc27530",
+  "audit": "audit.json",
+  "collector": "collect.mjs",
+  "verifier": "verify.mjs",
+  "previous_attempts": [
+    "infra-initial",
+    "infra-mcp-policy",
+    "infra-ec01-early-submit",
+    "quota-gpt-6.1-sol",
+    "infra-ec07-injector",
+    "retry-ec07-early-exit"
+  ],
+  "metrics_definition_source": "ArquiTech-Report README.md section 8.2.2",
+  "statistical_inference": false,
+  "started_at": "2026-11-10T10:49:00.232Z",
+  "ended_at": "2026-11-10T11:10:51.331Z"
+}

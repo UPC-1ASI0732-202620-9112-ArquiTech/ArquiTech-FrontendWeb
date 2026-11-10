@@ -1,0 +1,128 @@
+[
+  {
+    "id": "EC06-S02-B",
+    "pdf": "EC06-S02-B/arquitech-reporte-semanal-torre-residencial-norte-2026-11-09.pdf",
+    "pages": 1,
+    "checked": {
+      "project": true,
+      "progress": true,
+      "openTasks": true,
+      "openIncidents": true,
+      "completed": true,
+      "entries": true,
+      "usages": true,
+      "incidents": true,
+      "file_period": true,
+      "status": true
+    },
+    "passed": true
+  },
+  {
+    "id": "EC06-S03-B",
+    "pdf": "EC06-S03-B/arquitech-reporte-semanal-torre-residencial-norte-2026-11-09.pdf",
+    "pages": 1,
+    "checked": {
+      "project": true,
+      "progress": true,
+      "openTasks": true,
+      "openIncidents": true,
+      "completed": true,
+      "entries": true,
+      "usages": true,
+      "incidents": true,
+      "file_period": true,
+      "status": true
+    },
+    "passed": true
+  },
+  {
+    "id": "EC06-S04-B",
+    "pdf": "EC06-S04-B/arquitech-reporte-semanal-torre-residencial-norte-2026-11-09.pdf",
+    "pages": 1,
+    "checked": {
+      "project": true,
+      "progress": true,
+      "openTasks": true,
+      "openIncidents": true,
+      "completed": true,
+      "entries": true,
+      "usages": true,
+      "incidents": true,
+      "file_period": true,
+      "status": true
+    },
+    "passed": true
+  },
+  {
+    "id": "EC06-S05-B",
+    "pdf": "EC06-S05-B/arquitech-reporte-semanal-torre-residencial-norte-2026-11-09.pdf",
+    "pages": 1,
+    "checked": {
+      "project": true,
+      "progress": true,
+      "openTasks": true,
+      "openIncidents": true,
+      "completed": true,
+      "entries": true,
+      "usages": true,
+      "incidents": true,
+      "file_period": true,
+      "status": true
+    },
+    "passed": true
+  },
+  {
+    "id": "EC06-S06-B",
+    "pdf": "EC06-S06-B/arquitech-reporte-semanal-torre-residencial-norte-2026-11-09.pdf",
+    "pages": 1,
+    "checked": {
+      "project": true,
+      "progress": true,
+      "openTasks": true,
+      "openIncidents": true,
+      "completed": true,
+      "entries": true,
+      "usages": true,
+      "incidents": true,
+      "file_period": true,
+      "status": true
+    },
+    "passed": true
+  },
+  {
+    "id": "EC06-S07-B",
+    "pdf": "EC06-S07-B/arquitech-reporte-semanal-torre-residencial-norte-2026-11-09.pdf",
+    "pages": 1,
+    "checked": {
+      "project": true,
+      "progress": true,
+      "openTasks": true,
+      "openIncidents": true,
+      "completed": true,
+      "entries": true,
+      "usages": true,
+      "incidents": true,
+      "file_period": true,
+      "status": true
+    },
+    "passed": true
+  },
+  {
+    "id": "EC06-S08-B",
+    "pdf": "EC06-S08-B/arquitech-reporte-semanal-torre-residencial-norte-2026-11-09.pdf",
+    "pages": 1,
+    "checked": {
+      "project": true,
+      "progress": true,
+      "openTasks": true,
+      "openIncidents": true,
+      "completed": true,
+      "entries": true,
+      "usages": true,
+      "incidents": true,
+      "file_period": true,
+      "status": true
+    },
+    "passed": true
+  }
+]

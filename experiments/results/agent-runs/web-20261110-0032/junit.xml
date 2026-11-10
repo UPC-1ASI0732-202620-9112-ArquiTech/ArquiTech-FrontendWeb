@@ -1,0 +1,60 @@
+<testsuites id="" name="" tests="8" failures="0" skipped="0" errors="0" time="188.52333199999998">
+<testsuite name="ab-smoke.spec.ts" timestamp="2026-11-10T05:33:11.861Z" hostname="" tests="8" failures="0" skipped="0" time="338.601" errors="0">
+<testcase name="EC01: smoke A/B - Stock y límites de movimiento" classname="ab-smoke.spec.ts" time="36.992">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|traces\ab-smoke-EC01-smoke-A-B---Stock-y-límites-de-movimiento\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="EC02: smoke A/B - Asistencia y completitud" classname="ab-smoke.spec.ts" time="65.385">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|traces\ab-smoke-EC02-smoke-A-B---Asistencia-y-completitud\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="EC03: smoke A/B - Priorización de tareas" classname="ab-smoke.spec.ts" time="36.47">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|traces\ab-smoke-EC03-smoke-A-B---Priorización-de-tareas\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="EC04: smoke A/B - Consulta del estado y reporte" classname="ab-smoke.spec.ts" time="39.55">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|traces\ab-smoke-EC04-smoke-A-B---Consulta-del-estado-y-reporte\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="EC05: smoke A/B - Fecha y responsable del movimiento" classname="ab-smoke.spec.ts" time="38.118">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|traces\ab-smoke-EC05-smoke-A-B---Fecha-y-responsable-del-movimiento\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="EC06: smoke A/B - Informe y campos obligatorios" classname="ab-smoke.spec.ts" time="36.668">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|traces\ab-smoke-EC06-smoke-A-B---Informe-y-campos-obligatorios\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="EC07: smoke A/B - Incidencias críticas abiertas" classname="ab-smoke.spec.ts" time="55.683">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|traces\ab-smoke-EC07-smoke-A-B---Incidencias-críticas-abiertas\trace.zip]]
+]]>
+</system-out>
+</testcase>
+<testcase name="EC09: smoke A/B - Guía de incorporación por rol" classname="ab-smoke.spec.ts" time="29.735">
+<system-out>
+<![CDATA[
+[[ATTACHMENT|traces\ab-smoke-EC09-smoke-A-B---Guía-de-incorporación-por-rol\trace.zip]]
+]]>
+</system-out>
+</testcase>
+</testsuite>
+</testsuites>
