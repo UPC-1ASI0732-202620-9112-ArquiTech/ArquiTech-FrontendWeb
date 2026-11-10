@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0",
-  "evidence_class": "synthetic-ai-experiment-plan",
+  "evidence_class": "synthetic-experiment-plan",
   "status": "configuration-only-not-executed",
   "created_for": "ArquiTech Capítulo VIII EC01-EC10",
   "default_data_source": "isolated-demo-or-mock",
   "baseline_condition": "A - aplicación o procedimiento actual",
   "experimental_condition": "B - propuesta modificada sin despliegue a producción",
   "baseline_branch": "main",
-  "experimental_branch": "experiment/ai-evaluation",
+  "experimental_branch": "experiment/ab-evaluation",
   "recorded_results": 0,
   "design_constraints": [
     "No usar cuentas humanas reales, datos sensibles ni modificar información en producción.",
