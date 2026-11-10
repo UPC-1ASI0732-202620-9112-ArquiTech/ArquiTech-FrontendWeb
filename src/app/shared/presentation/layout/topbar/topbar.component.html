@@ -22,6 +22,21 @@
   <div class="topbar__right">
     <button
       type="button"
+      class="topbar__improvements"
+      data-testid="web-improvements-toggle"
+      [class.is-active]="mode.enabled()"
+      [attr.aria-pressed]="mode.enabled()"
+      [attr.aria-label]="(mode.enabled() ? 'improvements.toggle.disable' : 'improvements.toggle.enable') | translate"
+      (click)="mode.toggle()"
+    >
+      <lucide-icon name="sliders-horizontal" [size]="16" aria-hidden="true" />
+      <span class="topbar__improvements-label">{{ 'improvements.toggle.label' | translate }}</span>
+      <span class="topbar__improvements-state">{{
+        (mode.enabled() ? 'improvements.toggle.on' : 'improvements.toggle.off') | translate
+      }}</span>
+    </button>
+    <button
+      type="button"
       class="notification"
       cdkOverlayOrigin
       #alertsOrigin="cdkOverlayOrigin"
