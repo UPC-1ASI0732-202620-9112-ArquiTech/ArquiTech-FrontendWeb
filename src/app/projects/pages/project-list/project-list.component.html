@@ -16,6 +16,10 @@
     }
   </header>
 
+  @if (table.pageRows()[0]; as project) {
+    <app-experiment-module-panel [projectId]="'' + project.id" [experiments]="['EC09']" (changed)="load()" />
+  }
+
   <app-data-toolbar [state]="table" searchPlaceholderKey="projects.search" [filters]="filterFields" />
 
   <div class="data-panel">
