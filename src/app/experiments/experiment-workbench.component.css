@@ -1,0 +1,32 @@
+.experiment-page { max-width: 1250px; margin: 0 auto; }
+.experiment-tag { color: var(--color-sinopia); font-size: .73rem; letter-spacing: .1em; font-weight: 700; }
+.experiment-note { padding: 14px 18px; border: 1px solid var(--color-border); background: #fff8e9; border-radius: 10px; color: #6c4f25; }
+.experiment-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 16px; }
+.experiment-card { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding: 22px; border: 1px solid var(--color-border); border-radius: 12px; background: var(--color-surface); min-width: 0; text-decoration: none; color: var(--color-text); box-shadow: var(--shadow-card); }
+.experiment-card h2 { font-size: 1.1rem; }
+.experiment-card h2:not(:first-child) { margin-top: 3px; }
+.experiment-card small { color: var(--color-sinopia); font-weight: 700; letter-spacing: .02em; }
+.experiment-card p, .experiment-card span { line-height: 1.5; }
+.experiment-card progress { width: 100%; height: 12px; accent-color: var(--color-green-pigment); }
+.experiment-metrics .experiment-card h2 { font-size: 1.7rem; }
+.experiment-field { width: 100%; display: flex; flex-direction: column; gap: 6px; font-weight: 600; }
+.experiment-field select, .experiment-field input { min-height: 44px; width: 100%; border-radius: 8px; border: 1px solid var(--color-border-strong); background: white; padding: 8px 10px; font-weight: 400; }
+.experiment-scroll { max-width: 100%; overflow-x: auto; }
+.experiment-table { width: 100%; border-collapse: collapse; text-align: left; min-width: 420px; }
+.experiment-table td, .experiment-table th { padding: 12px; border-bottom: 1px solid var(--color-border); vertical-align: top; }
+.experiment-table th { background: var(--color-surface-muted); font-weight: 700; }
+.experiment-table select { min-height: 38px; width: 100%; border: 1px solid var(--color-border-strong); padding: 6px; border-radius: 6px; }
+.experiment-list { padding: 0; width: 100%; margin: 0; display: grid; gap: 12px; list-style: none; }
+.experiment-list li { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; background: var(--color-surface-muted); border: 1px solid var(--color-border); padding: 14px; border-radius: 8px; }
+.experiment-list li strong { flex: 1 1 210px; }
+.experiment-priority { padding: 4px 8px; border-radius: 8px; font-size: .7rem; background: #f3ece4; }
+.experiment-priority.is-urgent { background: #ffe2d9; color: #962504; font-weight: 700; }
+.experiment-error { padding: 12px; border: 1px solid #d55b39; background: #fff1ee; border-radius: 8px; color: #8a230b; }
+.experiment-success { padding: 12px; border: 1px solid #6fb37d; background: #e9f8ed; border-radius: 8px; }
+.experiment-alert { background: #fff1e6; padding: 14px; border-radius: 8px; color: #742a08; width: 100%; }
+.experiment-checklist { display: grid; gap: 10px; padding-left: 18px; }
+.experiment-guide { display: grid; gap: 14px; padding-left: 22px; width: 100%; }
+.experiment-guide li { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.experiment-guide label { flex: 1 1 210px; }
+.experiment-guide input { width: 18px; height: 18px; accent-color: var(--color-sinopia); }
+@media(max-width:720px) { .experiment-page { padding: 16px; } .experiment-grid { grid-template-columns: 1fr; } .experiment-table { font-size: .8rem; } }
