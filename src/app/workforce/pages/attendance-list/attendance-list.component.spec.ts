@@ -1,3 +1,5 @@
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { signal, importProvidersFrom } from '@angular/core';
 import { LucideAngularModule } from 'lucide-angular';
 import { APP_ICONS } from '../../../shared/presentation/icons';
@@ -31,8 +33,13 @@ describe('Attendance role UI', () => {
       TestBed.configureTestingModule({
         imports: [AttendanceListComponent, TranslateModule.forRoot()],
         providers: [
+          provideHttpClient(),
+          provideHttpClientTesting(),
           importProvidersFrom(LucideAngularModule.pick(APP_ICONS)),
-          { provide: SessionService, useValue: { isSupervisor: signal(supervisor) } },
+          { provide: SessionService, useValue: {
+            isSupervisor: signal(supervisor), isContractor: signal(!supervisor),
+            user: signal({ id: 1 }),
+          } },
           { provide: AttendanceService, useValue: { getByProject: () => of([row]) } },
           { provide: WorkerService, useValue: { getByProject: () => of([]) } },
           { provide: ProjectAlertsService, useValue: { refresh: () => {} } },
