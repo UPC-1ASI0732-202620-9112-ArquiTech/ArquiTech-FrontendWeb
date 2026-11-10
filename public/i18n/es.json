@@ -616,27 +616,24 @@
   },
   "improvements": {
     "toggle": {
-      "label": "Mejoras",
-      "on": "Activadas",
-      "off": "Desactivadas",
-      "enable": "Activar mejoras",
-      "disable": "Desactivar mejoras"
+      "label": "Vista",
+      "on": "Vista mejorada",
+      "off": "Vista original",
+      "enable": "Cambiar a vista mejorada",
+      "disable": "Cambiar a vista original"
     },
     "panel": {
       "aria": "Mejoras del módulo",
-      "badge": "VERSIÓN MEJORADA",
-      "title": "Mejoras del módulo",
-      "description": "Funciones mejoradas dentro de la pantalla original. Puedes desactivarlas desde la barra superior."
+      "badge": "VISTA MEJORADA",
+      "title": "Funciones adicionales",
+      "description": "Herramientas de apoyo integradas a este módulo."
     },
     "header": {
-      "tag": "ARQUITECH - CONDICIÓN B / ENTORNO DE INVESTIGACIÓN",
+      "tag": "ARQUITECH · VISTA MEJORADA",
       "title": "Laboratorio experimental",
       "description": "Selecciona una mejora para esta obra.",
       "other": "Otras mejoras",
       "refresh": "Actualizar",
-      "note": "Esta pantalla solo existe en la rama experimental. Los datos se consultan con los servicios de ArquiTech.",
-      "readOnly": "Las operaciones que modificarían el proyecto están deshabilitadas fuera del entorno de demostración.",
-      "mockWarning": "Las modificaciones se permiten únicamente con rol supervisor en el entorno mock local.",
       "loading": "Cargando información del proyecto...",
       "variantB": "Variante B",
       "explore": "Explorar mejora"
