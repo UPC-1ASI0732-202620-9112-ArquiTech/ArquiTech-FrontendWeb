@@ -30,7 +30,6 @@
       (click)="mode.toggle()"
     >
       <lucide-icon name="sliders-horizontal" [size]="16" aria-hidden="true" />
-      <span class="topbar__improvements-label">{{ 'improvements.toggle.label' | translate }}</span>
       <span class="topbar__improvements-state">{{
         (mode.enabled() ? 'improvements.toggle.on' : 'improvements.toggle.off') | translate
       }}</span>
