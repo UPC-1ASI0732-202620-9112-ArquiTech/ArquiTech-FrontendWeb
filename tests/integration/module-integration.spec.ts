@@ -28,7 +28,7 @@ for (const { id, route, role, english } of cases) {
     const toggle = page.getByTestId('web-improvements-toggle');
     const panel = page.locator('app-experiment-module-panel');
     await expect(toggle).toHaveAttribute('aria-pressed', 'false');
-    await expect(toggle).toContainText('Mejoras');
+    await expect(toggle).toContainText('Vista original');
     await expect(panel.locator('app-experiment-workbench')).toHaveCount(0);
     await expect(page.locator('.page-heading .page-title')).toBeVisible();
 
@@ -38,13 +38,13 @@ for (const { id, route, role, english } of cases) {
     await expect(panel.locator('.experiment-card').first()).toBeVisible();
 
     await page.locator('.language__option[lang="en"]').click();
-    await expect(toggle).toContainText('Improvements');
-    await expect(toggle).toContainText('On');
+    await expect(toggle).toContainText('Enhanced view');
+    await expect(toggle).toHaveAttribute('aria-label', 'Switch to original view');
     await expect(panel.getByText(english, { exact: true })).toBeVisible();
 
     await toggle.click();
     await expect(toggle).toHaveAttribute('aria-pressed', 'false');
-    await expect(toggle).toContainText('Off');
+    await expect(toggle).toContainText('Original view');
     await expect(panel.locator('app-experiment-workbench')).toHaveCount(0);
     await expect(page.locator('.page-heading .page-title')).toBeVisible();
   });
@@ -61,8 +61,8 @@ test('Global preference persists between routes, reload and language changes', a
   await page.reload();
   await expect(toggle).toHaveAttribute('aria-pressed', 'true');
   await page.locator('.language__option[lang="en"]').click();
-  await expect(toggle).toContainText('Improvements');
-  await expect(toggle).toContainText('On');
+  await expect(toggle).toContainText('Enhanced view');
+  await expect(toggle).toHaveAttribute('aria-label', 'Switch to original view');
   await page.goto('/projects/1/attendance');
   await expect(page.locator('app-experiment-workbench')).toBeVisible();
   await toggle.click();
