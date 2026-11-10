@@ -11,34 +11,67 @@ async function login(page: Page, role: 'supervisor' | 'contractor' = 'supervisor
 }
 
 const cases = [
-  { id: 'EC01', route: '/projects/1/materials', role: 'supervisor' },
-  { id: 'EC02', route: '/projects/1/attendance', role: 'supervisor' },
-  { id: 'EC03', route: '/projects/1/tasks', role: 'supervisor' },
-  { id: 'EC04', route: '/projects/1/reports', role: 'contractor' },
-  { id: 'EC05', route: '/projects/1/materials/movements', role: 'supervisor' },
-  { id: 'EC06', route: '/projects/1/reports', role: 'supervisor' },
-  { id: 'EC07', route: '/projects/1/incidents', role: 'supervisor' },
-  { id: 'EC09', route: '/projects', role: 'supervisor' },
+  { id: 'EC01', route: '/projects/1/materials', role: 'supervisor', english: '1. Select a material' },
+  { id: 'EC02', route: '/projects/1/attendance', role: 'supervisor', english: 'Quick daily attendance' },
+  { id: 'EC03', route: '/projects/1/tasks', role: 'supervisor', english: 'Overdue and upcoming tasks' },
+  { id: 'EC04', route: '/projects/1/reports', role: 'contractor', english: 'Contracted project' },
+  { id: 'EC05', route: '/projects/1/materials/movements', role: 'supervisor', english: 'Traceable movement history' },
+  { id: 'EC06', route: '/projects/1/reports', role: 'supervisor', english: 'Assisted report: completeness review' },
+  { id: 'EC07', route: '/projects/1/incidents', role: 'supervisor', english: 'Prioritized project alerts' },
+  { id: 'EC09', route: '/projects', role: 'supervisor', english: 'First steps for supervisor' },
 ] as const;
 
-for (const { id, route, role } of cases) {
-  test(id + ' - B integrada en el módulo original; A permanece disponible', async ({ page }) => {
+for (const { id, route, role, english } of cases) {
+  test(id + ' - navbar switches original A and integrated B with ES/EN labels', async ({ page }) => {
     await login(page, role);
     await page.goto(route);
+    const toggle = page.getByTestId('web-improvements-toggle');
     const panel = page.locator('app-experiment-module-panel');
-    await expect(panel).toBeVisible();
-    const improvement = panel.getByRole('button', { name: new RegExp('^' + id) });
-    await expect(improvement).toHaveAttribute('aria-pressed', 'true');
-    await expect(panel.locator('app-experiment-workbench')).toBeVisible();
-    await panel.getByRole('button', { name: /Versión A/ }).click();
+    await expect(toggle).toHaveAttribute('aria-pressed', 'false');
+    await expect(toggle).toContainText('Mejoras');
     await expect(panel.locator('app-experiment-workbench')).toHaveCount(0);
     await expect(page.locator('.page-heading .page-title')).toBeVisible();
-    await improvement.click();
+
+    await toggle.click();
+    await expect(toggle).toHaveAttribute('aria-pressed', 'true');
     await expect(panel.locator('app-experiment-workbench')).toBeVisible();
+    await expect(panel.locator('.experiment-card').first()).toBeVisible();
+
+    await page.locator('.language__option[lang="en"]').click();
+    await expect(toggle).toContainText('Improvements');
+    await expect(toggle).toContainText('On');
+    await expect(panel.getByText(english, { exact: true })).toBeVisible();
+
+    await toggle.click();
+    await expect(toggle).toHaveAttribute('aria-pressed', 'false');
+    await expect(toggle).toContainText('Off');
+    await expect(panel.locator('app-experiment-workbench')).toHaveCount(0);
+    await expect(page.locator('.page-heading .page-title')).toBeVisible();
   });
 }
 
-test('EC01 recarga materiales al navegar desde el resumen experimental', async ({ page }) => {
+test('Global preference persists between routes, reload and language changes', async ({ page }) => {
+  await login(page);
+  const toggle = page.getByTestId('web-improvements-toggle');
+  await expect(toggle).toHaveAttribute('aria-pressed', 'false');
+  await toggle.click();
+  await page.goto('/projects/1/materials');
+  await expect(toggle).toHaveAttribute('aria-pressed', 'true');
+  await expect(page.locator('app-experiment-workbench')).toBeVisible();
+  await page.reload();
+  await expect(toggle).toHaveAttribute('aria-pressed', 'true');
+  await page.locator('.language__option[lang="en"]').click();
+  await expect(toggle).toContainText('Improvements');
+  await expect(toggle).toContainText('On');
+  await page.goto('/projects/1/attendance');
+  await expect(page.locator('app-experiment-workbench')).toBeVisible();
+  await toggle.click();
+  await page.goto('/projects/1/materials');
+  await expect(toggle).toHaveAttribute('aria-pressed', 'false');
+  await expect(page.locator('app-experiment-workbench')).toHaveCount(0);
+});
+
+test('EC01 reloads data when navigating from the experiment overview', async ({ page }) => {
   await login(page);
   await page.goto('/projects/1/experiments/overview');
   await expect(page.getByRole('heading', { name: /Laboratorio experimental/ })).toBeVisible();
@@ -50,9 +83,10 @@ test('EC01 recarga materiales al navegar desde el resumen experimental', async (
   await expect(page.getByText(/Stock disponible/)).toBeVisible();
 });
 
-test('EC01 utiliza los materiales reales del mock también dentro de Inventario', async ({ page }) => {
+test('EC01 keeps original inventory and validates mock materials in B', async ({ page }) => {
   await login(page);
   await page.goto('/projects/1/materials');
+  await page.getByTestId('web-improvements-toggle').click();
   const panel = page.locator('app-experiment-module-panel');
   const materials = panel.locator('.experiment-field select').first();
   await expect(materials.locator('option')).toHaveCount(5);
