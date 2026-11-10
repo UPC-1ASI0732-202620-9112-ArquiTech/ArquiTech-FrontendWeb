@@ -74,6 +74,7 @@ test('Global preference persists between routes, reload and language changes', a
 test('EC01 reloads data when navigating from the experiment overview', async ({ page }) => {
   await login(page);
   await page.goto('/projects/1/experiments/overview');
+  await expect(page.locator('.experiment-note')).toHaveCount(0);
   await expect(page.getByRole('heading', { name: /Laboratorio experimental/ })).toBeVisible();
   await page.getByRole('link', { name: /Registro guiado de materiales/ }).click();
   await expect(page).toHaveURL(/\/projects\/1\/experiments\/EC01/);
