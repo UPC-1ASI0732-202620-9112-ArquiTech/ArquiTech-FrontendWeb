@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, computed, inject, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, computed, effect, inject, input, output, signal, untracked } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
-import { forkJoin, firstValueFrom, Observable } from 'rxjs';
+import { forkJoin, firstValueFrom, Observable, Subscription } from 'rxjs';
 import { SessionService } from '../iam/services/session.service';
 import { ProjectContextService } from '../projects/services/project-context.service';
 import { MaterialService } from '../inventory/services/material.service';
@@ -47,12 +47,15 @@ const EXPERIMENTS: ExperimentLink[] = [
   styleUrl: './experiment-workbench.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ExperimentWorkbenchComponent implements OnInit {
+export class ExperimentWorkbenchComponent {
   readonly projectId = input.required<string>();
   readonly experimentId = input.required<string>();
+  readonly embedded = input(false);
+  readonly changed = output<void>();
   protected readonly session = inject(SessionService);
   protected readonly projectContext = inject(ProjectContextService);
   private readonly destroyRef = inject(DestroyRef);
+  private activeRequest?: Subscription;
   private readonly materialService = inject(MaterialService);
   private readonly attendanceService = inject(AttendanceService);
   private readonly workerService = inject(WorkerService);
@@ -106,19 +109,28 @@ export class ExperimentWorkbenchComponent implements OnInit {
       { label: 'Revisar las alertas críticas', target: 'EC07' },
     ]);
 
-  ngOnInit(): void {
-    if (this.experimentId() === 'EC09') {
-      try {
-        const raw = localStorage.getItem(this.guideStorageKey());
-        const value: unknown = raw ? JSON.parse(raw) : [];
-        if (Array.isArray(value)) {
-          this.completedGuideSteps.set(value.filter((v): v is number => Number.isInteger(v) && v >= 0 && v < 3));
-        }
-      } catch {
-        this.completedGuideSteps.set([]);
-      }
+  constructor() {
+    // Angular reuses the route component when only experimentId changes.
+    // Watch both route inputs and project context so every selected improvement loads its own data.
+    effect(() => {
+      this.projectId();
+      this.experimentId();
+      this.projectContext.current();
+      untracked(() => this.refresh());
+    });
+    this.destroyRef.onDestroy(() => this.activeRequest?.unsubscribe());
+  }
+
+  private restoreGuide(): void {
+    try {
+      const raw = localStorage.getItem(this.guideStorageKey());
+      const value: unknown = raw ? JSON.parse(raw) : [];
+      this.completedGuideSteps.set(Array.isArray(value)
+        ? value.filter((v): v is number => Number.isInteger(v) && v >= 0 && v < 3)
+        : []);
+    } catch {
+      this.completedGuideSteps.set([]);
     }
-    this.refresh();
   }
 
   private guideStorageKey(): string {
@@ -140,16 +152,34 @@ export class ExperimentWorkbenchComponent implements OnInit {
   }
 
   protected refresh(): void {
+    this.activeRequest?.unsubscribe();
+    this.activeRequest = undefined;
+    this.loading.set(false);
+    this.error.set('');
+    this.message.set('');
     const id = Number(this.projectId());
+    const experiment = this.experimentId();
+    if (!Number.isInteger(id) || id <= 0) {
+      this.error.set('Selecciona una obra válida.');
+      return;
+    }
+    if (experiment === 'EC09') {
+      this.restoreGuide();
+      return;
+    }
+    if (experiment === 'overview') return;
     const current = this.projectContext.current();
-    if (!Number.isInteger(id) || !current || current.id !== id) {
+    if (!current || current.id !== id) {
       this.error.set('No se encontró una obra autorizada en la sesión.');
       return;
     }
-    this.error.set('');
-    this.message.set('');
-    const experiment = this.experimentId();
-    if (experiment === 'overview' || experiment === 'EC09') return;
+    this.materials.set([]);
+    this.movements.set([]);
+    this.workers.set([]);
+    this.tasks.set([]);
+    this.incidents.set([]);
+    this.report.set(null);
+    this.selectedMaterialId.set(0);
     this.loading.set(true);
     const request: Observable<{
       materials?: Material[]; workers?: Worker[]; tasks?: Task[]; report?: WeeklyReport;
@@ -171,7 +201,7 @@ export class ExperimentWorkbenchComponent implements OnInit {
       this.error.set('Experimento no disponible en esta rama.');
       return;
     }
-    request.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+    this.activeRequest = request.pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (result) => {
         if (result.materials) {
           this.materials.set(result.materials);
@@ -236,6 +266,7 @@ export class ExperimentWorkbenchComponent implements OnInit {
         }));
       }
       this.refresh();
+      this.changed.emit();
       this.message.set('Movimiento de ensayo registrado. Se actualizará el stock.');
     } catch {
       this.error.set('No se pudo registrar el movimiento. Los datos no se han confirmado.');
