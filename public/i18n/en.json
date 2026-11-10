@@ -616,27 +616,24 @@
   },
   "improvements": {
     "toggle": {
-      "label": "Improvements",
-      "on": "On",
-      "off": "Off",
-      "enable": "Enable improvements",
-      "disable": "Disable improvements"
+      "label": "View",
+      "on": "Enhanced view",
+      "off": "Original view",
+      "enable": "Switch to enhanced view",
+      "disable": "Switch to original view"
     },
     "panel": {
       "aria": "Module improvements",
-      "badge": "IMPROVED VERSION",
-      "title": "Module improvements",
-      "description": "Enhanced features inside the original screen. Turn them off from the top bar."
+      "badge": "ENHANCED VIEW",
+      "title": "Additional features",
+      "description": "Supporting tools integrated into this module."
     },
     "header": {
-      "tag": "ARQUITECH - CONDITION B / EVALUATION ENVIRONMENT",
+      "tag": "ARQUITECH · ENHANCED VIEW",
       "title": "Experiment workspace",
       "description": "Select an improvement for this project.",
       "other": "Other improvements",
       "refresh": "Refresh",
-      "note": "This screen is available in the experiment branch. Data is retrieved from ArquiTech services.",
-      "readOnly": "Changes to the project are disabled outside the demo environment.",
-      "mockWarning": "Changes are allowed only for the supervisor role in the local mock environment.",
       "loading": "Loading project data...",
       "variantB": "Variant B",
       "explore": "Explore improvement"
