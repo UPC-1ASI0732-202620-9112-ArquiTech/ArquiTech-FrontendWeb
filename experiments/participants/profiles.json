@@ -1,13 +1,13 @@
 {
   "schema_version": "1.0",
   "evidence_class": "synthetic-participants",
-  "description": "Perfiles ficticios reproducibles para las simulaciones de EC01-EC10; no representan individuos reales.",
+  "description": "Perfiles de evaluación automatizada para ejecutar EC01-EC10 en ArquiTech. Cada perfil es un agente de software, no una persona participante.",
   "general_agent_rules": [
     "Cada agente recibe un objetivo de tarea y observa el estado visible de la interfaz antes de actuar.",
     "No se proporcionan selectores, rutas de clics ni respuestas esperadas al agente participante.",
     "Los rasgos de perfil no fuerzan errores, éxito, solicitudes de ayuda ni tiempos de ejecución.",
     "No se inventan acciones, tiempos, resultados ni sentimientos cuando la ejecución o el modelo no estén disponibles.",
-    "Los resultados se etiquetan como sintéticos y se conservan por separado de la evidencia humana."
+    "Los resultados se identifican como ejecuciones automatizadas por agentes y se conservan por separado de observaciones realizadas con participantes humanos."
   ],
   "visitor_templates": [
     {
