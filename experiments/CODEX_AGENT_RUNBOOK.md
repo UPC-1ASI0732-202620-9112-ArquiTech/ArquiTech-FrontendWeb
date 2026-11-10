@@ -1,4 +1,4 @@
-# Encargo de ejecución agéntica para Codex - ArquiTech
+# Protocolo de ejecución de pruebas automatizadas - ArquiTech
 
 ## Objetivo
 
