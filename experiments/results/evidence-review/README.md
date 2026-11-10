@@ -6,7 +6,7 @@ El [informe de cierre](../2026-11-10-ab-local-execution-report.md) registra 132 
 
 - [Inventario por archivo](./inventory.csv) con ruta relativa a `experiments/results/agent-runs/`, tamaño en bytes, SHA-256, destino y paquete. Contiene los 4.888 archivos de la cohorte, incluida la lista que contiene las 4.887 huellas originales, además de los archivos de las fases anteriores.
 - [Verificación consolidada](./verification-cohort.jsonl) con los 116 dictámenes canónicos de la cohorte y los nueve suplementos, incluidos los casos y las revisiones del verificador. Los 16 dictámenes del piloto se conservan en [su archivo original](../agent-runs/autonomous-web-20261110/verification.json).
-- [Paquetes adjuntos en GitHub](https://github.com/educmz/ArquiTech-FrontendWeb/releases/tag/evidence/web-ab-2026-11-10) y [huellas de los paquetes](./assets.csv). Contienen 1.338 archivos canónicos. Las trazas, capturas, observaciones, estados del mock y descargas se recuperan conservando sus rutas originales.
+- [Paquetes adjuntos en GitHub](https://github.com/educmz/ArquiTech-FrontendWeb/releases/tag/evidence/web-ab-2026-11-10) y [huellas de los paquetes](./assets.csv). Contienen 1.338 archivos canónicos. El paquete EC01–EC04 se descarga en cuatro partes con [huellas de transferencia](./transport-parts.csv). Las trazas, capturas, observaciones, estados del mock y descargas se recuperan conservando sus rutas originales.
 - Las filas con destino `local` identifican los **4.314 archivos de respaldo local**. Incluyen las colas, registros brutos de Codex, diagnósticos y reintentos, así como el HTML de Playwright que duplica evidencia. Se conservan bajo `experiments/results/agent-runs/` en la máquina de ejecución. Queda pendiente copiarlos a almacenamiento privado si deben conservarse fuera de esa máquina.
 
 La [copia del informe al terminar la ejecución](./report-as-executed.md) conserva la huella registrada en el manifiesto de la cohorte. El informe de cierre agrega el inventario y la publicación para el PR.
@@ -18,7 +18,18 @@ Desde la raíz del repositorio, con Node.js 24 y GitHub CLI disponibles:
 ```powershell
 node experiments/results/evidence-review/verify-inventory.mjs git
 New-Item -ItemType Directory -Force evidence-download | Out-Null
-gh release download evidence/web-ab-2026-11-10 --repo educmz/ArquiTech-FrontendWeb --pattern '*.tar.gz' --dir evidence-download
+gh release download evidence/web-ab-2026-11-10 --repo educmz/ArquiTech-FrontendWeb --pattern '*.tar.gz*' --dir evidence-download
+# Reunir en orden las cuatro partes del paquete EC01–EC04.
+$parts = @(Get-ChildItem evidence-download -Filter 'web-ab-cohorte-ec01-ec04.tar.gz.part??' | Sort-Object Name)
+if ($parts.Count -ne 4) { throw 'Faltan partes del paquete EC01–EC04' }
+$archive = Join-Path (Resolve-Path evidence-download).Path 'web-ab-cohorte-ec01-ec04.tar.gz'
+$output = [IO.File]::Create($archive)
+try {
+  foreach ($part in $parts) {
+    $inputStream = [IO.File]::OpenRead($part.FullName)
+    try { $inputStream.CopyTo($output) } finally { $inputStream.Dispose() }
+  }
+} finally { $output.Dispose() }
 node experiments/results/evidence-review/verify-inventory.mjs git evidence-download
 Get-ChildItem evidence-download -Filter '*.tar.gz' | ForEach-Object {
   tar -xzf $_.FullName -C experiments/results/agent-runs
