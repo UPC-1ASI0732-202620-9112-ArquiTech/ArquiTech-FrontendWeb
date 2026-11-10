@@ -1,3 +1,4 @@
+import { ExperimentModulePanelComponent } from '../../../experiments/experiment-module-panel.component';
 import { CdkMenu, CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
@@ -34,6 +35,7 @@ import { MaterialService } from '../../services/material.service';
 @Component({
   selector: 'app-material-list',
   imports: [
+    ExperimentModulePanelComponent,
     RouterLink,
     RouterLinkActive,
     TranslatePipe,
