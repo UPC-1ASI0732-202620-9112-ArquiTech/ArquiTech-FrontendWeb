@@ -28,6 +28,10 @@ import { addDays, parseIso, startOfWeek, toIsoDate } from '../../../shared/utils
 import { WeeklyReport } from '../../model/weekly-report.model';
 import { ReportPdfService } from '../../services/report-pdf.service';
 import { WeeklyReportService } from '../../services/weekly-report.service';
+import {
+  classifyExperimentError,
+  ExperimentTrackingService,
+} from '../../../experiments/tracking/experiment-tracking.service';
 
 /** Weekly report of the work (HU20) with PDF download (HU52). */
 @Component({
@@ -54,7 +58,9 @@ export class WeeklyReportComponent {
   private readonly pdfService = inject(ReportPdfService);
   private readonly context = inject(ProjectContextService);
   private readonly toast = inject(ToastService);
+  private readonly tracking = inject(ExperimentTrackingService);
   private subscription?: Subscription;
+  private lastTrackedLoadKey: string | null = null;
 
   protected readonly projectStatusTone = PROJECT_STATUS_TONE;
   protected readonly severityTone = INCIDENT_SEVERITY_TONE;
@@ -75,25 +81,39 @@ export class WeeklyReportComponent {
       const project = this.context.current();
       const weekStart = this.weekStart();
       if (project && String(project.id) === this.projectId()) {
-        untracked(() => this.load(weekStart));
+        untracked(() => this.load(weekStart, false));
       }
     });
     inject(DestroyRef).onDestroy(() => this.subscription?.unsubscribe());
   }
 
-  protected load(weekStart = this.weekStart()): void {
+  protected load(weekStart = this.weekStart(), userInitiated = true): void {
     const project = this.context.current();
     if (!project) {
       return;
     }
     this.subscription?.unsubscribe();
     this.status.set('loading');
+    const loadKey = `${project.id}:${toIsoDate(weekStart)}`;
+    const suppressedByConditionB = !userInitiated && this.tracking.consumeConditionBReportNavigation();
+    const shouldTrack = !suppressedByConditionB && (userInitiated || this.lastTrackedLoadKey !== loadKey);
+    this.lastTrackedLoadKey = loadKey;
+    const attempt = shouldTrack
+      ? this.tracking.acquireProjectConsultation({
+          condition: 'A',
+          forceNew: userInitiated,
+        })
+      : null;
     this.subscription = this.reportService.generate(project, weekStart).subscribe({
       next: (report) => {
         this.report.set(report);
         this.status.set('ready');
+        attempt?.loaded();
       },
-      error: () => this.status.set('error'),
+      error: (err: unknown) => {
+        this.status.set('error');
+        attempt?.failApi(classifyExperimentError(err));
+      },
     });
   }
 
@@ -120,6 +140,7 @@ export class WeeklyReportComponent {
     if (!report || this.downloading()) {
       return;
     }
+    this.tracking.recordProjectReportOpened({ condition: 'A' });
     this.downloading.set(true);
     try {
       const fileName = await this.pdfService.download(report);

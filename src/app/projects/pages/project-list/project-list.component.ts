@@ -26,6 +26,7 @@ import { PROJECT_STATUS_TONE } from '../../components/project-status.tones';
 import { Project, ProjectStatus } from '../../model/project.entity';
 import { ProjectContextService } from '../../services/project-context.service';
 import { ProjectService } from '../../services/project.service';
+import { ExperimentTrackingService } from '../../../experiments/tracking/experiment-tracking.service';
 
 /** Figma "Proyectos": works under supervision (HU22) or contracted (HU33). */
 @Component({
@@ -52,6 +53,7 @@ export class ProjectListComponent implements OnInit {
   private readonly context = inject(ProjectContextService);
   private readonly router = inject(Router);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly tracking = inject(ExperimentTrackingService);
   protected readonly session = inject(SessionService);
 
   protected readonly status = signal<LoadStatus>('loading');
@@ -105,6 +107,11 @@ export class ProjectListComponent implements OnInit {
     });
   }
   protected open(project: Project): void {
+    this.tracking.startProjectConsultation({ condition: 'A' });
     void this.router.navigate(['/projects', project.id, 'materials']);
+  }
+
+  protected trackProjectSelection(): void {
+    this.tracking.startProjectConsultation({ condition: 'A' });
   }
 }

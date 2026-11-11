@@ -21,6 +21,11 @@ import { WeeklyReport } from '../reports/model/weekly-report.model';
 import { WeeklyReportService } from '../reports/services/weekly-report.service';
 import { ReportPdfService } from '../reports/services/report-pdf.service';
 import { environment } from '../../environments/environment';
+import {
+  classifyExperimentError,
+  ExperimentTrackingService,
+  ProjectConsultationAttemptHandle,
+} from './tracking/experiment-tracking.service';
 
 type ExperimentId = 'EC01' | 'EC02' | 'EC03' | 'EC04' | 'EC05' | 'EC06' | 'EC07' | 'EC09';
 interface ExperimentLink { id: ExperimentId; title: string; description: string; role: 'all' | 'supervisor' | 'contractor'; }
@@ -65,6 +70,9 @@ export class ExperimentWorkbenchComponent {
   private readonly reportService = inject(WeeklyReportService);
   private readonly pdfService = inject(ReportPdfService);
   private readonly translate = inject(TranslateService);
+  private readonly tracking = inject(ExperimentTrackingService);
+  private lastTrackedEc04Key: string | null = null;
+  private ec04ConsultationAttempt: ProjectConsultationAttemptHandle | null = null;
 
   protected readonly experimentLinks = EXPERIMENTS;
   protected readonly current = computed(() => EXPERIMENTS.find(e => e.id === this.experimentId()));
@@ -119,7 +127,7 @@ export class ExperimentWorkbenchComponent {
       this.projectId();
       this.experimentId();
       this.projectContext.current();
-      untracked(() => this.refresh());
+      untracked(() => this.refresh(false));
     });
     this.destroyRef.onDestroy(() => this.activeRequest?.unsubscribe());
   }
@@ -154,7 +162,7 @@ export class ExperimentWorkbenchComponent {
     return ['/projects', this.projectId(), name];
   }
 
-  protected refresh(): void {
+  protected refresh(userInitiated = true): void {
     this.activeRequest?.unsubscribe();
     this.activeRequest = undefined;
     this.loading.set(false);
@@ -184,6 +192,18 @@ export class ExperimentWorkbenchComponent {
     this.report.set(null);
     this.selectedMaterialId.set(0);
     this.loading.set(true);
+    const shouldTrackEc04 =
+      experiment === 'EC04' &&
+      (!this.embedded() || userInitiated) &&
+      (userInitiated || this.lastTrackedEc04Key !== `${id}:EC04`);
+    const ec04Attempt = shouldTrackEc04
+      ? (() => {
+          this.lastTrackedEc04Key = `${id}:EC04`;
+          const handle = this.tracking.startProjectConsultation({ condition: 'B' });
+          this.ec04ConsultationAttempt = handle;
+          return handle;
+        })()
+      : null;
     const request: Observable<{
       materials?: Material[]; workers?: Worker[]; tasks?: Task[]; report?: WeeklyReport;
       movements?: MaterialMovement[]; incidents?: Incident[];
@@ -218,10 +238,12 @@ export class ExperimentWorkbenchComponent {
         );
         if (result.incidents) this.incidents.set(result.incidents);
         this.loading.set(false);
+        ec04Attempt?.loaded();
       },
-      error: () => {
+      error: (err: unknown) => {
         this.loading.set(false);
         this.error.set('improvements.messages.loadError');
+        ec04Attempt?.failApi(classifyExperimentError(err));
       },
     });
   }
@@ -246,10 +268,33 @@ export class ExperimentWorkbenchComponent {
     return '';
   }
 
+  protected openEc04Report(): void {
+    this.tracking.markConditionBReportNavigation();
+    if (this.ec04ConsultationAttempt) {
+      this.ec04ConsultationAttempt.openReport();
+      return;
+    }
+    this.tracking.recordProjectReportOpened({ condition: 'B' });
+  }
+
   protected async saveMovement(): Promise<void> {
-    if (!this.canEdit() || this.stockError() || this.busy()) return;
+    if (!this.canEdit() || this.busy()) return;
+    const operationType = this.movementKind() === MovementType.Entry ? 'ENTRY' : 'USAGE';
+    const attempt = this.tracking.startMaterialOperation({
+      condition: 'B',
+      operationType,
+    });
     const material = this.selectedMaterial();
-    if (!material) return;
+    if (!material || this.stockError()) {
+      const quantity = this.movementQty();
+      const isInsufficientStock =
+        !!material &&
+        this.movementKind() === MovementType.Usage &&
+        Number.isFinite(quantity) &&
+        quantity > material.stock;
+      attempt.failValidation(isInsufficientStock ? 'insufficient_stock' : 'validation');
+      return;
+    }
     this.busy.set(true);
     this.error.set('');
     try {
@@ -268,10 +313,12 @@ export class ExperimentWorkbenchComponent {
           note: 'EC01 - escenario controlado',
         }));
       }
-      this.refresh();
+      attempt.complete();
+      this.refresh(false);
       this.changed.emit();
       this.message.set('improvements.messages.movementSuccess');
-    } catch {
+    } catch (err: unknown) {
+      attempt.failApi(classifyExperimentError(err));
       this.error.set('improvements.messages.movementFailure');
     } finally {
       this.busy.set(false);

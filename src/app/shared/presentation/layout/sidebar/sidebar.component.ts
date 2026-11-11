@@ -6,6 +6,7 @@ import { LucideAngularModule } from 'lucide-angular';
 import { filter, map } from 'rxjs';
 import { ProjectContextService } from '../../../../projects/services/project-context.service';
 import { LanguageSwitchComponent } from '../../components/language-switch/language-switch.component';
+import { ExperimentTrackingService } from '../../../../experiments/tracking/experiment-tracking.service';
 
 interface ProjectNavItem {
   path: string;
@@ -23,6 +24,7 @@ interface ProjectNavItem {
 })
 export class SidebarComponent {
   private readonly router = inject(Router);
+  private readonly tracking = inject(ExperimentTrackingService);
   protected readonly context = inject(ProjectContextService);
 
   readonly navigate = output<void>();
@@ -54,4 +56,11 @@ export class SidebarComponent {
     const url = this.url().split('?')[0];
     return url === '/projects' || url === '/projects/new';
   });
+
+  protected selectModule(path: string): void {
+    if (path === 'reports') {
+      this.tracking.openProjectReportFromNavigation({ condition: 'A' });
+    }
+    this.navigate.emit();
+  }
 }
