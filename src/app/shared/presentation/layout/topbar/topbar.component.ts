@@ -64,6 +64,14 @@ export class TopbarComponent {
     this.alertsOpen.set(!this.alertsOpen());
   }
 
+  protected markAsRead(alertId: string): void {
+    this.alerts.markAsRead(alertId);
+  }
+
+  protected markAllAsRead(): void {
+    this.alerts.markAllAsRead();
+  }
+
   protected goTo(link: (string | number)[]): void {
     this.alertsOpen.set(false);
     void this.router.navigate(link);

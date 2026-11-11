@@ -126,6 +126,8 @@
     "title": "Alertas de la obra",
     "empty": "Todo en orden. No hay alertas en esta obra.",
     "noProject": "Abre un proyecto para ver sus alertas.",
+    "markRead": "Marcar alerta como leída",
+    "markAllRead": "Marcar todas como leídas",
     "lowStock": "Stock bajo: {{name}} ({{stock}} de {{minimum}} {{unit}} mínimos).",
     "criticalIncident": "Incidencia de severidad alta pendiente: {{type}}."
   },

@@ -126,6 +126,8 @@
     "title": "Site alerts",
     "empty": "All good. There are no alerts on this site.",
     "noProject": "Open a project to see its alerts.",
+    "markRead": "Mark alert as read",
+    "markAllRead": "Mark all as read",
     "lowStock": "Low stock: {{name}} ({{stock}} of {{minimum}} {{unit}} minimum).",
     "criticalIncident": "High-severity incident pending: {{type}}."
   },

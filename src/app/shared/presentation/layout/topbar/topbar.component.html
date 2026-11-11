@@ -40,12 +40,12 @@
       cdkOverlayOrigin
       #alertsOrigin="cdkOverlayOrigin"
       [attr.aria-expanded]="alertsOpen()"
-      [attr.aria-label]="'alerts.label' | translate: { count: alerts.alerts().length }"
+      [attr.aria-label]="'alerts.label' | translate: { count: alerts.unreadCount() }"
       (click)="openAlerts()"
     >
       <lucide-icon name="bell" [size]="17" aria-hidden="true" />
-      @if (alerts.alerts().length > 0) {
-        <span class="notification__dot" aria-hidden="true"></span>
+      @if (alerts.hasUnread()) {
+        <span class="notification__count" aria-hidden="true">{{ alerts.unreadCount() }}</span>
       }
     </button>
 
@@ -61,7 +61,14 @@
       (overlayKeydown)="$event.key === 'Escape' && alertsOpen.set(false)"
     >
       <div class="popover alerts" role="dialog" [attr.aria-label]="'alerts.title' | translate">
-        <p class="alerts__title">{{ 'alerts.title' | translate }}</p>
+        <div class="alerts__header">
+          <p class="alerts__title">{{ 'alerts.title' | translate }}</p>
+          @if (alerts.hasUnread()) {
+            <button type="button" class="alerts__mark-all" (click)="markAllAsRead()">
+              {{ 'alerts.markAllRead' | translate }}
+            </button>
+          }
+        </div>
         @if (!context.current()) {
           <p class="alerts__empty">{{ 'alerts.noProject' | translate }}</p>
         } @else if (alerts.alerts().length === 0) {
@@ -69,8 +76,13 @@
         } @else {
           <ul class="alerts__list">
             @for (alert of alerts.alerts(); track alert.id) {
-              <li>
-                <button type="button" class="alerts__item" (click)="goTo(alert.link)">
+              <li class="alerts__row" [class.alerts__row--read]="alert.read">
+                <button
+                  type="button"
+                  class="alerts__item"
+                  [attr.aria-label]="alert.messageKey | translate: (alert.typeKey ? { type: (alert.typeKey | translate) } : alert.params)"
+                  (click)="goTo(alert.link)"
+                >
                   <lucide-icon
                     [name]="alert.kind === 'lowStock' ? 'package-minus' : 'triangle-alert'"
                     [size]="18"
@@ -84,6 +96,16 @@
                     }}
                   </span>
                 </button>
+                @if (!alert.read) {
+                  <button
+                    type="button"
+                    class="alerts__mark-read"
+                    [attr.aria-label]="'alerts.markRead' | translate"
+                    (click)="markAsRead(alert.id)"
+                  >
+                    <lucide-icon name="check" [size]="16" aria-hidden="true" />
+                  </button>
+                }
               </li>
             }
           </ul>
