@@ -31,7 +31,7 @@
               [routerLink]="['/projects', projectId, item.path]"
               routerLinkActive="is-active"
               ariaCurrentWhenActive="page"
-              (click)="navigate.emit()"
+              (click)="selectModule(item.path)"
             >
               <lucide-icon [name]="item.icon" [size]="20" aria-hidden="true" />
               <span>{{ item.labelKey | translate }}</span>

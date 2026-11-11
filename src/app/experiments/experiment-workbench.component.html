@@ -54,7 +54,7 @@
           <article class="experiment-card">
             <small>{{ 'improvements.ec04.weekly' | translate }}</small>
             <h2>{{ (report() ? 'improvements.ec04.available' : 'improvements.ec04.consulting') | translate }}</h2>
-            <a class="btn btn--primary" [routerLink]="modulePath('reports')" data-testid="ec04-weekly-report-link">{{ 'improvements.ec04.openReport' | translate }}</a>
+            <a class="btn btn--primary" [routerLink]="modulePath('reports')" (click)="openEc04Report()" data-testid="ec04-weekly-report-link">{{ 'improvements.ec04.openReport' | translate }}</a>
           </article>
         </div>
         @if (report(); as reportValue) {

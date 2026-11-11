@@ -7,6 +7,10 @@ import { LucideAngularModule } from 'lucide-angular';
 import { FieldErrorComponent } from '../../../shared/presentation/components/field-error/field-error.component';
 import { AppNumberPipe } from '../../../shared/presentation/pipes/format.pipes';
 import { apiErrorKey } from '../../../shared/utils/api-error';
+import {
+  classifyExperimentError,
+  ExperimentTrackingService,
+} from '../../../experiments/tracking/experiment-tracking.service';
 import { todayIsoDate } from '../../../shared/utils/date.utils';
 import { maxStockValidator, notFutureDateValidator } from '../../../shared/utils/form-validators';
 import { toEventDateTime } from '../../../shared/utils/movement-date';
@@ -32,6 +36,7 @@ export class MaterialMovementDialogComponent {
   private readonly dialogRef = inject<DialogRef<MaterialMovement>>(DialogRef);
   private readonly formBuilder = inject(NonNullableFormBuilder);
   private readonly materialService = inject(MaterialService);
+  private readonly tracking = inject(ExperimentTrackingService);
 
   protected readonly isEntry = this.data.type === MovementType.Entry;
   protected readonly today = todayIsoDate();
@@ -75,8 +80,18 @@ export class MaterialMovementDialogComponent {
   }
 
   protected submit(): void {
+    if (this.submitting()) {
+      return;
+    }
+    const attempt = this.tracking.startMaterialOperation({
+      condition: 'A',
+      operationType: this.isEntry ? 'ENTRY' : 'USAGE',
+    });
     if (this.form.invalid) {
       this.form.markAllAsTouched();
+      const isInsufficientStock =
+        !this.isEntry && this.form.controls.quantity.hasError('insufficientStock');
+      attempt.failValidation(isInsufficientStock ? 'insufficient_stock' : 'validation');
       return;
     }
     const value = this.form.getRawValue();
@@ -98,9 +113,13 @@ export class MaterialMovementDialogComponent {
     this.submitting.set(true);
     this.errorKey.set(null);
     request$.subscribe({
-      next: (movement) => this.dialogRef.close(movement),
+      next: (movement) => {
+        attempt.complete();
+        this.dialogRef.close(movement);
+      },
       error: (error: unknown) => {
         // AC2 (HU01/HU02): the stock is not modified when the request is rejected.
+        attempt.failApi(classifyExperimentError(error));
         this.submitting.set(false);
         this.errorKey.set(apiErrorKey(error));
       },
