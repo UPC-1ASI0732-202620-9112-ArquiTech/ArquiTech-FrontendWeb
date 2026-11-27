@@ -242,3 +242,8 @@
     padding: var(--space-4);
   }
 }
+
+/* Finding 5: recovery help gives a working contact channel. */
+.form-alert.recovery { flex-direction: column; gap: 6px; }
+.form-alert p { margin: 0; }
+.recovery__link { display: inline-block; font-weight: 700; color: var(--color-primary); word-break: break-word; }
