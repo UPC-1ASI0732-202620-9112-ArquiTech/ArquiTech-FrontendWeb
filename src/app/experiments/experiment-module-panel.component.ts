@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, input, output, signal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ExperimentModeService } from './experiment-mode.service';
 import { ExperimentWorkbenchComponent } from './experiment-workbench.component';
@@ -21,4 +21,10 @@ export class ExperimentModulePanelComponent {
   readonly changed = output<void>();
 
   protected readonly mode = inject(ExperimentModeService);
+  /** Collapsed by default so the module's own content stays first (audit finding 8). */
+  protected readonly expanded = signal(false);
+
+  protected toggle(): void {
+    this.expanded.update(value => !value);
+  }
 }

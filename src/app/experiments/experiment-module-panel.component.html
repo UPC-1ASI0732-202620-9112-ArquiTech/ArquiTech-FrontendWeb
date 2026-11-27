@@ -1,13 +1,24 @@
 @if (mode.enabled()) {
   <section class="module-improvement" [attr.aria-label]="'improvements.panel.aria' | translate">
     <div class="module-improvement__header">
-      <p class="module-improvement__eyebrow">{{ 'improvements.panel.badge' | translate }}</p>
-      <h2>{{ 'improvements.panel.title' | translate }}</h2>
-      <p class="module-improvement__description">{{ 'improvements.panel.description' | translate }}</p>
+      <div>
+        <p class="module-improvement__eyebrow">{{ 'improvements.panel.badge' | translate }}</p>
+        <h2>{{ 'improvements.panel.title' | translate }}</h2>
+        <p class="module-improvement__description">{{ 'improvements.panel.description' | translate }}</p>
+      </div>
+      <button class="btn btn--secondary" type="button" data-testid="module-improvement-toggle"
+        [attr.aria-expanded]="expanded()" [attr.aria-controls]="'module-improvement-' + experiments().join('-')"
+        (click)="toggle()">
+        {{ (expanded() ? 'improvements.panel.hide' : 'improvements.panel.show') | translate }}
+      </button>
     </div>
-    @for (id of experiments(); track id) {
-      <app-experiment-workbench [projectId]="projectId()" [experimentId]="id"
-        [embedded]="true" (changed)="changed.emit()" />
+    @if (expanded()) {
+      <div class="module-improvement__body" [id]="'module-improvement-' + experiments().join('-')">
+        @for (id of experiments(); track id) {
+          <app-experiment-workbench [projectId]="projectId()" [experimentId]="id"
+            [embedded]="true" (changed)="changed.emit()" />
+        }
+      </div>
     }
   </section>
 }
