@@ -70,7 +70,12 @@ export class MaterialFormDialogComponent {
     this.unitChoice.set(choice);
     const unit = this.form.controls.unit;
     unit.setValue(choice === OTHER_UNIT ? '' : choice);
-    unit.markAsTouched();
+    // "Otra" opens an empty text field; it is validated when the user leaves it or saves.
+    if (choice === OTHER_UNIT) {
+      unit.markAsUntouched();
+    } else {
+      unit.markAsTouched();
+    }
   }
 
   private initialUnitChoice(): string {
