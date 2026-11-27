@@ -55,3 +55,44 @@ describe('Attendance role UI', () => {
     });
   }
 });
+
+describe('Audit correction 3: attendance opens on today with a visible, removable filter', () => {
+  it('shows a specific empty state for today and reveals previous days on demand', () => {
+    const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+    const old = new Attendance({
+      id: 21, projectId: 9, workerId: 3, workerName: 'Luis', attendanceDate: yesterday,
+      status: AttendanceStatus.Present, checkInAt: null, checkOutAt: null, notes: null,
+      registeredByUserId: 1, createdAt: '', updatedAt: '',
+    });
+    TestBed.configureTestingModule({
+      imports: [AttendanceListComponent, TranslateModule.forRoot()],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting(),
+        importProvidersFrom(LucideAngularModule.pick(APP_ICONS)),
+        { provide: SessionService, useValue: {
+          isSupervisor: signal(true), isContractor: signal(false), user: signal({ id: 1 }),
+        } },
+        { provide: AttendanceService, useValue: { getByProject: () => of([old]) } },
+        { provide: WorkerService, useValue: { getByProject: () => of([]) } },
+        { provide: ProjectAlertsService, useValue: { refresh: () => {} } },
+      ],
+    });
+    const fixture = TestBed.createComponent(AttendanceListComponent);
+    fixture.componentRef.setInput('projectId', '9');
+    fixture.detectChanges();
+    const element: HTMLElement = fixture.nativeElement;
+    expect(element.querySelector('[data-testid="attendance-today-chip"]')).not.toBeNull();
+    expect(element.textContent).toContain('attendance.emptyToday');
+    expect(element.textContent).not.toContain('common.noResultsTitle');
+    expect(element.textContent).not.toContain('Luis');
+
+    const previous = Array.from(element.querySelectorAll('button')).find((button) =>
+      button.textContent?.includes('attendance.showPreviousDays'),
+    )!;
+    previous.click();
+    fixture.detectChanges();
+    expect(element.querySelector('[data-testid="attendance-today-chip"]')).toBeNull();
+    expect(element.textContent).toContain('Luis');
+  });
+});

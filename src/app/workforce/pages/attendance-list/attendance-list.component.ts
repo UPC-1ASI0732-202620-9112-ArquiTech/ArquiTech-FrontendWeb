@@ -1,5 +1,5 @@
 import { ExperimentModulePanelComponent } from '../../../experiments/experiment-module-panel.component';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { ProjectScopedListPage } from '../../../shared/presentation/pages/project-scoped-list.page';
@@ -66,6 +66,18 @@ export class AttendanceListComponent extends ProjectScopedListPage<Attendance> {
     super();
     this.table.setFilter('from', todayIsoDate());
     this.table.setFilter('to', todayIsoDate());
+  }
+
+  /** Finding 3: the default "today" filter is visible, removable and has its own empty state. */
+  protected readonly isTodayOnly = computed(() => {
+    const filters = this.table.filters();
+    const today = todayIsoDate();
+    return filters['from'] === today && filters['to'] === today && !filters['status'] && !this.table.query().trim();
+  });
+
+  protected showPreviousDays(): void {
+    this.table.setFilter('from', '');
+    this.table.setFilter('to', '');
   }
   protected fetch(projectId: number): Observable<Attendance[]> {
     return this.service.getByProject(projectId);
