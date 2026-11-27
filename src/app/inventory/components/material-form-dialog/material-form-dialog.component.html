@@ -21,6 +21,7 @@
       </div>
     }
 
+    <p class="form-legend"><span aria-hidden="true">*</span> {{ 'common.requiredLegend' | translate }}</p>
     <div class="form-grid">
       <div class="field">
         <label class="field__label" for="material-name">{{ 'materials.fields.name' | translate }}</label>
@@ -34,12 +35,30 @@
       </div>
       <div class="field">
         <label class="field__label" for="material-unit">{{ 'materials.fields.unit' | translate }}</label>
-        <input id="material-unit" class="field__control" formControlName="unit" list="material-units" />
-        <datalist id="material-units">
+        <select
+          id="material-unit"
+          class="field__control"
+          aria-required="true"
+          [value]="unitChoice()"
+          (change)="chooseUnit($any($event.target).value)"
+          (blur)="form.controls.unit.markAsTouched()"
+        >
+          <option value="" disabled [selected]="unitChoice() === ''">{{ 'materials.fields.unitSelect' | translate }}</option>
           @for (unit of units; track unit) {
-            <option [value]="unit"></option>
+            <option [value]="unit" [selected]="unitChoice() === unit">{{ unit }}</option>
           }
-        </datalist>
+          <option [value]="otherUnit" [selected]="unitChoice() === otherUnit">{{ 'materials.fields.unitOther' | translate }}</option>
+        </select>
+        @if (unitChoice() === otherUnit) {
+          <input
+            id="material-unit-other"
+            class="field__control"
+            formControlName="unit"
+            maxlength="20"
+            [attr.aria-label]="'materials.fields.unitOtherLabel' | translate"
+            [placeholder]="'materials.fields.unitOtherLabel' | translate"
+          />
+        }
         <app-field-error [control]="form.controls.unit" />
       </div>
 
@@ -113,8 +132,10 @@
           formControlName="providerRuc"
           inputmode="numeric"
           maxlength="11"
-          placeholder="20100124567"
+          [placeholder]="'materials.fields.rucPlaceholder' | translate"
+          aria-describedby="material-ruc-hint"
         />
+        <span id="material-ruc-hint" class="field__hint">{{ 'materials.fields.rucHint' | translate }}</span>
         <app-field-error [control]="form.controls.providerRuc" />
       </div>
     </div>
@@ -122,7 +143,7 @@
 
   <footer class="dialog__footer">
     <button type="button" class="btn btn--secondary" (click)="close()">{{ 'common.cancel' | translate }}</button>
-    <button type="submit" class="btn btn--save" [disabled]="submitting()">
+    <button type="submit" class="btn btn--primary" [disabled]="submitting()">
       <lucide-icon name="check" [size]="16" aria-hidden="true" />
       {{ (submitting() ? 'common.saving' : isEdit ? 'common.saveChanges' : 'materials.form.submit') | translate }}
     </button>

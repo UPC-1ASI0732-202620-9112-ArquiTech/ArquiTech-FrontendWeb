@@ -20,6 +20,7 @@
 
     <fieldset class="form-section">
       <legend class="section-title">{{ 'projects.create.generalSection' | translate }}</legend>
+      <p class="form-legend"><span aria-hidden="true">*</span> {{ 'common.requiredLegend' | translate }}</p>
       <div class="form-grid">
         <div class="field field--full">
           <label class="field__label" for="project-name">{{ 'projects.fields.name' | translate }}</label>
@@ -114,7 +115,7 @@
 
     <div class="project-form__actions">
       <a class="btn btn--secondary" routerLink="/projects">{{ 'common.cancel' | translate }}</a>
-      <button type="submit" class="btn btn--save" [disabled]="submitting()">
+      <button type="submit" class="btn btn--primary" [disabled]="submitting()">
         <lucide-icon name="check" [size]="16" aria-hidden="true" />
         {{ (submitting() ? 'common.saving' : 'projects.create.submit') | translate }}
       </button>

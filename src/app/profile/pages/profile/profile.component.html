@@ -22,6 +22,7 @@
         </div>
       </div>
 
+      <p class="form-legend"><span aria-hidden="true">*</span> {{ 'common.requiredLegend' | translate }}</p>
       <div class="form-grid">
         <div class="field field--full">
           <label class="field__label" for="profile-name">{{ 'profile.fields.fullName' | translate }}</label>
@@ -71,7 +72,7 @@
         @if (user()?.createdAt) {
           <p class="muted">{{ 'profile.memberSince' | translate: { date: (user()?.createdAt | appDate) } }}</p>
         }
-        <button type="submit" class="btn btn--save" [disabled]="saving() || form.pristine">
+        <button type="submit" class="btn btn--primary" [disabled]="saving() || form.pristine">
           <lucide-icon name="check" [size]="16" aria-hidden="true" />
           {{ (saving() ? 'common.saving' : 'common.saveChanges') | translate }}
         </button>

@@ -1,4 +1,5 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
+import { RequiredMarkerDirective } from '../../../shared/presentation/directives/required-marker.directive';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -22,7 +23,7 @@ function localInput(instant: string | null | undefined): string {
 }
 @Component({
   selector: 'app-attendance-form-dialog',
-  imports: [ReactiveFormsModule, TranslatePipe, FieldErrorComponent],
+  imports: [ReactiveFormsModule, RequiredMarkerDirective, TranslatePipe, FieldErrorComponent],
   templateUrl: './attendance-form-dialog.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

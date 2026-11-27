@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { RequiredMarkerDirective } from '../../../shared/presentation/directives/required-marker.directive';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 import { LucideAngularModule } from 'lucide-angular';
@@ -16,7 +17,7 @@ import { ProfileService } from '../../services/profile.service';
 /** Profile (HU16), accessibility (HU19), language (HU46) and sign-out (HU44). */
 @Component({
   selector: 'app-profile',
-  imports: [ReactiveFormsModule, TranslatePipe, LucideAngularModule, FieldErrorComponent, AppDatePipe],
+  imports: [ReactiveFormsModule, RequiredMarkerDirective, TranslatePipe, LucideAngularModule, FieldErrorComponent, AppDatePipe],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

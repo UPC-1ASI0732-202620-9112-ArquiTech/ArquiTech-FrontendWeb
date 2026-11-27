@@ -1,4 +1,5 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
+import { RequiredMarkerDirective } from '../../../shared/presentation/directives/required-marker.directive';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -21,7 +22,7 @@ export interface TaskFormDialogData {
 /** Assign a task to a worker (HU07) or update its data and status (HU53). */
 @Component({
   selector: 'app-task-form-dialog',
-  imports: [ReactiveFormsModule, TranslatePipe, LucideAngularModule, FieldErrorComponent],
+  imports: [ReactiveFormsModule, RequiredMarkerDirective, TranslatePipe, LucideAngularModule, FieldErrorComponent],
   templateUrl: './task-form-dialog.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

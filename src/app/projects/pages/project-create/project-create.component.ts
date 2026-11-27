@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
+import { RequiredMarkerDirective } from '../../../shared/presentation/directives/required-marker.directive';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -18,7 +19,7 @@ import { ProjectService } from '../../services/project.service';
 /** Registration of a construction project (HU09, TS09). Supervisor only (TS21). */
 @Component({
   selector: 'app-project-create',
-  imports: [ReactiveFormsModule, RouterLink, TranslatePipe, LucideAngularModule, FieldErrorComponent],
+  imports: [ReactiveFormsModule, RequiredMarkerDirective, RouterLink, TranslatePipe, LucideAngularModule, FieldErrorComponent],
   templateUrl: './project-create.component.html',
   styleUrl: './project-create.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
