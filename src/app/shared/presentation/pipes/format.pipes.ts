@@ -18,9 +18,9 @@ export class AppDatePipe implements PipeTransform {
   private cacheKey = '';
   private cacheValue = '';
 
-  transform(value: string | null | undefined, format: AppDateFormat = 'date'): string {
+  transform(value: string | Date | null | undefined, format: AppDateFormat = 'date'): string {
     const locale = this.preferences.locale;
-    const key = `${value}|${format}|${locale}`;
+    const key = `${value instanceof Date ? value.toISOString() : value}|${format}|${locale}`;
     if (key === this.cacheKey) {
       return this.cacheValue;
     }
@@ -29,8 +29,8 @@ export class AppDatePipe implements PipeTransform {
     return this.cacheValue;
   }
 
-  private format(value: string | null | undefined, format: AppDateFormat, locale: string): string {
-    const date = parseIso(value);
+  private format(value: string | Date | null | undefined, format: AppDateFormat, locale: string): string {
+    const date = value instanceof Date ? (Number.isNaN(value.getTime()) ? null : value) : parseIso(value);
     if (!date) {
       return '—';
     }

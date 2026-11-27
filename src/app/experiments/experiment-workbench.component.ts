@@ -21,6 +21,7 @@ import { WeeklyReport } from '../reports/model/weekly-report.model';
 import { WeeklyReportService } from '../reports/services/weekly-report.service';
 import { ReportPdfService } from '../reports/services/report-pdf.service';
 import { environment } from '../../environments/environment';
+import { AppDatePipe, AppNumberPipe } from '../shared/presentation/pipes/format.pipes';
 import {
   classifyExperimentError,
   ExperimentTrackingService,
@@ -48,7 +49,7 @@ const EXPERIMENTS: ExperimentLink[] = [
 @Component({
   selector: 'app-experiment-workbench',
   standalone: true,
-  imports: [CommonModule, RouterLink, TranslatePipe],
+  imports: [CommonModule, RouterLink, TranslatePipe, AppDatePipe, AppNumberPipe],
   templateUrl: './experiment-workbench.component.html',
   styleUrl: './experiment-workbench.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -230,7 +231,11 @@ export class ExperimentWorkbenchComponent {
           this.materials.set(result.materials);
           if (!this.selectedMaterialId() && result.materials.length) this.selectedMaterialId.set(result.materials[0].id);
         }
-        if (result.workers) this.workers.set(result.workers.filter(w => w.isActive()).slice(0, 12));
+        if (result.workers) {
+          const active = result.workers.filter(w => w.isActive()).slice(0, 12);
+          this.workers.set(active);
+          this.selections.set(Object.fromEntries(active.map(w => [w.id, AttendanceStatus.Present])));
+        }
         if (result.tasks) this.tasks.set(result.tasks);
         if (result.report) this.report.set(result.report);
         if (result.movements) this.movements.set(
@@ -302,15 +307,13 @@ export class ExperimentWorkbenchComponent {
       if (this.movementKind() === MovementType.Entry) {
         await firstValueFrom(this.materialService.registerEntry(material.id, {
           quantity: this.movementQty(),
-          supplier: material.provider || 'Proveedor de ensayo',
+          supplier: material.provider,
           occurredAt: at,
-          note: 'EC01 - escenario controlado',
         }));
       } else {
         await firstValueFrom(this.materialService.registerUsage(material.id, {
           quantity: this.movementQty(),
           occurredAt: at,
-          note: 'EC01 - escenario controlado',
         }));
       }
       attempt.complete();
@@ -332,6 +335,20 @@ export class ExperimentWorkbenchComponent {
   protected attendanceComplete(): boolean {
     return this.workers().length > 0 && this.workers().every(w => !!this.selections()[w.id]);
   }
+  protected markAllPresent(): void {
+    this.selections.set(Object.fromEntries(this.workers().map(w => [w.id, AttendanceStatus.Present])));
+  }
+  protected presentCount(): number {
+    return this.workers().filter(w => this.selections()[w.id] === AttendanceStatus.Present).length;
+  }
+  /** Readable summary such as "1 entrada y 3 salidas" (audit finding 7). */
+  protected movementSummary(report: WeeklyReport): string {
+    const entries = report.entries.length;
+    const usages = report.usages.length;
+    const entryText = this.translate.instant(entries === 1 ? 'improvements.ec06.entriesOne' : 'improvements.ec06.entriesOther', { count: entries });
+    const usageText = this.translate.instant(usages === 1 ? 'improvements.ec06.usagesOne' : 'improvements.ec06.usagesOther', { count: usages });
+    return `${entryText} · ${usageText}`;
+  }
   protected async saveAttendance(): Promise<void> {
     if (!this.canEdit() || !this.attendanceComplete() || this.busy()) return;
     this.busy.set(true);
@@ -346,7 +363,7 @@ export class ExperimentWorkbenchComponent {
         await firstValueFrom(this.attendanceService.create({
           projectId: Number(this.projectId()), workerId: worker.id, attendanceDate: date,
           status: this.selections()[worker.id], checkInAt: null, checkOutAt: null,
-          notes: 'EC02 - jornada de ensayo',
+          notes: null,
         }));
         count++;
       }
