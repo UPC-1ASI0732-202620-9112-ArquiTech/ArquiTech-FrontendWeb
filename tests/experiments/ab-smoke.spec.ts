@@ -111,12 +111,10 @@ async function inspect(page: Page, id: string, condition: 'A' | 'B'): Promise<st
     case 'EC02': {
       const rows = page.locator('.experiment-table tbody tr');
       await expect(rows).toHaveCount(12);
-      await expect(page.getByRole('button', { name: 'Guardar asistencia de ensayo' })).toBeDisabled();
-      for (let index = 0; index < 12; index++) {
-        await rows.nth(index).locator('select').selectOption('PRESENT');
-      }
-      await expect(page.getByRole('button', { name: 'Guardar asistencia de ensayo' })).toBeEnabled();
-      await page.getByRole('button', { name: 'Guardar asistencia de ensayo' }).click();
+      // Finding 10: every worker starts as present; one click confirms the day.
+      await page.getByRole('button', { name: 'Marcar todos como presentes' }).click();
+      await expect(page.getByRole('button', { name: 'Guardar asistencia del día' })).toBeEnabled();
+      await page.getByRole('button', { name: 'Guardar asistencia del día' }).click();
       await expect(page.locator('.experiment-success')).toContainText('12 registros nuevos');
       assertions.push('doce registros completos guardados en el mock');
       break;
@@ -127,7 +125,7 @@ async function inspect(page: Page, id: string, condition: 'A' | 'B'): Promise<st
       assertions.push('cinco tareas presentadas con jerarquía de prioridad');
       break;
     case 'EC04':
-      await expect(page.getByTestId('ec04-status')).toHaveText('ACTIVE');
+      await expect(page.getByTestId('ec04-status')).toHaveText('Activo');
       await expect(page.getByTestId('ec04-progress')).toContainText('62');
       await page.getByTestId('ec04-weekly-report-link').click();
       await expect(page.locator('.report-grid').first()).toBeVisible();
@@ -146,7 +144,7 @@ async function inspect(page: Page, id: string, condition: 'A' | 'B'): Promise<st
       assertions.push('nueve campos de revisión y exportación disponible');
       break;
     case 'EC07':
-      await expect(page.getByTestId('ec07-critical-count')).toContainText('1 alertas críticas');
+      await expect(page.getByTestId('ec07-critical-count')).toContainText('1 alerta crítica');
       await page.getByRole('button', { name: 'Revisar detalle' }).first().click();
       await expect(page.locator('.experiment-alert strong')).toBeVisible();
       assertions.push('priorización y detalle de incidencia crítica');
