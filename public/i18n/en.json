@@ -13,7 +13,8 @@
     "retry": "Try again",
     "saveChanges": "Save changes",
     "saving": "Saving…",
-    "status": "Status"
+    "status": "Status",
+    "requiredLegend": "Required field"
   },
   "roles": {
     "SUPERVISOR": "Site supervisor",
@@ -57,13 +58,17 @@
     "showPassword": "Show password",
     "hidePassword": "Hide password",
     "forgotPassword": "Forgot your password?",
-    "recoveryHelp": "For security reasons, resets are handled by the ArquiTech support team. Write to us from the email registered in your account.",
+    "recoveryHelp": "For security reasons, resets are handled by the ArquiTech support team. Write to {{email}} from the email registered in your account.",
     "signIn": "Sign in",
     "signingIn": "Signing in…",
     "signOut": "Sign out",
-    "support": "Need help? Contact support",
     "sessionExpired": "Your session ended. Sign in again to continue.",
-    "demoTitle": "Demo mode · use a test account"
+    "demoTitle": "Demo mode · use a test account",
+    "recoveryEmailAction": "Email support",
+    "recoverySubject": "Reset password",
+    "supportPrefix": "Need help?",
+    "supportLink": "Contact support",
+    "supportSubject": "Help with ArquiTech"
   },
   "pagination": {
     "label": "Pagination",
@@ -134,7 +139,7 @@
     "descriptionContractor": "Check the status of the sites you contracted.",
     "search": "Search projects...",
     "contractor": "Contractor",
-    "viewDetails": "View details",
+    "viewDetails": "Open project",
     "emptySupervisorTitle": "You have no registered projects",
     "emptySupervisorMessage": "Register your first site to start managing materials, staff and incidents.",
     "emptyContractorTitle": "You have no contracted projects",
@@ -200,13 +205,16 @@
     },
     "columns": {
       "material": "Material",
-      "quantity": "Quantity",
-      "stock": "Stock",
+      "quantity": "Received",
+      "stock": "Available",
       "unitPrice": "Unit price",
       "unit": "Unit",
       "provider": "Supplier",
       "ruc": "RUC",
-      "date": "Date"
+      "date": "Last movement",
+      "quantityHint": "Total quantity received on site",
+      "stockHint": "Quantity available today",
+      "dateHint": "Date of the material’s last movement"
     },
     "fields": {
       "name": "Material",
@@ -219,7 +227,12 @@
       "minimumStock": "Minimum stock",
       "minimumStockHint": "You will be alerted when the stock falls below this value.",
       "provider": "Supplier",
-      "ruc": "Supplier RUC"
+      "ruc": "Supplier RUC",
+      "rucPlaceholder": "11 digits",
+      "rucHint": "11-digit number without spaces.",
+      "unitOther": "Other",
+      "unitOtherLabel": "Type the unit",
+      "unitSelect": "Select a unit"
     },
     "form": {
       "createTitle": "Register material",
@@ -500,17 +513,21 @@
     "currentWeek": "Current week",
     "pickWeek": "Pick a date of the week",
     "emptySection": "No records this week.",
-    "lowStock": "{{count}} material(s) below minimum stock:",
     "kpis": {
       "progress": "Site progress",
       "completedTasks": "Completed tasks",
       "openTasks": "Pending tasks",
-      "openTasksContext": "{{count}} tasks still open",
       "movements": "Material movements",
-      "movementsContext": "{{entries}} entries · {{usages}} usages",
       "incidents": "Registered incidents",
       "openIncidents": "Unresolved incidents",
-      "openIncidentsContext": "{{count}} unresolved on the site"
+      "openTasksContextOne": "1 task still open",
+      "openTasksContextOther": "{{count}} tasks still open",
+      "entriesOne": "1 entry",
+      "entriesOther": "{{count}} entries",
+      "usagesOne": "1 usage",
+      "usagesOther": "{{count}} usages",
+      "openIncidentsContextOne": "1 unresolved on the site",
+      "openIncidentsContextOther": "{{count}} unresolved on the site"
     },
     "sections": {
       "project": "Project information",
@@ -528,7 +545,9 @@
       "field": "Field",
       "value": "Value",
       "footer": "ArquiTech · Page {{page}} of {{pages}}"
-    }
+    },
+    "lowStockOne": "1 material below minimum stock:",
+    "lowStockOther": "{{count}} materials below minimum stock:"
   },
   "profile": {
     "title": "My profile",
@@ -608,7 +627,12 @@
       "ABSENT": "Absent",
       "LATE": "Late",
       "EXCUSED": "Excused"
-    }
+    },
+    "todayFilter": "Showing: today",
+    "removeTodayFilter": "Remove the today filter and see all days",
+    "emptyToday": "No attendance has been recorded today",
+    "emptyTodayMessage": "Record today’s attendance or review previous days.",
+    "showPreviousDays": "See previous days"
   },
   "legal": {
     "terms": "Terms and Conditions",

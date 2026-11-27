@@ -29,7 +29,7 @@
   --color-border: #e5ded7;
   --color-border-strong: #cfc6bd;
   --color-text: var(--color-jet);
-  --color-text-muted: #746f6a;
+  --color-text-muted: #5f5a55;
   --color-sidebar-text: #d4ccc5;
   --color-sidebar-muted: #aaa19a;
   --color-brand-panel-text: #d7d0c9;
@@ -456,7 +456,7 @@ textarea.field__control {
 select.field__control {
   appearance: none;
   padding-right: 40px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23746f6a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235f5a55' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 14px center;
 }
@@ -858,3 +858,149 @@ select.field__control {
     width: 100%;
   }
 }
+
+/* ---------- Required fields (audit finding 17) ---------- */
+.field:has([aria-required='true']) > .field__label::after,
+.field:has([aria-required='true']) > label::after {
+  content: ' *';
+  color: var(--color-danger-text);
+  font-weight: 700;
+}
+
+.form-legend {
+  margin: 0 0 12px;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+.form-legend span {
+  color: var(--color-danger-text);
+  font-weight: 700;
+}
+
+/* ---------- Tables as cards on narrow screens (audit finding 4) ---------- */
+@media (max-width: 640px) {
+  .data-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .data-table,
+  .data-table tbody {
+    display: block;
+  }
+
+  .data-table tbody tr {
+    position: relative;
+    display: grid;
+    gap: 6px;
+    padding: 14px 16px;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .data-table tbody td {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 12px;
+    height: auto;
+    padding: 0;
+    border-top: 0;
+    text-align: right;
+    white-space: normal;
+  }
+
+  .data-table tbody td[data-label]::before {
+    content: attr(data-label);
+    flex: 0 0 auto;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    text-align: left;
+    color: var(--color-text-muted);
+  }
+
+  .data-table th:first-child,
+  .data-table td:first-child,
+  .data-table th:last-child,
+  .data-table td:last-child {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* The first cell is the card title; the action menu stays visible in the corner. */
+  .data-table tbody td:first-child {
+    padding-right: 48px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    text-align: left;
+    justify-content: flex-start;
+  }
+
+  .data-table tbody td:first-child::before {
+    flex-basis: 100%;
+  }
+
+  .data-table tbody td.cell-actions {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: auto;
+  }
+
+  .data-table tbody td.cell-actions::before {
+    content: none;
+  }
+
+  .data-table .cell-sub {
+    flex-basis: 100%;
+    text-align: inherit;
+  }
+}
+
+@media (max-width: 640px) {
+  .data-table tbody td.cell-actions:has(a) {
+    position: static;
+    justify-content: flex-end;
+  }
+}
+
+/* ---------- Active filter chips (audit finding 3) ---------- */
+.filter-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; }
+.filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px 4px 12px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  background: var(--color-surface);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+.filter-chip__remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-surface-sunken);
+  color: var(--color-text);
+  font-size: 1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.filter-chip__remove:hover { background: var(--color-border); }
+.list-state__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 8px; }
+.list-state__actions:empty { display: none; }
+
+/* Finding 20: the available stock is the highlighted column. */
+.data-table .cell-highlight { background: rgba(255, 182, 39, 0.1); font-size: 0.875rem; }
