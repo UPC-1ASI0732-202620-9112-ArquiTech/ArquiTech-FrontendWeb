@@ -3,7 +3,7 @@ import { Dialog } from '@angular/cdk/dialog';
 import { DeleteProjectDialogComponent } from '../../components/delete-project-dialog.component';
 import { openFormDialog } from '../../../shared/services/dialog.helpers';
 import { ToastService } from '../../../shared/services/toast.service';
-import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, OnInit, computed, inject, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router, RouterLink } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -27,6 +27,7 @@ import { Project, ProjectStatus } from '../../model/project.entity';
 import { ProjectContextService } from '../../services/project-context.service';
 import { ProjectService } from '../../services/project.service';
 import { ExperimentTrackingService } from '../../../experiments/tracking/experiment-tracking.service';
+import { ExperimentModeService } from '../../../experiments/experiment-mode.service';
 
 /** Figma "Proyectos": works under supervision (HU22) or contracted (HU33). */
 @Component({
@@ -55,6 +56,7 @@ export class ProjectListComponent implements OnInit {
   private readonly destroyRef = inject(DestroyRef);
   private readonly tracking = inject(ExperimentTrackingService);
   protected readonly session = inject(SessionService);
+  protected readonly mode = inject(ExperimentModeService);
 
   protected readonly status = signal<LoadStatus>('loading');
   protected readonly statusTone = PROJECT_STATUS_TONE;
@@ -67,6 +69,18 @@ export class ProjectListComponent implements OnInit {
       isWithinIsoRange(project.startDate, filters['from'], filters['to']),
     sort: (a, b) => compareIsoDesc(a.startDate, b.startDate),
   });
+
+  /** Work used by the onboarding guide (EC09); it is named so the user knows which one it is (finding 11). */
+  protected readonly guideProjectId = signal<string | null>(null);
+  protected readonly guideProject = computed(() => {
+    const rows = this.table.rows();
+    const chosen = this.guideProjectId() ?? (this.context.current() ? String(this.context.current()!.id) : null);
+    return rows.find(project => String(project.id) === chosen) ?? rows[0] ?? null;
+  });
+
+  protected chooseGuideProject(id: string): void {
+    this.guideProjectId.set(id);
+  }
 
   protected readonly filterFields: FilterField[] = [
     {

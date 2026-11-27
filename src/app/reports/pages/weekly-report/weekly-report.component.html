@@ -82,23 +82,22 @@
         <div class="kpi card" role="listitem">
           <p class="kpi__label">{{ 'reports.kpis.completedTasks' | translate }}</p>
           <p class="kpi__value">{{ report.completedTasks.length }}</p>
-          <p class="kpi__context">{{ 'reports.kpis.openTasksContext' | translate: { count: report.openTasks } }}</p>
+          <p class="kpi__context">{{ ('reports.kpis.openTasksContext' | pluralKey: report.openTasks) | translate: { count: report.openTasks } }}</p>
         </div>
         <div class="kpi card" role="listitem">
           <p class="kpi__label">{{ 'reports.kpis.movements' | translate }}</p>
           <p class="kpi__value">{{ report.entries.length + report.usages.length }}</p>
           <p class="kpi__context">
-            {{
-              'reports.kpis.movementsContext'
-                | translate: { entries: report.entries.length, usages: report.usages.length }
-            }}
+            {{ ('reports.kpis.entries' | pluralKey: report.entries.length) | translate: { count: report.entries.length } }}
+            ·
+            {{ ('reports.kpis.usages' | pluralKey: report.usages.length) | translate: { count: report.usages.length } }}
           </p>
         </div>
         <div class="kpi card" role="listitem">
           <p class="kpi__label">{{ 'reports.kpis.incidents' | translate }}</p>
           <p class="kpi__value">{{ report.incidents.length }}</p>
           <p class="kpi__context">
-            {{ 'reports.kpis.openIncidentsContext' | translate: { count: report.openIncidents } }}
+            {{ ('reports.kpis.openIncidentsContext' | pluralKey: report.openIncidents) | translate: { count: report.openIncidents } }}
           </p>
         </div>
       </div>
@@ -147,7 +146,7 @@
             <div class="form-alert low-stock" role="note">
               <lucide-icon name="package-minus" [size]="16" aria-hidden="true" />
               <span>
-                {{ 'reports.lowStock' | translate: { count: report.lowStockMaterials.length } }}
+                {{ ('reports.lowStock' | pluralKey: report.lowStockMaterials.length) | translate: { count: report.lowStockMaterials.length } }}
                 @for (material of report.lowStockMaterials; track material.id; let last = $last) {
                   <strong>{{ material.name }}</strong
                   >{{ last ? '' : ', ' }}

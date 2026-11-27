@@ -19,6 +19,7 @@
       </div>
     }
 
+    <p class="form-legend"><span aria-hidden="true">*</span> {{ 'common.requiredLegend' | translate }}</p>
     <div class="form-grid">
       <div class="field">
         <label class="field__label" for="incident-type">{{ 'incidents.fields.type' | translate }}</label>
@@ -73,7 +74,7 @@
 
   <footer class="dialog__footer">
     <button type="button" class="btn btn--secondary" (click)="close()">{{ 'common.cancel' | translate }}</button>
-    <button type="submit" class="btn btn--save" [disabled]="submitting()">
+    <button type="submit" class="btn btn--primary" [disabled]="submitting()">
       <lucide-icon name="check" [size]="16" aria-hidden="true" />
       {{ (submitting() ? 'common.saving' : isEdit ? 'common.saveChanges' : 'incidents.form.submit') | translate }}
     </button>

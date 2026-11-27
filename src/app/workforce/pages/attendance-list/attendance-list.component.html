@@ -11,16 +11,33 @@
 
   <app-experiment-module-panel [projectId]="projectId()" [experiments]="['EC02']" (changed)="load()" />
   <app-data-toolbar [state]="table" searchPlaceholderKey="attendance.search" [filters]="filterFields" />
+  @if (isTodayOnly()) {
+    <div class="filter-chips" data-testid="attendance-today-chip">
+      <span class="filter-chip">
+        {{ 'attendance.todayFilter' | translate }}
+        <button type="button" class="filter-chip__remove" (click)="showPreviousDays()"
+          [attr.aria-label]="'attendance.removeTodayFilter' | translate">×</button>
+      </span>
+    </div>
+  }
   <div class="data-panel">
     <app-list-state
       [status]="status()"
       [isEmpty]="table.total() === 0"
-      [isFiltering]="table.isFiltering()"
+      [isFiltering]="table.isFiltering() && !isTodayOnly()"
       icon="calendar-days"
-      emptyTitleKey="attendance.empty"
-      emptyMessageKey="attendance.emptyMessage"
+      [emptyTitleKey]="isTodayOnly() ? 'attendance.emptyToday' : 'attendance.empty'"
+      [emptyMessageKey]="isTodayOnly() ? 'attendance.emptyTodayMessage' : 'attendance.emptyMessage'"
       (retry)="load()"
     >
+      <div emptyAction class="list-state__actions">
+        @if (canManage()) {
+          <button type="button" class="btn btn--primary" (click)="openForm()">{{ 'attendance.create' | translate }}</button>
+        }
+        @if (isTodayOnly()) {
+          <button type="button" class="btn btn--secondary" (click)="showPreviousDays()">{{ 'attendance.showPreviousDays' | translate }}</button>
+        }
+      </div>
       <div class="table-scroll">
         <table class="data-table">
           <caption class="sr-only">
@@ -44,16 +61,16 @@
           <tbody>
             @for (row of table.pageRows(); track row.id) {
               <tr>
-                <td class="cell-strong">{{ row.workerName }}</td>
-                <td>{{ row.attendanceDate | appDate }}</td>
-                <td>
+                <td [attr.data-label]="'attendance.worker' | translate" class="cell-strong">{{ row.workerName }}</td>
+                <td [attr.data-label]="'attendance.date' | translate">{{ row.attendanceDate | appDate }}</td>
+                <td [attr.data-label]="'common.status' | translate">
                   <app-status-badge [tone]="statusTone[row.status]" [labelKey]="'attendance.status.' + row.status" />
                 </td>
-                <td>{{ row.checkInAt | appDate: 'datetime' }}</td>
-                <td>{{ row.checkOutAt | appDate: 'datetime' }}</td>
-                <td>{{ row.notes || '—' }}</td>
+                <td [attr.data-label]="'attendance.checkIn' | translate">{{ row.checkInAt | appDate: 'datetime' }}</td>
+                <td [attr.data-label]="'attendance.checkOut' | translate">{{ row.checkOutAt | appDate: 'datetime' }}</td>
+                <td [attr.data-label]="'attendance.notes' | translate">{{ row.notes || '—' }}</td>
                 @if (canManage()) {
-                  <td class="cell-actions">
+                  <td [attr.data-label]="'common.actions' | translate" class="cell-actions">
                     <button type="button" class="btn btn--ghost" (click)="openForm(row)">
                       {{ 'common.edit' | translate }}</button
                     ><button type="button" class="btn btn--ghost" (click)="delete(row)">

@@ -57,15 +57,15 @@
           <tbody>
             @for (worker of table.pageRows(); track worker.id) {
               <tr>
-                <td>{{ worker.fullName }}</td>
-                <td class="cell-strong">{{ worker.role }}</td>
-                <td>{{ worker.specialty || '—' }}</td>
-                <td class="cell-num">{{ worker.hireDate | appDate }}</td>
-                <td>
+                <td [attr.data-label]="'workers.columns.name' | translate">{{ worker.fullName }}</td>
+                <td [attr.data-label]="'workers.columns.role' | translate" class="cell-strong">{{ worker.role }}</td>
+                <td [attr.data-label]="'workers.columns.specialty' | translate">{{ worker.specialty || '—' }}</td>
+                <td [attr.data-label]="'workers.columns.hireDate' | translate" class="cell-num">{{ worker.hireDate | appDate }}</td>
+                <td [attr.data-label]="'common.status' | translate">
                   <app-status-badge [tone]="statusTone[worker.status]" [labelKey]="'workers.status.' + worker.status" />
                 </td>
                 @if (canManage()) {
-                  <td class="cell-actions">
+                  <td [attr.data-label]="'common.actions' | translate" class="cell-actions">
                     <button
                       type="button"
                       class="icon-button"

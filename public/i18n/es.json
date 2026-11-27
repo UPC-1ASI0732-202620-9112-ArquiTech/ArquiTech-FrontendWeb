@@ -13,7 +13,8 @@
     "retry": "Reintentar",
     "saveChanges": "Guardar cambios",
     "saving": "Guardando…",
-    "status": "Estado"
+    "status": "Estado",
+    "requiredLegend": "Campo obligatorio"
   },
   "roles": {
     "SUPERVISOR": "Supervisor de obra",
@@ -57,13 +58,17 @@
     "showPassword": "Mostrar contraseña",
     "hidePassword": "Ocultar contraseña",
     "forgotPassword": "¿Olvidaste tu contraseña?",
-    "recoveryHelp": "Por seguridad, el restablecimiento lo realiza el equipo de soporte de ArquiTech. Escríbenos desde el correo registrado en tu cuenta.",
+    "recoveryHelp": "Por seguridad, el restablecimiento lo realiza el equipo de soporte de ArquiTech. Escríbenos a {{email}} desde el correo registrado en tu cuenta.",
     "signIn": "Iniciar sesión",
     "signingIn": "Ingresando…",
     "signOut": "Cerrar sesión",
-    "support": "¿Necesitas ayuda? Contacta a soporte",
     "sessionExpired": "Tu sesión terminó. Vuelve a iniciar sesión para continuar.",
-    "demoTitle": "Modo demostración · usa una cuenta de prueba"
+    "demoTitle": "Modo demostración · usa una cuenta de prueba",
+    "recoveryEmailAction": "Escribir a soporte",
+    "recoverySubject": "Restablecer contraseña",
+    "supportPrefix": "¿Necesitas ayuda?",
+    "supportLink": "Contacta a soporte",
+    "supportSubject": "Ayuda con ArquiTech"
   },
   "pagination": {
     "label": "Paginación",
@@ -127,16 +132,16 @@
     "empty": "Todo en orden. No hay alertas en esta obra.",
     "noProject": "Abre un proyecto para ver sus alertas.",
     "lowStock": "Stock bajo: {{name}} ({{stock}} de {{minimum}} {{unit}} mínimos).",
-    "criticalIncident": "Incidencia de severidad alta pendiente: {{type}}."
+    "criticalIncident": "Incidente de severidad alta pendiente: {{type}}."
   },
   "projects": {
     "descriptionSupervisor": "Consulta las obras bajo tu supervisión y entra a cada una para gestionarla.",
     "descriptionContractor": "Consulta el estado de las obras que contrataste.",
     "search": "Buscar en proyectos...",
     "contractor": "Contratante",
-    "viewDetails": "Ver detalles",
+    "viewDetails": "Abrir proyecto",
     "emptySupervisorTitle": "No tienes proyectos registrados",
-    "emptySupervisorMessage": "Registra tu primera obra para empezar a gestionar materiales, personal e incidencias.",
+    "emptySupervisorMessage": "Registra tu primera obra para empezar a gestionar materiales, personal e incidentes.",
     "emptyContractorTitle": "No tienes proyectos contratados",
     "emptyContractorMessage": "Cuando un supervisor te asigne como contratante de una obra, aparecerá aquí.",
     "columns": {
@@ -200,13 +205,16 @@
     },
     "columns": {
       "material": "Material",
-      "quantity": "Cantidad",
-      "stock": "Stock",
+      "quantity": "Ingresado",
+      "stock": "Disponible",
       "unitPrice": "Precio unit.",
       "unit": "Unidad",
       "provider": "Proveedor",
       "ruc": "RUC",
-      "date": "Fecha"
+      "date": "Último movimiento",
+      "quantityHint": "Cantidad total ingresada a la obra",
+      "stockHint": "Cantidad disponible hoy",
+      "dateHint": "Fecha del último movimiento del material"
     },
     "fields": {
       "name": "Material",
@@ -219,7 +227,12 @@
       "minimumStock": "Stock mínimo",
       "minimumStockHint": "Te avisaremos cuando el stock baje de este valor.",
       "provider": "Proveedor",
-      "ruc": "RUC del proveedor"
+      "ruc": "RUC del proveedor",
+      "rucPlaceholder": "11 dígitos",
+      "rucHint": "Número de 11 dígitos sin espacios.",
+      "unitOther": "Otra",
+      "unitOtherLabel": "Escribe la unidad",
+      "unitSelect": "Selecciona una unidad"
     },
     "form": {
       "createTitle": "Registrar material",
@@ -388,9 +401,9 @@
     "descriptionReadOnly": "Consulta los problemas registrados durante la ejecución de la obra.",
     "search": "Buscar en incidentes...",
     "resolvedOn": "Resuelto el {{date}}",
-    "emptyTitle": "No hay incidencias registradas en esta obra",
+    "emptyTitle": "No hay incidentes registrados en esta obra",
     "emptyMessage": "Registra cualquier evento relevante para mantener evidencia.",
-    "emptyMessageReadOnly": "No se han reportado incidencias en esta obra.",
+    "emptyMessageReadOnly": "No se han reportado incidentes en esta obra.",
     "columns": {
       "date": "Fecha",
       "type": "Tipo de incidente",
@@ -423,24 +436,24 @@
       "descriptionPlaceholder": "¿Qué ocurrió, dónde y qué impacto tiene en la obra?"
     },
     "form": {
-      "createTitle": "Registrar incidencia",
-      "editTitle": "Editar incidencia",
+      "createTitle": "Registrar incidente",
+      "editTitle": "Editar incidente",
       "subtitle": "Deja evidencia del problema y su nivel de severidad.",
-      "submit": "Registrar incidencia"
+      "submit": "Registrar incidente"
     },
     "actions": {
-      "create": "Registrar incidencia",
+      "create": "Registrar incidente",
       "markResolved": "Marcar como resuelta"
     },
     "delete": {
-      "title": "¿Eliminar incidencia?",
-      "message": "Úsalo solo si la incidencia se registró por error. Esta acción no se puede deshacer."
+      "title": "¿Eliminar incidente?",
+      "message": "Úsalo solo si el incidente se registró por error. Esta acción no se puede deshacer."
     },
     "messages": {
-      "created": "Incidencia registrada.",
-      "updated": "Incidencia actualizada.",
-      "resolved": "Incidencia marcada como resuelta.",
-      "deleted": "Incidencia eliminada."
+      "created": "Incidente registrado.",
+      "updated": "Incidente actualizado.",
+      "resolved": "Incidente marcado como resuelto.",
+      "deleted": "Incidente eliminado."
     }
   },
   "machinery": {
@@ -489,7 +502,7 @@
   },
   "reports": {
     "title": "Reporte semanal",
-    "description": "Resumen de avances, materiales e incidencias de la obra durante la semana.",
+    "description": "Resumen de avances, materiales e incidentes de la obra durante la semana.",
     "download": "Descargar PDF",
     "downloading": "Generando PDF…",
     "downloaded": "Reporte descargado: {{file}}",
@@ -500,24 +513,28 @@
     "currentWeek": "Semana actual",
     "pickWeek": "Elegir una fecha de la semana",
     "emptySection": "Sin registros en esta semana.",
-    "lowStock": "{{count}} material(es) por debajo del stock mínimo:",
     "kpis": {
       "progress": "Avance de obra",
       "completedTasks": "Tareas completadas",
       "openTasks": "Tareas pendientes",
-      "openTasksContext": "{{count}} tareas aún abiertas",
       "movements": "Movimientos de material",
-      "movementsContext": "{{entries}} entradas · {{usages}} salidas",
-      "incidents": "Incidencias registradas",
-      "openIncidents": "Incidencias sin resolver",
-      "openIncidentsContext": "{{count}} sin resolver en la obra"
+      "incidents": "Incidentes registrados",
+      "openIncidents": "Incidentes sin resolver",
+      "openTasksContextOne": "1 tarea aún abierta",
+      "openTasksContextOther": "{{count}} tareas aún abiertas",
+      "entriesOne": "1 entrada",
+      "entriesOther": "{{count}} entradas",
+      "usagesOne": "1 salida",
+      "usagesOther": "{{count}} salidas",
+      "openIncidentsContextOne": "1 sin resolver en la obra",
+      "openIncidentsContextOther": "{{count}} sin resolver en la obra"
     },
     "sections": {
       "project": "Información del proyecto",
       "completedTasks": "Tareas completadas",
       "entries": "Entradas de materiales",
       "usages": "Salidas de materiales",
-      "incidents": "Incidencias registradas"
+      "incidents": "Incidentes registrados"
     },
     "columns": {
       "completedOn": "Completada"
@@ -528,7 +545,9 @@
       "field": "Dato",
       "value": "Valor",
       "footer": "ArquiTech · Página {{page}} de {{pages}}"
-    }
+    },
+    "lowStockOne": "1 material por debajo del stock mínimo:",
+    "lowStockOther": "{{count}} materiales por debajo del stock mínimo:"
   },
   "profile": {
     "title": "Mi perfil",
@@ -608,7 +627,12 @@
       "ABSENT": "Ausente",
       "LATE": "Tardanza",
       "EXCUSED": "Justificado"
-    }
+    },
+    "todayFilter": "Mostrando: hoy",
+    "removeTodayFilter": "Quitar el filtro de hoy y ver todos los días",
+    "emptyToday": "Aún no se registra asistencia hoy",
+    "emptyTodayMessage": "Registra la asistencia del día o revisa los días anteriores.",
+    "showPreviousDays": "Ver días anteriores"
   },
   "legal": {
     "terms": "Términos y Condiciones",
@@ -626,16 +650,17 @@
       "aria": "Mejoras del módulo",
       "badge": "VISTA MEJORADA",
       "title": "Funciones adicionales",
-      "description": "Herramientas de apoyo integradas a este módulo."
+      "description": "Herramientas de apoyo integradas a este módulo.",
+      "show": "Mostrar funciones adicionales",
+      "hide": "Ocultar funciones adicionales"
     },
     "header": {
-      "tag": "ARQUITECH · VISTA MEJORADA",
-      "title": "Laboratorio experimental",
+      "tag": "ARQUITECH",
+      "title": "Mejoras disponibles",
       "description": "Selecciona una mejora para esta obra.",
       "other": "Otras mejoras",
       "refresh": "Actualizar",
       "loading": "Cargando información del proyecto...",
-      "variantB": "Variante B",
       "explore": "Explorar mejora"
     },
     "experiments": {
@@ -653,7 +678,7 @@
       },
       "EC04": {
         "title": "Panel de seguimiento",
-        "description": "Estado, avance, incidencias y reporte en un mismo lugar."
+        "description": "Estado, avance, incidentes y reporte en un mismo lugar."
       },
       "EC05": {
         "title": "Historial verificable",
@@ -664,7 +689,7 @@
         "description": "Consolidación verificable del reporte semanal y descarga."
       },
       "EC07": {
-        "title": "Incidencias críticas",
+        "title": "Incidentes críticos",
         "description": "Bandeja priorizada de alertas de alta severidad."
       },
       "EC09": {
@@ -676,7 +701,7 @@
       "date": "Fecha",
       "select": "Seleccionar",
       "supervisorOnly": "Este flujo corresponde al rol supervisor.",
-      "unknown": "No existe una variante B implementada para este identificador en Frontend Web."
+      "unknown": "Esta mejora no está disponible."
     },
     "ec04": {
       "project": "Proyecto contratado",
@@ -689,8 +714,8 @@
       "consulting": "Consultando",
       "openReport": "Abrir reporte semanal",
       "openTasks": "Tareas abiertas",
-      "pendingIncidents": "Incidencias pendientes",
-      "openIncidents": "Consultar incidencias",
+      "pendingIncidents": "Incidentes pendientes",
+      "openIncidents": "Consultar incidentes",
       "weeklyMovements": "Movimientos de la semana",
       "history": "Ver historial"
     },
@@ -702,29 +727,27 @@
       "lowStock": "Stock inferior al mínimo.",
       "step2": "2. Comprueba el movimiento",
       "operation": "Operación",
-      "usage": "Uso de material",
-      "entry": "Entrada de material",
+      "usage": "Salida",
+      "entry": "Entrada",
       "quantity": "Cantidad",
       "projected": "Stock resultante previsto",
-      "confirm": "Confirmar movimiento en datos de ensayo"
+      "confirm": "Confirmar movimiento"
     },
     "ec02": {
       "title": "Registro rápido por jornada",
-      "description": "Selecciona un estado para cada trabajador. Solo se guardan registros nuevos de la fecha elegida.",
+      "description": "Todos los trabajadores inician como presentes; cambia solo las faltas, tardanzas o justificaciones. Solo se guardan registros nuevos de la fecha elegida.",
       "worker": "Trabajador",
       "status": "Estado",
       "attendanceFor": "Asistencia de {{name}}",
-      "eligible": "{{count}} trabajadores elegibles.",
-      "complete": "Lista completa.",
-      "incomplete": "Completa todos los estados antes de guardar.",
-      "save": "Guardar asistencia de ensayo"
+      "incomplete": "Elige un estado para cada trabajador antes de guardar.",
+      "save": "Guardar asistencia del día",
+      "markAllPresent": "Marcar todos como presentes",
+      "summary": "{{count}} trabajadores en la lista: {{present}} presentes y {{others}} con otro estado."
     },
     "ec03": {
       "title": "Tareas vencidas y próximas a vencer",
       "description": "Las tareas abiertas vencidas aparecen primero; las completadas, al final.",
-      "done": "Completada",
-      "overdue": "VENCIDA",
-      "pending": "Pendiente",
+      "overdue": "Vencida",
       "due": "Vence",
       "empty": "No hay tareas disponibles.",
       "openList": "Abrir listado completo"
@@ -734,7 +757,6 @@
       "description": "Movimientos ordenados por fecha, incluyendo responsable, cantidad y tipo.",
       "type": "Tipo",
       "owner": "Responsable",
-      "usage": "Uso",
       "user": "Usuario #{{id}}",
       "empty": "No hay movimientos para esta obra.",
       "openHistory": "Abrir historial actual"
@@ -749,22 +771,26 @@
       "progress": "Avance",
       "completedTasks": "Tareas completadas",
       "openTasks": "Tareas abiertas",
-      "entriesUsages": "Entradas y usos",
-      "and": "y",
-      "incidentsRecorded": "Incidencias registradas",
-      "incidentsOpen": "Incidencias pendientes",
+      "incidentsRecorded": "Incidentes registrados",
+      "incidentsOpen": "Incidentes pendientes",
       "generate": "Generar PDF con datos consolidados",
-      "failure": "No se pudo generar el reporte de esta semana."
+      "failure": "No se pudo generar el reporte de esta semana.",
+      "movements": "Movimientos de material",
+      "entriesOne": "1 entrada",
+      "entriesOther": "{{count}} entradas",
+      "usagesOne": "1 salida",
+      "usagesOther": "{{count}} salidas"
     },
     "ec07": {
       "title": "Alertas priorizadas de obra",
-      "description": "Únicamente incidencias de severidad alta que siguen sin resolver.",
-      "count": "{{count}} alertas críticas",
+      "description": "Únicamente incidentes de severidad alta que siguen sin resolver.",
       "high": "ALTA PRIORIDAD",
-      "reported": "Registrada",
+      "reported": "Registrado",
       "detail": "Revisar detalle",
-      "empty": "No hay incidencias críticas abiertas para esta obra.",
-      "open": "Abrir módulo de incidencias"
+      "empty": "No hay incidentes críticos abiertos para esta obra.",
+      "open": "Abrir módulo de incidentes",
+      "countOne": "1 alerta crítica",
+      "countOther": "{{count}} alertas críticas"
     },
     "ec09": {
       "title": "Primeros pasos para {{role}}",
@@ -772,25 +798,27 @@
       "contractor": "contratante",
       "description": "Marca cada paso cuando termines de explorar el módulo. Puedes volver al recorrido cuando quieras.",
       "explore": "Explorar",
-      "progress": "Progreso de la guía: {{done}} de {{total}} pasos."
+      "progress": "Progreso de la guía: {{done}} de {{total}} pasos.",
+      "project": "Obra de la guía: {{name}}",
+      "chooseProject": "Elige la obra para la guía"
     },
     "guide": {
       "projectStatus": "Revisar el estado y avance del proyecto",
       "weeklyReport": "Abrir el reporte semanal",
-      "incidents": "Consultar las incidencias",
+      "incidents": "Consultar los incidentes",
       "priorityTasks": "Revisar tareas prioritarias",
-      "material": "Registrar un material en entorno de ensayo",
+      "material": "Registrar un material",
       "criticalAlerts": "Revisar las alertas críticas"
     },
     "messages": {
       "invalidProject": "Selecciona una obra válida.",
       "unauthorizedProject": "No se encontró una obra autorizada en la sesión.",
-      "unavailable": "Experimento no disponible en esta rama.",
-      "loadError": "No se pudieron cargar los datos del proyecto. Comprueba la conexión o el escenario de ensayo.",
+      "unavailable": "Esta mejora no está disponible.",
+      "loadError": "No se pudieron cargar los datos del proyecto. Comprueba tu conexión e inténtalo nuevamente.",
       "selectMaterial": "Selecciona un material.",
       "invalidQuantity": "La cantidad debe ser mayor que cero.",
       "insufficientStock": "El uso supera el stock disponible ({{stock}} {{unit}}).",
-      "movementSuccess": "Movimiento de ensayo registrado. Se actualizará el stock.",
+      "movementSuccess": "Movimiento registrado. El stock se actualizó.",
       "movementFailure": "No se pudo registrar el movimiento. Los datos no se han confirmado.",
       "attendanceSuccess": "{{count}} registros nuevos guardados; {{existing}} ya existían para la fecha.",
       "attendanceFailure": "Se produjo un error; algunos registros pueden haberse guardado. Revisa la asistencia antes de repetir.",

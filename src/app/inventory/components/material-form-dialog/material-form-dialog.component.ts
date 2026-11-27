@@ -1,4 +1,5 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
+import { RequiredMarkerDirective } from '../../../shared/presentation/directives/required-marker.directive';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -17,12 +18,14 @@ export interface MaterialFormDialogData {
   material?: Material;
 }
 
-export const MATERIAL_UNITS = ['kg', 'bolsa', 'unidad', 'litro', 'galón', 'm³', 'm²', 'm', 'varilla', 'plancha'];
+/** Units most used on site (audit finding 18); anything else goes through "Otra". */
+export const MATERIAL_UNITS = ['kg', 't', 'm', 'm²', 'm³', 'unidad', 'bolsa', 'varilla', 'litro', 'galón', 'plancha'];
+export const OTHER_UNIT = '__other__';
 
 /** Register a material with its first entry, or update its information (HU29). */
 @Component({
   selector: 'app-material-form-dialog',
-  imports: [ReactiveFormsModule, TranslatePipe, LucideAngularModule, FieldErrorComponent],
+  imports: [ReactiveFormsModule, RequiredMarkerDirective, TranslatePipe, LucideAngularModule, FieldErrorComponent],
   templateUrl: './material-form-dialog.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -34,6 +37,9 @@ export class MaterialFormDialogComponent {
 
   protected readonly isEdit = !!this.data.material;
   protected readonly units = MATERIAL_UNITS;
+  protected readonly otherUnit = OTHER_UNIT;
+  /** Selected option of the unit list; "Otra" reveals a free text field. */
+  protected readonly unitChoice = signal(this.initialUnitChoice());
   protected readonly today = todayIsoDate();
   protected readonly submitting = signal(false);
   protected readonly errorKey = signal<string | null>(null);
@@ -58,6 +64,26 @@ export class MaterialFormDialogComponent {
       this.form.controls.quantity.disable();
       this.form.controls.date.disable();
     }
+  }
+
+  protected chooseUnit(choice: string): void {
+    this.unitChoice.set(choice);
+    const unit = this.form.controls.unit;
+    unit.setValue(choice === OTHER_UNIT ? '' : choice);
+    // "Otra" opens an empty text field; it is validated when the user leaves it or saves.
+    if (choice === OTHER_UNIT) {
+      unit.markAsUntouched();
+    } else {
+      unit.markAsTouched();
+    }
+  }
+
+  private initialUnitChoice(): string {
+    const current = this.data.material?.unit;
+    if (!current) {
+      return '';
+    }
+    return MATERIAL_UNITS.includes(current) ? current : OTHER_UNIT;
   }
 
   protected close(): void {

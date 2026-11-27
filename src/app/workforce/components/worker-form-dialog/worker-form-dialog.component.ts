@@ -1,4 +1,5 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
+import { RequiredMarkerDirective } from '../../../shared/presentation/directives/required-marker.directive';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -31,7 +32,7 @@ export const WORKER_ROLES = [
 /** Register (HU06) or update (HU32) a worker of the work. */
 @Component({
   selector: 'app-worker-form-dialog',
-  imports: [ReactiveFormsModule, TranslatePipe, LucideAngularModule, FieldErrorComponent],
+  imports: [ReactiveFormsModule, RequiredMarkerDirective, TranslatePipe, LucideAngularModule, FieldErrorComponent],
   templateUrl: './worker-form-dialog.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

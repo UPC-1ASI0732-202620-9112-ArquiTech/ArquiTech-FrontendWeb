@@ -1,5 +1,12 @@
 import { test, expect, type Page } from '@playwright/test';
 
+async function expandImprovements(page: Page) {
+  const expand = page.getByTestId('module-improvement-toggle');
+  await expect(expand).toHaveAttribute('aria-expanded', 'false');
+  await expand.click();
+  await expect(expand).toHaveAttribute('aria-expanded', 'true');
+}
+
 async function login(page: Page, role: 'supervisor' | 'contractor' = 'supervisor') {
   await page.goto('/login');
   const email = role === 'supervisor' ? 'supervisor@arquitech.demo' : 'contratante@arquitech.demo';
@@ -34,6 +41,9 @@ for (const { id, route, role, english } of cases) {
 
     await toggle.click();
     await expect(toggle).toHaveAttribute('aria-pressed', 'true');
+    // Finding 8: the additional functions start collapsed so they do not duplicate the module.
+    await expect(panel.locator('app-experiment-workbench')).toHaveCount(0);
+    await expandImprovements(page);
     await expect(panel.locator('app-experiment-workbench')).toBeVisible();
     await expect(panel.locator('.experiment-card').first()).toBeVisible();
 
@@ -57,6 +67,7 @@ test('Global preference persists between routes, reload and language changes', a
   await toggle.click();
   await page.goto('/projects/1/materials');
   await expect(toggle).toHaveAttribute('aria-pressed', 'true');
+  await expandImprovements(page);
   await expect(page.locator('app-experiment-workbench')).toBeVisible();
   await page.reload();
   await expect(toggle).toHaveAttribute('aria-pressed', 'true');
@@ -64,6 +75,7 @@ test('Global preference persists between routes, reload and language changes', a
   await expect(toggle).toContainText('Enhanced view');
   await expect(toggle).toHaveAttribute('aria-label', 'Switch to original view');
   await page.goto('/projects/1/attendance');
+  await expandImprovements(page);
   await expect(page.locator('app-experiment-workbench')).toBeVisible();
   await toggle.click();
   await page.goto('/projects/1/materials');
@@ -75,7 +87,7 @@ test('EC01 reloads data when navigating from the experiment overview', async ({ 
   await login(page);
   await page.goto('/projects/1/experiments/overview');
   await expect(page.locator('.experiment-note')).toHaveCount(0);
-  await expect(page.getByRole('heading', { name: /Laboratorio experimental/ })).toBeVisible();
+  await expect(page.getByRole('heading', { name: /Mejoras disponibles/ })).toBeVisible();
   await page.getByRole('link', { name: /Registro guiado de materiales/ }).click();
   await expect(page).toHaveURL(/\/projects\/1\/experiments\/EC01/);
   const materials = page.locator('.experiment-field select').first();
@@ -88,6 +100,7 @@ test('EC01 keeps original inventory and validates mock materials in B', async ({
   await login(page);
   await page.goto('/projects/1/materials');
   await page.getByTestId('web-improvements-toggle').click();
+  await expandImprovements(page);
   const panel = page.locator('app-experiment-module-panel');
   const materials = panel.locator('.experiment-field select').first();
   await expect(materials.locator('option')).toHaveCount(5);
@@ -96,4 +109,34 @@ test('EC01 keeps original inventory and validates mock materials in B', async ({
   await panel.getByRole('spinbutton', { name: 'Cantidad' }).fill('50');
   await expect(panel.getByText(/El uso supera el stock disponible/)).toBeVisible();
   await expect(panel.getByTestId('ec01-save')).toBeDisabled();
+});
+
+test('EC02 starts every worker as present and saves in one click', async ({ page }) => {
+  await login(page);
+  await page.goto('/projects/1/attendance');
+  await page.getByTestId('web-improvements-toggle').click();
+  await expandImprovements(page);
+  const panel = page.locator('app-experiment-module-panel');
+  const rows = panel.locator('.experiment-table tbody tr');
+  await expect(rows.first()).toBeVisible();
+  const count = await rows.count();
+  await expect(panel.getByText(new RegExp(count + ' trabajadores'))).toBeVisible();
+  await rows.first().locator('select').selectOption('ABSENT');
+  await panel.getByRole('button', { name: 'Marcar todos como presentes' }).click();
+  await expect(rows.first().locator('select')).toHaveValue('PRESENT');
+  await expect(panel.getByRole('button', { name: 'Guardar asistencia del día' })).toBeEnabled();
+});
+
+test('EC09 names the work used by the onboarding guide', async ({ page }) => {
+  await login(page);
+  await page.getByTestId('web-improvements-toggle').click();
+  const guide = page.getByTestId('ec09-guide-project');
+  await expect(guide.getByText(/Obra de la guía: /)).toBeVisible();
+  const select = guide.locator('select');
+  const options = select.locator('option');
+  if ((await options.count()) > 1) {
+    const second = await options.nth(1).textContent();
+    await select.selectOption({ index: 1 });
+    await expect(guide.getByText('Obra de la guía: ' + second!.trim())).toBeVisible();
+  }
 });

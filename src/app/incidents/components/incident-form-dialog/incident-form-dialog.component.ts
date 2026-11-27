@@ -1,4 +1,5 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
+import { RequiredMarkerDirective } from '../../../shared/presentation/directives/required-marker.directive';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -26,7 +27,7 @@ export interface IncidentFormDialogData {
 /** Register (HU35) or update (HU36) an incident of the work. */
 @Component({
   selector: 'app-incident-form-dialog',
-  imports: [ReactiveFormsModule, TranslatePipe, LucideAngularModule, FieldErrorComponent],
+  imports: [ReactiveFormsModule, RequiredMarkerDirective, TranslatePipe, LucideAngularModule, FieldErrorComponent],
   templateUrl: './incident-form-dialog.component.html',
   styleUrl: './incident-form-dialog.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

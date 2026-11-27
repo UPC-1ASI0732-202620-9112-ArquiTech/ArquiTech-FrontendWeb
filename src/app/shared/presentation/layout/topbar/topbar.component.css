@@ -215,3 +215,21 @@
   .topbar__improvements { padding: 7px 9px; gap: 5px; }
   .topbar__improvements-label { display: none; }
 }
+
+/* Finding 12: on phones the view switch is icon-only and the topbar never exceeds the screen. */
+.topbar__left { flex: 1 1 auto; }
+.topbar__right { flex: 0 0 auto; }
+.breadcrumb { min-width: 0; overflow: hidden; }
+.breadcrumb__current { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+@media (max-width: 600px) {
+  .topbar__right { gap: 6px; }
+  .topbar__improvements { width: 36px; min-width: 36px; padding: 0; }
+  .topbar__improvements-state {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+}

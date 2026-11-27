@@ -24,7 +24,6 @@
         @for (experiment of experimentLinks; track experiment.id) {
           @if (visible(experiment)) {
             <a class="experiment-card" [routerLink]="path(experiment.id)">
-              <small>{{ experiment.id }} · {{ 'improvements.header.variantB' | translate }}</small>
               <h2>{{ experiment.title | translate }}</h2>
               <p>{{ experiment.description | translate }}</p>
               <strong>{{ 'improvements.header.explore' | translate }}</strong>
@@ -43,7 +42,7 @@
           </article>
           <article class="experiment-card">
             <small>{{ 'improvements.ec04.status' | translate }}</small>
-            <h2 data-testid="ec04-status">{{ project.status }}</h2>
+            <h2 data-testid="ec04-status">{{ ('projects.status.' + project.status) | translate }}</h2>
             <p>{{ 'improvements.ec04.statusCaption' | translate }}</p>
           </article>
           <article class="experiment-card">
@@ -54,7 +53,9 @@
           <article class="experiment-card">
             <small>{{ 'improvements.ec04.weekly' | translate }}</small>
             <h2>{{ (report() ? 'improvements.ec04.available' : 'improvements.ec04.consulting') | translate }}</h2>
-            <a class="btn btn--primary" [routerLink]="modulePath('reports')" (click)="openEc04Report()" data-testid="ec04-weekly-report-link">{{ 'improvements.ec04.openReport' | translate }}</a>
+            @if (!embedded()) {
+              <a class="btn btn--primary" [routerLink]="modulePath('reports')" (click)="openEc04Report()" data-testid="ec04-weekly-report-link">{{ 'improvements.ec04.openReport' | translate }}</a>
+            }
           </article>
         </div>
         @if (report(); as reportValue) {
@@ -137,7 +138,6 @@
                   <td>
                     <label class="sr-only" [for]="'attendance-' + worker.id">{{ 'improvements.ec02.attendanceFor' | translate: { name: worker.fullName } }}</label>
                     <select [id]="'attendance-' + worker.id" [value]="selections()[worker.id] || ''" (change)="setAttendance(worker.id, $event)">
-                      <option value="">{{ 'improvements.shared.select' | translate }}</option>
                       <option value="PRESENT">{{ 'attendance.status.PRESENT' | translate }}</option>
                       <option value="ABSENT">{{ 'attendance.status.ABSENT' | translate }}</option>
                       <option value="LATE">{{ 'attendance.status.LATE' | translate }}</option>
@@ -148,8 +148,14 @@
               }
             </tbody>
           </table>
-          <p>{{ 'improvements.ec02.eligible' | translate: { count: workers().length } }} {{ (attendanceComplete() ? 'improvements.ec02.complete' : 'improvements.ec02.incomplete') | translate }}</p>
-          <button class="btn btn--primary" type="button" [disabled]="!canEdit() || !attendanceComplete() || busy()" (click)="saveAttendance()">{{ 'improvements.ec02.save' | translate }}</button>
+          <p role="status">
+            {{ 'improvements.ec02.summary' | translate: { count: workers().length, present: presentCount(), others: workers().length - presentCount() } }}
+            @if (!attendanceComplete()) { {{ 'improvements.ec02.incomplete' | translate }} }
+          </p>
+          <div class="experiment-actions">
+            <button class="btn btn--secondary" type="button" [disabled]="!workers().length || busy()" (click)="markAllPresent()">{{ 'improvements.ec02.markAllPresent' | translate }}</button>
+            <button class="btn btn--primary" type="button" [disabled]="!canEdit() || !attendanceComplete() || busy()" (click)="saveAttendance()">{{ 'improvements.ec02.save' | translate }}</button>
+          </div>
         </article>
       } @else { <p class="experiment-error">{{ 'improvements.shared.supervisorOnly' | translate }}</p> }
     }
@@ -160,11 +166,10 @@
         <ul class="experiment-list">
           @for (task of orderedTasks(); track task.id) {
             <li>
-              <span class="experiment-priority" [class.is-urgent]="task.isOverdue()">
-                {{ (task.isCompleted() ? 'improvements.ec03.done' : task.isOverdue() ? 'improvements.ec03.overdue' : 'improvements.ec03.pending') | translate }}
-              </span>
+              <span class="experiment-priority">{{ ('tasks.status.' + task.status) | translate }}</span>
+              @if (task.isOverdue()) { <span class="experiment-priority is-urgent">{{ 'improvements.ec03.overdue' | translate }}</span> }
               <strong>{{ task.title }}</strong>
-              <span>{{ 'improvements.ec03.due' | translate }}: {{ task.dueDate | date:'dd/MM/yyyy' }}</span>
+              <span>{{ 'improvements.ec03.due' | translate }}: {{ task.dueDate | appDate }}</span>
               <small>{{ task.workerName }}</small>
             </li>
           } @empty { <li>{{ 'improvements.ec03.empty' | translate }}</li> }
@@ -181,10 +186,10 @@
           <tbody>
             @for (movement of movements(); track movement.id) {
               <tr>
-                <td>{{ movement.occurredAt | date:'dd/MM/yyyy HH:mm' }}</td>
+                <td>{{ movement.occurredAt | appDate: 'datetime' }}</td>
                 <td>{{ movement.materialName }}</td>
-                <td>{{ (movement.type === 'ENTRY' ? 'improvements.ec01.entry' : 'improvements.ec05.usage') | translate }}</td>
-                <td>{{ movement.quantity }} {{ movement.unit }}</td>
+                <td>{{ ('movements.types.' + movement.type) | translate }}</td>
+                <td>{{ movement.type === 'ENTRY' ? '+' : '−' }}{{ movement.quantity | appNumber }} {{ movement.unit }}</td>
                 <td>{{ movement.registeredByName || ('improvements.ec05.user' | translate: { id: movement.registeredByUserId }) }}</td>
               </tr>
             } @empty { <tr><td colspan="5">{{ 'improvements.ec05.empty' | translate }}</td></tr> }
@@ -200,16 +205,18 @@
           <p>{{ 'improvements.ec06.description' | translate }}</p>
           <ul class="experiment-checklist">
             <li><strong>{{ 'improvements.ec06.project' | translate }}:</strong> {{ weekly.project.name }}</li>
-            <li><strong>{{ 'improvements.ec06.week' | translate }}:</strong> {{ weekly.weekStart | date:'dd/MM/yyyy' }} {{ 'improvements.ec06.to' | translate }} {{ weekly.weekEnd | date:'dd/MM/yyyy' }}</li>
-            <li><strong>{{ 'improvements.ec06.status' | translate }}:</strong> {{ weekly.project.status }}</li>
+            <li><strong>{{ 'improvements.ec06.week' | translate }}:</strong> {{ weekly.weekStart | appDate }} {{ 'improvements.ec06.to' | translate }} {{ weekly.weekEnd | appDate }}</li>
+            <li><strong>{{ 'improvements.ec06.status' | translate }}:</strong> {{ ('projects.status.' + weekly.project.status) | translate }}</li>
             <li><strong>{{ 'improvements.ec06.progress' | translate }}:</strong> {{ weekly.project.progress }} %</li>
             <li><strong>{{ 'improvements.ec06.completedTasks' | translate }}:</strong> {{ weekly.completedTasks.length }}</li>
             <li><strong>{{ 'improvements.ec06.openTasks' | translate }}:</strong> {{ weekly.openTasks }}</li>
-            <li><strong>{{ 'improvements.ec06.entriesUsages' | translate }}:</strong> {{ weekly.entries.length }} {{ 'improvements.ec06.and' | translate }} {{ weekly.usages.length }}</li>
+            <li><strong>{{ 'improvements.ec06.movements' | translate }}:</strong> {{ movementSummary(weekly) }}</li>
             <li><strong>{{ 'improvements.ec06.incidentsRecorded' | translate }}:</strong> {{ weekly.incidents.length }}</li>
             <li><strong>{{ 'improvements.ec06.incidentsOpen' | translate }}:</strong> {{ weekly.openIncidents }}</li>
           </ul>
-          <button class="btn btn--primary" type="button" [disabled]="busy()" (click)="downloadReport()">{{ 'improvements.ec06.generate' | translate }}</button>
+          @if (!embedded()) {
+            <button class="btn btn--primary" type="button" [disabled]="busy()" (click)="downloadReport()">{{ 'improvements.ec06.generate' | translate }}</button>
+          }
         </article>
       } @else if (!loading()) { <p>{{ 'improvements.ec06.failure' | translate }}</p> }
     }
@@ -217,20 +224,20 @@
       <article class="experiment-card">
         <h2>{{ 'improvements.ec07.title' | translate }}</h2>
         <p>{{ 'improvements.ec07.description' | translate }}</p>
-        <div aria-live="polite"><strong data-testid="ec07-critical-count">{{ 'improvements.ec07.count' | translate: { count: critical().length } }}</strong></div>
+        <div aria-live="polite"><strong data-testid="ec07-critical-count">{{ (critical().length === 1 ? 'improvements.ec07.countOne' : 'improvements.ec07.countOther') | translate: { count: critical().length } }}</strong></div>
         <ul class="experiment-list">
           @for (incident of critical(); track incident.id) {
             <li>
               <span class="experiment-priority is-urgent">{{ 'improvements.ec07.high' | translate }}</span>
-              <strong>{{ incident.type }}</strong>
-              <span>{{ 'improvements.ec07.reported' | translate }}: {{ incident.reportedAt | date:'dd/MM/yyyy HH:mm' }}</span>
+              <strong>{{ ('incidents.types.' + incident.type) | translate }}</strong>
+              <span>{{ 'improvements.ec07.reported' | translate }}: {{ incident.reportedAt | appDate: 'datetime' }}</span>
               <button class="btn btn--secondary" type="button" (click)="selectAlert(incident.id)">{{ 'improvements.ec07.detail' | translate }}</button>
             </li>
           } @empty { <li>{{ 'improvements.ec07.empty' | translate }}</li> }
         </ul>
         @if (selectedAlert(); as incident) {
           <div class="experiment-alert" role="status">
-            <strong>{{ incident.type }} - {{ ('incidents.status.' + incident.status) | translate }}</strong>
+            <strong>{{ ('incidents.types.' + incident.type) | translate }} - {{ ('incidents.status.' + incident.status) | translate }}</strong>
             <p>{{ incident.description }}</p>
             <a class="btn btn--secondary" [routerLink]="modulePath('incidents')">{{ 'improvements.ec07.open' | translate }}</a>
           </div>

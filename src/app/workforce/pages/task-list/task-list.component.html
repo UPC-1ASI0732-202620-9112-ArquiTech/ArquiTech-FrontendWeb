@@ -58,14 +58,14 @@
           <tbody>
             @for (row of table.pageRows(); track row.task.id) {
               <tr>
-                <td class="cell-strong task-title">
+                <td [attr.data-label]="'tasks.columns.task' | translate" class="cell-strong task-title">
                   {{ row.task.title }}
                   @if (row.task.description) {
                     <span class="cell-sub">{{ row.task.description }}</span>
                   }
                 </td>
-                <td>{{ row.workerName || '—' }}</td>
-                <td class="cell-num">
+                <td [attr.data-label]="'tasks.columns.worker' | translate">{{ row.workerName || '—' }}</td>
+                <td [attr.data-label]="'tasks.columns.dueDate' | translate" class="cell-num">
                   <span class="due" [class.due--overdue]="row.task.isOverdue()">
                     {{ row.task.dueDate | appDate }}
                     @if (row.task.isOverdue()) {
@@ -73,14 +73,14 @@
                     }
                   </span>
                 </td>
-                <td>
+                <td [attr.data-label]="'common.status' | translate">
                   <app-status-badge
                     [tone]="statusTone[row.task.status]"
                     [labelKey]="'tasks.status.' + row.task.status"
                   />
                 </td>
                 @if (canManage()) {
-                  <td class="cell-actions">
+                  <td [attr.data-label]="'common.actions' | translate" class="cell-actions">
                     <button
                       type="button"
                       class="icon-button"

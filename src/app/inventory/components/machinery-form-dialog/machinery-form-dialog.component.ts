@@ -1,4 +1,5 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
+import { RequiredMarkerDirective } from '../../../shared/presentation/directives/required-marker.directive';
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -18,7 +19,7 @@ export interface MachineryFormDialogData {
 /** Register (HU05) or update (HU31) a machine of the work. */
 @Component({
   selector: 'app-machinery-form-dialog',
-  imports: [ReactiveFormsModule, TranslatePipe, LucideAngularModule, FieldErrorComponent],
+  imports: [ReactiveFormsModule, RequiredMarkerDirective, TranslatePipe, LucideAngularModule, FieldErrorComponent],
   templateUrl: './machinery-form-dialog.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

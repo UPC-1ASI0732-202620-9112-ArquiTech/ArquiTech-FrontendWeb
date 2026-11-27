@@ -1,4 +1,5 @@
 import { DIALOG_DATA, DialogRef } from '@angular/cdk/dialog';
+import { RequiredMarkerDirective } from '../../../shared/presentation/directives/required-marker.directive';
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -27,7 +28,7 @@ export interface MaterialMovementDialogData {
 /** Entry (HU01) or usage (HU02) of a material. Usage cannot exceed the stock (TS03). */
 @Component({
   selector: 'app-material-movement-dialog',
-  imports: [ReactiveFormsModule, TranslatePipe, LucideAngularModule, FieldErrorComponent, AppNumberPipe],
+  imports: [ReactiveFormsModule, RequiredMarkerDirective, TranslatePipe, LucideAngularModule, FieldErrorComponent, AppNumberPipe],
   templateUrl: './material-movement-dialog.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

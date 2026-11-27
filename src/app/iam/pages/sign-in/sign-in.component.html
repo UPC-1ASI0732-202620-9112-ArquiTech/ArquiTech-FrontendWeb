@@ -59,7 +59,6 @@
             [type]="showPassword() ? 'text' : 'password'"
             formControlName="password"
             autocomplete="current-password"
-            placeholder="••••••••"
             aria-describedby="password-error"
           />
           <button
@@ -84,14 +83,20 @@
         {{ 'auth.forgotPassword' | translate }}
       </button>
       @if (showRecoveryHelp()) {
-        <p class="form-alert form-alert--info" role="status">{{ 'auth.recoveryHelp' | translate }}</p>
+        <div class="form-alert form-alert--info recovery" role="status" data-testid="recovery-help">
+          <p>{{ 'auth.recoveryHelp' | translate: { email: supportEmail } }}</p>
+          <a class="recovery__link" [href]="mailto('auth.recoverySubject')">{{ 'auth.recoveryEmailAction' | translate }} ({{ supportEmail }})</a>
+        </div>
       }
 
       <button type="submit" class="btn btn--primary btn--block btn--lg" [disabled]="submitting()">
         {{ (submitting() ? 'auth.signingIn' : 'auth.signIn') | translate }}
       </button>
 
-      <p class="form-card__support">{{ 'auth.support' | translate }}</p>
+      <p class="form-card__support">
+        {{ 'auth.supportPrefix' | translate }}
+        <a [href]="mailto('auth.supportSubject')" data-testid="support-link">{{ 'auth.supportLink' | translate }}</a>
+      </p>
       <p class="form-card__support"><a [href]="termsUrl" target="_blank" rel="noopener noreferrer">{{ 'legal.terms' | translate }}</a></p>
     </form>
 

@@ -6,6 +6,7 @@
     @if (errorKey(); as error) {
       <div class="form-alert" role="alert">{{ error | translate }}</div>
     }
+    <p class="form-legend"><span aria-hidden="true">*</span> {{ 'common.requiredLegend' | translate }}</p>
     <div class="form-grid">
       <div class="field field--full">
         <label for="attendance-worker">{{ 'attendance.worker' | translate }}</label>
@@ -56,7 +57,7 @@
   <footer class="dialog__footer">
     <button type="button" class="btn btn--secondary" [disabled]="submitting()" (click)="close()">
       {{ 'common.cancel' | translate }}</button
-    ><button class="btn btn--save" type="submit" [disabled]="submitting()">
+    ><button class="btn btn--primary" type="submit" [disabled]="submitting()">
       {{ (submitting() ? 'common.saving' : 'common.saveChanges') | translate }}
     </button>
   </footer>

@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 
 export default defineConfig({
   testDir: '../tests/integration',
-  testMatch: '**/module-integration.spec.ts',
+  testMatch: ['**/module-integration.spec.ts', '**/audit-corrections.spec.ts'],
   timeout: 120000,
   expect: { timeout: 15000 },
   retries: process.env.CI ? 1 : 0,

@@ -24,6 +24,7 @@
     @if (materials.length === 0) {
       <p class="form-alert form-alert--info">{{ 'movements.form.noMaterials' | translate }}</p>
     } @else {
+      <p class="form-legend"><span aria-hidden="true">*</span> {{ 'common.requiredLegend' | translate }}</p>
       <div class="form-grid">
         <div class="field field--full">
           <label class="field__label" for="movement-material">{{ 'movements.fields.material' | translate }}</label>
@@ -97,7 +98,7 @@
 
   <footer class="dialog__footer">
     <button type="button" class="btn btn--secondary" (click)="close()">{{ 'common.cancel' | translate }}</button>
-    <button type="submit" class="btn btn--save" [disabled]="submitting() || materials.length === 0">
+    <button type="submit" class="btn btn--primary" [disabled]="submitting() || materials.length === 0">
       <lucide-icon [name]="isEntry ? 'package-plus' : 'package-minus'" [size]="16" aria-hidden="true" />
       {{
         (submitting() ? 'common.saving' : isEntry ? 'movements.form.entrySubmit' : 'movements.form.usageSubmit')

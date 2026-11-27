@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject, input, signal } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { LucideAngularModule } from 'lucide-angular';
-import { TERMS_URL } from '../../../shared/legal-links';
+import { SUPPORT_EMAIL, TERMS_URL, supportMailto } from '../../../shared/legal-links';
 import { environment } from '../../../../environments/environment';
 import { DEMO_ACCOUNTS } from '../../../shared/infrastructure/mock-backend/mock-seed';
 import { FieldErrorComponent } from '../../../shared/presentation/components/field-error/field-error.component';
@@ -21,6 +21,8 @@ import { AuthenticationService } from '../../services/authentication.service';
 })
 export class SignInComponent {
   protected readonly termsUrl = TERMS_URL;
+  protected readonly supportEmail = SUPPORT_EMAIL;
+  private readonly translate = inject(TranslateService);
   private readonly authentication = inject(AuthenticationService);
   private readonly router = inject(Router);
   private readonly formBuilder = inject(NonNullableFormBuilder);
@@ -39,6 +41,11 @@ export class SignInComponent {
   protected readonly showPassword = signal(false);
   protected readonly showRecoveryHelp = signal(false);
   protected readonly demoAccounts = environment.useMockApi ? DEMO_ACCOUNTS : [];
+
+  /** mailto link with the subject already written, in the current language. */
+  protected mailto(subjectKey: string): string {
+    return supportMailto(this.translate.instant(subjectKey));
+  }
 
   protected submit(): void {
     if (this.form.invalid) {

@@ -23,6 +23,13 @@
           <span>{{ 'nav.projects' | translate }}</span>
         </a>
       </li>
+      @if (!targetProjectId()) {
+        <!-- Finding 25: the explanation sits right under "Proyectos", next to the disabled modules. -->
+        <li class="nav__hint" data-testid="nav-select-project-hint">
+          <lucide-icon name="info" [size]="16" aria-hidden="true" />
+          <span>{{ 'nav.selectProjectFirst' | translate }}</span>
+        </li>
+      }
       @for (item of projectItems; track item.path) {
         <li>
           @if (targetProjectId(); as projectId) {
@@ -53,8 +60,6 @@
         <lucide-icon name="arrow-left" [size]="18" aria-hidden="true" />
         <span>{{ 'nav.backToProjects' | translate }}</span>
       </a>
-    } @else if (!targetProjectId()) {
-      <p class="sidebar__hint">{{ 'nav.selectProjectFirst' | translate }}</p>
     }
     <app-language-switch />
   </div>

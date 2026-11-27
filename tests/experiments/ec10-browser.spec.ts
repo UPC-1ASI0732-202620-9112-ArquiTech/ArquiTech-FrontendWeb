@@ -51,7 +51,10 @@ for (const variant of ['A', 'B'] as Variant[]) {
           await expect(page.locator('.ec10-segments button.is-active')).toContainText(
             i % 2 === 0 ? 'supervisor' : 'contratante',
           );
-          await expect(page.getByRole('button', { name: 'Preparar solicitud de demostración' })).toBeVisible();
+          // Audit finding 13 renamed the action; both labels are accepted so older Landing builds still run.
+          await expect(page.getByRole('button', {
+            name: /Abrir correo con la solicitud|Preparar solicitud de demostración/,
+          })).toBeVisible();
         }
         const observed = await page.evaluate(() => ({
           id: localStorage.getItem('arquitech-ec10-visitor-id'),
