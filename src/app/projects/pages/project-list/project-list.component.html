@@ -70,15 +70,15 @@
           <tbody>
             @for (project of table.pageRows(); track project.id) {
               <tr class="is-clickable" (click)="open(project)">
-                <td class="cell-num">{{ project.startDate | appDate }}</td>
-                <td class="cell-strong">
+                <td [attr.data-label]="'projects.columns.date' | translate" class="cell-num">{{ project.startDate | appDate }}</td>
+                <td [attr.data-label]="'projects.columns.project' | translate" class="cell-strong">
                   {{ project.name }}
                   @if (session.isSupervisor() && project.contractorName) {
                     <span class="cell-sub">{{ 'projects.contractor' | translate }}: {{ project.contractorName }}</span>
                   }
                 </td>
-                <td>{{ project.location }}</td>
-                <td>
+                <td [attr.data-label]="'projects.columns.location' | translate">{{ project.location }}</td>
+                <td [attr.data-label]="'projects.columns.progress' | translate">
                   <div class="progress">
                     <div
                       class="progress__bar"
@@ -93,13 +93,13 @@
                     <span class="progress__value">{{ project.progress }}%</span>
                   </div>
                 </td>
-                <td>
+                <td [attr.data-label]="'common.status' | translate">
                   <app-status-badge
                     [tone]="statusTone[project.status]"
                     [labelKey]="'projects.status.' + project.status"
                   />
                 </td>
-                <td class="cell-actions">
+                <td [attr.data-label]="'common.actions' | translate" class="cell-actions">
                   @if (session.isSupervisor()) {
                     <button
                       type="button"

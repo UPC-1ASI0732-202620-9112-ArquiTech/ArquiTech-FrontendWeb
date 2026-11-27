@@ -56,22 +56,22 @@
           <tbody>
             @for (machine of table.pageRows(); track machine.id) {
               <tr>
-                <td>
+                <td [attr.data-label]="'machinery.columns.name' | translate">
                   {{ machine.name }}
                   @if (machine.description) {
                     <span class="cell-sub">{{ machine.description }}</span>
                   }
                 </td>
-                <td class="cell-strong">{{ machine.serialNumber }}</td>
-                <td class="cell-num">{{ machine.registeredAt | appDate }}</td>
-                <td>
+                <td [attr.data-label]="'machinery.columns.serialNumber' | translate" class="cell-strong">{{ machine.serialNumber }}</td>
+                <td [attr.data-label]="'machinery.columns.registeredAt' | translate" class="cell-num">{{ machine.registeredAt | appDate }}</td>
+                <td [attr.data-label]="'common.status' | translate">
                   <app-status-badge
                     [tone]="statusTone[machine.status]"
                     [labelKey]="'machinery.status.' + machine.status"
                   />
                 </td>
                 @if (canManage()) {
-                  <td class="cell-actions">
+                  <td [attr.data-label]="'common.actions' | translate" class="cell-actions">
                     <button
                       type="button"
                       class="icon-button"

@@ -58,18 +58,18 @@
           <tbody>
             @for (incident of table.pageRows(); track incident.id) {
               <tr>
-                <td class="cell-num">{{ incident.reportedAt | appDate }}</td>
-                <td class="cell-strong incident-type">
+                <td [attr.data-label]="'incidents.columns.date' | translate" class="cell-num">{{ incident.reportedAt | appDate }}</td>
+                <td [attr.data-label]="'incidents.columns.type' | translate" class="cell-strong incident-type">
                   {{ incident.typeKey ? (incident.typeKey | translate) : incident.type }}
                   <span class="cell-sub">{{ incident.description }}</span>
                 </td>
-                <td>
+                <td [attr.data-label]="'incidents.columns.severity' | translate">
                   <app-status-badge
                     [tone]="severityTone[incident.severity]"
                     [labelKey]="'incidents.severity.' + incident.severity"
                   />
                 </td>
-                <td>
+                <td [attr.data-label]="'common.status' | translate">
                   <app-status-badge
                     [tone]="statusTone[incident.status]"
                     [labelKey]="'incidents.status.' + incident.status"
@@ -81,7 +81,7 @@
                   }
                 </td>
                 @if (canManage()) {
-                  <td class="cell-actions">
+                  <td [attr.data-label]="'common.actions' | translate" class="cell-actions">
                     <button
                       type="button"
                       class="icon-button"
