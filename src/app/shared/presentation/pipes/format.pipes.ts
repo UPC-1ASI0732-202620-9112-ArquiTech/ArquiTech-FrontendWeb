@@ -20,7 +20,7 @@ export class AppDatePipe implements PipeTransform {
 
   transform(value: string | Date | null | undefined, format: AppDateFormat = 'date'): string {
     const locale = this.preferences.locale;
-    const key = `${value instanceof Date ? value.toISOString() : value}|${format}|${locale}`;
+    const key = `${value instanceof Date ? value.getTime() : value}|${format}|${locale}`;
     if (key === this.cacheKey) {
       return this.cacheValue;
     }
@@ -72,5 +72,16 @@ export class AppNumberPipe implements PipeTransform {
 export class PenCurrencyPipe implements PipeTransform {
   transform(value: number | null | undefined): string {
     return value === null || value === undefined || Number.isNaN(value) ? '—' : CURRENCY_FORMAT.format(value);
+  }
+}
+
+/**
+ * Picks the singular or plural translation key: `'reports.lowStock' | pluralKey: 1` gives
+ * `reports.lowStockOne` (audit finding 23; ngx-translate has no built-in ICU plurals).
+ */
+@Pipe({ name: 'pluralKey' })
+export class PluralKeyPipe implements PipeTransform {
+  transform(baseKey: string, count: number | null | undefined): string {
+    return baseKey + (count === 1 ? 'One' : 'Other');
   }
 }
