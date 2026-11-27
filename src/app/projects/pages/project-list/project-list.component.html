@@ -16,7 +16,18 @@
     }
   </header>
 
-  @if (table.pageRows()[0]; as project) {
+  @if (guideProject(); as project) {
+    @if (mode.enabled()) {
+      <div class="guide-project" data-testid="ec09-guide-project">
+        <label for="guide-project">{{ 'improvements.ec09.chooseProject' | translate }}</label>
+        <select id="guide-project" [value]="'' + project.id" (change)="chooseGuideProject($any($event.target).value)">
+          @for (option of table.rows(); track option.id) {
+            <option [value]="'' + option.id" [selected]="option.id === project.id">{{ option.name }}</option>
+          }
+        </select>
+        <p role="status">{{ 'improvements.ec09.project' | translate: { name: project.name } }}</p>
+      </div>
+    }
     <app-experiment-module-panel [projectId]="'' + project.id" [experiments]="['EC09']" (changed)="load()" />
   }
 
