@@ -27,6 +27,7 @@
       [class.is-active]="mode.enabled()"
       [attr.aria-pressed]="mode.enabled()"
       [attr.aria-label]="(mode.enabled() ? 'improvements.toggle.disable' : 'improvements.toggle.enable') | translate"
+      [title]="(mode.enabled() ? 'improvements.toggle.disable' : 'improvements.toggle.enable') | translate"
       (click)="mode.toggle()"
     >
       <lucide-icon name="sliders-horizontal" [size]="16" aria-hidden="true" />

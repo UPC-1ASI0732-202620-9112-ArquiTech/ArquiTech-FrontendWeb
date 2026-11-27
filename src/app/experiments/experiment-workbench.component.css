@@ -38,3 +38,6 @@
 @media (max-width: 720px) {
   .experiment-page--embedded { padding: 0; }
 }
+
+/* Finding 12: long action labels wrap inside their card on phones. */
+.experiment-card .btn { max-width: 100%; white-space: normal; text-align: center; }
