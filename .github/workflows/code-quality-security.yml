@@ -1,0 +1,58 @@
+name: Code quality and security
+on:
+  push:
+    branches:
+      - main
+      - feature/tb2-code-quality-security
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  duplication:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Measure source duplication
+        run: npx --yes jscpd@4.0.5 --min-lines 5 --min-tokens 50 --format typescript,css --reporters console,json --output quality-report src
+      - name: Preserve duplication report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: source-duplication
+          path: quality-report
+          if-no-files-found: error
+  dependency-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Audit production dependencies
+        shell: bash
+        run: |
+          set +e
+          npm audit --omit=dev --audit-level=high --json > npm-audit.json
+          status=$?
+          set -e
+          node -e 'const a=require("./npm-audit.json"); if (!a.metadata || !a.vulnerabilities) { console.error(a); process.exit(2) } console.log(JSON.stringify(a.metadata.vulnerabilities)); for(const [name,v] of Object.entries(a.vulnerabilities)) console.log(JSON.stringify({name,severity:v.severity,range:v.range,fixAvailable:v.fixAvailable,via:v.via}));'
+          exit "$status"
+      - name: Preserve audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: npm-production-audit
+          path: npm-audit.json
+          if-no-files-found: error
