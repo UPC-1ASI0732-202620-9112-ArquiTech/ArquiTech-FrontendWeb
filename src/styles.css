@@ -972,7 +972,12 @@ select.field__control {
 }
 
 /* ---------- Active filter chips (audit finding 3) ---------- */
-.filter-chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; }
+.filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 12px;
+}
 .filter-chip {
   display: inline-flex;
   align-items: center;
@@ -998,9 +1003,22 @@ select.field__control {
   line-height: 1;
   cursor: pointer;
 }
-.filter-chip__remove:hover { background: var(--color-border); }
-.list-state__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 8px; }
-.list-state__actions:empty { display: none; }
+.filter-chip__remove:hover {
+  background: var(--color-border);
+}
+.list-state__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+.list-state__actions:empty {
+  display: none;
+}
 
 /* Finding 20: the available stock is the highlighted column. */
-.data-table .cell-highlight { background: rgba(255, 182, 39, 0.1); font-size: 0.875rem; }
+.data-table .cell-highlight {
+  background: rgba(255, 182, 39, 0.1);
+  font-size: 0.875rem;
+}

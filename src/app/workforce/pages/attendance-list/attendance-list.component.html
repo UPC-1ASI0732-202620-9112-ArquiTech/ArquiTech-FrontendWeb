@@ -15,8 +15,14 @@
     <div class="filter-chips" data-testid="attendance-today-chip">
       <span class="filter-chip">
         {{ 'attendance.todayFilter' | translate }}
-        <button type="button" class="filter-chip__remove" (click)="showPreviousDays()"
-          [attr.aria-label]="'attendance.removeTodayFilter' | translate">×</button>
+        <button
+          type="button"
+          class="filter-chip__remove"
+          (click)="showPreviousDays()"
+          [attr.aria-label]="'attendance.removeTodayFilter' | translate"
+        >
+          ×
+        </button>
       </span>
     </div>
   }
@@ -32,10 +38,14 @@
     >
       <div emptyAction class="list-state__actions">
         @if (canManage()) {
-          <button type="button" class="btn btn--primary" (click)="openForm()">{{ 'attendance.create' | translate }}</button>
+          <button type="button" class="btn btn--primary" (click)="openForm()">
+            {{ 'attendance.create' | translate }}
+          </button>
         }
         @if (isTodayOnly()) {
-          <button type="button" class="btn btn--secondary" (click)="showPreviousDays()">{{ 'attendance.showPreviousDays' | translate }}</button>
+          <button type="button" class="btn btn--secondary" (click)="showPreviousDays()">
+            {{ 'attendance.showPreviousDays' | translate }}
+          </button>
         }
       </div>
       <div class="table-scroll">
@@ -67,7 +77,9 @@
                   <app-status-badge [tone]="statusTone[row.status]" [labelKey]="'attendance.status.' + row.status" />
                 </td>
                 <td [attr.data-label]="'attendance.checkIn' | translate">{{ row.checkInAt | appDate: 'datetime' }}</td>
-                <td [attr.data-label]="'attendance.checkOut' | translate">{{ row.checkOutAt | appDate: 'datetime' }}</td>
+                <td [attr.data-label]="'attendance.checkOut' | translate">
+                  {{ row.checkOutAt | appDate: 'datetime' }}
+                </td>
                 <td [attr.data-label]="'attendance.notes' | translate">{{ row.notes || '—' }}</td>
                 @if (canManage()) {
                   <td [attr.data-label]="'common.actions' | translate" class="cell-actions">

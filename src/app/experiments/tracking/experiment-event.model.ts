@@ -12,33 +12,11 @@ export const EXPERIMENT_EVENT_NAMES = [
 
 export type ExperimentEventName = (typeof EXPERIMENT_EVENT_NAMES)[number];
 
-export const EXPERIMENT_IDS = [
-  'EC01',
-  'EC02',
-  'EC03',
-  'EC04',
-  'EC05',
-  'EC06',
-  'EC07',
-  'EC08',
-  'EC09',
-  'EC10',
-] as const;
+export const EXPERIMENT_IDS = ['EC01', 'EC02', 'EC03', 'EC04', 'EC05', 'EC06', 'EC07', 'EC08', 'EC09', 'EC10'] as const;
 
 export type TrackedExperimentId = (typeof EXPERIMENT_IDS)[number];
 
-export const QUESTION_IDS = [
-  'Q01',
-  'Q02',
-  'Q03',
-  'Q04',
-  'Q05',
-  'Q06',
-  'Q07',
-  'Q08',
-  'Q09',
-  'Q10',
-] as const;
+export const QUESTION_IDS = ['Q01', 'Q02', 'Q03', 'Q04', 'Q05', 'Q06', 'Q07', 'Q08', 'Q09', 'Q10'] as const;
 
 export type TrackedQuestionId = (typeof QUESTION_IDS)[number];
 

@@ -28,7 +28,14 @@ export interface MaterialMovementDialogData {
 /** Entry (HU01) or usage (HU02) of a material. Usage cannot exceed the stock (TS03). */
 @Component({
   selector: 'app-material-movement-dialog',
-  imports: [ReactiveFormsModule, RequiredMarkerDirective, TranslatePipe, LucideAngularModule, FieldErrorComponent, AppNumberPipe],
+  imports: [
+    ReactiveFormsModule,
+    RequiredMarkerDirective,
+    TranslatePipe,
+    LucideAngularModule,
+    FieldErrorComponent,
+    AppNumberPipe,
+  ],
   templateUrl: './material-movement-dialog.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -90,8 +97,7 @@ export class MaterialMovementDialogComponent {
     });
     if (this.form.invalid) {
       this.form.markAllAsTouched();
-      const isInsufficientStock =
-        !this.isEntry && this.form.controls.quantity.hasError('insufficientStock');
+      const isInsufficientStock = !this.isEntry && this.form.controls.quantity.hasError('insufficientStock');
       attempt.failValidation(isInsufficientStock ? 'insufficient_stock' : 'validation');
       return;
     }

@@ -79,13 +79,19 @@
           <thead>
             <tr>
               <th scope="col">{{ 'materials.columns.material' | translate }}</th>
-              <th scope="col" [title]="'materials.columns.quantityHint' | translate">{{ 'materials.columns.quantity' | translate }}</th>
-              <th scope="col" [title]="'materials.columns.stockHint' | translate">{{ 'materials.columns.stock' | translate }}</th>
+              <th scope="col" [title]="'materials.columns.quantityHint' | translate">
+                {{ 'materials.columns.quantity' | translate }}
+              </th>
+              <th scope="col" [title]="'materials.columns.stockHint' | translate">
+                {{ 'materials.columns.stock' | translate }}
+              </th>
               <th scope="col">{{ 'materials.columns.unitPrice' | translate }}</th>
               <th scope="col">{{ 'materials.columns.unit' | translate }}</th>
               <th scope="col">{{ 'materials.columns.provider' | translate }}</th>
               <th scope="col">{{ 'materials.columns.ruc' | translate }}</th>
-              <th scope="col" [title]="'materials.columns.dateHint' | translate">{{ 'materials.columns.date' | translate }}</th>
+              <th scope="col" [title]="'materials.columns.dateHint' | translate">
+                {{ 'materials.columns.date' | translate }}
+              </th>
               <th scope="col">
                 <span class="sr-only">{{ 'common.actions' | translate }}</span>
               </th>
@@ -95,8 +101,13 @@
             @for (material of table.pageRows(); track material.id) {
               <tr>
                 <td [attr.data-label]="'materials.columns.material' | translate">{{ material.name }}</td>
-                <td [attr.data-label]="'materials.columns.quantity' | translate" class="cell-num">{{ material.quantity | appNumber }}</td>
-                <td [attr.data-label]="'materials.columns.stock' | translate" class="cell-strong cell-num cell-highlight">
+                <td [attr.data-label]="'materials.columns.quantity' | translate" class="cell-num">
+                  {{ material.quantity | appNumber }}
+                </td>
+                <td
+                  [attr.data-label]="'materials.columns.stock' | translate"
+                  class="cell-strong cell-num cell-highlight"
+                >
                   <span class="stock" [class.stock--low]="material.isBelowMinimum()">
                     {{ material.stock | appNumber }}
                     @if (material.isBelowMinimum()) {
@@ -104,11 +115,17 @@
                     }
                   </span>
                 </td>
-                <td [attr.data-label]="'materials.columns.unitPrice' | translate" class="cell-num">{{ material.unitPrice | pen }}</td>
+                <td [attr.data-label]="'materials.columns.unitPrice' | translate" class="cell-num">
+                  {{ material.unitPrice | pen }}
+                </td>
                 <td [attr.data-label]="'materials.columns.unit' | translate">{{ material.unit }}</td>
                 <td [attr.data-label]="'materials.columns.provider' | translate">{{ material.provider }}</td>
-                <td [attr.data-label]="'materials.columns.ruc' | translate" class="cell-num">{{ material.providerRuc }}</td>
-                <td [attr.data-label]="'materials.columns.date' | translate" class="cell-num">{{ material.date | appDate }}</td>
+                <td [attr.data-label]="'materials.columns.ruc' | translate" class="cell-num">
+                  {{ material.providerRuc }}
+                </td>
+                <td [attr.data-label]="'materials.columns.date' | translate" class="cell-num">
+                  {{ material.date | appDate }}
+                </td>
                 <td [attr.data-label]="'common.actions' | translate" class="cell-actions">
                   @if (canManage()) {
                     <button

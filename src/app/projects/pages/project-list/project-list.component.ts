@@ -75,7 +75,7 @@ export class ProjectListComponent implements OnInit {
   protected readonly guideProject = computed(() => {
     const rows = this.table.rows();
     const chosen = this.guideProjectId() ?? (this.context.current() ? String(this.context.current()!.id) : null);
-    return rows.find(project => String(project.id) === chosen) ?? rows[0] ?? null;
+    return rows.find((project) => String(project.id) === chosen) ?? rows[0] ?? null;
   });
 
   protected chooseGuideProject(id: string): void {

@@ -43,7 +43,9 @@ export class InMemoryExperimentEventSink implements ExperimentEventSink {
 }
 
 export class ConsoleDebugExperimentEventSink implements ExperimentEventSink {
-  constructor(private readonly logger: (line: string) => void = (line) => console.debug('[experiment-tracking]', line)) {}
+  constructor(
+    private readonly logger: (line: string) => void = (line) => console.debug('[experiment-tracking]', line),
+  ) {}
 
   emit(event: ExperimentEvent): void {
     this.logger(serializeExperimentEvent(event));
@@ -58,9 +60,7 @@ export interface ExperimentTrackingOptions {
   readonly utcTimestamp?: () => string;
 }
 
-export const EXPERIMENT_TRACKING_OPTIONS = new InjectionToken<ExperimentTrackingOptions>(
-  'EXPERIMENT_TRACKING_OPTIONS',
-);
+export const EXPERIMENT_TRACKING_OPTIONS = new InjectionToken<ExperimentTrackingOptions>('EXPERIMENT_TRACKING_OPTIONS');
 
 export interface MaterialOperationAttemptHandle {
   readonly attemptId: string;

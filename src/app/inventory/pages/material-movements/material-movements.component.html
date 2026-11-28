@@ -60,7 +60,9 @@
           <tbody>
             @for (movement of table.pageRows(); track movement.id) {
               <tr>
-                <td [attr.data-label]="'movements.columns.date' | translate" class="cell-num">{{ movement.occurredAt | appDate: 'datetime' }}</td>
+                <td [attr.data-label]="'movements.columns.date' | translate" class="cell-num">
+                  {{ movement.occurredAt | appDate: 'datetime' }}
+                </td>
                 <td [attr.data-label]="'movements.columns.material' | translate" class="cell-strong">
                   {{ movement.materialName }}
                   @if (movement.note) {
@@ -73,11 +75,17 @@
                     [labelKey]="'movements.types.' + movement.type"
                   />
                 </td>
-                <td [attr.data-label]="'movements.columns.quantity' | translate" class="cell-num quantity" [class.quantity--usage]="movement.type !== entryType">
+                <td
+                  [attr.data-label]="'movements.columns.quantity' | translate"
+                  class="cell-num quantity"
+                  [class.quantity--usage]="movement.type !== entryType"
+                >
                   {{ movement.type === entryType ? '+' : '−' }}{{ movement.quantity | appNumber }} {{ movement.unit }}
                 </td>
                 <td [attr.data-label]="'movements.columns.supplier' | translate">{{ movement.supplier || '—' }}</td>
-                <td [attr.data-label]="'movements.columns.registeredBy' | translate" class="cell-muted">{{ movement.registeredByName || '—' }}</td>
+                <td [attr.data-label]="'movements.columns.registeredBy' | translate" class="cell-muted">
+                  {{ movement.registeredByName || '—' }}
+                </td>
               </tr>
             }
           </tbody>

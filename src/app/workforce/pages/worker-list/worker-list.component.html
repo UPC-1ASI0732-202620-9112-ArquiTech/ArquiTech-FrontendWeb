@@ -60,7 +60,9 @@
                 <td [attr.data-label]="'workers.columns.name' | translate">{{ worker.fullName }}</td>
                 <td [attr.data-label]="'workers.columns.role' | translate" class="cell-strong">{{ worker.role }}</td>
                 <td [attr.data-label]="'workers.columns.specialty' | translate">{{ worker.specialty || '—' }}</td>
-                <td [attr.data-label]="'workers.columns.hireDate' | translate" class="cell-num">{{ worker.hireDate | appDate }}</td>
+                <td [attr.data-label]="'workers.columns.hireDate' | translate" class="cell-num">
+                  {{ worker.hireDate | appDate }}
+                </td>
                 <td [attr.data-label]="'common.status' | translate">
                   <app-status-badge [tone]="statusTone[worker.status]" [labelKey]="'workers.status.' + worker.status" />
                 </td>

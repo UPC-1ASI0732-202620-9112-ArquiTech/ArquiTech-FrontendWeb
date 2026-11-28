@@ -35,7 +35,27 @@
 }
 
 /* EC09: the guide names the work it refers to. */
-.guide-project { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; margin: 0 0 12px; }
-.guide-project label { font-weight: 600; }
-.guide-project select { min-height: 40px; min-width: 0; max-width: 100%; border: 1px solid var(--color-border-strong); border-radius: 8px; padding: 6px 10px; background: #fff; }
-.guide-project p { margin: 0; flex-basis: 100%; color: var(--color-text-muted, #665e56); }
+.guide-project {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin: 0 0 12px;
+}
+.guide-project label {
+  font-weight: 600;
+}
+.guide-project select {
+  min-height: 40px;
+  min-width: 0;
+  max-width: 100%;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 8px;
+  padding: 6px 10px;
+  background: #fff;
+}
+.guide-project p {
+  margin: 0;
+  flex-basis: 100%;
+  color: var(--color-text-muted, #665e56);
+}

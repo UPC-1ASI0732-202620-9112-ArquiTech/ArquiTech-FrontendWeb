@@ -58,7 +58,9 @@
           <tbody>
             @for (incident of table.pageRows(); track incident.id) {
               <tr>
-                <td [attr.data-label]="'incidents.columns.date' | translate" class="cell-num">{{ incident.reportedAt | appDate }}</td>
+                <td [attr.data-label]="'incidents.columns.date' | translate" class="cell-num">
+                  {{ incident.reportedAt | appDate }}
+                </td>
                 <td [attr.data-label]="'incidents.columns.type' | translate" class="cell-strong incident-type">
                   {{ incident.typeKey ? (incident.typeKey | translate) : incident.type }}
                   <span class="cell-sub">{{ incident.description }}</span>

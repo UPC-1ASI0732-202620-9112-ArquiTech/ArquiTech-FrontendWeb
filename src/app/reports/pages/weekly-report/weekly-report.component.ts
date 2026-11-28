@@ -22,7 +22,12 @@ import {
   LoadStatus,
 } from '../../../shared/presentation/components/list-state/list-state.component';
 import { StatusBadgeComponent } from '../../../shared/presentation/components/status-badge/status-badge.component';
-import { AppDatePipe, AppNumberPipe, PenCurrencyPipe, PluralKeyPipe } from '../../../shared/presentation/pipes/format.pipes';
+import {
+  AppDatePipe,
+  AppNumberPipe,
+  PenCurrencyPipe,
+  PluralKeyPipe,
+} from '../../../shared/presentation/pipes/format.pipes';
 import { ToastService } from '../../../shared/services/toast.service';
 import { addDays, parseIso, startOfWeek, toIsoDate } from '../../../shared/utils/date.utils';
 import { WeeklyReport } from '../../model/weekly-report.model';

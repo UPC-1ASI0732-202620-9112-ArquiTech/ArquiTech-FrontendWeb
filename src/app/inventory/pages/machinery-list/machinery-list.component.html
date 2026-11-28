@@ -62,8 +62,12 @@
                     <span class="cell-sub">{{ machine.description }}</span>
                   }
                 </td>
-                <td [attr.data-label]="'machinery.columns.serialNumber' | translate" class="cell-strong">{{ machine.serialNumber }}</td>
-                <td [attr.data-label]="'machinery.columns.registeredAt' | translate" class="cell-num">{{ machine.registeredAt | appDate }}</td>
+                <td [attr.data-label]="'machinery.columns.serialNumber' | translate" class="cell-strong">
+                  {{ machine.serialNumber }}
+                </td>
+                <td [attr.data-label]="'machinery.columns.registeredAt' | translate" class="cell-num">
+                  {{ machine.registeredAt | appDate }}
+                </td>
                 <td [attr.data-label]="'common.status' | translate">
                   <app-status-badge
                     [tone]="statusTone[machine.status]"

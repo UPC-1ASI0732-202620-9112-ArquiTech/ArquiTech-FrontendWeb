@@ -57,5 +57,16 @@
   }
 }
 
-.shell__legal { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 16px; padding: 16px 24px; border-top: 1px solid var(--color-border, #ded8d3); font-size: 0.875rem; }
-.shell__legal a { color: var(--color-primary, #c83200); text-decoration: underline; }
+.shell__legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 16px;
+  padding: 16px 24px;
+  border-top: 1px solid var(--color-border, #ded8d3);
+  font-size: 0.875rem;
+}
+.shell__legal a {
+  color: var(--color-primary, #c83200);
+  text-decoration: underline;
+}
