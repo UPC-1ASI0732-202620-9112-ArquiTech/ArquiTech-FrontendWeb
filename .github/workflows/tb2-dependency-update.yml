@@ -1,0 +1,32 @@
+name: Generate dependency update
+on:
+  push:
+    branches:
+      - feature/tb2-code-quality-security
+permissions:
+  contents: read
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Update compatible dependencies
+        run: npm update dompurify --package-lock-only --ignore-scripts
+      - name: Export lockfile
+        run: |
+          python3 - <<'PY'
+          import base64, pathlib
+          data = base64.b64encode(pathlib.Path('package-lock.json').read_bytes()).decode()
+          for i in range(0,len(data),6000):
+              print('LOCK_DATA', i, data[i:i+6000])
+          print('LOCK_END',len(data))
+          PY
+      - name: Check installation
+        run: npm ci
+      - name: Audit updated dependencies
+        run: npm audit --omit=dev --audit-level=high
