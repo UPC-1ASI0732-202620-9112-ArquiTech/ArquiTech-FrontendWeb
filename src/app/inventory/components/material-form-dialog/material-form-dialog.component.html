@@ -43,11 +43,15 @@
           (change)="chooseUnit($any($event.target).value)"
           (blur)="form.controls.unit.markAsTouched()"
         >
-          <option value="" disabled [selected]="unitChoice() === ''">{{ 'materials.fields.unitSelect' | translate }}</option>
+          <option value="" disabled [selected]="unitChoice() === ''">
+            {{ 'materials.fields.unitSelect' | translate }}
+          </option>
           @for (unit of units; track unit) {
             <option [value]="unit" [selected]="unitChoice() === unit">{{ unit }}</option>
           }
-          <option [value]="otherUnit" [selected]="unitChoice() === otherUnit">{{ 'materials.fields.unitOther' | translate }}</option>
+          <option [value]="otherUnit" [selected]="unitChoice() === otherUnit">
+            {{ 'materials.fields.unitOther' | translate }}
+          </option>
         </select>
         @if (unitChoice() === otherUnit) {
           <input

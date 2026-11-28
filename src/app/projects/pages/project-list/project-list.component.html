@@ -70,7 +70,9 @@
           <tbody>
             @for (project of table.pageRows(); track project.id) {
               <tr class="is-clickable" (click)="open(project)">
-                <td [attr.data-label]="'projects.columns.date' | translate" class="cell-num">{{ project.startDate | appDate }}</td>
+                <td [attr.data-label]="'projects.columns.date' | translate" class="cell-num">
+                  {{ project.startDate | appDate }}
+                </td>
                 <td [attr.data-label]="'projects.columns.project' | translate" class="cell-strong">
                   {{ project.name }}
                   @if (session.isSupervisor() && project.contractorName) {

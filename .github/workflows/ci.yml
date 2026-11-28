@@ -31,6 +31,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Check source formatting
+        run: npx --no-install prettier --check "src/**/*.{ts,html,css}" "public/i18n/*.json"
+
       - name: Run tests
         run: npm run test:ci
 

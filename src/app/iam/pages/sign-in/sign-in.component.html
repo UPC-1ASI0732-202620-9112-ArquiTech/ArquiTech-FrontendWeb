@@ -85,7 +85,9 @@
       @if (showRecoveryHelp()) {
         <div class="form-alert form-alert--info recovery" role="status" data-testid="recovery-help">
           <p>{{ 'auth.recoveryHelp' | translate: { email: supportEmail } }}</p>
-          <a class="recovery__link" [href]="mailto('auth.recoverySubject')">{{ 'auth.recoveryEmailAction' | translate }} ({{ supportEmail }})</a>
+          <a class="recovery__link" [href]="mailto('auth.recoverySubject')"
+            >{{ 'auth.recoveryEmailAction' | translate }} ({{ supportEmail }})</a
+          >
         </div>
       }
 
@@ -97,7 +99,9 @@
         {{ 'auth.supportPrefix' | translate }}
         <a [href]="mailto('auth.supportSubject')" data-testid="support-link">{{ 'auth.supportLink' | translate }}</a>
       </p>
-      <p class="form-card__support"><a [href]="termsUrl" target="_blank" rel="noopener noreferrer">{{ 'legal.terms' | translate }}</a></p>
+      <p class="form-card__support">
+        <a [href]="termsUrl" target="_blank" rel="noopener noreferrer">{{ 'legal.terms' | translate }}</a>
+      </p>
     </form>
 
     @if (demoAccounts.length > 0) {

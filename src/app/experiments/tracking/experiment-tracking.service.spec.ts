@@ -157,9 +157,7 @@ describe('ExperimentTrackingService & Web Tracking Plan (8.2.8)', () => {
       'outcome_correct',
     ]) {
       const candidate = { ...base, [forbiddenField]: 'secret' };
-      expect(validateExperimentEvent(candidate).valid)
-        .withContext(`Should reject ${forbiddenField}`)
-        .toBeFalse();
+      expect(validateExperimentEvent(candidate).valid).withContext(`Should reject ${forbiddenField}`).toBeFalse();
     }
 
     const withJwt = {
@@ -400,8 +398,7 @@ describe('ExperimentTrackingService & Web Tracking Plan (8.2.8)', () => {
         {
           provide: WeeklyReportService,
           useValue: {
-            generate: () =>
-              failReport ? throwError(() => new HttpErrorResponse({ status: 0 })) : of(sampleReport),
+            generate: () => (failReport ? throwError(() => new HttpErrorResponse({ status: 0 })) : of(sampleReport)),
           },
         },
         { provide: ReportPdfService, useValue: { download: () => Promise.resolve('report.pdf') } },
@@ -422,10 +419,7 @@ describe('ExperimentTrackingService & Web Tracking Plan (8.2.8)', () => {
     // Validation rejection in EC01-B (quantity 80 > stock 40)
     fixture.componentInstance['movementQty'].set(80);
     await fixture.componentInstance['saveMovement']();
-    expect(sink.events().map((e) => e.event_name)).toEqual([
-      'material_operation_started',
-      'material_operation_failed',
-    ]);
+    expect(sink.events().map((e) => e.event_name)).toEqual(['material_operation_started', 'material_operation_failed']);
     expect(sink.events()[1].condition).toBe('B');
     expect(sink.events()[1].outcome).toBe('validation_failed');
     expect(sink.events()[1].error_category).toBe('insufficient_stock');
@@ -435,10 +429,7 @@ describe('ExperimentTrackingService & Web Tracking Plan (8.2.8)', () => {
     failMovement = true;
     fixture.componentInstance['movementQty'].set(5);
     await fixture.componentInstance['saveMovement']();
-    expect(sink.events().map((e) => e.event_name)).toEqual([
-      'material_operation_started',
-      'material_operation_failed',
-    ]);
+    expect(sink.events().map((e) => e.event_name)).toEqual(['material_operation_started', 'material_operation_failed']);
     expect(sink.events()[1].outcome).toBe('api_failed');
     expect(sink.events()[1].error_category).toBe('api_error');
 

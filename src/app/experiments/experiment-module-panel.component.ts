@@ -25,6 +25,6 @@ export class ExperimentModulePanelComponent {
   protected readonly expanded = signal(false);
 
   protected toggle(): void {
-    this.expanded.update(value => !value);
+    this.expanded.update((value) => !value);
   }
 }

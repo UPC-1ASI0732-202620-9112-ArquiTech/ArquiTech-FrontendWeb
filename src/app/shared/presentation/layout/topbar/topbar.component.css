@@ -195,12 +195,14 @@
   background: var(--color-surface);
   color: var(--color-text);
   font: inherit;
-  font-size: .78rem;
+  font-size: 0.78rem;
   font-weight: 650;
   white-space: nowrap;
   cursor: pointer;
 }
-.topbar__improvements:hover { background: var(--color-surface-muted); }
+.topbar__improvements:hover {
+  background: var(--color-surface-muted);
+}
 .topbar__improvements.is-active {
   background: #fff5ed;
   color: #aa3509;
@@ -210,20 +212,45 @@
   outline: 3px solid var(--color-sinopia);
   outline-offset: 2px;
 }
-.topbar__improvements-state { font-weight: 800; }
+.topbar__improvements-state {
+  font-weight: 800;
+}
 @media (max-width: 680px) {
-  .topbar__improvements { padding: 7px 9px; gap: 5px; }
-  .topbar__improvements-label { display: none; }
+  .topbar__improvements {
+    padding: 7px 9px;
+    gap: 5px;
+  }
+  .topbar__improvements-label {
+    display: none;
+  }
 }
 
 /* Finding 12: on phones the view switch is icon-only and the topbar never exceeds the screen. */
-.topbar__left { flex: 1 1 auto; }
-.topbar__right { flex: 0 0 auto; }
-.breadcrumb { min-width: 0; overflow: hidden; }
-.breadcrumb__current { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.topbar__left {
+  flex: 1 1 auto;
+}
+.topbar__right {
+  flex: 0 0 auto;
+}
+.breadcrumb {
+  min-width: 0;
+  overflow: hidden;
+}
+.breadcrumb__current {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 @media (max-width: 600px) {
-  .topbar__right { gap: 6px; }
-  .topbar__improvements { width: 36px; min-width: 36px; padding: 0; }
+  .topbar__right {
+    gap: 6px;
+  }
+  .topbar__improvements {
+    width: 36px;
+    min-width: 36px;
+    padding: 0;
+  }
   .topbar__improvements-state {
     position: absolute;
     width: 1px;

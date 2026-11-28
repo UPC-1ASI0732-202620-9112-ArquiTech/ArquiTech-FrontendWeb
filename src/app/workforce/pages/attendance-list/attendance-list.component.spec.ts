@@ -36,10 +36,14 @@ describe('Attendance role UI', () => {
           provideHttpClient(),
           provideHttpClientTesting(),
           importProvidersFrom(LucideAngularModule.pick(APP_ICONS)),
-          { provide: SessionService, useValue: {
-            isSupervisor: signal(supervisor), isContractor: signal(!supervisor),
-            user: signal({ id: 1 }),
-          } },
+          {
+            provide: SessionService,
+            useValue: {
+              isSupervisor: signal(supervisor),
+              isContractor: signal(!supervisor),
+              user: signal({ id: 1 }),
+            },
+          },
           { provide: AttendanceService, useValue: { getByProject: () => of([row]) } },
           { provide: WorkerService, useValue: { getByProject: () => of([]) } },
           { provide: ProjectAlertsService, useValue: { refresh: () => {} } },
@@ -60,9 +64,18 @@ describe('Audit correction 3: attendance opens on today with a visible, removabl
   it('shows a specific empty state for today and reveals previous days on demand', () => {
     const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
     const old = new Attendance({
-      id: 21, projectId: 9, workerId: 3, workerName: 'Luis', attendanceDate: yesterday,
-      status: AttendanceStatus.Present, checkInAt: null, checkOutAt: null, notes: null,
-      registeredByUserId: 1, createdAt: '', updatedAt: '',
+      id: 21,
+      projectId: 9,
+      workerId: 3,
+      workerName: 'Luis',
+      attendanceDate: yesterday,
+      status: AttendanceStatus.Present,
+      checkInAt: null,
+      checkOutAt: null,
+      notes: null,
+      registeredByUserId: 1,
+      createdAt: '',
+      updatedAt: '',
     });
     TestBed.configureTestingModule({
       imports: [AttendanceListComponent, TranslateModule.forRoot()],
@@ -70,9 +83,14 @@ describe('Audit correction 3: attendance opens on today with a visible, removabl
         provideHttpClient(),
         provideHttpClientTesting(),
         importProvidersFrom(LucideAngularModule.pick(APP_ICONS)),
-        { provide: SessionService, useValue: {
-          isSupervisor: signal(true), isContractor: signal(false), user: signal({ id: 1 }),
-        } },
+        {
+          provide: SessionService,
+          useValue: {
+            isSupervisor: signal(true),
+            isContractor: signal(false),
+            user: signal({ id: 1 }),
+          },
+        },
         { provide: AttendanceService, useValue: { getByProject: () => of([old]) } },
         { provide: WorkerService, useValue: { getByProject: () => of([]) } },
         { provide: ProjectAlertsService, useValue: { refresh: () => {} } },

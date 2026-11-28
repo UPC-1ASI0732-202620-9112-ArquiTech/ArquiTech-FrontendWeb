@@ -1,5 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, DestroyRef, computed, effect, inject, input, output, signal, untracked } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  computed,
+  effect,
+  inject,
+  input,
+  output,
+  signal,
+  untracked,
+} from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink } from '@angular/router';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
@@ -29,17 +40,62 @@ import {
 } from './tracking/experiment-tracking.service';
 
 type ExperimentId = 'EC01' | 'EC02' | 'EC03' | 'EC04' | 'EC05' | 'EC06' | 'EC07' | 'EC09';
-interface ExperimentLink { id: ExperimentId; title: string; description: string; role: 'all' | 'supervisor' | 'contractor'; }
+interface ExperimentLink {
+  id: ExperimentId;
+  title: string;
+  description: string;
+  role: 'all' | 'supervisor' | 'contractor';
+}
 
 const EXPERIMENTS: ExperimentLink[] = [
-  { id: 'EC04', title: 'improvements.experiments.EC04.title', description: 'improvements.experiments.EC04.description', role: 'contractor' },
-  { id: 'EC06', title: 'improvements.experiments.EC06.title', description: 'improvements.experiments.EC06.description', role: 'supervisor' },
-  { id: 'EC07', title: 'improvements.experiments.EC07.title', description: 'improvements.experiments.EC07.description', role: 'all' },
-  { id: 'EC01', title: 'improvements.experiments.EC01.title', description: 'improvements.experiments.EC01.description', role: 'supervisor' },
-  { id: 'EC05', title: 'improvements.experiments.EC05.title', description: 'improvements.experiments.EC05.description', role: 'all' },
-  { id: 'EC02', title: 'improvements.experiments.EC02.title', description: 'improvements.experiments.EC02.description', role: 'supervisor' },
-  { id: 'EC03', title: 'improvements.experiments.EC03.title', description: 'improvements.experiments.EC03.description', role: 'supervisor' },
-  { id: 'EC09', title: 'improvements.experiments.EC09.title', description: 'improvements.experiments.EC09.description', role: 'all' },
+  {
+    id: 'EC04',
+    title: 'improvements.experiments.EC04.title',
+    description: 'improvements.experiments.EC04.description',
+    role: 'contractor',
+  },
+  {
+    id: 'EC06',
+    title: 'improvements.experiments.EC06.title',
+    description: 'improvements.experiments.EC06.description',
+    role: 'supervisor',
+  },
+  {
+    id: 'EC07',
+    title: 'improvements.experiments.EC07.title',
+    description: 'improvements.experiments.EC07.description',
+    role: 'all',
+  },
+  {
+    id: 'EC01',
+    title: 'improvements.experiments.EC01.title',
+    description: 'improvements.experiments.EC01.description',
+    role: 'supervisor',
+  },
+  {
+    id: 'EC05',
+    title: 'improvements.experiments.EC05.title',
+    description: 'improvements.experiments.EC05.description',
+    role: 'all',
+  },
+  {
+    id: 'EC02',
+    title: 'improvements.experiments.EC02.title',
+    description: 'improvements.experiments.EC02.description',
+    role: 'supervisor',
+  },
+  {
+    id: 'EC03',
+    title: 'improvements.experiments.EC03.title',
+    description: 'improvements.experiments.EC03.description',
+    role: 'supervisor',
+  },
+  {
+    id: 'EC09',
+    title: 'improvements.experiments.EC09.title',
+    description: 'improvements.experiments.EC09.description',
+    role: 'all',
+  },
 ];
 
 /**
@@ -76,7 +132,7 @@ export class ExperimentWorkbenchComponent {
   private ec04ConsultationAttempt: ProjectConsultationAttemptHandle | null = null;
 
   protected readonly experimentLinks = EXPERIMENTS;
-  protected readonly current = computed(() => EXPERIMENTS.find(e => e.id === this.experimentId()));
+  protected readonly current = computed(() => EXPERIMENTS.find((e) => e.id === this.experimentId()));
   protected readonly readOnlyEnvironment = !environment.useMockApi;
   protected readonly busy = signal(false);
   protected readonly loading = signal(false);
@@ -98,28 +154,38 @@ export class ExperimentWorkbenchComponent {
   protected readonly selectedCriticalId = signal<number | null>(null);
 
   protected readonly canEdit = computed(() => this.session.isSupervisor() && !this.readOnlyEnvironment);
-  protected readonly selectedMaterial = computed(() => this.materials().find(m => m.id === this.selectedMaterialId()) ?? null);
-  protected readonly lowStock = computed(() => this.materials().filter(m => m.isBelowMinimum()));
-  protected readonly orderedTasks = computed(() => [...this.tasks()].sort((a, b) => {
-    const aScore = a.isCompleted() ? 2 : a.isOverdue() ? 0 : 1;
-    const bScore = b.isCompleted() ? 2 : b.isOverdue() ? 0 : 1;
-    return aScore - bScore || a.dueDate.localeCompare(b.dueDate);
-  }));
-  protected readonly critical = computed(() => this.incidents()
-    .filter(i => i.severity === IncidentSeverity.High && !i.isResolved())
-    .sort((a, b) => b.reportedAt.localeCompare(a.reportedAt)));
-  protected readonly selectedAlert = computed(() => this.critical().find(i => i.id === this.selectedCriticalId()) ?? null);
-  protected readonly guide = computed(() => this.session.isContractor()
-    ? [
-      { key: 'projectStatus', target: 'EC04' },
-      { key: 'weeklyReport', target: 'reports' },
-      { key: 'incidents', target: 'incidents' },
-    ]
-    : [
-      { key: 'priorityTasks', target: 'EC03' },
-      { key: 'material', target: 'EC01' },
-      { key: 'criticalAlerts', target: 'EC07' },
-    ]);
+  protected readonly selectedMaterial = computed(
+    () => this.materials().find((m) => m.id === this.selectedMaterialId()) ?? null,
+  );
+  protected readonly lowStock = computed(() => this.materials().filter((m) => m.isBelowMinimum()));
+  protected readonly orderedTasks = computed(() =>
+    [...this.tasks()].sort((a, b) => {
+      const aScore = a.isCompleted() ? 2 : a.isOverdue() ? 0 : 1;
+      const bScore = b.isCompleted() ? 2 : b.isOverdue() ? 0 : 1;
+      return aScore - bScore || a.dueDate.localeCompare(b.dueDate);
+    }),
+  );
+  protected readonly critical = computed(() =>
+    this.incidents()
+      .filter((i) => i.severity === IncidentSeverity.High && !i.isResolved())
+      .sort((a, b) => b.reportedAt.localeCompare(a.reportedAt)),
+  );
+  protected readonly selectedAlert = computed(
+    () => this.critical().find((i) => i.id === this.selectedCriticalId()) ?? null,
+  );
+  protected readonly guide = computed(() =>
+    this.session.isContractor()
+      ? [
+          { key: 'projectStatus', target: 'EC04' },
+          { key: 'weeklyReport', target: 'reports' },
+          { key: 'incidents', target: 'incidents' },
+        ]
+      : [
+          { key: 'priorityTasks', target: 'EC03' },
+          { key: 'material', target: 'EC01' },
+          { key: 'criticalAlerts', target: 'EC07' },
+        ],
+  );
 
   constructor() {
     // Angular reuses the route component when only experimentId changes.
@@ -137,9 +203,9 @@ export class ExperimentWorkbenchComponent {
     try {
       const raw = localStorage.getItem(this.guideStorageKey());
       const value: unknown = raw ? JSON.parse(raw) : [];
-      this.completedGuideSteps.set(Array.isArray(value)
-        ? value.filter((v): v is number => Number.isInteger(v) && v >= 0 && v < 3)
-        : []);
+      this.completedGuideSteps.set(
+        Array.isArray(value) ? value.filter((v): v is number => Number.isInteger(v) && v >= 0 && v < 3) : [],
+      );
     } catch {
       this.completedGuideSteps.set([]);
     }
@@ -150,9 +216,11 @@ export class ExperimentWorkbenchComponent {
   }
 
   protected visible(experiment: ExperimentLink): boolean {
-    return experiment.role === 'all' ||
+    return (
+      experiment.role === 'all' ||
       (experiment.role === 'supervisor' && this.session.isSupervisor()) ||
-      (experiment.role === 'contractor' && this.session.isContractor());
+      (experiment.role === 'contractor' && this.session.isContractor())
+    );
   }
 
   protected path(id: string): string[] {
@@ -206,18 +274,29 @@ export class ExperimentWorkbenchComponent {
         })()
       : null;
     const request: Observable<{
-      materials?: Material[]; workers?: Worker[]; tasks?: Task[]; report?: WeeklyReport;
-      movements?: MaterialMovement[]; incidents?: Incident[];
+      materials?: Material[];
+      workers?: Worker[];
+      tasks?: Task[];
+      report?: WeeklyReport;
+      movements?: MaterialMovement[];
+      incidents?: Incident[];
     }> | null = (() => {
       switch (experiment) {
-        case 'EC01': return forkJoin({ materials: this.materialService.getByProject(id) });
-        case 'EC02': return forkJoin({ workers: this.workerService.getByProject(id) });
-        case 'EC03': return forkJoin({ tasks: this.taskService.getByProject(id) });
+        case 'EC01':
+          return forkJoin({ materials: this.materialService.getByProject(id) });
+        case 'EC02':
+          return forkJoin({ workers: this.workerService.getByProject(id) });
+        case 'EC03':
+          return forkJoin({ tasks: this.taskService.getByProject(id) });
         case 'EC04':
-        case 'EC06': return forkJoin({ report: this.reportService.generate(current, new Date()) });
-        case 'EC05': return forkJoin({ movements: this.materialService.getMovementsByProject(id) });
-        case 'EC07': return forkJoin({ incidents: this.incidentService.getByProject(id) });
-        default: return null;
+        case 'EC06':
+          return forkJoin({ report: this.reportService.generate(current, new Date()) });
+        case 'EC05':
+          return forkJoin({ movements: this.materialService.getMovementsByProject(id) });
+        case 'EC07':
+          return forkJoin({ incidents: this.incidentService.getByProject(id) });
+        default:
+          return null;
       }
     })();
     if (!request) {
@@ -229,18 +308,18 @@ export class ExperimentWorkbenchComponent {
       next: (result) => {
         if (result.materials) {
           this.materials.set(result.materials);
-          if (!this.selectedMaterialId() && result.materials.length) this.selectedMaterialId.set(result.materials[0].id);
+          if (!this.selectedMaterialId() && result.materials.length)
+            this.selectedMaterialId.set(result.materials[0].id);
         }
         if (result.workers) {
-          const active = result.workers.filter(w => w.isActive()).slice(0, 12);
+          const active = result.workers.filter((w) => w.isActive()).slice(0, 12);
           this.workers.set(active);
-          this.selections.set(Object.fromEntries(active.map(w => [w.id, AttendanceStatus.Present])));
+          this.selections.set(Object.fromEntries(active.map((w) => [w.id, AttendanceStatus.Present])));
         }
         if (result.tasks) this.tasks.set(result.tasks);
         if (result.report) this.report.set(result.report);
-        if (result.movements) this.movements.set(
-          [...result.movements].sort((a, b) => b.occurredAt.localeCompare(a.occurredAt)),
-        );
+        if (result.movements)
+          this.movements.set([...result.movements].sort((a, b) => b.occurredAt.localeCompare(a.occurredAt)));
         if (result.incidents) this.incidents.set(result.incidents);
         this.loading.set(false);
         ec04Attempt?.loaded();
@@ -266,9 +345,13 @@ export class ExperimentWorkbenchComponent {
     const quantity = this.movementQty();
     const material = this.selectedMaterial();
     if (!material) return this.translate.instant('improvements.messages.selectMaterial');
-    if (!Number.isFinite(quantity) || quantity <= 0) return this.translate.instant('improvements.messages.invalidQuantity');
+    if (!Number.isFinite(quantity) || quantity <= 0)
+      return this.translate.instant('improvements.messages.invalidQuantity');
     if (this.movementKind() === MovementType.Usage && quantity > material.stock) {
-      return this.translate.instant('improvements.messages.insufficientStock', { stock: material.stock, unit: material.unit });
+      return this.translate.instant('improvements.messages.insufficientStock', {
+        stock: material.stock,
+        unit: material.unit,
+      });
     }
     return '';
   }
@@ -305,16 +388,20 @@ export class ExperimentWorkbenchComponent {
     try {
       const at = new Date().toISOString();
       if (this.movementKind() === MovementType.Entry) {
-        await firstValueFrom(this.materialService.registerEntry(material.id, {
-          quantity: this.movementQty(),
-          supplier: material.provider,
-          occurredAt: at,
-        }));
+        await firstValueFrom(
+          this.materialService.registerEntry(material.id, {
+            quantity: this.movementQty(),
+            supplier: material.provider,
+            occurredAt: at,
+          }),
+        );
       } else {
-        await firstValueFrom(this.materialService.registerUsage(material.id, {
-          quantity: this.movementQty(),
-          occurredAt: at,
-        }));
+        await firstValueFrom(
+          this.materialService.registerUsage(material.id, {
+            quantity: this.movementQty(),
+            occurredAt: at,
+          }),
+        );
       }
       attempt.complete();
       this.refresh(false);
@@ -330,23 +417,29 @@ export class ExperimentWorkbenchComponent {
 
   protected setAttendance(workerId: number, event: Event): void {
     const value = (event.target as HTMLSelectElement).value as AttendanceStatus;
-    this.selections.update(values => ({ ...values, [workerId]: value }));
+    this.selections.update((values) => ({ ...values, [workerId]: value }));
   }
   protected attendanceComplete(): boolean {
-    return this.workers().length > 0 && this.workers().every(w => !!this.selections()[w.id]);
+    return this.workers().length > 0 && this.workers().every((w) => !!this.selections()[w.id]);
   }
   protected markAllPresent(): void {
-    this.selections.set(Object.fromEntries(this.workers().map(w => [w.id, AttendanceStatus.Present])));
+    this.selections.set(Object.fromEntries(this.workers().map((w) => [w.id, AttendanceStatus.Present])));
   }
   protected presentCount(): number {
-    return this.workers().filter(w => this.selections()[w.id] === AttendanceStatus.Present).length;
+    return this.workers().filter((w) => this.selections()[w.id] === AttendanceStatus.Present).length;
   }
   /** Readable summary such as "1 entrada y 3 salidas" (audit finding 7). */
   protected movementSummary(report: WeeklyReport): string {
     const entries = report.entries.length;
     const usages = report.usages.length;
-    const entryText = this.translate.instant(entries === 1 ? 'improvements.ec06.entriesOne' : 'improvements.ec06.entriesOther', { count: entries });
-    const usageText = this.translate.instant(usages === 1 ? 'improvements.ec06.usagesOne' : 'improvements.ec06.usagesOther', { count: usages });
+    const entryText = this.translate.instant(
+      entries === 1 ? 'improvements.ec06.entriesOne' : 'improvements.ec06.entriesOther',
+      { count: entries },
+    );
+    const usageText = this.translate.instant(
+      usages === 1 ? 'improvements.ec06.usagesOne' : 'improvements.ec06.usagesOther',
+      { count: usages },
+    );
     return `${entryText} · ${usageText}`;
   }
   protected async saveAttendance(): Promise<void> {
@@ -356,15 +449,21 @@ export class ExperimentWorkbenchComponent {
     try {
       const date = this.attendanceDate();
       const existing = await firstValueFrom(this.attendanceService.getByProject(Number(this.projectId()), date));
-      const registered = new Set(existing.map(row => row.workerId));
+      const registered = new Set(existing.map((row) => row.workerId));
       let count = 0;
       for (const worker of this.workers()) {
         if (registered.has(worker.id)) continue;
-        await firstValueFrom(this.attendanceService.create({
-          projectId: Number(this.projectId()), workerId: worker.id, attendanceDate: date,
-          status: this.selections()[worker.id], checkInAt: null, checkOutAt: null,
-          notes: null,
-        }));
+        await firstValueFrom(
+          this.attendanceService.create({
+            projectId: Number(this.projectId()),
+            workerId: worker.id,
+            attendanceDate: date,
+            status: this.selections()[worker.id],
+            checkInAt: null,
+            checkOutAt: null,
+            notes: null,
+          }),
+        );
         count++;
       }
       this.messageParams.set({ count, existing: registered.size });
@@ -392,7 +491,9 @@ export class ExperimentWorkbenchComponent {
   }
 
   protected toggleGuideStep(index: number): void {
-    this.completedGuideSteps.update(steps => steps.includes(index) ? steps.filter(i => i !== index) : [...steps, index]);
+    this.completedGuideSteps.update((steps) =>
+      steps.includes(index) ? steps.filter((i) => i !== index) : [...steps, index],
+    );
     try {
       localStorage.setItem(this.guideStorageKey(), JSON.stringify(this.completedGuideSteps()));
     } catch {
