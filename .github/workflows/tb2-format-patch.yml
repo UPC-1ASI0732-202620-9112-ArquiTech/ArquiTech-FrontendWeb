@@ -1,0 +1,31 @@
+name: Generate formatting patch
+on:
+  push:
+    branches:
+      - feature/tb2-coding-standards
+permissions:
+  contents: read
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - run: npx --no-install prettier --write "src/**/*.{ts,html,css}" "public/i18n/*.json"
+      - name: Export formatted sources
+        run: |
+          python3 - <<'PY'
+          import base64, json, pathlib, subprocess
+          paths = subprocess.check_output(["git", "diff", "--name-only", "-z"]).decode().split("\0")
+          for path in filter(None, paths):
+              if not (path.startswith(("src/", "public/i18n/", "lib/", "test/"))):
+                  raise RuntimeError("Unexpected modified path: " + path)
+              data = base64.b64encode(pathlib.Path(path).read_bytes()).decode()
+              for index in range(0, len(data), 6000):
+                  print("FORMAT_DATA " + json.dumps([path, index, data[index:index+6000]], separators=(",", ":")))
+          print("FORMAT_END " + str(len(list(filter(None, paths)))))
+          PY
