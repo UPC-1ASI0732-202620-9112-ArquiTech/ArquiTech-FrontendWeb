@@ -18,7 +18,7 @@ jobs:
           node-version: '22'
       - run: npm ci
       - name: Migrate Angular 19 to 20
-        run: npx ng update @angular/core@20 @angular/cli@20 @angular/cdk@20 --allow-dirty
+        run: npx ng update @angular/core@20 @angular/cli@20 @angular/cdk@20 @angular/common@20 @angular/compiler@20 @angular/compiler-cli@20 @angular/forms@20 @angular/platform-browser@20 @angular/platform-browser-dynamic@20 @angular/router@20 @angular-devkit/build-angular@20 --allow-dirty
       - name: Format migrated source
         run: npm run format
       - name: Export changed files
